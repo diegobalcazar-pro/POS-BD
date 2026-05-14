@@ -12,6 +12,9 @@ import repository.Validaciones;
 			super(id, nombre, email, tipo, password);
 		}
 		
+		public Admin() {
+	        super();
+	    }
 		
 		@Override
 		public String toString() {
