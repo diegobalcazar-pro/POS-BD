@@ -24,7 +24,7 @@ public class Main {
                     if (usuario != null) {
                         if (usuario instanceof Admin) {
                             JOptionPane.showMessageDialog(null, "Bienvenido Admin " + usuario.getNombre());
-                            // Ir a menu de profesor
+                            // Ir a menu de Admin
                             usuario.Menu();
                         } else if (usuario instanceof Cajero) {
                             JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + usuario.getNombre());
