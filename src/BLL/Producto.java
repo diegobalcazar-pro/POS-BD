@@ -5,17 +5,17 @@ import java.util.LinkedList;
 public class Producto {
 
 	//atriubtos
-	protected int codigo;
+	protected int id_producto;
 	protected String nombreProducto;
 	protected String descripcionProducto;
 	protected double precio;
 	protected int stock;
 	protected LinkedList <Proveedor> proveedores;	
 	//constructores
-	public Producto(int codigo, String nombreProducto, String descripcionProducto, double precio, int stock,
+	public Producto(int id_producto, String nombreProducto, String descripcionProducto, double precio, int stock,
 			LinkedList<Proveedor> proveedores) {
 		super();
-		this.codigo = codigo;
+		this.id_producto = id_producto;
 		this.nombreProducto = nombreProducto;
 		this.descripcionProducto = descripcionProducto;
 		this.precio = precio;
@@ -24,17 +24,18 @@ public class Producto {
 	}
 	//gettersysetters
 	
+	
+	public int getId_producto() {
+		return id_producto;
+	}
+	public void setId_producto(int id_producto) {
+		this.id_producto = id_producto;
+	}
+
 	public String getNombreProducto() {
 		return nombreProducto;
 	}
-	public int getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-
+	
 	public void setNombreProducto(String nombreProducto) {
 		this.nombreProducto = nombreProducto;
 	}
