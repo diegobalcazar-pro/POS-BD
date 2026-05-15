@@ -18,14 +18,125 @@ public class Admin extends Usuario implements Validaciones {
 	}
 
 	@Override
+	//------------------------------------------------------------------ MENU DE ADMINISTRADOR ----------------------------------------------------------------------------------------------------------------
 	public void Menu() {
 
-		String[] opciones = { "Agregar cajeros", "Ver cajeros", "Eliminar cajeros", "Editar cajeros", "Ver repositor", "Eliminar repositor", "Editar repositor", "Salir" };
+		//String[] opciones = { "Agregar cajeros", "Ver cajeros", "Eliminar cajeros", "Editar cajeros", "Ver repositor", "Eliminar repositor", "Editar repositor", "Salir" };
+		String[] opciones = { "Gestionar Usuario", "Gestion de Productos", "Informacion de Ventas", "Configuracion", "Cerrar Sesion" };
+		
 		int opcion;
 		do {
 
 			opcion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones, opciones);
 			switch (opcion) {
+			case 0:
+				//GESTION DE USUARIOS
+				String[] opciones_gestion_usuario = { "Ver Empleados", "Añadir Empleado", "← Salir" };
+				int opcion_gestionar_usuario;
+				do {
+					opcion_gestionar_usuario = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_gestion_usuario, opciones_gestion_usuario);
+					switch (opcion_gestionar_usuario) {
+					case 0:
+						//VER EMPLEADOS
+						
+						
+						break;
+					case 1:
+						//AÑADIR EMPLEADO
+						
+						
+						break;
+					default:
+						break;
+					}
+					
+				} while (opcion_gestionar_usuario != 2); //SALE DE GESTION DE USUARIOS
+				
+				
+				break;
+			case 1:
+				//GESTION DE PRODUCTOS
+				String[] opciones_gestion_productos = { "Ver Productos", "Ver Movimientos de Stock", "← Salir" };
+				int opcion_gestionar_productos;
+				do {
+					opcion_gestionar_productos = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_gestion_productos, opciones_gestion_productos);
+					switch (opcion_gestionar_productos) {
+					case 0:
+						//VER PRODUCTOS
+						
+						break;
+					case 1:
+						//VER MOVIMIENTOS DE STOCK
+						
+						break;
+
+					default:
+						break;
+					}
+					
+				} while (opcion_gestionar_productos != 2); //SALE DE GESTION DE PRODUCTOS
+				
+				break;
+			case 2:
+				//INFORMACION DE VENTAS
+				String[] opciones_info_ventas = { "Historial de Ventas", "Productos Más Vendidos", "Categorias Más Vendidas", "← Salir" };
+				int opcion_info_ventas;
+				do {
+					opcion_info_ventas = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_info_ventas, opciones_info_ventas);
+					switch (opcion_info_ventas) {
+					case 0:
+						//HISTORIAL DE VENTAS
+						
+						break;
+					case 1:
+						//PRODUCTOS MAS VENDIDOS
+						
+						break;
+					case 2:
+						//CATEGORIAS MAS VENDIDAS
+						
+						break;
+
+					default:
+						break;
+					}
+					
+				} while (opcion_info_ventas != 3); //SALE DE INFORMACION DE VENTAS
+				
+				break;
+			case 3:
+				//CONFIG
+				String[] opciones_config = { "Configurar Informacion", "Configurar Descuentos", "← Salir" };
+				int opcion_config;
+				do {
+					opcion_config = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_config, opciones_config);
+					switch (opcion_config) {
+					case 0:
+						//CONFIGURAR INFORMACION
+						
+						break;
+					case 1:
+						//CONFIGURAR DESCUENTOS
+						
+						break;
+
+					default:
+						break;
+					}
+					
+				} while (opcion_config != 2);
+				
+				break;
+
+			default:
+				break;
+			}
+			
+			
+			
+			
+			/*switch (opcion) {
+			
 			case 0:
 				//AGREGAR ALUMNOS
 				// String nombre, String email, String tipo, String password
@@ -112,8 +223,13 @@ public class Admin extends Usuario implements Validaciones {
 				break;
 			default:
 				break;
-			}
-		} while (opcion != 7);
+			}*/
+			
+			
+			
+			
+			
+		} while (opcion != 4); //CIERRA SESION DE ADMIN
 
 	}
 
