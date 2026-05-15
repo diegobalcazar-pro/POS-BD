@@ -1,0 +1,149 @@
+package DLL;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
+import BLL.Cajero;
+import BLL.Producto;
+import BLL.Usuario;
+import repository.UsuarioRepository;
+
+public class ControllerProducto {
+	
+	private static Connection con = Conexion.getInstance().getConnection();
+	
+	
+	
+	public void agregarProducto(Producto producto) {
+        try {
+            PreparedStatement statement = con.prepareStatement(
+                "INSERT INTO producto (nombreProducto, descripcionProducto, precio, stock) VALUES (?,?, ?, ?)"
+            );
+            statement.setString(1, producto.getNombreProducto());
+            statement.setString(2, producto.getDescripcionProducto());
+            statement.setDouble(3, producto.getPrecio());
+            statement.setInt(4, producto.getStock());
+
+            int filas = statement.executeUpdate();
+            if (filas > 0) {
+                System.out.println("Producto agregado correctamente.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+	 public LinkedList<Producto> mostrarProductos() {
+	        LinkedList<Producto> productos = new LinkedList<>();
+	        try {
+	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto");
+	            ResultSet rs = stmt.executeQuery();
+
+	            while (rs.next()) {
+	                int id = rs.getInt("id");
+	                String nombreProducto= rs.getString("nombreProducto");
+	                String descripcionProducto = rs.getString("descripcionProducto");
+	                double precio = rs.getDouble("precio");
+	                int stock = rs.getInt("stock");
+
+	              
+	                        productos.add((T) new Producto(id, nombreProducto, descripcionProducto, precio, stock, null));
+	                 
+	          
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return productos;
+	    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

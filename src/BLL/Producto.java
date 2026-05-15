@@ -2,6 +2,8 @@ package BLL;
 
 import java.util.LinkedList;
 
+import DLL.ControllerProducto;
+
 public class Producto {
 
 	//atriubtos
@@ -10,7 +12,8 @@ public class Producto {
 	protected String descripcionProducto;
 	protected double precio;
 	protected int stock;
-	protected LinkedList <Proveedor> proveedores;	
+	protected LinkedList <Proveedor> proveedores;
+	private static ControllerProducto controller = new ControllerProducto();
 	//constructores
 	public Producto(int id_producto, String nombreProducto, String descripcionProducto, double precio, int stock,
 			LinkedList<Proveedor> proveedores) {
