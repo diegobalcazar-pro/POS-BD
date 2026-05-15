@@ -1,8 +1,9 @@
 package BLL;
 
 import javax.swing.JOptionPane;
-
 import DLL.ControllerUsuario;
+import repository.Hashing;
+import repository.Validaciones;
 
 public abstract class Usuario {
     protected int id;
@@ -87,6 +88,18 @@ public abstract class Usuario {
 	
 	
 	public abstract void Menu();
+	
+   public static void registrarse() {
+		
+		String nombre = Validaciones.validarIngresoString("Ingrese nombre");
+		String mail = Validaciones.validarIngresoString("Ingrese mail");
+		
+		String contrasenia = Validaciones.validarIngresoString("Ingrese contraseña");
+		String contraseniaOculta = Hashing.hash(contrasenia);
+		getController().agregarUsuario(new Cajero(nombre,mail,"Cajero",contraseniaOculta));
+		
+		
+	}
 	
 	
     

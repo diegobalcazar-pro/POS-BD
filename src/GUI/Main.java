@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.JOptionPane;
 import DLL.ControllerUsuario;
+import repository.Hashing;
 import BLL.Usuario;
 import BLL.Cajero;
 import BLL.Admin;
@@ -10,6 +11,9 @@ import BLL.Repositor;
 public class Main {
     public static void main(String[] args) {
         
+    	/*String contraseniaoculta = Hashing.hash("12345");
+        JOptionPane.showMessageDialog(null,contraseniaoculta );
+       	JOptionPane.showMessageDialog(null, Hashing.verificar("12345", contraseniaoculta));*/
         
         String[] acciones = { "Login", "Registrar", "Salir" };
         int menu = 0;
@@ -29,9 +33,11 @@ public class Main {
                         } else if (usuario instanceof Cajero) {
                             JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + usuario.getNombre());
                             // Ir a menu de cajero
+                            usuario.Menu();
                         } else if (usuario instanceof Repositor) {
                         	JOptionPane.showMessageDialog(null, "Bienvenido Repositor " + usuario.getNombre());
                             // Ir a menu de repositor
+                        	usuario.Menu();
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
@@ -40,7 +46,7 @@ public class Main {
 
                 case 1: 
                 	
-                	//falta registrar :D
+                	Usuario.registrarse();
                     
                     break;
             }
