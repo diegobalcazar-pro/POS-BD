@@ -21,7 +21,6 @@ public class Admin extends Usuario implements Validaciones {
 	//------------------------------------------------------------------ MENU DE ADMINISTRADOR ----------------------------------------------------------------------------------------------------------------
 	public void Menu() {
 
-		//String[] opciones = { "Agregar cajeros", "Ver cajeros", "Eliminar cajeros", "Editar cajeros", "Ver repositor", "Eliminar repositor", "Editar repositor", "Salir" };
 		String[] opciones = { "Gestionar Usuario", "Gestion de Productos", "Informacion de Ventas", "Configuracion", "Cerrar Sesion" };
 		
 		int opcion;
