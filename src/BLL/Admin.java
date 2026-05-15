@@ -6,15 +6,15 @@ import javax.swing.JOptionPane;
 
 import repository.Validaciones;
 
-public class Profesor extends Usuario implements Validaciones {
+public class Admin extends Usuario implements Validaciones {
 
-	public Profesor(int id, String nombre, String email, String tipo, String password) {
+	public Admin(int id, String nombre, String email, String tipo, String password) {
 		super(id, nombre, email, tipo, password);
 	}
 
 	@Override
 	public String toString() {
-		return "Profesor [toString()=" + super.toString() + "]";
+		return "Admin [toString()=" + super.toString() + "]";
 	}
 
 	@Override

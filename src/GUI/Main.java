@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 import DLL.ControllerUsuario;
 import BLL.Usuario;
 import BLL.Cajero;
-import BLL.Profesor;
+import BLL.Admin;
 import BLL.Repositor;
 
 public class Main {
@@ -22,9 +22,9 @@ public class Main {
                   
                     Usuario usuario = Usuario.Login();
                     if (usuario != null) {
-                        if (usuario instanceof Profesor) {
-                            JOptionPane.showMessageDialog(null, "Bienvenido Profesor " + usuario.getNombre());
-                            // Ir a menu de profesor
+                        if (usuario instanceof Admin) {
+                            JOptionPane.showMessageDialog(null, "Bienvenido Admin " + usuario.getNombre());
+                            // Ir a menu de admin
                             usuario.Menu();
                         } else if (usuario instanceof Cajero) {
                             JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + usuario.getNombre());

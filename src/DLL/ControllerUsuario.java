@@ -11,7 +11,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 import BLL.Usuario;
 import BLL.Cajero;
-import BLL.Profesor;
+import BLL.Admin;
 import BLL.Repositor;
 import repository.UsuarioRepository;
 
@@ -40,8 +40,8 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
                     case "alumno":
                         usuario = (T) new Cajero(id, nombre, email, tipo, password);
                         break;
-                    case "profesor":
-                        usuario = (T) new Profesor(id, nombre, email, tipo, password);
+                    case "admin":
+                        usuario = (T) new Admin(id, nombre, email, tipo, password);
                         break;
                     case "repositor":
                         usuario = (T) new Repositor(id, nombre, email, tipo, password);
@@ -97,8 +97,8 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
                     case "cajero":
                         usuarios.add((T) new Cajero(id, nombre, email, tipo, password));
                         break;
-                    case "profesor":
-                        usuarios.add((T) new Profesor(id, nombre, email, tipo, password));
+                    case "admin":
+                        usuarios.add((T) new Admin(id, nombre, email, tipo, password));
                         break;
                     case "repositor":
                         usuarios.add((T) new Repositor(id, nombre, email, tipo, password));
