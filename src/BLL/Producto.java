@@ -25,6 +25,15 @@ public class Producto {
 		this.stock = stock;
 		this.proveedores = proveedores;
 	}
+	
+	public Producto(String nombreProducto, String descripcionProducto, double precio, int stock
+			) {
+		this.nombreProducto = nombreProducto;
+		this.descripcionProducto = descripcionProducto;
+		this.precio = precio;
+		this.stock = stock;
+		
+	}
 	//gettersysetters
 	
 	

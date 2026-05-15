@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import repository.Validaciones;
+import DLL.ControllerProducto;
+import BLL.Producto;
 
 	public class Admin extends Usuario implements Validaciones {
 
@@ -25,7 +27,7 @@ import repository.Validaciones;
 		@Override
 		public void Menu() {
 
-			String[] opciones = { "Agregar cajeros", "Ver cajeros", "Eliminar cajeros", "Editar cajeros", "Ver repositor", "Eliminar repositor", "Editar repositor", "Salir" };
+			String[] opciones = { "Agregar cajeros", "Ver Productos", "Eliminar cajeros", "Editar cajeros", "Ver repositor", "Eliminar repositor", "Editar repositor","Agregar Producto", "Salir" };
 			int opcion;
 			do {
 
@@ -38,8 +40,8 @@ import repository.Validaciones;
 							validarIngresoString("Ingrese mail"), "Alumno", validarIngresoString("Ingrese password")));
 					break;
 				case 1:
-					//MOSTRAR Cajero
-					JOptionPane.showMessageDialog(null, this.getController().mostrarCajeros());
+					//MOSTRAR productos
+					JOptionPane.showMessageDialog(null, this.getController().mostrarProductos());
 					break;
 				case 2:
 					//ELIMINAR Cajero
@@ -114,6 +116,10 @@ import repository.Validaciones;
 					} while (elegir_datos_repositor != 3);
 
 					this.getController().EditarUsuario(elegido_repositor);
+					break;
+					
+				case 7: 	this.getController().agregarProducto(new Producto(validarIngresoString("Ingrese nombre de producto"),
+						validarIngresoString("Ingrese descripcion"), validarIngresoDouble("Ingrese precio"), validarIngresoInt("Ingrese Stock")));
 					break;
 				default:
 					break;

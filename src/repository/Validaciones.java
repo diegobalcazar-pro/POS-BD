@@ -13,4 +13,24 @@ public interface Validaciones {
 		
 		return dato;
 	}
+	
+	
+	default double validarIngresoDouble(String mensaje) {
+		
+		double dato = Double.parseDouble(validarIngresoString(mensaje));
+	return dato;
+    }
+	
+   default int validarIngresoInt(String mensaje) {
+		
+		int dato = Integer.parseInt(validarIngresoString(mensaje));
+	return dato;
+    }
+	
+	
+	
+	
+	
+	
+	
 }

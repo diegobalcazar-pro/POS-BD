@@ -23,8 +23,9 @@ public class ControllerProducto {
 	public void agregarProducto(Producto producto) {
         try {
             PreparedStatement statement = con.prepareStatement(
-                "INSERT INTO producto (nombreProducto, descripcionProducto, precio, stock) VALUES (?,?, ?, ?)"
-            );
+                "INSERT INTO productos (nombreProducto, descripcionProducto, precio, stock) VALUES (?,?, ?, ?)"
+            	
+            		);
             statement.setString(1, producto.getNombreProducto());
             statement.setString(2, producto.getDescripcionProducto());
             statement.setDouble(3, producto.getPrecio());
@@ -40,13 +41,10 @@ public class ControllerProducto {
     }
 
 
-
-
-
 	 public LinkedList<Producto> mostrarProductos() {
 	        LinkedList<Producto> productos = new LinkedList<>();
 	        try {
-	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM producto");
+	            PreparedStatement stmt = con.prepareStatement("SELECT * FROM productos");
 	            ResultSet rs = stmt.executeQuery();
 
 	            while (rs.next()) {
@@ -57,7 +55,7 @@ public class ControllerProducto {
 	                int stock = rs.getInt("stock");
 
 	              
-	                        productos.add((T) new Producto(id, nombreProducto, descripcionProducto, precio, stock, null));
+	                        productos.add( new Producto(id, nombreProducto, descripcionProducto, precio, stock, null));
 	                 
 	          
 	            }
