@@ -10,8 +10,8 @@ import BLL.Producto;
 
 	public class Admin extends Usuario implements Validaciones {
 
-		public Admin(int id, String nombre, String email, String tipo, String password) {
-			super(id, nombre, email, tipo, password);
+		public Admin(int id, String nombre, String apellido, String email, String rol, String contrasenia) {
+			super(id, nombre, apellido, email, rol, contrasenia);
 		}
 		
 		public Admin() {
@@ -34,10 +34,10 @@ import BLL.Producto;
 				opcion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones, opciones);
 				switch (opcion) {
 				case 0:
-					//AGREGAR ALUMNOS
-					// String nombre, String email, String tipo, String password
-					this.getController().agregarUsuario(new Cajero(validarIngresoString("Ingrese nombre"),
-							validarIngresoString("Ingrese mail"), "Alumno", validarIngresoString("Ingrese password")));
+					//AGREGAR Cajeros
+					// String nombre, String apellido, String email, String tipo, String password
+					this.getController().agregarUsuario(new Cajero(validarIngresoString("Ingrese nombre"), validarIngresoString("Ingrese apellido"),
+							validarIngresoString("Ingrese mail"), "Cajero", validarIngresoString("Ingrese password")));
 					break;
 				case 1:
 					//MOSTRAR productos
@@ -54,7 +54,7 @@ import BLL.Producto;
 				case 3:
 					//EDITAR Cajero
 					elegido = BuscarCajero();
-					String[] datos = { "Nombre", "Tipo", "Contraseña", "Editar" };
+					String[] datos = { "Nombre", "Apellido", "Rol", "Contraseña", "Editar" };
 					int elegir;
 					do {
 						elegir = JOptionPane.showOptionDialog(null,
@@ -62,19 +62,22 @@ import BLL.Producto;
 								datos, datos[0]);
 						switch (elegir) {
 						case 0:
-							elegido.setNombre(JOptionPane.showInputDialog("Ingresar nombre"));
+							elegido.setNombre_usuario(JOptionPane.showInputDialog("Ingresar nombre"));
 							break;
 						case 1:
-							elegido.setTipo(JOptionPane.showInputDialog("Ingresar tipo"));
+							elegido.setNombre_usuario(JOptionPane.showInputDialog("Ingresar apellido"));
 							break;
 						case 2:
-							elegido.setPassword(JOptionPane.showInputDialog("Ingresar Contraseña"));
+							elegido.setRol(JOptionPane.showInputDialog("Ingresar Rol"));
+							break;
+						case 3:
+							elegido.setContrasenia(JOptionPane.showInputDialog("Ingresar Contraseña"));
 							;
 							break;
 						default:
 							break;
 						}
-					} while (elegir != 3);
+					} while (elegir != 4);
 
 					this.getController().EditarUsuario(elegido);
 					break;
@@ -93,7 +96,7 @@ import BLL.Producto;
 				case 6:
 					//EDITAR REPOSITOR
 					elegido_repositor = BuscarRepositor();
-					String[] datosrepositor = { "Nombre", "Tipo", "Contraseña", "Editar" };
+					String[] datosrepositor = { "Nombre", "Apellido", "Rol", "Contraseña", "Editar" };
 					int elegir_datos_repositor;
 					do {
 						elegir_datos_repositor = JOptionPane.showOptionDialog(null,
@@ -101,19 +104,22 @@ import BLL.Producto;
 								datosrepositor, datosrepositor[0]);
 						switch (elegir_datos_repositor) {
 						case 0:
-							elegido_repositor.setNombre(JOptionPane.showInputDialog("Ingresar nombre"));
+							elegido_repositor.setNombre_usuario(JOptionPane.showInputDialog("Ingresar nombre"));
 							break;
 						case 1:
-							elegido_repositor.setTipo(JOptionPane.showInputDialog("Ingresar tipo"));
+							elegido_repositor.setApellido_usuario(JOptionPane.showInputDialog("Ingresar apellido"));
 							break;
 						case 2:
-							elegido_repositor.setPassword(JOptionPane.showInputDialog("Ingresar Contraseña"));
+							elegido_repositor.setRol(JOptionPane.showInputDialog("Ingresar rol"));
+							break;
+						case 3:
+							elegido_repositor.setContrasenia(JOptionPane.showInputDialog("Ingresar Contraseña"));
 							;
 							break;
 						default:
 							break;
 						}
-					} while (elegir_datos_repositor != 3);
+					} while (elegir_datos_repositor != 4);
 
 					this.getController().EditarUsuario(elegido_repositor);
 					break;

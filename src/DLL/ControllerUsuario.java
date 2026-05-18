@@ -21,34 +21,37 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
     private static Connection con = Conexion.getInstance().getConnection();
 
     @Override
-    public T login(String nombre, String password) {
+    public T login(String nombre_usuario, String contrasenia) {
         T usuario = null;
         try {
             PreparedStatement stmt = con.prepareStatement(
-                "SELECT * FROM usuario WHERE nombre = ? AND password = ?"
+                "SELECT * FROM usuarios WHERE nombre_usuario = ? AND contrasenia = ?"
+            		
+            		
             );
-            stmt.setString(1, nombre);
-            stmt.setString(2, password);
+            stmt.setString(1, nombre_usuario);
+            stmt.setString(2, contrasenia);
 
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 int id = rs.getInt("id");
-                String email = rs.getString("email");
-                String tipo = rs.getString("tipo");
+                String apellido_usuario = rs.getString("apellido_usuario");
+                String email = rs.getString("correo");
+                String rol = rs.getString("rol");
 
-                switch (tipo.toLowerCase()) {
-                    case "alumno":
-                        usuario = (T) new Cajero(id, nombre, email, tipo, password);
+                switch (rol.toLowerCase()) {
+                    case "cajero":
+                        usuario = (T) new Cajero(id, nombre_usuario, apellido_usuario, email, rol, contrasenia);
                         break;
-                    case "profesor":
-                        usuario = (T) new Admin(id, nombre, email, tipo, password);
+                    case "Admin":
+                        usuario = (T) new Admin(id, nombre_usuario, apellido_usuario, email, rol, contrasenia);
                         break;
                     case "repositor":
-                        usuario = (T) new Repositor(id, nombre, email, tipo, password);
+                        usuario = (T) new Repositor(id, nombre_usuario, apellido_usuario, email, rol, contrasenia);
                         break;
                     default:
-                        System.out.println("Tipo de usuario desconocido: " + tipo);
+                        System.out.println("Tipo de usuario desconocido: " + rol);
                         break;
                 }
             }
@@ -62,12 +65,12 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
     public void agregarUsuario(Usuario usuario) {
         try {
             PreparedStatement statement = con.prepareStatement(
-                "INSERT INTO usuario (nombre, email, tipo, password) VALUES (?,?, ?, ?)"
+                "INSERT INTO usuarios (nombre_usuario, apellido_usuario, correo, contrasenia,`rol) VALUES (?,?,?,?,?)"
             );
-            statement.setString(1, usuario.getNombre());
+            statement.setString(1, usuario.getNombre_usuario());
             statement.setString(2, usuario.getEmail());
-            statement.setString(3, usuario.getTipo());
-            statement.setString(4, usuario.getPassword());
+            statement.setString(3, usuario.getRol());
+            statement.setString(4, usuario.getContrasenia());
 
             int filas = statement.executeUpdate();
             if (filas > 0) {
@@ -90,22 +93,23 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
                 String email = rs.getString("email");
-                String tipo = rs.getString("tipo");
-                String password = rs.getString("password");
+                String rol = rs.getString("rol");
+                String contrasenia = rs.getString("contrasenia");
 
-                switch (tipo.toLowerCase()) {
+                switch (rol.toLowerCase()) {
                     case "cajero":
-                        usuarios.add((T) new Cajero(id, nombre, email, tipo, password));
+                        usuarios.add((T) new Cajero(id, nombre, apellido, email, rol, contrasenia));
                         break;
                     case "profesor":
-                        usuarios.add((T) new Admin(id, nombre, email, tipo, password));
+                        usuarios.add((T) new Admin(id, nombre, apellido, email, rol, contrasenia));
                         break;
                     case "repositor":
-                        usuarios.add((T) new Repositor(id, nombre, email, tipo, password));
+                        usuarios.add((T) new Repositor(id, nombre, apellido, email, rol, contrasenia));
                         break;
                     default:
-                        System.out.println("Tipo desconocido: " + tipo);
+                        System.out.println("Tipo desconocido: " + rol);
                         break;
                 }
             }
@@ -124,12 +128,13 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
                 String email = rs.getString("email");
-                String tipo = rs.getString("tipo");
-                String password = rs.getString("password");
+                String rol = rs.getString("rol");
+                String contrasenia = rs.getString("contrasenia");
 
               
-                        usuarios.add((T) new Cajero(id, nombre, email, tipo, password));
+                        usuarios.add((T) new Cajero(id, nombre, apellido, email, rol, contrasenia));
                  
           
             }
@@ -148,12 +153,13 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
                 String email = rs.getString("email");
-                String tipo = rs.getString("tipo");
-                String password = rs.getString("password");
+                String rol = rs.getString("rol");
+                String contrasenia = rs.getString("contrasenia");
 
               
-                        usuarios.add((T) new Repositor(id, nombre, email, tipo, password));
+                        usuarios.add((T) new Repositor(id, nombre, apellido, email, rol, contrasenia));
                  
           
             }
@@ -251,9 +257,9 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             PreparedStatement statement = con.prepareStatement(
                 "UPDATE `usuario` SET `nombre`=?,`tipo`=?,`password`=? WHERE id =?"
             );
-            statement.setString(1, usuario.getNombre());
-            statement.setString(2, usuario.getTipo());
-            statement.setString(3, usuario.getPassword());
+            statement.setString(1, usuario.getNombre_usuario());
+            statement.setString(2, usuario.getRol());
+            statement.setString(3, usuario.getContrasenia());
             statement.setInt(4, usuario.getId());
 
 

@@ -6,18 +6,20 @@ import DLL.ControllerUsuario;
 
 public abstract class Usuario {
     protected int id;
-    protected String nombre;
+    protected String nombre_usuario;
+    protected String apellido_usuario;
     protected String email;
-    protected String tipo;
-    protected String password;
+    protected String contrasenia;
+    protected String rol;
     private static ControllerUsuario controller = new ControllerUsuario();
 
-    public Usuario(int id, String nombre, String email,String tipo,String password) {
+    public Usuario(int id, String nombre,String apellido, String email,String rol,String contrasenia) {
         this.id = id;
-        this.nombre = nombre;
+        this.nombre_usuario = nombre_usuario;
+        this.apellido_usuario = apellido_usuario;
         this.email = email;
-        this.tipo = tipo;
-        this.password = password;
+        this.rol = rol;
+        this.contrasenia = contrasenia;
         
     }
     public Usuario() {
@@ -29,11 +31,17 @@ public abstract class Usuario {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getNombre() {
-		return nombre;
+	public String getNombre_usuario() {
+		return nombre_usuario;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre_usuario(String nombre_usuario) {
+		this.nombre_usuario = nombre_usuario;
+	}
+	public String getApellido_usuario() {
+		return apellido_usuario;
+	}
+	public void setApellido_usuario(String apellido_usuario) {
+		this.apellido_usuario = apellido_usuario;
 	}
 	public String getEmail() {
 		return email;
@@ -41,17 +49,17 @@ public abstract class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getTipo() {
-		return tipo;
+	public String getRol() {
+		return rol;
 	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
-	public String getPassword() {
-		return password;
+	public String getContrasenia() {
+		return contrasenia;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 	
 	public static ControllerUsuario getController() {
@@ -62,14 +70,14 @@ public abstract class Usuario {
 	}
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", email=" + email + ", tipo=" + tipo + ", password="
-				+ password + "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre_usuario + ", apellido=" + apellido_usuario + ", email=" + email + ", rol=" + rol + ", password="
+				+ contrasenia + "]";
 	}
 	public static Usuario Login() {
-		  String nombre = "";
-          while (nombre.isEmpty()) {
-              nombre = JOptionPane.showInputDialog("Ingrese nombre");
-              if (nombre.isEmpty()) {
+		  String nombre_usuario = "";
+          while (nombre_usuario.isEmpty()) {
+              nombre_usuario = JOptionPane.showInputDialog("Ingrese nombre");
+              if (nombre_usuario.isEmpty()) {
                   JOptionPane.showMessageDialog(null, "Incorrecto");
               }
           }
@@ -81,7 +89,7 @@ public abstract class Usuario {
                   JOptionPane.showMessageDialog(null, "Incorrecto");
               }
           }
-        return controller.login(nombre, contrasenia);
+        return controller.login(nombre_usuario, contrasenia);
 
 	}
 	

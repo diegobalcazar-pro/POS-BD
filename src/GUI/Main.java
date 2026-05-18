@@ -23,14 +23,14 @@ public class Main {
                     Usuario usuario = Usuario.Login();
                     if (usuario != null) {
                         if (usuario instanceof Admin) {
-                            JOptionPane.showMessageDialog(null, "Bienvenido Admin " + usuario.getNombre());
+                            JOptionPane.showMessageDialog(null, "Bienvenido Admin " + usuario.getNombre_usuario());
                             // Ir a menu de Admin
                             usuario.Menu();
                         } else if (usuario instanceof Cajero) {
-                            JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + usuario.getNombre());
+                            JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + usuario.getNombre_usuario());
                             // Ir a menu de cajero
                         } else if (usuario instanceof Repositor) {
-                        	JOptionPane.showMessageDialog(null, "Bienvenido Repositor " + usuario.getNombre());
+                        	JOptionPane.showMessageDialog(null, "Bienvenido Repositor " + usuario.getNombre_usuario());
                             // Ir a menu de repositor
                         }
                     } else {
