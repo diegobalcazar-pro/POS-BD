@@ -23,7 +23,7 @@ public class Repositor extends Usuario {
 	//------------------------------------------------------------------ MENU DE REPOSITOR ----------------------------------------------------------------------------------------------------------------
 	public void Menu() {
 
-		String[] opciones = { "Gestion productos", "Gestion pedidos", "Gestion proveedores", "Cerrar Sesion" };
+		String[] opciones = { "Gestion productos", "Gestion pedidos", "Gestion de Stock", "Gestion proveedores", "Cerrar Sesion" };
 		
 		int opcion;
 		do {
@@ -145,7 +145,7 @@ public class Repositor extends Usuario {
 						break;
 					}
 					
-				} while (opcion_config != 3); //SALE DE GESTION PROVEEDORES
+				} while (opcion_config != 4); //SALE DE GESTION PROVEEDORES
 				
 				break;	
 
@@ -153,7 +153,7 @@ public class Repositor extends Usuario {
 				break;
 			}
 			
-		} while (opcion != 3); //CIERRA SESION DE REPOSITOR
+		} while (opcion != 4); //CIERRA SESION DE REPOSITOR
 
 	}
     
