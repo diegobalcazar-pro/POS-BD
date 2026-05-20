@@ -32,7 +32,13 @@ public class Producto {
 		this.descripcionProducto = descripcionProducto;
 		this.precio = precio;
 		this.stock = stock;
+		}
 		
+	public Producto(int id_producto, String nombreProducto, String descripcionProducto) {
+		this.id_producto = id_producto;	
+		this.nombreProducto = nombreProducto;
+		this.descripcionProducto = descripcionProducto;
+			
 	}
 	//gettersysetters
 	
@@ -79,7 +85,7 @@ public class Producto {
 
 	@Override
 	public String toString() {
-	    return nombreProducto + " | $" + precio + " | Stock: " + stock;
+	    return nombreProducto + " | " + descripcionProducto ;
 	}
 	
 	

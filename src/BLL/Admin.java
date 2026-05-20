@@ -20,7 +20,7 @@ import BLL.Producto;
 		
 		@Override
 		public String toString() {
-			return "Profesor [toString()=" + super.toString() + "]";
+			return "Admin [toString()=" + super.toString() + "]";
 		}
 		
 		

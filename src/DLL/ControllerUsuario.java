@@ -25,7 +25,7 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
         T usuario = null;
         try {
             PreparedStatement stmt = con.prepareStatement(
-                "SELECT * FROM usuarios WHERE nombre_usuario = ? AND contrasenia = ?"
+                "SELECT * FROM `usuarios` WHERE nombre_usuario = ? AND contrasenia = ?"
             		
             		
             );
@@ -35,20 +35,20 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                int id = rs.getInt("id");
+                int id = rs.getInt("id_usuario");
                 String apellido_usuario = rs.getString("apellido_usuario");
-                String email = rs.getString("correo");
+                String email = rs.getString("email");
                 String rol = rs.getString("rol");
 
                 switch (rol.toLowerCase()) {
                     case "cajero":
-                        usuario = (T) new Cajero(id, nombre_usuario, apellido_usuario, email, rol, contrasenia);
+                        usuario = (T) new Cajero(id, nombre_usuario, apellido_usuario, email, contrasenia, rol);
                         break;
-                    case "Admin":
-                        usuario = (T) new Admin(id, nombre_usuario, apellido_usuario, email, rol, contrasenia);
+                    case "admin":
+                        usuario = (T) new Admin(id, nombre_usuario, apellido_usuario, email, contrasenia, rol);
                         break;
                     case "repositor":
-                        usuario = (T) new Repositor(id, nombre_usuario, apellido_usuario, email, rol, contrasenia);
+                        usuario = (T) new Repositor(id, nombre_usuario, apellido_usuario, email, contrasenia, rol);
                         break;
                     default:
                         System.out.println("Tipo de usuario desconocido: " + rol);
@@ -174,7 +174,7 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
     
     
     
-    public LinkedList<Producto> mostrarProductos() {
+    /**public LinkedList<Producto> mostrarProductos() {
         LinkedList<Producto> productos = new LinkedList<>();
         try {
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM productos");
@@ -190,6 +190,31 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
               
                         productos.add( new Producto(id, nombreProducto, descripcionProducto, precio, stock, null));
                  
+          
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return productos;
+    } **/
+    
+    
+    public LinkedList<Producto> mostrarProductos() {
+        LinkedList<Producto> productos = new LinkedList<>();
+        try {
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM productos");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id_producto = rs.getInt("id_producto");
+                String nombreProducto= rs.getString("nombre_producto");
+                String descripcionProducto = rs.getString("descripcion_producto");
+                //double precio = rs.getDouble("precio");
+                //int stock = rs.getInt("stock");
+
+              
+    //     productos.add( new Producto(id, nombreProducto, descripcionProducto, null, null, null));
+                 productos.add(new Producto(id_producto, nombreProducto, descripcionProducto));
           
             }
         } catch (Exception e) {

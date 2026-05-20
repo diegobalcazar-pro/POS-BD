@@ -13,7 +13,7 @@ public abstract class Usuario {
     protected String rol;
     private static ControllerUsuario controller = new ControllerUsuario();
 
-    public Usuario(int id, String nombre,String apellido, String email,String rol,String contrasenia) {
+    public Usuario(int id, String nombre_usuario,String apellido_usuario, String email,String rol,String contrasenia) {
         this.id = id;
         this.nombre_usuario = nombre_usuario;
         this.apellido_usuario = apellido_usuario;
@@ -70,8 +70,8 @@ public abstract class Usuario {
 	}
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre_usuario + ", apellido=" + apellido_usuario + ", email=" + email + ", rol=" + rol + ", password="
-				+ contrasenia + "]";
+		return "Usuario [id=" + id + ", nombre=" + nombre_usuario + ", apellido=" + apellido_usuario + ", email=" + email + ","
+				+ " rol=" + rol + ", contraseña=" + contrasenia + "]";
 	}
 	public static Usuario Login() {
 		  String nombre_usuario = "";

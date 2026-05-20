@@ -48,15 +48,15 @@ public class ControllerProducto {
 	            ResultSet rs = stmt.executeQuery();
 
 	            while (rs.next()) {
-	                int id = rs.getInt("id");
-	                String nombreProducto= rs.getString("nombreProducto");
-	                String descripcionProducto = rs.getString("descripcionProducto");
-	                double precio = rs.getDouble("precio");
-	                int stock = rs.getInt("stock");
+	                int id_producto = rs.getInt("id_producto");
+	                String nombreProducto= rs.getString("nombre_producto");
+	                String descripcionProducto = rs.getString("descripcion_producto");
+	                //double precio = rs.getDouble("precio");
+	                //int stock = rs.getInt("stock");
 
 	              
-	                        productos.add( new Producto(id, nombreProducto, descripcionProducto, precio, stock, null));
-	                 
+	    //     productos.add( new Producto(id, nombreProducto, descripcionProducto, null, null, null));
+	                 productos.add(new Producto(id_producto, nombreProducto, descripcionProducto));
 	          
 	            }
 	        } catch (Exception e) {
@@ -64,77 +64,6 @@ public class ControllerProducto {
 	        }
 	        return productos;
 	    }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
