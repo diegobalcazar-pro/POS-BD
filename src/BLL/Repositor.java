@@ -23,19 +23,19 @@ public class Repositor extends Usuario {
 	//------------------------------------------------------------------ MENU DE REPOSITOR ----------------------------------------------------------------------------------------------------------------
 	public void Menu() {
 
-		String[] opciones = { "Gestion productos", "Gestion pedidos", "Gestion de Stock", "Gestion proveedores", "Cerrar Sesion" };
+		String[] opciones = { "Gestion Productos", "Gestion Pedidos", "Gestion de Stock", "Gestion Proveedores", "Cerrar Sesion" };
 		
 		int opcion;
 		do {
 
-			opcion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones, opciones);
+			opcion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Menu Repositor", 0, 0, null, opciones, opciones);
 			switch (opcion) {
 			case 0:
 				//GESTION PRODUCTOS
 				String[] opciones_gestion_usuario = { "Nuevo Producto", "Modificar Producto", "Eliminar Producto", "Mover Producto Stock", "← Salir" };
 				int opcion_gestionar_usuario;
 				do {
-					opcion_gestionar_usuario = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_gestion_usuario, opciones_gestion_usuario);
+					opcion_gestionar_usuario = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion Productos", 0, 0, null, opciones_gestion_usuario, opciones_gestion_usuario);
 					switch (opcion_gestionar_usuario) {
 					case 0:
 						//NUEVO PRODUCTO
@@ -71,7 +71,7 @@ public class Repositor extends Usuario {
 				String[] opciones_gestion_productos = { "Nuevo Pedido", "Modificar Pedido", "Eliminar Pedido", "← Salir" };
 				int opcion_gestionar_productos;
 				do {
-					opcion_gestionar_productos = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_gestion_productos, opciones_gestion_productos);
+					opcion_gestionar_productos = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion Pedidos", 0, 0, null, opciones_gestion_productos, opciones_gestion_productos);
 					switch (opcion_gestionar_productos) {
 					case 0:
 						//NUEVO PEDIDO
@@ -98,7 +98,7 @@ public class Repositor extends Usuario {
 				String[] opciones_info_ventas = { "Ver Stock", "Modificar Stock", "← Salir" };
 				int opcion_info_ventas;
 				do {
-					opcion_info_ventas = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_info_ventas, opciones_info_ventas);
+					opcion_info_ventas = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion de Stock", 0, 0, null, opciones_info_ventas, opciones_info_ventas);
 					switch (opcion_info_ventas) {
 					case 0:
 						//VER STOCK
@@ -121,7 +121,7 @@ public class Repositor extends Usuario {
 				String[] opciones_config = { "Ver Proveedor", "Nuevo Proveedor", "Modificar Proveedor", "Eliminar Proveedor", "← Salir" };
 				int opcion_config;
 				do {
-					opcion_config = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_config, opciones_config);
+					opcion_config = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion Proveedores", 0, 0, null, opciones_config, opciones_config);
 					switch (opcion_config) {
 					
 					case 0:

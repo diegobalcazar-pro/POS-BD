@@ -21,19 +21,19 @@ public class Admin extends Usuario implements Validaciones {
 	//------------------------------------------------------------------ MENU DE ADMINISTRADOR ----------------------------------------------------------------------------------------------------------------
 	public void Menu() {
 
-		String[] opciones = { "Gestionar Usuario", "Gestion de Productos", "Informacion de Ventas", "Configuracion", "Cerrar Sesion" };
+		String[] opciones = { "Gestion de Usuarios", "Gestion de Productos", "Informacion de Ventas", "Configuracion", "Cerrar Sesion" };
 		
 		int opcion;
 		do {
 
-			opcion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones, opciones);
+			opcion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Menu Administrador", 0, 0, null, opciones, opciones);
 			switch (opcion) {
 			case 0:
 				//GESTION DE USUARIOS
 				String[] opciones_gestion_usuario = { "Ver Empleados", "Añadir Empleado", "← Salir" };
 				int opcion_gestionar_usuario;
 				do {
-					opcion_gestionar_usuario = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_gestion_usuario, opciones_gestion_usuario);
+					opcion_gestionar_usuario = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion de Usuarios", 0, 0, null, opciones_gestion_usuario, opciones_gestion_usuario);
 					switch (opcion_gestionar_usuario) {
 					case 0:
 						//VER EMPLEADOS
@@ -58,7 +58,7 @@ public class Admin extends Usuario implements Validaciones {
 				String[] opciones_gestion_productos = { "Ver Productos", "Ver Movimientos de Stock", "← Salir" };
 				int opcion_gestionar_productos;
 				do {
-					opcion_gestionar_productos = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_gestion_productos, opciones_gestion_productos);
+					opcion_gestionar_productos = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion de Productos", 0, 0, null, opciones_gestion_productos, opciones_gestion_productos);
 					switch (opcion_gestionar_productos) {
 					case 0:
 						//VER PRODUCTOS
@@ -81,7 +81,7 @@ public class Admin extends Usuario implements Validaciones {
 				String[] opciones_info_ventas = { "Historial de Ventas", "Productos Más Vendidos", "Categorias Más Vendidas", "← Salir" };
 				int opcion_info_ventas;
 				do {
-					opcion_info_ventas = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_info_ventas, opciones_info_ventas);
+					opcion_info_ventas = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Informacion de Ventas", 0, 0, null, opciones_info_ventas, opciones_info_ventas);
 					switch (opcion_info_ventas) {
 					case 0:
 						//HISTORIAL DE VENTAS
@@ -108,7 +108,7 @@ public class Admin extends Usuario implements Validaciones {
 				String[] opciones_config = { "Configurar Informacion", "Configurar Descuentos", "← Salir" };
 				int opcion_config;
 				do {
-					opcion_config = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_config, opciones_config);
+					opcion_config = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Configuración", 0, 0, null, opciones_config, opciones_config);
 					switch (opcion_config) {
 					case 0:
 						//CONFIGURAR INFORMACION
