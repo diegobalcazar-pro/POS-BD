@@ -68,7 +68,7 @@ public class Repositor extends Usuario {
 				break;
 			case 1:
 				//GESTION PEDIDOS
-				String[] opciones_gestion_productos = { "Nuevo Pedido", "Modificar Pedido", "Eliminar Pedido", "← Salir" };
+				String[] opciones_gestion_productos = { "Ver Pedido", "Nuevo Pedido", "Modificar Pedido", "Eliminar Pedido", "← Salir" };
 				int opcion_gestionar_productos;
 				do {
 					opcion_gestionar_productos = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion Pedidos", 0, 0, null, opciones_gestion_productos, opciones_gestion_productos);
