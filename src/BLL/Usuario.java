@@ -1,8 +1,9 @@
 package BLL;
 
 import javax.swing.JOptionPane;
-
 import DLL.ControllerUsuario;
+import repository.Hashing;
+import repository.Validaciones;
 
 public abstract class Usuario {
     protected int id;
@@ -95,6 +96,41 @@ public abstract class Usuario {
 	
 	
 	public abstract void Menu();
+	
+   public static void registrarse() {
+	   
+	   int flag=0;
+	   
+		do {
+			
+			String hola = JOptionPane.showInputDialog("ingrese NOMBRE");
+			   
+			   if (hola == null) {		
+				   //presiona Cancelar
+				   JOptionPane.showMessageDialog(null, "Registro Cancelado");
+				   return;
+				   
+				   //presiona aceptar
+		     	}else if (hola.isEmpty()) {
+				JOptionPane.showMessageDialog(null, "error de texto: campo Vacio");
+				flag=1;
+				
+				}
+			   
+			   
+			/*
+			    String nombre = Validaciones.validarIngresoString("Ingrese nombre");			    
+			    String mail = Validaciones.validarIngresoString("Ingrese mail");
+				String contrasenia = Validaciones.validarIngresoString("Ingrese contraseña");
+				String contraseniaOculta = Hashing.hash(contrasenia);
+				getController().agregarUsuario(new Cajero(nombre,mail,"Cajero",contraseniaOculta));
+			*/	
+				
+			
+		} while (flag==1);
+		System.out.println("fin de registro");
+		
+	}
 	
 	
     

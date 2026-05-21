@@ -11,16 +11,21 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 import BLL.Usuario;
 import BLL.Cajero;
+<<<<<<< HEAD
 import BLL.Producto;
+=======
+>>>>>>> origin/diego
 import BLL.Admin;
 import BLL.Repositor;
+import repository.Hashing;
 import repository.UsuarioRepository;
 
 public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
 
-    private static Connection con = Conexion.getInstance().getConnection();
+	private static Connection con = Conexion.getInstance().getConnection();
 
     @Override
+<<<<<<< HEAD
     public T login(String nombre_usuario, String contrasenia) {
         T usuario = null;
         try {
@@ -31,10 +36,21 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             );
             stmt.setString(1, nombre_usuario);
             stmt.setString(2, contrasenia);
+=======
+    public T login(String email, String password) {
+        T usuario = null;
+        try {
+            PreparedStatement stmt = con.prepareStatement(
+                "SELECT * FROM usuario WHERE email =?"
+            );
+            stmt.setString(1, email);
+            
+>>>>>>> origin/diego
 
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
+<<<<<<< HEAD
                 int id = rs.getInt("id_usuario");
                 String apellido_usuario = rs.getString("apellido_usuario");
                 String email = rs.getString("email");
@@ -54,6 +70,33 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
                         System.out.println("Tipo de usuario desconocido: " + rol);
                         break;
                 }
+=======
+                int id = rs.getInt("id");
+                String nombre = rs.getString("nombre");
+                String tipo = rs.getString("tipo");
+                String contrasenia = rs.getString("password");
+                System.out.println(contrasenia);
+                if (Hashing.verificar(password, contrasenia)) {
+					
+				
+	                switch (tipo.toLowerCase()) {
+	                    case "cajero":
+	                        usuario = (T) new Cajero(id, nombre, email, tipo, password);
+	                        break;
+	                    case "repositor":
+	                        usuario = (T) new Repositor(id, nombre, email, tipo, password);
+	                        break;
+	                    case "admin":
+	                        usuario = (T) new Admin(id, nombre, email, tipo, password);
+	                        break;
+	                    default:
+	                        System.out.println("Tipo de usuario desconocido: " + tipo);
+	                        break;
+	                }
+                }else {
+					JOptionPane.showMessageDialog(null, "La contraseña es incorrecta");
+				}
+>>>>>>> origin/diego
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,11 +145,17 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
                     case "cajero":
                         usuarios.add((T) new Cajero(id, nombre, apellido, email, rol, contrasenia));
                         break;
+<<<<<<< HEAD
                     case "profesor":
                         usuarios.add((T) new Admin(id, nombre, apellido, email, rol, contrasenia));
                         break;
+=======
+>>>>>>> origin/diego
                     case "repositor":
                         usuarios.add((T) new Repositor(id, nombre, apellido, email, rol, contrasenia));
+                        break;
+                    case "admin":
+                        usuarios.add((T) new Admin(id, nombre, email, tipo, password));
                         break;
                     default:
                         System.out.println("Tipo desconocido: " + rol);
@@ -122,7 +171,7 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
     public LinkedList<Usuario> mostrarCajeros() {
         LinkedList<Usuario> usuarios = new LinkedList<>();
         try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuario WHERE tipo ='Cajero'");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuario WHERE tipo ='Alumno'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -143,6 +192,7 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
         }
         return usuarios;
     }
+<<<<<<< HEAD
     @Override
     public LinkedList<Usuario> mostrarRepositores() {
         LinkedList<Usuario> usuarios = new LinkedList<>();
@@ -168,6 +218,8 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
         }
         return usuarios;
     }
+=======
+>>>>>>> origin/diego
     
     
     
@@ -282,9 +334,15 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             PreparedStatement statement = con.prepareStatement(
                 "UPDATE `usuario` SET `nombre`=?,`tipo`=?,`password`=? WHERE id =?"
             );
+<<<<<<< HEAD
             statement.setString(1, usuario.getNombre_usuario());
             statement.setString(2, usuario.getRol());
             statement.setString(3, usuario.getContrasenia());
+=======
+            statement.setString(1, usuario.getNombre());
+            statement.setString(2, usuario.getTipo());
+            statement.setString(3,  usuario.getPassword());
+>>>>>>> origin/diego
             statement.setInt(4, usuario.getId());
 
 
@@ -296,4 +354,10 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             e.printStackTrace();
         }
     }
+
+	@Override
+	public LinkedList<Usuario> mostrarRepositores() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
