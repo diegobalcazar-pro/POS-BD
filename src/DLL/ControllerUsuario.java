@@ -171,9 +171,6 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
     
     
     
-    
-    
-    
     /**public LinkedList<Producto> mostrarProductos() {
         LinkedList<Producto> productos = new LinkedList<>();
         try {
@@ -253,14 +250,6 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     public void EliminarUsuario(Usuario usuario) {
         try {
             PreparedStatement statement = con.prepareStatement(
@@ -295,5 +284,5 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
         }  catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    } 
 }

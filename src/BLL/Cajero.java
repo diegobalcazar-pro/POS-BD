@@ -35,7 +35,7 @@ public class Cajero extends Usuario {
 			}
 		} while (opcion != 2);
 		
-	}
+	} 
     
     
    
