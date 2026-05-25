@@ -1,19 +1,26 @@
 package BLL;
 
+import java.sql.PreparedStatement;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import repository.Validaciones;
 import DLL.ControllerProducto;
 import BLL.Producto;
+import BLL.Usuario;
 
 	public class Admin extends Usuario implements Validaciones {
 
-		public Admin(int id, String nombre, String apellido, String email, String rol, String contrasenia) {
-			super(id, nombre, apellido, email, rol, contrasenia);
+		public Admin(int id_usuario, String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+			super(id_usuario, nombre_usuario, apellido_usuario, email, contrasenia, rol);
 		}
 		
+		public Admin(String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+            super(nombre_usuario, apellido_usuario, email, contrasenia, rol);
+   }
 		public Admin() {
 	        super();
 	    }
@@ -22,26 +29,178 @@ import BLL.Producto;
 		public String toString() {
 			return "Admin [toString()=" + super.toString() + "]";
 		}
+		 @Override
+		    public void agregarUsuario(Usuario usuario) {
+		    }
 		
 		
+
 		@Override
+		//------------------------------------------------------------------ MENU DE ADMINISTRADOR ----------------------------------------------------------------------------------------------------------------
 		public void Menu() {
 
-			String[] opciones = { "Agregar cajeros", "Ver Productos", "Eliminar cajeros", "Editar cajeros", "Ver repositor", "Eliminar repositor", "Editar repositor","Agregar Producto", "Salir" };
+			String[] opciones = { "Gestion de Usuarios", "Gestion de Productos", "Informacion de Ventas", "Configuracion", "Cerrar Sesion" };
+			
 			int opcion;
 			do {
 
-				opcion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones, opciones);
+				opcion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Menu Administrador", 0, 0, null, opciones, opciones);
 				switch (opcion) {
 				case 0:
-					//AGREGAR Cajeros
-					// String nombre, String apellido, String email, String tipo, String password
-					this.getController().agregarUsuario(new Cajero(validarIngresoString("Ingrese nombre"), validarIngresoString("Ingrese apellido"),
-							validarIngresoString("Ingrese mail"), "Cajero", validarIngresoString("Ingrese password")));
+					
+					//GESTION DE USUARIOS
+					
+					String[] opciones_gestion_usuario = { "Ver Empleados", "Añadir Empleado", "← Salir" };
+					int opcion_gestionar_usuario;
+					do {
+						opcion_gestionar_usuario = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion de Usuarios", 0, 0, null, opciones_gestion_usuario, opciones_gestion_usuario);
+						
+						switch (opcion_gestionar_usuario) {
+						case 0:
+							//VER EMPLEADOS
+							JOptionPane.showMessageDialog(null, this.getController().mostrarUsuarios());
+							
+							break;
+							
+						case 1:
+							//AÑADIR EMPLEADO
+							String[] opciones_agregar_usuario = { "Agregar Admin", "AAgregar Repositor","Agregar Cajero", "← Salir" };
+							int opcion_agregar_usuario;
+							do {
+								opcion_agregar_usuario = JOptionPane.showOptionDialog(null, "Agregar Usuario: ", "Gestion de Usuarios", 0, 0, null, opciones_agregar_usuario, opciones_agregar_usuario);
+								
+								switch (opcion_agregar_usuario) {
+								case 0:
+									//AGREGAR ADMIN
+					                getController().agregarUsuario( new Admin(validarIngresoString("Ingrese nombre: "),
+							                validarIngresoString("Ingrese apellido: "),
+								            validarIngresoString("Ingrese mail: "),
+								            validarIngresoString("Ingrese contraseña: "),
+								            "Admin"));
+					                JOptionPane.showMessageDialog(null, "Admin Agregado con exito!");
+									
+									break;
+								case 1:
+									getController().agregarUsuario( new Repositor(validarIngresoString("Ingrese nombre: "),
+								            validarIngresoString("Ingrese apellido: "),
+									        validarIngresoString("Ingrese mail: "),
+									        validarIngresoString("Ingrese contraseña: "),
+									        "Repositor"));
+									JOptionPane.showMessageDialog(null, "Repositor Agregado con exito!");
+									break;
+								case 2:
+									getController().agregarUsuario( new Cajero(validarIngresoString("Ingrese nombre: "),
+								            validarIngresoString("Ingrese apellido: "),
+									        validarIngresoString("Ingrese mail: "),
+									        validarIngresoString("Ingrese contraseña: "),
+									        "Cajero"));
+									JOptionPane.showMessageDialog(null, "Cajero Agregado con exito!");
+									break;
+								default:
+									break;
+								}	
+							} while (opcion_agregar_usuario != 3); //SALE DE AGREGAR DE USUARIOS
+							break;
+							
+						default:
+							break;
+						}
+						
+					} while (opcion_gestionar_usuario != 2); //SALE DE GESTION DE USUARIOS
+					break;
+					
+				case 1:
+					//GESTION DE PRODUCTOS
+					String[] opciones_gestion_productos = { "Ver Productos", "Ver Movimientos de Stock", "← Salir" };
+					int opcion_gestionar_productos;
+					do {
+						opcion_gestionar_productos = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion de Productos", 0, 0, null, opciones_gestion_productos, opciones_gestion_productos);
+						switch (opcion_gestionar_productos) {
+						case 0:
+							//VER PRODUCTOS
+							
+							break;
+						case 1:
+							//VER MOVIMIENTOS DE STOCK
+							
+							break;
+
+						default:
+							break;
+						}
+						
+					} while (opcion_gestionar_productos != 2); //SALE DE GESTION DE PRODUCTOS
+					
+					break;
+				case 2:
+					//INFORMACION DE VENTAS
+					String[] opciones_info_ventas = { "Historial de Ventas", "Productos Más Vendidos", "Categorias Más Vendidas", "← Salir" };
+					int opcion_info_ventas;
+					do {
+						opcion_info_ventas = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Informacion de Ventas", 0, 0, null, opciones_info_ventas, opciones_info_ventas);
+						switch (opcion_info_ventas) {
+						case 0:
+							//HISTORIAL DE VENTAS
+							
+							break;
+						case 1:
+							//PRODUCTOS MAS VENDIDOS
+							
+							break;
+						case 2:
+							//CATEGORIAS MAS VENDIDAS
+							
+							break;
+
+						default:
+							break;
+						}
+						
+					} while (opcion_info_ventas != 3); //SALE DE INFORMACION DE VENTAS
+					
+					break;
+				case 3:
+					//CONFIG
+					String[] opciones_config = { "Configurar Informacion", "Configurar Descuentos", "← Salir" };
+					int opcion_config;
+					do {
+						opcion_config = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Configuración", 0, 0, null, opciones_config, opciones_config);
+						switch (opcion_config) {
+						case 0:
+							//CONFIGURAR INFORMACION
+							
+							break;
+						case 1:
+							//CONFIGURAR DESCUENTOS
+							
+							break;
+
+						default:
+							break;
+						}
+						
+					} while (opcion_config != 2);
+					
+					break;
+
+				default:
+					break;
+				}
+				
+				
+				
+				
+				/*switch (opcion) {
+				
+				case 0:
+					//AGREGAR ALUMNOS
+					// String nombre, String email, String tipo, String password
+					this.getController().agregarUsuario(new Cajero(validarIngresoString("Ingrese nombre"),
+							validarIngresoString("Ingrese mail"), "Alumno", validarIngresoString("Ingrese password")));
 					break;
 				case 1:
-					//MOSTRAR productos
-					JOptionPane.showMessageDialog(null, this.getController().mostrarProductos());
+					//MOSTRAR Cajero
+					JOptionPane.showMessageDialog(null, this.getController().mostrarCajeros());
 					break;
 				case 2:
 					//ELIMINAR Cajero
@@ -54,7 +213,7 @@ import BLL.Producto;
 				case 3:
 					//EDITAR Cajero
 					elegido = BuscarCajero();
-					String[] datos = { "Nombre", "Apellido", "Rol", "Contraseña", "Editar" };
+					String[] datos = { "Nombre", "Tipo", "Contraseña", "Editar" };
 					int elegir;
 					do {
 						elegir = JOptionPane.showOptionDialog(null,
@@ -62,22 +221,19 @@ import BLL.Producto;
 								datos, datos[0]);
 						switch (elegir) {
 						case 0:
-							elegido.setNombre_usuario(JOptionPane.showInputDialog("Ingresar nombre"));
+							elegido.setNombre(JOptionPane.showInputDialog("Ingresar nombre"));
 							break;
 						case 1:
-							elegido.setNombre_usuario(JOptionPane.showInputDialog("Ingresar apellido"));
+							elegido.setTipo(JOptionPane.showInputDialog("Ingresar tipo"));
 							break;
 						case 2:
-							elegido.setRol(JOptionPane.showInputDialog("Ingresar Rol"));
-							break;
-						case 3:
-							elegido.setContrasenia(JOptionPane.showInputDialog("Ingresar Contraseña"));
+							elegido.setPassword(JOptionPane.showInputDialog("Ingresar Contraseña"));
 							;
 							break;
 						default:
 							break;
 						}
-					} while (elegir != 4);
+					} while (elegir != 3);
 
 					this.getController().EditarUsuario(elegido);
 					break;
@@ -96,7 +252,7 @@ import BLL.Producto;
 				case 6:
 					//EDITAR REPOSITOR
 					elegido_repositor = BuscarRepositor();
-					String[] datosrepositor = { "Nombre", "Apellido", "Rol", "Contraseña", "Editar" };
+					String[] datosrepositor = { "Nombre", "Tipo", "Contraseña", "Editar" };
 					int elegir_datos_repositor;
 					do {
 						elegir_datos_repositor = JOptionPane.showOptionDialog(null,
@@ -104,33 +260,31 @@ import BLL.Producto;
 								datosrepositor, datosrepositor[0]);
 						switch (elegir_datos_repositor) {
 						case 0:
-							elegido_repositor.setNombre_usuario(JOptionPane.showInputDialog("Ingresar nombre"));
+							elegido_repositor.setNombre(JOptionPane.showInputDialog("Ingresar nombre"));
 							break;
 						case 1:
-							elegido_repositor.setApellido_usuario(JOptionPane.showInputDialog("Ingresar apellido"));
+							elegido_repositor.setTipo(JOptionPane.showInputDialog("Ingresar tipo"));
 							break;
 						case 2:
-							elegido_repositor.setRol(JOptionPane.showInputDialog("Ingresar rol"));
-							break;
-						case 3:
-							elegido_repositor.setContrasenia(JOptionPane.showInputDialog("Ingresar Contraseña"));
+							elegido_repositor.setPassword(JOptionPane.showInputDialog("Ingresar Contraseña"));
 							;
 							break;
 						default:
 							break;
 						}
-					} while (elegir_datos_repositor != 4);
+					} while (elegir_datos_repositor != 3);
 
 					this.getController().EditarUsuario(elegido_repositor);
 					break;
-					
-				case 7: 	this.getController().agregarProducto(new Producto(validarIngresoString("Ingrese nombre de producto"),
-						validarIngresoString("Ingrese descripcion"), validarIngresoDouble("Ingrese precio"), validarIngresoInt("Ingrese Stock")));
-					break;
 				default:
 					break;
-				}
-			} while (opcion != 7);
+				}*/
+				
+				
+				
+				
+				
+			} while (opcion != 4); //CIERRA SESION DE ADMIN
 
 		}
 
@@ -155,4 +309,12 @@ import BLL.Producto;
 			return repositores.get(elegido);
 
 		}
+		
+		
+		
+		
+		
+		
+		
+		
 }

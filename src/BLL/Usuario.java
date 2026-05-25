@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 import DLL.ControllerUsuario;
 
 public abstract class Usuario {
-    protected int id;
+    protected int id_usuario;
     protected String nombre_usuario;
     protected String apellido_usuario;
     protected String email;
@@ -13,23 +13,32 @@ public abstract class Usuario {
     protected String rol;
     private static ControllerUsuario controller = new ControllerUsuario();
 
-    public Usuario(int id, String nombre_usuario,String apellido_usuario, String email,String rol,String contrasenia) {
-        this.id = id;
+    public Usuario(int id_usuario, String nombre_usuario,String apellido_usuario, String email,String contrasenia, String rol) {
+        this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
         this.apellido_usuario = apellido_usuario;
         this.email = email;
-        this.rol = rol;
         this.contrasenia = contrasenia;
-        
+        this.rol = rol; 
     }
+    public Usuario(String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+    	    this.nombre_usuario = nombre_usuario;
+    	    this.apellido_usuario = apellido_usuario;
+    	    this.email = email;
+    	    this.contrasenia = contrasenia;
+    	    this.rol = rol;
+    	}
     public Usuario() {
-      
-    }
-	public int getId() {
-		return id;
+    	
+    };
+    
+    
+    
+	public int getId_usuario() {
+		return id_usuario;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 	public String getNombre_usuario() {
 		return nombre_usuario;
@@ -68,11 +77,14 @@ public abstract class Usuario {
 	public static void setController(ControllerUsuario controller) {
 		Usuario.controller = controller;
 	}
+	
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre_usuario + ", apellido=" + apellido_usuario + ", email=" + email + ","
-				+ " rol=" + rol + ", contraseña=" + contrasenia + "]";
+		return "Usuarios:\n[id=" + id_usuario + ", " + nombre_usuario +" "+ apellido_usuario + ", " + email + ","
+				+ " rol=" + rol + "]\n";
 	}
+	
+	
 	public static Usuario Login() {
 		  String nombre_usuario = "";
           while (nombre_usuario.isEmpty()) {
@@ -95,6 +107,11 @@ public abstract class Usuario {
 	
 	
 	public abstract void Menu();
+	
+	public void agregarUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
       

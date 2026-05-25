@@ -5,11 +5,11 @@ import javax.swing.JOptionPane;
 public class Cajero extends Usuario {
 
     
-    public Cajero(int id, String nombre, String apellido, String email, String rol, String contrasenia) {
-		super(id, nombre, apellido, email, rol, contrasenia);
+    public Cajero(int id_usuario, String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+		super(id_usuario, nombre_usuario, apellido_usuario, email, contrasenia, rol);
 	}
-    public Cajero( String nombre, String apellido, String email, String rol, String contrasenia) {
-		super(0, nombre, apellido, email, rol, contrasenia);
+    public Cajero( String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+		super(0, nombre_usuario, apellido_usuario, email, contrasenia, rol);
 	}
 	public Cajero() {
         super();

@@ -11,11 +11,11 @@ public class Main {
     public static void main(String[] args) {
         
         
-        String[] acciones = { "Login", "Registrar", "Salir" };
+        String[] acciones = { "Iniciar Sesión", "Salir" };
         int menu = 0;
         
         do {
-            menu = JOptionPane.showOptionDialog(null, "Bienvenido", null, 0, 0, null, acciones, acciones[0]);
+            menu = JOptionPane.showOptionDialog(null, "Bienvenido a POS", null, 0, 0, null, acciones, acciones[0]);
 
             switch (menu) {
                 case 0:
@@ -38,12 +38,8 @@ public class Main {
                     }
                     break;
 
-                case 1: 
-                	
-                	//falta registrar :D
-                    
-                    break;
+               
             }
-        } while (menu != 2);
+        } while (menu != 1);
     }
 }
