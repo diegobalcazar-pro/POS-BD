@@ -85,6 +85,23 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             e.printStackTrace();
         }
     }
+    
+    public void EliminarUsuario(String email) {
+        try {
+            PreparedStatement statement = con.prepareStatement(
+            		"DELETE FROM usuarios WHERE email = ?"
+            );
+            statement.setString(1, email);
+          
+
+            int filas = statement.executeUpdate();
+            if (filas > 0) {
+                System.out.println("Usuario elinado correctamente.");
+            }
+        }  catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     
     
@@ -253,27 +270,6 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
     
     
     
-    
-    
-    
-    
-    
-    public void EliminarUsuario(Usuario usuario) {
-        try {
-            PreparedStatement statement = con.prepareStatement(
-                "DELETE FROM `usuario` WHERE id=?"
-            );
-            statement.setInt(1, usuario.getId_usuario());
-          
-
-            int filas = statement.executeUpdate();
-            if (filas > 0) {
-                System.out.println("Usuario elinado correctamente.");
-            }
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     public void EditarUsuario(Usuario usuario) {	
         try {
             PreparedStatement statement = con.prepareStatement(
@@ -292,5 +288,11 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
         }  catch (Exception e) {
             e.printStackTrace();
         }
-    } 
+    }
+
+	@Override
+	public void EliminarUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		
+	} 
 }

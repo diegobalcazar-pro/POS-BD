@@ -50,7 +50,7 @@ import BLL.Usuario;
 					
 					//GESTION DE USUARIOS
 					
-					String[] opciones_gestion_usuario = { "Ver Empleados", "Añadir Empleado", "← Salir" };
+					String[] opciones_gestion_usuario = { "Ver Empleados", "Añadir Empleado", "Eliminar Empleado", "← Salir" };
 					int opcion_gestionar_usuario;
 					do {
 						opcion_gestionar_usuario = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion de Usuarios", 0, 0, null, opciones_gestion_usuario, opciones_gestion_usuario);
@@ -64,7 +64,7 @@ import BLL.Usuario;
 							
 						case 1:
 							//AÑADIR EMPLEADO
-							String[] opciones_agregar_usuario = { "Agregar Admin", "AAgregar Repositor","Agregar Cajero", "← Salir" };
+							String[] opciones_agregar_usuario = { "Agregar Admin", "Agregar Repositor","Agregar Cajero", "← Salir" };
 							int opcion_agregar_usuario;
 							do {
 								opcion_agregar_usuario = JOptionPane.showOptionDialog(null, "Agregar Usuario: ", "Gestion de Usuarios", 0, 0, null, opciones_agregar_usuario, opciones_agregar_usuario);
@@ -102,11 +102,17 @@ import BLL.Usuario;
 							} while (opcion_agregar_usuario != 3); //SALE DE AGREGAR DE USUARIOS
 							break;
 							
+						case 2:
+							//ELIMINAR USUARIO EMPLEADO
+							getController().EliminarUsuario(validarIngresoString("Ingrese mail de usuario que desea eliminar: "));
+							JOptionPane.showMessageDialog(null, "El usuario se elimino correctamente");
+							break;
+							
 						default:
 							break;
 						}
 						
-					} while (opcion_gestionar_usuario != 2); //SALE DE GESTION DE USUARIOS
+					} while (opcion_gestionar_usuario != 3); //SALE DE GESTION DE USUARIOS
 					break;
 					
 				case 1:
