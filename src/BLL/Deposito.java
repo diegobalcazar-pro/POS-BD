@@ -1,29 +1,22 @@
 package BLL;
 
 public class Deposito {
-	protected int idDeposito;
-	protected String lugar_deposito;
+    private int idDeposito;
+    private String lugar_deposito;
 
-	public Deposito(int idDeposito, String lugar_deposito) {
-		super();
-		this.idDeposito = idDeposito;
-		this.lugar_deposito = lugar_deposito;
-	}
+    public Deposito(int idDeposito, String lugarDeposito) {
+        this.idDeposito = idDeposito;
+        this.lugar_deposito = lugarDeposito;
+    }
 
-	public int getIdDeposito() {
-		return idDeposito;
-	}
+    public int getIdDeposito() { return idDeposito; }
+    public void setIdDeposito(int idDeposito) { this.idDeposito = idDeposito; }
 
-	public void setIdDeposito(int idDeposito) {
-		this.idDeposito = idDeposito;
-	}
+    public String getLugarDeposito() { return lugar_deposito; }
+    public void setLugarDeposito(String lugarDeposito) { this.lugar_deposito = lugarDeposito; }
 
-	public String getLugar_deposito() {
-		return lugar_deposito;
-	}
-
-	public void setLugar_deposito(String lugar_deposito) {
-		this.lugar_deposito = lugar_deposito;
-	}
-
+    @Override
+    public String toString() {
+        return lugar_deposito.substring(0, 1).toUpperCase() + lugar_deposito.substring(1);
+    }
 }
