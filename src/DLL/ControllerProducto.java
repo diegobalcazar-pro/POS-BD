@@ -54,8 +54,6 @@ public class ControllerProducto {
 	                //double precio = rs.getDouble("precio");
 	                //int stock = rs.getInt("stock");
 
-	              
-	    //     productos.add( new Producto(id, nombreProducto, descripcionProducto, null, null, null));
 	                 productos.add(new Producto(id_producto, nombreProducto, descripcionProducto));
 	          
 	            }

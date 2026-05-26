@@ -1,5 +1,7 @@
 package BLL;
 
+import java.util.LinkedList;
+
 import javax.swing.JOptionPane;
 
 import DLL.ControllerUsuario;
@@ -113,7 +115,15 @@ public abstract class Usuario {
 		
 	}
 	
-	
-      
+	public Usuario BuscarUsuario() {
+		LinkedList<Usuario> usuarios = this.getController().mostrarUsuarios();
+		String[] mails = new String[usuarios.size()];
+		for (int i = 0; i < mails.length; i++) {
+			mails[i] = usuarios.get(i).getEmail();
+		}
+		int elegido = JOptionPane.showOptionDialog(null, "Seleccione mail", "", 0, 0, null, mails, mails[0]);
+		return usuarios.get(elegido);
 
+	}
+	
 }

@@ -147,19 +147,19 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
     public LinkedList<Usuario> mostrarCajeros() {
         LinkedList<Usuario> usuarios = new LinkedList<>();
         try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuario WHERE tipo ='Cajero'");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuarios WHERE rol ='Cajero'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
+                int id_usuario = rs.getInt("id_usuario");
+                String nombre_usuario = rs.getString("nombre_usuario");
+                String apellido_usuario = rs.getString("apellido_usuario");
                 String email = rs.getString("email");
                 String rol = rs.getString("rol");
                 String contrasenia = rs.getString("contrasenia");
 
               
-                        usuarios.add((T) new Cajero(id, nombre, apellido, email, rol, contrasenia));
+                        usuarios.add((T) new Cajero(id_usuario, nombre_usuario, apellido_usuario, email, rol, contrasenia));
                  
           
             }
@@ -273,12 +273,15 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
     public void EditarUsuario(Usuario usuario) {	
         try {
             PreparedStatement statement = con.prepareStatement(
-                "UPDATE `usuario` SET `nombre`=?,`tipo`=?,`password`=? WHERE id =?"
-            );
+            		"UPDATE usuarios SET nombre_usuario=?, apellido_usuario=?, email=?, contrasenia=?, rol=? WHERE id_usuario=?"
+            	 );
+            
             statement.setString(1, usuario.getNombre_usuario());
-            statement.setString(2, usuario.getRol());
-            statement.setString(3, usuario.getContrasenia());
-            statement.setInt(4, usuario.getId_usuario());
+            statement.setString(2, usuario.getApellido_usuario());
+            statement.setString(3, usuario.getEmail());
+            statement.setString(4, usuario.getContrasenia());
+            statement.setString(5, usuario.getRol());
+            statement.setInt(6, usuario.getId_usuario());
 
 
             int filas = statement.executeUpdate();

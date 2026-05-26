@@ -50,11 +50,12 @@ import BLL.Usuario;
 					
 					//GESTION DE USUARIOS
 					
-					String[] opciones_gestion_usuario = { "Ver Empleados", "Añadir Empleado", "Eliminar Empleado", "← Salir" };
+					String[] opciones_gestion_usuario = { "Ver Empleados", "Añadir Empleado", "Eliminar Empleado", "Editar Empleado", "← Salir" };
 					int opcion_gestionar_usuario;
 					do {
 						opcion_gestionar_usuario = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion de Usuarios", 0, 0, null, opciones_gestion_usuario, opciones_gestion_usuario);
 						
+						Usuario elegido;
 						switch (opcion_gestionar_usuario) {
 						case 0:
 							//VER EMPLEADOS
@@ -80,7 +81,7 @@ import BLL.Usuario;
 					                JOptionPane.showMessageDialog(null, "Admin Agregado con exito!");
 									
 									break;
-								case 1:
+								case 1: //AGREGAR REPOSITOR
 									getController().agregarUsuario( new Repositor(validarIngresoString("Ingrese nombre: "),
 								            validarIngresoString("Ingrese apellido: "),
 									        validarIngresoString("Ingrese mail: "),
@@ -88,7 +89,7 @@ import BLL.Usuario;
 									        "Repositor"));
 									JOptionPane.showMessageDialog(null, "Repositor Agregado con exito!");
 									break;
-								case 2:
+								case 2: //AGREGAR CAJERO
 									getController().agregarUsuario( new Cajero(validarIngresoString("Ingrese nombre: "),
 								            validarIngresoString("Ingrese apellido: "),
 									        validarIngresoString("Ingrese mail: "),
@@ -108,11 +109,51 @@ import BLL.Usuario;
 							JOptionPane.showMessageDialog(null, "El usuario se elimino correctamente");
 							break;
 							
+						case 3:
+							//EDITAR USUARIOS
+							
+							elegido = BuscarUsuario();
+					
+							String[] datos = { "Nombre", "Rol", "Contraseña", "Guardar" };
+						    int elegir;
+						    do {
+						        elegir = JOptionPane.showOptionDialog(null, "Información actual:\n" + elegido + "\nSeleccione qué desea editar", "", 0, 0, null, datos, datos[0]);
+						        switch (elegir) {
+
+						        case 0:
+						            elegido.setNombre_usuario(JOptionPane.showInputDialog("Ingresar nombre"));
+						            break;
+
+						        case 1:
+						           
+						        	String[] roles = {"admin", "cajero", "repositor"};
+
+						        	String rol = (String) JOptionPane.showInputDialog(null, "Seleccione rol", "Rol",JOptionPane.QUESTION_MESSAGE, null, roles, roles[0]
+						        	);
+						        	elegido.setRol(rol);
+						        	
+						        	
+						            break;
+
+						        case 2:
+						            elegido.setContrasenia(JOptionPane.showInputDialog("Ingresar contraseña"));
+						            break;
+						        }
+						    } while (elegir != 3);
+
+						    this.getController().EditarUsuario(elegido);
+
+						    break;
+							
+							
+							
+							
+							
 						default:
 							break;
 						}
 						
-					} while (opcion_gestionar_usuario != 3); //SALE DE GESTION DE USUARIOS
+					} while (opcion_gestionar_usuario != 4); //SALE DE GESTION DE USUARIOS
 					break;
 					
 				case 1:
@@ -198,24 +239,6 @@ import BLL.Usuario;
 				
 				/*switch (opcion) {
 				
-				case 0:
-					//AGREGAR ALUMNOS
-					// String nombre, String email, String tipo, String password
-					this.getController().agregarUsuario(new Cajero(validarIngresoString("Ingrese nombre"),
-							validarIngresoString("Ingrese mail"), "Alumno", validarIngresoString("Ingrese password")));
-					break;
-				case 1:
-					//MOSTRAR Cajero
-					JOptionPane.showMessageDialog(null, this.getController().mostrarCajeros());
-					break;
-				case 2:
-					//ELIMINAR Cajero
-					Cajero elegido = BuscarCajero();
-					int confir = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar a : " + elegido);
-					if (confir == JOptionPane.YES_OPTION) {
-						this.getController().EliminarUsuario(elegido);
-					}
-					break;
 				case 3:
 					//EDITAR Cajero
 					elegido = BuscarCajero();
