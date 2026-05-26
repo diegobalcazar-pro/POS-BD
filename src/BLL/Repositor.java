@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import DLL.ControllerCategoria;
+import DLL.ControllerEnvio;
 import DLL.ControllerProducto;
 import DLL.ControllerProveedor;
 import DLL.ControllerVarianteProducto;
@@ -15,6 +16,7 @@ public class Repositor extends Usuario {
 	private static ControllerCategoria controllerCat = new ControllerCategoria();
 	private static ControllerProducto controllerProd = new ControllerProducto();
 	private static ControllerVarianteProducto controllerVar = new ControllerVarianteProducto();
+	private static ControllerEnvio controllerEnvio = new ControllerEnvio();
 
 	// --- CONSTRUCTORES ---
 	public Repositor(int id, String nombre, String apellido, String correo, String contrasenia, String rol) {
@@ -29,7 +31,8 @@ public class Repositor extends Usuario {
 		super();
 	}
 
-	// --- GESTIÓN DE CATEGORÍAS ---
+	// --- GESTIÓN DE PRODUCTOS ---
+	// --- CRUD DE CATEGORÍAS ---
 	public void altaCategoria() {
 		String nombre = JOptionPane.showInputDialog("Ingrese el nombre de la nueva categoría:");
 		if (nombre == null || nombre.trim().isEmpty())
@@ -91,14 +94,14 @@ public class Repositor extends Usuario {
 		JOptionPane.showMessageDialog(null, "Categoría actualizada correctamente.");
 	}
 
-	// --- GESTIÓN DE PRODUCTOS ---
 	// --- VER INVENTARIO ---
 	public void verInventario() {
-        String datosInventario = controllerVar.obtenerInventarioCompleto();
-        
-        JOptionPane.showMessageDialog(null, datosInventario, "Inventario Completo", JOptionPane.INFORMATION_MESSAGE);
-    }
-	// --- CRUD PRODUCTO
+		String datosInventario = controllerVar.obtenerInventarioCompleto();
+
+		JOptionPane.showMessageDialog(null, datosInventario, "Inventario Completo", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	// --- CRUD PRODUCTO ---
 	public void altaProducto() {
 		String nombre = JOptionPane.showInputDialog("Nombre del producto:");
 		String desc = JOptionPane.showInputDialog("Descripción:");
@@ -327,6 +330,106 @@ public class Repositor extends Usuario {
 		}
 	}
 
+	// --- GESTIÓN DE ENVÍOS ---
+	// --- CRUD ENVÍOS ---
+	public void verPedidos() {
+		String datosPedidos = controllerEnvio.obtenerListaPedidos();
+
+		JOptionPane.showMessageDialog(null, datosPedidos, "Lista de Pedidos y Envíos", JOptionPane.INFORMATION_MESSAGE);
+	}
+
+	public void modificarEnvio() {
+		String[] opciones = controllerEnvio.obtenerOpcionesEnvios();
+
+		if (opciones.length == 1 && opciones[0].equals("No hay envíos")) {
+			JOptionPane.showMessageDialog(null, "No hay envíos registrados para modificar.");
+			return;
+		}
+
+		String seleccion = (String) JOptionPane.showInputDialog(null, "Seleccione el envío a modificar:",
+				"Modificar Seguimiento", JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+
+		if (seleccion == null)
+			return;
+
+		int idEnvio = Integer.parseInt(seleccion.split(" -")[0]);
+
+		String nuevoSeguimiento = JOptionPane.showInputDialog(null,
+				"Ingrese el nuevo número de seguimiento para el Envío #" + idEnvio + ":", "Nuevo Seguimiento",
+				JOptionPane.QUESTION_MESSAGE);
+
+		if (nuevoSeguimiento == null || nuevoSeguimiento.trim().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Operación cancelada.");
+			return;
+		}
+
+		controllerEnvio.modificarSeguimiento(idEnvio, nuevoSeguimiento);
+		JOptionPane.showMessageDialog(null, "El número de seguimiento se actualizó correctamente.");
+	}
+
+	public void eliminarEnvio() {
+		String[] opciones = controllerEnvio.obtenerOpcionesEnvios();
+
+		if (opciones.length == 1 && opciones[0].equals("No hay envíos")) {
+			JOptionPane.showMessageDialog(null, "No hay envíos registrados para eliminar.");
+			return;
+		}
+
+		String seleccion = (String) JOptionPane.showInputDialog(null, "Seleccione el envío a ELIMINAR:",
+				"Baja de Envío", JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
+
+		if (seleccion == null)
+			return;
+
+		int idEnvio = Integer.parseInt(seleccion.split(" -")[0]);
+
+		int confirmacion = JOptionPane.showConfirmDialog(null,
+				"¿Está seguro que desea eliminar definitivamente el Envío #" + idEnvio
+						+ "?\nEsta acción no se puede deshacer.",
+				"Confirmar Eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+
+		if (confirmacion == JOptionPane.YES_OPTION) {
+			controllerEnvio.eliminarEnvio(idEnvio);
+			JOptionPane.showMessageDialog(null, "El envío ha sido eliminado con éxito.", "Eliminado",
+					JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "Operación cancelada. El envío no fue eliminado.");
+		}
+	}
+
+	public void enviarPedidoMenu() {
+		if (!controllerEnvio.verificarCupoDiario()) {
+			JOptionPane.showMessageDialog(null, "¡Cupo diario lleno! Ya se han realizado 10 despachos hoy.",
+					"Límite alcanzado", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+
+		String[] opciones = controllerEnvio.obtenerOpcionesPendientes();
+
+		if (opciones.length == 1 && opciones[0].equals("No hay pedidos pendientes")) {
+			JOptionPane.showMessageDialog(null, "No hay pedidos pendientes para enviar.");
+			return;
+		}
+
+		String seleccion = (String) JOptionPane.showInputDialog(null, "Seleccione el pedido a DESPACHAR:",
+				"Enviar Pedido", JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+
+		if (seleccion == null)
+			return;
+
+		int idEnvio = Integer.parseInt(seleccion.split(" -")[0]);
+		controllerEnvio.enviarPedido(idEnvio);
+		JOptionPane.showMessageDialog(null, "Pedido #" + idEnvio + " despachado con éxito.");
+	}
+
+	// --- VER CUPO DIARIO ---
+	public void verCupoDiario() {
+		int cantidad = controllerEnvio.obtenerCantidadDespachosHoy();
+
+		JOptionPane.showMessageDialog(null, "Pedidos despachados hoy: " + cantidad + "/10", "Estado del Cupo Diario",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+
 	// --- GESTIÓN DE PROVEEDORES ---
 	public void altaProveedor() {
 		String nombreEmpresa = JOptionPane.showInputDialog("Ingrese nombre de la empresa:");
@@ -541,12 +644,35 @@ public class Repositor extends Usuario {
 				break;
 
 			case 1:
-				String[] opcionespedido = { "Ver pedidos", "Ver cupos diarios", "Enviar pedido", "← Salir" };
+				String[] opcionespedido = { "Ver pedidos", "Modificar pedido", "Eliminar pedido", "Enviar pedido",
+						"Ver cupos diarios", "← Salir" };
 				int opcionpedido;
+
 				do {
 					opcionpedido = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestión de Pedidos", 0,
 							0, null, opcionespedido, opcionespedido[0]);
-				} while (opcionpedido != 3 && opcionpedido != -1);
+
+					switch (opcionpedido) {
+					case 0:
+						verPedidos();
+						break;
+					case 1:
+						modificarEnvio();
+						break;
+					case 2:
+						eliminarEnvio();
+						break;
+					case 3:
+						enviarPedidoMenu();
+						break;
+					case 4:
+						verCupoDiario();
+						break;
+					case 5:
+						break;
+					}
+
+				} while (opcionpedido != 5 && opcionpedido != -1);
 				break;
 
 			case 2:

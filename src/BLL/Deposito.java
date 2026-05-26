@@ -1,8 +1,8 @@
 package BLL;
 
 public class Deposito {
-    private int idDeposito;
-    private String lugar_deposito;
+    protected int idDeposito;
+    protected String lugar_deposito;
 
     public Deposito(int idDeposito, String lugarDeposito) {
         this.idDeposito = idDeposito;
