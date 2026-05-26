@@ -1,9 +1,5 @@
 package BLL;
 
-import javax.swing.JOptionPane;
-import repository.Hashing;
-import repository.Validaciones;
-
 public class Proveedor {
 	protected int IdProveedor;
 	protected String nombreEmpresa;

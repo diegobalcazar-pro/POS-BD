@@ -4,175 +4,127 @@ import javax.swing.JOptionPane;
 
 public class Cajero extends Usuario {
 
-    
-    public Cajero(int id, String nombre, String email, String tipo, String password) {
-		super(id, nombre, email, tipo, password);
+	// --- CONSTRUCTORES ---
+	public Cajero(int id, String nombre, String apellido, String correo, String contrasenia, String rol) {
+		super(id, nombre, apellido, correo, contrasenia, rol);
 	}
-    public Cajero( String nombre, String email, String tipo, String password) {
-		super(0, nombre, email, tipo, password);
+
+	public Cajero(String nombre, String apellido, String correo, String contrasenia, String rol) {
+		super(0, nombre, apellido, correo, contrasenia, rol);
 	}
+
 	public Cajero() {
-        super();
-    }
-	@Override
-	public String toString() {
-		return "Cajero [toString()=" + super.toString() + "]";
+		super();
 	}
-	
+
+	// --- MENÚ ---
 	@Override
-	//------------------------------------------------------------------ MENU DE CAJERO ----------------------------------------------------------------------------------------------------------------
 	public void Menu() {
-
-		String[] opciones = { "Realizar Venta", "Ver Caja", "Ver Stock", "Ver Ventas", "Cerra Caja", "Cerrar Sesion" };
-		
+		String[] opciones = { "Realizar Venta", "Ver Caja", "Ver Stock", "Ver Ventas", "Cerrar Caja", "Cerrar Sesion" };
 		int opcion;
-		do {
 
-			opcion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones, opciones);
+		do {
+			opcion = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Menú Principal - Cajero", 0, 0, null,
+					opciones, opciones[0]);
+
 			switch (opcion) {
 			case 0:
-				//REALIZAR VENTA
-				String[] opciones_gestion_usuario = { "Cliente", "Agregar Producto", "Borrar Producto", "Agregar Descuento", "Procesar Cobro", "← Salir" };
-				int opcion_gestionar_usuario;
+				String[] opVenta = { "Cliente", "Agregar Producto", "Borrar Producto", "Agregar Descuento",
+						"Procesar Cobro", "← Salir" };
+				int opVentaSub;
 				do {
-					opcion_gestionar_usuario = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_gestion_usuario, opciones_gestion_usuario);
-					switch (opcion_gestionar_usuario) {
+					opVentaSub = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Módulo de Ventas", 0, 0,
+							null, opVenta, opVenta[0]);
+					switch (opVentaSub) {
 					case 0:
-						//CLIENTE
-						
-						
 						break;
 					case 1:
-						//AGREGAR PRODUCTOS
-						
-						
 						break;
 					case 2:
-						//BORRAR PRODUCTOS
-						
-						
 						break;
 					case 3:
-						//AGREGAR DESCUENTO
-						
-						
 						break;
 					case 4:
-						//PROCESAR COBRO
-						
-						
 						break;
 					default:
 						break;
 					}
-					
-				} while (opcion_gestionar_usuario != 5); //SALE DE REALIZAR VENTA
-				
-				
+				} while (opVentaSub != 5 && opVentaSub != -1);
 				break;
+
 			case 1:
-				//VER CAJA
-				String[] opciones_gestion_productos = { "Imprimir Dia", "Añadir Gasto", "← Salir" };
-				int opcion_gestionar_productos;
+				String[] opCaja = { "Imprimir Dia", "Añadir Gasto", "← Salir" };
+				int opCajaSub;
 				do {
-					opcion_gestionar_productos = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_gestion_productos, opciones_gestion_productos);
-					switch (opcion_gestionar_productos) {
+					opCajaSub = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Caja Diaria", 0, 0, null,
+							opCaja, opCaja[0]);
+					switch (opCajaSub) {
 					case 0:
-						//IMPRIMIR DIA
-						
 						break;
 					case 1:
-						//AÑADIR GASTO
-						
 						break;
-
 					default:
 						break;
 					}
-					
-				} while (opcion_gestionar_productos != 2); //SALE DE VER CAJA
-				
+				} while (opCajaSub != 2 && opCajaSub != -1);
 				break;
+
 			case 2:
-				//VER STOCK
-				String[] opciones_info_ventas = { "Ver Todo", "Buscar Producto", "← Salir" };
-				int opcion_info_ventas;
+				String[] opStock = { "Ver Todo", "Buscar Producto", "← Salir" };
+				int opStockSub;
 				do {
-					opcion_info_ventas = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_info_ventas, opciones_info_ventas);
-					switch (opcion_info_ventas) {
+					opStockSub = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestión de Stock", 0, 0,
+							null, opStock, opStock[0]);
+					switch (opStockSub) {
 					case 0:
-						//VER TODO
-						
 						break;
 					case 1:
-						//BUSCAR PRODUCTO
-						
 						break;
-
 					default:
 						break;
 					}
-					
-				} while (opcion_info_ventas != 2); //SALE DE VER STOCK
-				
+				} while (opStockSub != 2 && opStockSub != -1);
 				break;
+
 			case 3:
-				//VER VENTAS
-				String[] opciones_config = { "Por Fecha", "Por Cliente", "Por N° Venta", "← Salir" };
-				int opcion_config;
+				String[] opVentas = { "Por Fecha", "Por Cliente", "Por N° Venta", "← Salir" };
+				int opVentasSub;
 				do {
-					opcion_config = JOptionPane.showOptionDialog(null, "Seleccione una opción", "", 0, 0, null, opciones_config, opciones_config);
-					switch (opcion_config) {
+					opVentasSub = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Historial de Ventas", 0,
+							0, null, opVentas, opVentas[0]);
+					switch (opVentasSub) {
 					case 0:
-						//POR FECHA
-						
 						break;
 					case 1:
-						//POR CLIENTE
-						
 						break;
 					case 2:
-						//POR N°VENTA
-						
 						break;
-
 					default:
 						break;
 					}
-					
-				} while (opcion_config != 3); //SALE DE VER VENTAS
-				
-				break;	
+				} while (opVentasSub != 3 && opVentasSub != -1);
+				break;
+
 			case 4:
-				//CERRAR CAJA
-				String[] opciones_cerrar_caja = { "Si", "← No, Salir" };
-				int opcion_cerrar_caja;
+				String[] opCerrar = { "Si", "← No, Salir" };
+				int opCerrarSub;
 				do {
-					opcion_cerrar_caja = JOptionPane.showOptionDialog(null, "¿Esta Seguro?", "Cerrar Caja", 0, 0, null, opciones_cerrar_caja, opciones_cerrar_caja);
-					switch (opcion_cerrar_caja) {
-					case 0:
-						//SI, CERRAR CAJA
-						
-						opcion_cerrar_caja = 1;
-						
-						break;
-
-					default:
-						break;
-					}
-					
-				} while (opcion_cerrar_caja != 1); //SALE DE CERRAR CAJA
-				
+					opCerrarSub = JOptionPane.showOptionDialog(null, "¿Esta Seguro?", "Cerrar Caja", 0, 0, null,
+							opCerrar, opCerrar[0]);
+					if (opCerrarSub == 0)
+						opCerrarSub = 1;
+				} while (opCerrarSub != 1 && opCerrarSub != -1);
 				break;
 
 			default:
 				break;
 			}
-			
-		} while (opcion != 5); //CIERRA SESION DE CAJERO
-
+		} while (opcion != 5 && opcion != -1);
 	}
-    
-    
-   
+
+	// --- TO STRING ---
+	@Override
+	public String toString() {
+		return "Cajero [" + super.toString() + "]";
+	}
 }

@@ -3,6 +3,7 @@ package DLL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
@@ -20,171 +21,187 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
 
 	private static Connection con = Conexion.getInstance().getConnection();
 
-    @Override
-    public T login(String email, String password) {
-        T usuario = null;
-        try {
-            PreparedStatement stmt = con.prepareStatement(
-                "SELECT * FROM usuario WHERE email =?"
-            );
-            stmt.setString(1, email);
-            
+	@Override
+	public T login(String correo, String contraseniaInput) {
+		T usuario = null;
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuarios WHERE correo = ?");
+			stmt.setString(1, correo);
 
-            ResultSet rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                int id = rs.getInt("id");
-                String nombre = rs.getString("nombre");
-                String tipo = rs.getString("tipo");
-                String contrasenia = rs.getString("password");
-                System.out.println(contrasenia);
-                if (Hashing.verificar(password, contrasenia)) {
-					
-				
-	                switch (tipo.toLowerCase()) {
-	                    case "cajero":
-	                        usuario = (T) new Cajero(id, nombre, email, tipo, password);
-	                        break;
-	                    case "repositor":
-	                        usuario = (T) new Repositor(id, nombre, email, tipo, password);
-	                        break;
-	                    case "admin":
-	                        usuario = (T) new Admin(id, nombre, email, tipo, password);
-	                        break;
-	                    default:
-	                        System.out.println("Tipo de usuario desconocido: " + tipo);
-	                        break;
-	                }
-                }else {
+			if (rs.next()) {
+				int id = rs.getInt("id_usuario");
+				String nombre = rs.getString("nombre_usuario");
+				String apellido = rs.getString("apellido_usuario");
+				String correoDb = rs.getString("correo");
+				String rol = rs.getString("rol");
+				String contraseniaDb = rs.getString("contrasenia");
+
+				System.out.println("Hash en DB: " + contraseniaDb);
+
+				if (Hashing.verificar(contraseniaInput, contraseniaDb)) {
+					switch (rol.toLowerCase()) {
+					case "cajero":
+						usuario = (T) new Cajero(id, nombre, apellido, correoDb, contraseniaDb, rol);
+						break;
+					case "repositor":
+						usuario = (T) new Repositor(id, nombre, apellido, correoDb, contraseniaDb, rol);
+						break;
+					case "admin":
+						usuario = (T) new Admin(id, nombre, apellido, correoDb, contraseniaDb, rol);
+						break;
+					default:
+						System.out.println("Rol de usuario desconocido: " + rol);
+						break;
+					}
+				} else {
 					JOptionPane.showMessageDialog(null, "La contraseña es incorrecta");
 				}
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return usuario;
-    }
+			} else {
+				JOptionPane.showMessageDialog(null, "Usuario no encontrado");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return usuario;
+	}
 
-    @Override
-    public void agregarUsuario(Usuario usuario) {
-        try {
-            PreparedStatement statement = con.prepareStatement(
-                "INSERT INTO usuario (nombre, email, tipo, password) VALUES (?,?, ?, ?)"
-            );
-            statement.setString(1, usuario.getNombre());
-            statement.setString(2, usuario.getEmail());
-            statement.setString(3, usuario.getTipo());
-            statement.setString(4, usuario.getPassword());
+	@Override
+	public void agregarUsuario(Usuario usuario) {
+		try {
+			PreparedStatement statement = con.prepareStatement(
+					"INSERT INTO usuarios (nombre_usuario, apellido_usuario, correo, rol, contrasenia) VALUES (?, ?, ?, ?, ?)");
+			statement.setString(1, usuario.getNombre());
+			statement.setString(2, usuario.getApellido());
+			statement.setString(3, usuario.getCorreo());
+			statement.setString(4, usuario.getRol());
+			statement.setString(5, usuario.getContrasenia());
 
-            int filas = statement.executeUpdate();
-            if (filas > 0) {
-                System.out.println("Usuario agregado correctamente.");
-            }
-        } catch (MySQLIntegrityConstraintViolationException e) {
-            JOptionPane.showMessageDialog(null, "No se puede crear usuario con mail existente");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+			int filas = statement.executeUpdate();
+			if (filas > 0) {
+				System.out.println("Usuario agregado correctamente.");
+			}
+		} catch (SQLIntegrityConstraintViolationException e) {
+			JOptionPane.showMessageDialog(null, "No se puede crear usuario con un correo ya existente");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    @Override
-    public LinkedList<Usuario> mostrarUsuarios() {
-        LinkedList<Usuario> usuarios = new LinkedList<>();
-        try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuario");
-            ResultSet rs = stmt.executeQuery();
+	@Override
+	public LinkedList<Usuario> mostrarUsuarios() {
+		LinkedList<Usuario> usuarios = new LinkedList<>();
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuarios");
+			ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String nombre = rs.getString("nombre");
-                String email = rs.getString("email");
-                String tipo = rs.getString("tipo");
-                String password = rs.getString("password");
+			while (rs.next()) {
+				int id = rs.getInt("id_usuario");
+				String nombre = rs.getString("nombre_usuario");
+				String apellido = rs.getString("apellido_usuario");
+				String correo = rs.getString("correo");
+				String rol = rs.getString("rol");
+				String contrasenia = rs.getString("contrasenia");
 
-                switch (tipo.toLowerCase()) {
-                    case "cajero":
-                        usuarios.add((T) new Cajero(id, nombre, email, tipo, password));
-                        break;
-                    case "repositor":
-                        usuarios.add((T) new Repositor(id, nombre, email, tipo, password));
-                        break;
-                    case "admin":
-                        usuarios.add((T) new Admin(id, nombre, email, tipo, password));
-                        break;
-                    default:
-                        System.out.println("Tipo desconocido: " + tipo);
-                        break;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return usuarios;
-    }
-    @Override
-    public LinkedList<Usuario> mostrarCajeros() {
-        LinkedList<Usuario> usuarios = new LinkedList<>();
-        try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuario WHERE tipo ='Alumno'");
-            ResultSet rs = stmt.executeQuery();
+				switch (rol.toLowerCase()) {
+				case "cajero":
+					usuarios.add(new Cajero(id, nombre, apellido, correo, contrasenia, rol));
+					break;
+				case "repositor":
+					usuarios.add(new Repositor(id, nombre, apellido, correo, contrasenia, rol));
+					break;
+				case "admin":
+					usuarios.add(new Admin(id, nombre, apellido, correo, contrasenia, rol));
+					break;
+				default:
+					System.out.println("Rol desconocido: " + rol);
+					break;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return usuarios;
+	}
 
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String nombre = rs.getString("nombre");
-                String email = rs.getString("email");
-                String tipo = rs.getString("tipo");
-                String password = rs.getString("password");
+	@Override
+	public LinkedList<Usuario> mostrarCajeros() {
+		LinkedList<Usuario> usuarios = new LinkedList<>();
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuarios WHERE rol = 'cajero'");
+			ResultSet rs = stmt.executeQuery();
 
-              
-                        usuarios.add((T) new Cajero(id, nombre, email, tipo, password));
-                 
-          
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return usuarios;
-    }
-    
-    public void EliminarUsuario(Usuario usuario) {
-        try {
-            PreparedStatement statement = con.prepareStatement(
-                "DELETE FROM `usuario` WHERE id=?"
-            );
-            statement.setInt(1, usuario.getId());
-          
+			while (rs.next()) {
+				int id = rs.getInt("id_usuario");
+				String nombre = rs.getString("nombre_usuario");
+				String apellido = rs.getString("apellido_usuario");
+				String correo = rs.getString("correo");
+				String rol = rs.getString("rol");
+				String contrasenia = rs.getString("contrasenia");
 
-            int filas = statement.executeUpdate();
-            if (filas > 0) {
-                System.out.println("Usuario elinado correctamente.");
-            }
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public void EditarUsuario(Usuario usuario) {	
-        try {
-            PreparedStatement statement = con.prepareStatement(
-                "UPDATE `usuario` SET `nombre`=?,`tipo`=?,`password`=? WHERE id =?"
-            );
-            statement.setString(1, usuario.getNombre());
-            statement.setString(2, usuario.getTipo());
-            statement.setString(3,  usuario.getPassword());
-            statement.setInt(4, usuario.getId());
+				usuarios.add(new Cajero(id, nombre, apellido, correo, contrasenia, rol));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return usuarios;
+	}
 
+	public void EliminarUsuario(Usuario usuario) {
+		try {
+			PreparedStatement statement = con.prepareStatement("DELETE FROM usuarios WHERE id_usuario = ?");
+			statement.setInt(1, usuario.getId());
 
-            int filas = statement.executeUpdate();
-            if (filas > 0) {
-                System.out.println("Usuario editado correctamente.");
-            }
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+			int filas = statement.executeUpdate();
+			if (filas > 0) {
+				System.out.println("Usuario eliminado correctamente.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void EditarUsuario(Usuario usuario) {
+		try {
+			PreparedStatement statement = con.prepareStatement(
+					"UPDATE usuarios SET nombre_usuario = ?, apellido_usuario = ?, correo = ?, rol = ?, contrasenia = ? WHERE id_usuario = ?");
+			statement.setString(1, usuario.getNombre());
+			statement.setString(2, usuario.getApellido());
+			statement.setString(3, usuario.getCorreo());
+			statement.setString(4, usuario.getRol());
+			statement.setString(5, usuario.getContrasenia());
+			statement.setInt(6, usuario.getId());
+
+			int filas = statement.executeUpdate();
+			if (filas > 0) {
+				System.out.println("Usuario editado correctamente.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public LinkedList<Usuario> mostrarRepositores() {
-		// TODO Auto-generated method stub
-		return null;
+		LinkedList<Usuario> usuarios = new LinkedList<>();
+		try {
+			PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuarios WHERE rol = 'repositor'");
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id_usuario");
+				String nombre = rs.getString("nombre_usuario");
+				String apellido = rs.getString("apellido_usuario");
+				String correo = rs.getString("correo");
+				String rol = rs.getString("rol");
+				String contrasenia = rs.getString("contrasenia");
+
+				usuarios.add(new Repositor(id, nombre, apellido, correo, contrasenia, rol));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return usuarios;
 	}
 }
