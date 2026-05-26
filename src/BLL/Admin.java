@@ -113,7 +113,6 @@ import BLL.Usuario;
 							//EDITAR USUARIOS
 							
 							elegido = BuscarUsuario();
-					
 							String[] datos = { "Nombre", "Rol", "Contraseña", "Guardar" };
 						    int elegir;
 						    do {
@@ -127,12 +126,10 @@ import BLL.Usuario;
 						        case 1:
 						           
 						        	String[] roles = {"admin", "cajero", "repositor"};
-
 						        	String rol = (String) JOptionPane.showInputDialog(null, "Seleccione rol", "Rol",JOptionPane.QUESTION_MESSAGE, null, roles, roles[0]
 						        	);
 						        	elegido.setRol(rol);
-						        	
-						        	
+						        						
 						            break;
 
 						        case 2:
@@ -144,8 +141,6 @@ import BLL.Usuario;
 						    this.getController().EditarUsuario(elegido);
 
 						    break;
-							
-							
 							
 							
 							
@@ -166,6 +161,7 @@ import BLL.Usuario;
 						case 0:
 							//VER PRODUCTOS
 							
+						
 							break;
 						case 1:
 							//VER MOVIMIENTOS DE STOCK
