@@ -430,6 +430,48 @@ public class Repositor extends Usuario {
 				JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	// --- GESTIÓN DE STOCK ---
+	public void modificarStockMenu() {
+		String[] opciones = controllerVar.obtenerOpcionesStock();
+
+		if (opciones.length == 1 && opciones[0].equals("No hay stock registrado")) {
+			JOptionPane.showMessageDialog(null, "No hay variantes con stock asignado para modificar.");
+			return;
+		}
+
+		String seleccion = (String) JOptionPane.showInputDialog(null, "Seleccione la variante a modificar:",
+				"Modificar Stock", JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+
+		if (seleccion == null)
+			return;
+
+		int idVariante = Integer.parseInt(seleccion.split(" -")[0]);
+
+		String cantidadStr = JOptionPane.showInputDialog(null,
+				"Ingrese la NUEVA cantidad de stock total para esta variante:", "Actualizar Stock",
+				JOptionPane.INFORMATION_MESSAGE);
+
+		if (cantidadStr == null || cantidadStr.trim().isEmpty())
+			return;
+
+		try {
+			int nuevaCantidad = Integer.parseInt(cantidadStr);
+
+			if (nuevaCantidad < 0) {
+				JOptionPane.showMessageDialog(null, "Error: El stock no puede ser negativo.", "Cantidad inválida",
+						JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+
+			controllerVar.actualizarCantidadStock(idVariante, nuevaCantidad);
+			JOptionPane.showMessageDialog(null, "El stock se actualizó correctamente a: " + nuevaCantidad);
+
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Por favor, ingrese únicamente números enteros.", "Error de formato",
+					JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
 	// --- GESTIÓN DE PROVEEDORES ---
 	public void altaProveedor() {
 		String nombreEmpresa = JOptionPane.showInputDialog("Ingrese nombre de la empresa:");
@@ -560,7 +602,8 @@ public class Repositor extends Usuario {
 
 	@Override
 	public void Menu() {
-		String[] opciones = { "Gestión de Producto", "Gestión de Pedido", "Gestión de Proveedor", "Cerrar Sesión" };
+		String[] opciones = { "Gestión de Producto", "Gestión de Pedido", "Gestión de Stock", "Gestión de Proveedor",
+				"Cerrar Sesión" };
 		int opcion;
 
 		do {
@@ -674,8 +717,26 @@ public class Repositor extends Usuario {
 
 				} while (opcionpedido != 5 && opcionpedido != -1);
 				break;
-
 			case 2:
+				String[] opcionesStock = { "Ver estado del stock", "Modificar stock", "← Salir" };
+				int opcionStockSel;
+
+				do {
+					opcionStockSel = JOptionPane.showOptionDialog(null, "Gestión de Inventario", "Stock", 0, 0, null,
+							opcionesStock, opcionesStock[0]);
+
+					switch (opcionStockSel) {
+					case 0:
+						verInventario();
+						break;
+					case 1:
+						modificarStockMenu();
+						break;
+					}
+				} while (opcionStockSel != 2 && opcionStockSel != -1);
+				break;
+
+			case 3:
 				String[] opcionesProveedor = { "Ver Proveedores", "Agregar Proveedor", "Eliminar Proveedor",
 						"Modificar Proveedor", "← Salir" };
 				int opcionProv;
@@ -703,6 +764,6 @@ public class Repositor extends Usuario {
 				break;
 			}
 
-		} while (opcion != 3 && opcion != -1);
+		} while (opcion != 4 && opcion != -1);
 	}
 }

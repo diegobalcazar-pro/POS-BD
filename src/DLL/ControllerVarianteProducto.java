@@ -12,46 +12,44 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 
 	@Override
 	public String obtenerInventarioCompleto() {
-        StringBuilder sb = new StringBuilder();
-        
-        String sql = "SELECT p.nombre_producto, c.nombre_categoria, v.talle, v.color, v.precio_venta, " +
-                     "s.cantidad, d.lugar_deposito " +
-                     "FROM productos p " +
-                     "JOIN categorias c ON p.fk_categoria = c.id_categoria " +
-                     "JOIN variantes_productos v ON p.id_producto = v.fk_producto " +
-                     "JOIN stocks s ON v.id_variante_producto = s.fk_variante_producto " +
-                     "JOIN depositos d ON s.fk_deposito = d.id_deposito " +
-                     "ORDER BY p.nombre_producto, v.talle";
+		StringBuilder sb = new StringBuilder();
 
-        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
-            boolean hayDatos = false;
-            
-            while (rs.next()) {
-                hayDatos = true;
-                sb.append("Producto: ").append(rs.getString("nombre_producto"))
-                  .append(" (").append(rs.getString("nombre_categoria")).append(")\n");
-                
-                sb.append("Variante: Talle ").append(rs.getString("talle"))
-                  .append(" | Color ").append(rs.getString("color"))
-                  .append(" | Precio: $").append(rs.getDouble("precio_venta")).append("\n");
-                
-                sb.append("Stock: ").append(rs.getInt("cantidad"))
-                  .append(" unid. en ").append(rs.getString("lugar_deposito").toUpperCase()).append("\n");
-                
-                sb.append("--------------------------------------------------\n");
-            }
-            
-            if (!hayDatos) {
-                return "No hay productos en el inventario.";
-            }
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return "Error al cargar el inventario.";
-        }
-        
-        return sb.toString();
-    }
+		String sql = "SELECT p.nombre_producto, c.nombre_categoria, v.talle, v.color, v.precio_venta, "
+				+ "s.cantidad, d.lugar_deposito " + "FROM productos p "
+				+ "JOIN categorias c ON p.fk_categoria = c.id_categoria "
+				+ "JOIN variantes_productos v ON p.id_producto = v.fk_producto "
+				+ "JOIN stocks s ON v.id_variante_producto = s.fk_variante_producto "
+				+ "JOIN depositos d ON s.fk_deposito = d.id_deposito " + "ORDER BY p.nombre_producto, v.talle";
+
+		try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+			boolean hayDatos = false;
+
+			while (rs.next()) {
+				hayDatos = true;
+				sb.append("Producto: ").append(rs.getString("nombre_producto")).append(" (")
+						.append(rs.getString("nombre_categoria")).append(")\n");
+
+				sb.append("Variante: Talle ").append(rs.getString("talle")).append(" | Color ")
+						.append(rs.getString("color")).append(" | Precio: $").append(rs.getDouble("precio_venta"))
+						.append("\n");
+
+				sb.append("Stock: ").append(rs.getInt("cantidad")).append(" unid. en ")
+						.append(rs.getString("lugar_deposito").toUpperCase()).append("\n");
+
+				sb.append("--------------------------------------------------\n");
+			}
+
+			if (!hayDatos) {
+				return "No hay productos en el inventario.";
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return "Error al cargar el inventario.";
+		}
+
+		return sb.toString();
+	}
 
 	@Override
 	public List<BLL.Deposito> obtenerDepositos() {
@@ -168,6 +166,41 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 				System.out.println("No se encontró stock asociado a esta variante para mover.");
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String[] obtenerOpcionesStock() {
+		java.util.List<String> opciones = new java.util.ArrayList<>();
+
+		String sql = "SELECT v.id_variante_producto, p.nombre_producto, v.talle, v.color, s.cantidad "
+				+ "FROM variantes_productos v " + "JOIN productos p ON v.fk_producto = p.id_producto "
+				+ "JOIN stocks s ON s.fk_variante_producto = v.id_variante_producto";
+
+		try (java.sql.Statement stmt = con.createStatement(); java.sql.ResultSet rs = stmt.executeQuery(sql)) {
+			while (rs.next()) {
+				String item = rs.getInt("id_variante_producto") + " - " + rs.getString("nombre_producto") + " (Talle: "
+						+ rs.getString("talle") + " | Color: " + rs.getString("color") + ") -> Stock actual: "
+						+ rs.getInt("cantidad");
+				opciones.add(item);
+			}
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+		}
+
+		return opciones.isEmpty() ? new String[] { "No hay stock registrado" } : opciones.toArray(new String[0]);
+	}
+
+	@Override
+	public void actualizarCantidadStock(int idVariante, int nuevaCantidad) {
+		String sql = "UPDATE stocks SET cantidad = ? WHERE fk_variante_producto = ?";
+
+		try (java.sql.PreparedStatement stmt = con.prepareStatement(sql)) {
+			stmt.setInt(1, nuevaCantidad);
+			stmt.setInt(2, idVariante);
+			stmt.executeUpdate();
+		} catch (java.sql.SQLException e) {
 			e.printStackTrace();
 		}
 	}

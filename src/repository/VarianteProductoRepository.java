@@ -12,5 +12,7 @@ public interface VarianteProductoRepository {
     void eliminarVariante(int id);
     void modificarVariante(VarianteProducto v);
     void moverVariante(int idVariante, int idNuevoDeposito);
+    String[] obtenerOpcionesStock();
+    void actualizarCantidadStock(int idVariante, int nuevaCantidad);
 	
 }
