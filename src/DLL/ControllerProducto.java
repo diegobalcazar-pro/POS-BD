@@ -4,17 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
-import BLL.Cajero;
 import BLL.Producto;
 import BLL.Usuario;
-import repository.UsuarioRepository;
+import repository.ProductoRepository;
 
-public class ControllerProducto {
+public class ControllerProducto<T extends Producto> implements ProductoRepository{
 	
 	private static Connection con = Conexion.getInstance().getConnection();
 	
@@ -62,7 +60,6 @@ public class ControllerProducto {
 	        }
 	        return productos;
 	    }
-	
 	
 	
 	

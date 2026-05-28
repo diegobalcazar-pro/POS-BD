@@ -8,8 +8,11 @@ import javax.swing.JOptionPane;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import repository.Validaciones;
+import repository.DescuentoRepository;
+import DLL.ControllerDescuento;
 import DLL.ControllerProducto;
 import BLL.Producto;
+import BLL.Descuento;
 import BLL.Usuario;
 
 	public class Admin extends Usuario implements Validaciones {
@@ -160,7 +163,7 @@ import BLL.Usuario;
 						switch (opcion_gestionar_productos) {
 						case 0:
 							//VER PRODUCTOS
-							
+							JOptionPane.showMessageDialog(null, Producto.mostrarProductos());
 						
 							break;
 						case 1:
@@ -175,6 +178,7 @@ import BLL.Usuario;
 					} while (opcion_gestionar_productos != 2); //SALE DE GESTION DE PRODUCTOS
 					
 					break;
+					
 				case 2:
 					//INFORMACION DE VENTAS
 					String[] opciones_info_ventas = { "Historial de Ventas", "Productos Más Vendidos", "Categorias Más Vendidas", "← Salir" };
@@ -202,6 +206,7 @@ import BLL.Usuario;
 					} while (opcion_info_ventas != 3); //SALE DE INFORMACION DE VENTAS
 					
 					break;
+					
 				case 3:
 					//CONFIG
 					String[] opciones_config = { "Configurar Informacion", "Configurar Descuentos", "← Salir" };
@@ -216,6 +221,34 @@ import BLL.Usuario;
 						case 1:
 							//CONFIGURAR DESCUENTOS
 							
+							String[] opciones_descuentos = { "Ver Descuentos", "Agregar Descuentos","Eliminar Descuento", "← Salir" };
+							int opcion_descuentos;
+							do {
+								opcion_descuentos = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Configuración", 0, 0, null, opciones_descuentos, opciones_descuentos);
+								switch (opcion_descuentos) {
+								case 0:
+									//VER DESCUENTOS
+									
+									JOptionPane.showMessageDialog(null, Descuento.mostrarDescuentos());
+									break;
+								case 1:
+									//AGREGAR DESCUENTOS
+									Descuento.agregarDescuento( new Descuento(validarIngresoString("Ingrese nombre de descuento: "),
+							                validarIngresoDouble("Ingrese el valor del porcentaje del descuento: ")));
+					                JOptionPane.showMessageDialog(null, "Descuento Agregado con exito!");
+									break;
+								case 2:
+									//ELIMINAR DESCUENTOS
+									break;
+
+								default:
+									break;
+								}
+								
+							} while (opcion_descuentos != 3);
+							
+							
+		
 							break;
 
 						default:

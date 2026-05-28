@@ -11,7 +11,6 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 import BLL.Usuario;
 import BLL.Cajero;
-import BLL.Producto;
 import BLL.Admin;
 import BLL.Repositor;
 import repository.UsuarioRepository;
@@ -195,81 +194,6 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
     }
     
     
-    
-    /**public LinkedList<Producto> mostrarProductos() {
-        LinkedList<Producto> productos = new LinkedList<>();
-        try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM productos");
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String nombreProducto= rs.getString("nombreProducto");
-                String descripcionProducto = rs.getString("descripcionProducto");
-                double precio = rs.getDouble("precio");
-                int stock = rs.getInt("stock");
-
-              
-                        productos.add( new Producto(id, nombreProducto, descripcionProducto, precio, stock, null));
-                 
-          
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return productos;
-    } **/
-    
-    
-    public LinkedList<Producto> mostrarProductos() {
-        LinkedList<Producto> productos = new LinkedList<>();
-        try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM productos");
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                int id_producto = rs.getInt("id_producto");
-                String nombreProducto= rs.getString("nombre_producto");
-                String descripcionProducto = rs.getString("descripcion_producto");
-                //double precio = rs.getDouble("precio");
-                //int stock = rs.getInt("stock");
-
-              
-    //     productos.add( new Producto(id, nombreProducto, descripcionProducto, null, null, null));
-                 productos.add(new Producto(id_producto, nombreProducto, descripcionProducto));
-          
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return productos;
-    }
-    
-    
-    
-    
-    
-    public void agregarProducto(Producto producto) {
-        try {
-            PreparedStatement statement = con.prepareStatement(
-                "INSERT INTO productos (nombreProducto, descripcionProducto, precio, stock) VALUES (?,?, ?, ?)"
-            );
-            statement.setString(1, producto.getNombreProducto());
-            statement.setString(2, producto.getDescripcionProducto());
-            statement.setDouble(3, producto.getPrecio());
-            statement.setInt(4, producto.getStock());
-
-            int filas = statement.executeUpdate();
-            if (filas > 0) {
-                System.out.println("Producto agregado correctamente.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    
-    
     public void EditarUsuario(Usuario usuario) {	
         try {
             PreparedStatement statement = con.prepareStatement(
@@ -292,10 +216,14 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             e.printStackTrace();
         }
     }
+    
+    
 
 	@Override
 	public void EliminarUsuario(Usuario usuario) {
 		// TODO Auto-generated method stub
 		
-	} 
+	}
+
+
 }

@@ -3,6 +3,7 @@ package BLL;
 import java.util.LinkedList;
 
 import DLL.ControllerProducto;
+import DLL.ControllerUsuario;
 
 public class Producto {
 
@@ -81,6 +82,13 @@ public class Producto {
 	public void setProveedores(LinkedList<Proveedor> proveedores) {
 		this.proveedores = proveedores;
 	}
+	
+	public static ControllerProducto getController() {
+		return controller;
+	}
+	public static void setController(ControllerProducto controller) {
+		Producto.controller = controller;
+	}
 	//tostring
 
 	@Override
@@ -88,7 +96,9 @@ public class Producto {
 	    return nombreProducto + " | " + descripcionProducto ;
 	}
 	
-	
+	public static LinkedList<Producto> mostrarProductos() {
+	    return controller.mostrarProductos();
+	}
 	
 	
 }
