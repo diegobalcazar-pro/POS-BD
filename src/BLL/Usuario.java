@@ -1,7 +1,5 @@
 package BLL;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;

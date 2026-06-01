@@ -1,7 +1,6 @@
 package GUI;
 
 import javax.swing.JOptionPane;
-import DLL.ControllerUsuario;
 import BLL.Usuario;
 import BLL.Cajero;
 import BLL.Admin;

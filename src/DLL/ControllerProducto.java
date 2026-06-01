@@ -5,11 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedList;
 
-import javax.swing.JOptionPane;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import BLL.Producto;
-import BLL.Usuario;
+
 import repository.ProductoRepository;
 
 public class ControllerProducto<T extends Producto> implements ProductoRepository{
