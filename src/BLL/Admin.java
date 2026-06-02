@@ -1,12 +1,10 @@
 package BLL;
 
-import java.sql.PreparedStatement;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-import BLL.Descuento;
+
 import repository.Validaciones;
 	public class Admin extends Usuario implements Validaciones {
 
