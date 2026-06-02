@@ -32,25 +32,26 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
 			ResultSet rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				int id = rs.getInt("id_usuario");
-				String nombre = rs.getString("nombre_usuario");
-				String apellido = rs.getString("apellido_usuario");
+				int id_usuario = rs.getInt("id_usuario");
+				String nombre_usuario = rs.getString("nombre_usuario");
+				String apellido_usuario = rs.getString("apellido_usuario");
 				String correoDb = rs.getString("correo");
-				String rol = rs.getString("rol");
 				String contraseniaDb = rs.getString("contrasenia");
+				String rol = rs.getString("rol");
+				
 
 				System.out.println("Hash en DB: " + contraseniaDb);
 
 				if (Hashing.verificar(contraseniaInput, contraseniaDb)) {
 					switch (rol.toLowerCase()) {
 					case "cajero":
-						usuario = (T) new Cajero(id, nombre, apellido, correoDb, contraseniaDb, rol);
+						usuario = (T) new Cajero(id_usuario, nombre_usuario, apellido_usuario, correoDb, contraseniaDb, rol);
 						break;
 					case "repositor":
-						usuario = (T) new Repositor(id, nombre, apellido, correoDb, contraseniaDb, rol);
+						usuario = (T) new Repositor(id_usuario, nombre_usuario, apellido_usuario, correoDb, contraseniaDb, rol);
 						break;
 					case "admin":
-						usuario = (T) new Admin(id, nombre, apellido, correoDb, contraseniaDb, rol);
+						usuario = (T) new Admin(id_usuario, nombre_usuario, apellido_usuario, correoDb, contraseniaDb, rol);
 						break;
 					default:
 						System.out.println("Rol de usuario desconocido: " + rol);
@@ -75,8 +76,8 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             PreparedStatement statement = con.prepareStatement(
                 "INSERT INTO usuarios (nombre_usuario, apellido_usuario, correo, contrasenia, rol) VALUES (?,?,?,?,?)"
             	 );
-            statement.setString(1, usuario.getNombre());
-            statement.setString(2, usuario.getApellido());
+            statement.setString(1, usuario.getNombre_usuario());
+            statement.setString(2, usuario.getApellido_usuario());
             statement.setString(3, usuario.getCorreo());
             
             String hash = BCrypt.hashpw(usuario.getContrasenia(),BCrypt.gensalt());
@@ -124,21 +125,21 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
 
             while (rs.next()) {
                 int id_usuario = rs.getInt("id_usuario");
-                String nombre = rs.getString("nombre_usuario");
-                String apellido = rs.getString("apellido_usuario");
+                String nombre_usuario = rs.getString("nombre_usuario");
+                String apellido_usuario = rs.getString("apellido_usuario");
                 String correo = rs.getString("correo");
                 String contrasenia = rs.getString("contrasenia");
                 String rol = rs.getString("rol");
 
                 switch (rol.toLowerCase()) {
                     case "cajero":
-                        usuarios.add((T) new Cajero(id_usuario, nombre, apellido, correo, contrasenia, rol));
+                        usuarios.add((T) new Cajero(id_usuario, nombre_usuario, apellido_usuario, correo, contrasenia, rol));
                         break;
                     case "admin":
-                        usuarios.add((T) new Admin(id_usuario, nombre, apellido, correo, contrasenia, rol));
+                        usuarios.add((T) new Admin(id_usuario, nombre_usuario, apellido_usuario, correo, contrasenia, rol));
                         break;
                     case "repositor":
-                        usuarios.add((T) new Repositor(id_usuario, nombre, apellido, correo, contrasenia, rol));
+                        usuarios.add((T) new Repositor(id_usuario, nombre_usuario, apellido_usuario, correo, contrasenia, rol));
                         break;
                     default:
                         System.out.println("Tipo desconocido: " + rol);
@@ -186,15 +187,15 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id_usuario");
-                String nombre = rs.getString("nombre_usuario");
-                String apellido = rs.getString("apellido_usuario");
+                int id_usuario = rs.getInt("id_usuario");
+                String nombre_usuario = rs.getString("nombre_usuario");
+                String apellido_usuario = rs.getString("apellido_usuario");
                 String correo = rs.getString("correo");
                 String rol = rs.getString("rol");
                 String contrasenia = rs.getString("contrasenia");
 
               
-                        usuarios.add((T) new Repositor(id, nombre, apellido, correo, rol, contrasenia));
+                        usuarios.add((T) new Repositor(id_usuario, nombre_usuario, apellido_usuario, correo, rol, contrasenia));
                  
           
             }
@@ -211,15 +212,15 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             		"UPDATE usuarios SET nombre_usuario=?, apellido_usuario=?, correo=?, contrasenia=?, rol=? WHERE id_usuario=?"
             	 );
             
-            statement.setString(1, usuario.getNombre());
-            statement.setString(2, usuario.getApellido());
+            statement.setString(1, usuario.getNombre_usuario());
+            statement.setString(2, usuario.getApellido_usuario());
             statement.setString(3, usuario.getCorreo());
             
             String hash = BCrypt.hashpw(usuario.getContrasenia(),BCrypt.gensalt());
 
             statement.setString(4, hash);
             statement.setString(5, usuario.getRol());
-            statement.setInt(6, usuario.getId());
+            statement.setInt(6, usuario.getId_usuario());
 
 
             int filas = statement.executeUpdate();
