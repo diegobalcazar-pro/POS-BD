@@ -10,23 +10,23 @@ public abstract class Usuario {
     protected int id_usuario;
     protected String nombre_usuario;
     protected String apellido_usuario;
-    protected String email;
+    protected String correo;
     protected String contrasenia;
     protected String rol;
     private static ControllerUsuario controller = new ControllerUsuario();
 
-    public Usuario(int id_usuario, String nombre_usuario,String apellido_usuario, String email,String contrasenia, String rol) {
+    public Usuario(int id_usuario, String nombre_usuario,String apellido_usuario, String correo,String contrasenia, String rol) {
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
         this.apellido_usuario = apellido_usuario;
-        this.email = email;
+        this.correo = correo;
         this.contrasenia = contrasenia;
         this.rol = rol; 
     }
-    public Usuario(String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+    public Usuario(String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
     	    this.nombre_usuario = nombre_usuario;
     	    this.apellido_usuario = apellido_usuario;
-    	    this.email = email;
+    	    this.correo = correo;
     	    this.contrasenia = contrasenia;
     	    this.rol = rol;
     	}
@@ -54,11 +54,11 @@ public abstract class Usuario {
 	public void setApellido_usuario(String apellido_usuario) {
 		this.apellido_usuario = apellido_usuario;
 	}
-	public String getEmail() {
-		return email;
+	public String getCorreo() {
+		return correo;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 	public String getRol() {
 		return rol;
@@ -82,16 +82,16 @@ public abstract class Usuario {
 	
 	@Override
 	public String toString() {
-		return "Usuarios:\n[id=" + id_usuario + ", " + nombre_usuario +" "+ apellido_usuario + ", " + email + ","
+		return "Usuarios:\n[id=" + id_usuario + ", " + nombre_usuario +" "+ apellido_usuario + ", " + correo + ","
 				+ " rol=" + rol + "]\n";
 	}
 	
 	
 	public static Usuario Login() {
-		  String nombre_usuario = "";
-          while (nombre_usuario.isEmpty()) {
-              nombre_usuario = JOptionPane.showInputDialog("Ingrese nombre");
-              if (nombre_usuario.isEmpty()) {
+		  String correo = "";
+          while (correo.isEmpty()) {
+              correo = JOptionPane.showInputDialog("Ingrese Correo");
+              if (correo == null ||correo.isEmpty()) {
                   JOptionPane.showMessageDialog(null, "Incorrecto");
               }
           }
@@ -99,11 +99,11 @@ public abstract class Usuario {
           String contrasenia = "";
           while (contrasenia.isEmpty()) {
               contrasenia = JOptionPane.showInputDialog("Ingrese contraseña");
-              if (contrasenia.isEmpty()) {
+              if (contrasenia == null ||contrasenia.isEmpty()) {
                   JOptionPane.showMessageDialog(null, "Incorrecto");
               }
           }
-        return controller.login(nombre_usuario, contrasenia);
+        return controller.login(correo, contrasenia);
 
 	}
 	
@@ -117,11 +117,11 @@ public abstract class Usuario {
 	
 	public Usuario BuscarUsuario() {
 		LinkedList<Usuario> usuarios = this.getController().mostrarUsuarios();
-		String[] mails = new String[usuarios.size()];
-		for (int i = 0; i < mails.length; i++) {
-			mails[i] = usuarios.get(i).getEmail();
+		String[] correos = new String[usuarios.size()];
+		for (int i = 0; i < correos.length; i++) {
+			correos[i] = usuarios.get(i).getCorreo();
 		}
-		int elegido = JOptionPane.showOptionDialog(null, "Seleccione mail", "", 0, 0, null, mails, mails[0]);
+		int elegido = JOptionPane.showOptionDialog(null, "Seleccione Correo", "", 0, 0, null, correos, correos[0]);
 		return usuarios.get(elegido);
 
 	}

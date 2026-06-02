@@ -8,21 +8,14 @@ import javax.swing.JOptionPane;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import repository.Validaciones;
-import repository.DescuentoRepository;
-import DLL.ControllerDescuento;
-import DLL.ControllerProducto;
-import BLL.Producto;
-import BLL.Descuento;
-import BLL.Usuario;
-
 	public class Admin extends Usuario implements Validaciones {
 
-		public Admin(int id_usuario, String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
-			super(id_usuario, nombre_usuario, apellido_usuario, email, contrasenia, rol);
+		public Admin(int id_usuario, String nombre, String apellido, String correo, String contrasenia, String rol) {
+			super(id_usuario, nombre, apellido, correo, contrasenia, rol);
 		}
 		
-		public Admin(String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
-            super(nombre_usuario, apellido_usuario, email, contrasenia, rol);
+		public Admin(String nombre, String apellido, String correo, String contrasenia, String rol) {
+            super(nombre, apellido, correo, contrasenia, rol);
    }
 		public Admin() {
 	        super();
@@ -78,7 +71,7 @@ import BLL.Usuario;
 									//AGREGAR ADMIN
 					                getController().agregarUsuario( new Admin(validarIngresoString("Ingrese nombre: "),
 							                validarIngresoString("Ingrese apellido: "),
-								            validarIngresoString("Ingrese mail: "),
+								            validarIngresoString("Ingrese correo: "),
 								            validarIngresoString("Ingrese contraseña: "),
 								            "Admin"));
 					                JOptionPane.showMessageDialog(null, "Admin Agregado con exito!");
@@ -87,7 +80,7 @@ import BLL.Usuario;
 								case 1: //AGREGAR REPOSITOR
 									getController().agregarUsuario( new Repositor(validarIngresoString("Ingrese nombre: "),
 								            validarIngresoString("Ingrese apellido: "),
-									        validarIngresoString("Ingrese mail: "),
+									        validarIngresoString("Ingrese correo: "),
 									        validarIngresoString("Ingrese contraseña: "),
 									        "Repositor"));
 									JOptionPane.showMessageDialog(null, "Repositor Agregado con exito!");
@@ -95,7 +88,7 @@ import BLL.Usuario;
 								case 2: //AGREGAR CAJERO
 									getController().agregarUsuario( new Cajero(validarIngresoString("Ingrese nombre: "),
 								            validarIngresoString("Ingrese apellido: "),
-									        validarIngresoString("Ingrese mail: "),
+									        validarIngresoString("Ingrese correo: "),
 									        validarIngresoString("Ingrese contraseña: "),
 									        "Cajero"));
 									JOptionPane.showMessageDialog(null, "Cajero Agregado con exito!");
@@ -108,7 +101,7 @@ import BLL.Usuario;
 							
 						case 2:
 							//ELIMINAR USUARIO EMPLEADO
-							getController().EliminarUsuario(validarIngresoString("Ingrese mail de usuario que desea eliminar: "));
+							getController().EliminarUsuario(validarIngresoString("Ingrese correo de usuario que desea eliminar: "));
 							JOptionPane.showMessageDialog(null, "El usuario se elimino correctamente");
 							break;
 							
@@ -348,22 +341,22 @@ import BLL.Usuario;
 
 		public Cajero BuscarCajero() {
 			LinkedList<Cajero> cajeros = this.getController().mostrarCajeros();
-			String[] mails = new String[cajeros.size()];
-			for (int i = 0; i < mails.length; i++) {
-				mails[i] = cajeros.get(i).getEmail();
+			String[] correos = new String[cajeros.size()];
+			for (int i = 0; i < correos.length; i++) {
+				correos[i] = cajeros.get(i).getCorreo();
 			}
-			int elegido = JOptionPane.showOptionDialog(null, "Seleccione mail", "", 0, 0, null, mails, mails[0]);
+			int elegido = JOptionPane.showOptionDialog(null, "Seleccione mail", "", 0, 0, null, correos, correos[0]);
 			return cajeros.get(elegido);
 
 		}
 		
 		public Repositor BuscarRepositor() {
 			LinkedList<Repositor> repositores = this.getController().mostrarRepositores();
-			String[] mails = new String[repositores.size()];
-			for (int i = 0; i < mails.length; i++) {
-				mails[i] = repositores.get(i).getEmail();
+			String[] correos = new String[repositores.size()];
+			for (int i = 0; i < correos.length; i++) {
+				correos[i] = repositores.get(i).getCorreo();
 			}
-			int elegido = JOptionPane.showOptionDialog(null, "Seleccione mail", "", 0, 0, null, mails, mails[0]);
+			int elegido = JOptionPane.showOptionDialog(null, "Seleccione mail", "", 0, 0, null, correos, correos[0]);
 			return repositores.get(elegido);
 
 		}
