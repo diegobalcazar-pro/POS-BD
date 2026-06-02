@@ -14,7 +14,7 @@ public class Admin extends Usuario implements Validaciones {
 
 	@Override
 	public String toString() {
-		return "Admin [toString()=" + super.toString() + "]";
+	    return super.toString();
 	}
 
 	@Override
@@ -37,12 +37,12 @@ public class Admin extends Usuario implements Validaciones {
 					switch (opcion_gestionar_usuario) {
 					case 0:
 						//VER EMPLEADOS
-						
+						JOptionPane.showMessageDialog(null, getController().mostrarUsuarios());
 						
 						break;
 					case 1:
 						//AÑADIR EMPLEADO
-						
+						Usuario.registrarse();
 						
 						break;
 					default:

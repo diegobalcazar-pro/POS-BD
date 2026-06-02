@@ -80,6 +80,16 @@ public abstract class Usuario {
 		Usuario.controller = controller;
 	}
 	
+	@Override
+	public String toString() {
+		return "ID: " + id_usuario +
+		           "\nNombre: " + nombre_usuario +
+		           "\nApellido: " + apellido_usuario +
+		           "\nEmail: " + email +
+		           "\nRol: " + rol +
+		           "\n-------------------------\n";
+	}
+
 	public static Usuario Login() {
 		  String email = "";
         while (email.isEmpty()) {
@@ -131,7 +141,38 @@ public abstract class Usuario {
 			    String email = Validaciones.validarIngresoString("Ingrese mail");
 				String contrasenia = Validaciones.validarIngresoString("Ingrese contraseña");
 				String contraseniaOculta = Hashing.hash(contrasenia);
-				getController().agregarUsuario(new Cajero(nombre,apellido,email,contraseniaOculta,"cajero"));
+				
+				String[] roles = {"admin", "cajero", "repositor"};
+				
+				int opcionRol = JOptionPane.showOptionDialog(
+				        null,
+				        "Seleccione el rol del usuario",
+				        "Rol",
+				        0,
+				        0,
+				        null,
+				        roles,
+				        roles[1]
+				    );
+
+				    if (opcionRol == -1) {
+				        JOptionPane.showMessageDialog(null, "Registro cancelado");
+				        return;
+				    }
+
+				    String rol = roles[opcionRol];
+				    
+				    Usuario nuevoUsuario;
+
+				    if (rol.equals("admin")) {
+				        nuevoUsuario = new Admin(0, nombre, apellido, email, contraseniaOculta, rol);
+				    } else if (rol.equals("repositor")) {
+				        nuevoUsuario = new Repositor(nombre, apellido, email, contraseniaOculta, rol);
+				    } else {
+				        nuevoUsuario = new Cajero(nombre, apellido, email, contraseniaOculta, rol);
+				    }
+
+				    getController().agregarUsuario(nuevoUsuario);
 			
 				
 			

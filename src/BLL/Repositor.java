@@ -13,10 +13,10 @@ public class Repositor extends Usuario {
 		super(0, nombre_usuario, apellido_usuario, email, contrasenia, rol);
 	}
 
-	@Override
-	public String toString() {
-		return "Repositor [toString()=" + super.toString() + "]";
-	}
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 	
 	@Override
 	//------------------------------------------------------------------ MENU DE REPOSITOR ----------------------------------------------------------------------------------------------------------------

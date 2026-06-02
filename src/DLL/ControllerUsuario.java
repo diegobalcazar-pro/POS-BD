@@ -124,11 +124,54 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
         }
         return usuarios;
     }
+    
+    
+    
+    public void EliminarUsuario(Usuario usuario) {
+        try {
+            PreparedStatement statement = con.prepareStatement(
+                "DELETE FROM `usuarios` WHERE id_usuario=?"
+            );
+            statement.setInt(1, usuario.getId_usuario());
+          
+
+            int filas = statement.executeUpdate();
+            if (filas > 0) {
+                System.out.println("Usuario elinado correctamente.");
+            }
+        }  catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public void EditarUsuario(Usuario usuario) {
+        try {
+            PreparedStatement statement = con.prepareStatement(
+                "UPDATE `usuarios` SET `nombre_usuario`=?,`apellido_usuario`=?,`contrasenia`=?,`rol`=? WHERE id_usuario =?"
+            );
+            statement.setString(1, usuario.getNombre_usuario());
+            statement.setString(2, usuario.getApellido_usuario());
+            statement.setString(3,  usuario.getContrasenia());
+            statement.setString(4, usuario.getRol());
+            statement.setInt(5, usuario.getId_usuario());
+
+
+            int filas = statement.executeUpdate();
+            if (filas > 0) {
+                System.out.println("Usuario editado correctamente.");
+            }
+        }  catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
     @Override
     public LinkedList<Usuario> mostrarCajeros() {
         LinkedList<Usuario> usuarios = new LinkedList<>();
         try {
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuarios WHERE tipo ='cajero'");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuarios WHERE rol ='cajero'");
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -149,47 +192,34 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
         }
         return usuarios;
     }
+
+    @Override
+    public LinkedList<Usuario> mostrarRepositores() {
+        LinkedList<Usuario> usuarios = new LinkedList<>();
+
+        try {
+            PreparedStatement stmt = con.prepareStatement(
+                "SELECT * FROM usuarios WHERE rol = 'repositor'"
+            );
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id_usuario");
+                String nombre = rs.getString("nombre_usuario");
+                String apellido = rs.getString("apellido_usuario");
+                String email = rs.getString("email");
+                String password = rs.getString("contrasenia");
+                String rol = rs.getString("rol");
+
+                usuarios.add(new Repositor(id, nombre, apellido, email, password, rol));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return usuarios;
+    }
     
-    public void EliminarUsuario(Usuario usuario) {
-        try {
-            PreparedStatement statement = con.prepareStatement(
-                "DELETE FROM `usuarios` WHERE id_usuario=?"
-            );
-            statement.setInt(1, usuario.getId_usuario());
-          
-
-            int filas = statement.executeUpdate();
-            if (filas > 0) {
-                System.out.println("Usuario elinado correctamente.");
-            }
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public void EditarUsuario(Usuario usuario) {	
-        try {
-            PreparedStatement statement = con.prepareStatement(
-                "UPDATE `usuarios` SET `nombre_usuario`=?,`apellido_usuario`=?,`contrasenia`=?,`rol`=? WHERE id_usuario =?"
-            );
-            statement.setString(1, usuario.getNombre_usuario());
-            statement.setString(2, usuario.getApellido_usuario());
-            statement.setString(3, usuario.getRol());
-            statement.setString(4,  usuario.getContrasenia());
-            statement.setInt(5, usuario.getId_usuario());
-
-
-            int filas = statement.executeUpdate();
-            if (filas > 0) {
-                System.out.println("Usuario editado correctamente.");
-            }
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-	@Override
-	public LinkedList<Usuario> mostrarRepositores() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
