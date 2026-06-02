@@ -21,10 +21,7 @@ import repository.Validaciones;
 	        super();
 	    }
 		
-		@Override
-		public String toString() {
-			return "Admin [toString()=" + super.toString() + "]";
-		}
+		
 		 @Override
 		    public void agregarUsuario(Usuario usuario) {
 		    }

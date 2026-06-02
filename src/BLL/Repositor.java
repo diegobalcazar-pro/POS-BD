@@ -14,10 +14,10 @@ public class Repositor extends Usuario {
 	public Repositor() {
         super();
     }
-	@Override
+	/*@Override
 	public String toString() {
 		return "Repositor [toString()=" + super.toString() + "]";
-	}
+	}*/
 	@Override
 	public void Menu() {
 

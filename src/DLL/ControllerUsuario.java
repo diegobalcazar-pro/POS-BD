@@ -8,6 +8,8 @@ import repository.Hashing;
 
 import javax.swing.JOptionPane;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import BLL.Usuario;
@@ -76,7 +78,10 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             statement.setString(1, usuario.getNombre());
             statement.setString(2, usuario.getApellido());
             statement.setString(3, usuario.getCorreo());
-            statement.setString(4, usuario.getContrasenia());
+            
+            String hash = BCrypt.hashpw(usuario.getContrasenia(),BCrypt.gensalt());
+
+            statement.setString(4, hash);
             statement.setString(5, usuario.getRol());
             
 
@@ -122,18 +127,18 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
                 String nombre = rs.getString("nombre_usuario");
                 String apellido = rs.getString("apellido_usuario");
                 String correo = rs.getString("correo");
-                String rol = rs.getString("rol");
                 String contrasenia = rs.getString("contrasenia");
+                String rol = rs.getString("rol");
 
                 switch (rol.toLowerCase()) {
                     case "cajero":
-                        usuarios.add((T) new Cajero(id_usuario, nombre, apellido, correo, rol, contrasenia));
+                        usuarios.add((T) new Cajero(id_usuario, nombre, apellido, correo, contrasenia, rol));
                         break;
                     case "admin":
-                        usuarios.add((T) new Admin(id_usuario, nombre, apellido, correo, rol, contrasenia));
+                        usuarios.add((T) new Admin(id_usuario, nombre, apellido, correo, contrasenia, rol));
                         break;
                     case "repositor":
-                        usuarios.add((T) new Repositor(id_usuario, nombre, apellido, correo, rol, contrasenia));
+                        usuarios.add((T) new Repositor(id_usuario, nombre, apellido, correo, contrasenia, rol));
                         break;
                     default:
                         System.out.println("Tipo desconocido: " + rol);
@@ -209,7 +214,10 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             statement.setString(1, usuario.getNombre());
             statement.setString(2, usuario.getApellido());
             statement.setString(3, usuario.getCorreo());
-            statement.setString(4, usuario.getContrasenia());
+            
+            String hash = BCrypt.hashpw(usuario.getContrasenia(),BCrypt.gensalt());
+
+            statement.setString(4, hash);
             statement.setString(5, usuario.getRol());
             statement.setInt(6, usuario.getId());
 

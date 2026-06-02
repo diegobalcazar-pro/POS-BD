@@ -14,10 +14,10 @@ public class Cajero extends Usuario {
 	public Cajero() {
         super();
     }
-	@Override
+	/*@Override
 	public String toString() {
 		return "Cajero [toString()=" + super.toString() + "]";
-	}
+	}*/
 	@Override
 	public void Menu() {
 

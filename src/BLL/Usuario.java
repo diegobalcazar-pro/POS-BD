@@ -82,8 +82,7 @@ public abstract class Usuario {
 	
 	@Override
 	public String toString() {
-		return "Usuarios:\n[id=" + id + ", " + nombre +" "+ apellido + ", " + correo + ","
-				+ " rol=" + rol + "]\n";
+		return "Usuario:\n" + nombre +" "+ apellido + ", " + correo + ", rol= " + rol + "\n------------------------\n";
 	}
 	
 	
