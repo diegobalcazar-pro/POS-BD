@@ -106,34 +106,46 @@ import repository.Validaciones;
 							//EDITAR USUARIOS
 							
 							elegido = BuscarUsuario();
-							String[] datos = { "Nombre", "Rol", "Contraseña", "Guardar" };
+							String[] datos = { "Nombre", "Apellido", "correo",  "Rol", "Contraseña", "← Salir" };
 						    int elegir;
 						    do {
-						        elegir = JOptionPane.showOptionDialog(null, "Información actual:\n" + elegido + "\nSeleccione qué desea editar", "", 0, 0, null, datos, datos[0]);
-						        switch (elegir) {
+						          elegir = JOptionPane.showOptionDialog(null, "Información actual:\n" + elegido + "\nSeleccione qué desea editar", "", 0, 0, null, datos, datos[0]);
+						          switch (elegir) {
 
-						        case 0:
-						            elegido.setNombre(JOptionPane.showInputDialog("Ingresar nombre"));
-						            break;
+						          case 0:
+						              elegido.setNombre_usuario(validarIngresoString("Ingresar nuevo nombre"));
+						              JOptionPane.showMessageDialog(null, "El nombre fue modificado correctamente!");
+						              break;
+						              
+						          case 1:
+						              elegido.setApellido_usuario(validarIngresoString("Ingresar nuevo apellido"));
+						              JOptionPane.showMessageDialog(null, "El apellido fue mofidicado correctamente!");
+						              break;
+						              
+						          case 2:
+						              elegido.setCorreo(validarIngresoString("Ingresar nuevo correo"));
+						              JOptionPane.showMessageDialog(null, "El correo fue mofidicado correctamente!");
+						              break;
 
-						        case 1:
+						          case 3:
 						           
-						        	String[] roles = {"admin", "cajero", "repositor"};
-						        	String rol = (String) JOptionPane.showInputDialog(null, "Seleccione rol", "Rol",JOptionPane.QUESTION_MESSAGE, null, roles, roles[0]
-						        	);
-						        	elegido.setRol(rol);
-						        						
-						            break;
+						        	  String[] roles = {"admin", "cajero", "repositor"};
+						        	  String rol = (String) JOptionPane.showInputDialog(null, "Seleccione nuevo rol", "Rol",JOptionPane.QUESTION_MESSAGE, null, roles, roles[0]
+						        	  );
+						        	  elegido.setRol(rol);
+						        	  JOptionPane.showMessageDialog(null, "El rol fue modificado correctamente!");	
+						              break;
 
-						        case 2:
-						            elegido.setContrasenia(JOptionPane.showInputDialog("Ingresar contraseña"));
-						            break;
-						        }
-						    } while (elegir != 3);
+						          case 4:
+						              elegido.setContrasenia(JOptionPane.showInputDialog("Ingresar nueva contraseña"));
+						              JOptionPane.showMessageDialog(null, "La contraseña fue modificada correctamente!");
+						              break;
+						           }
+						         } while (elegir != 5);
 
-						    this.getController().EditarUsuario(elegido);
+						      this.getController().EditarUsuario(elegido);
 
-						    break;
+						   break;
 							
 							
 							
@@ -205,7 +217,7 @@ import repository.Validaciones;
 						opcion_config = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Configuración", 0, 0, null, opciones_config, opciones_config);
 						switch (opcion_config) {
 						case 0:
-							//CONFIGURAR INFORMACION
+							JOptionPane.showMessageDialog(null,"El nombre de la empresa es POS...\nPor el momento no se puede editar el nombre");
 							
 							break;
 						case 1:
@@ -218,7 +230,6 @@ import repository.Validaciones;
 								switch (opcion_descuentos) {
 								case 0:
 									//VER DESCUENTOS
-									
 									JOptionPane.showMessageDialog(null, Descuento.mostrarDescuentos());
 									break;
 								case 1:
