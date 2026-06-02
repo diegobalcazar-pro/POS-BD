@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-
+import BLL.Descuento;
 import repository.Validaciones;
 	public class Admin extends Usuario implements Validaciones {
 
@@ -240,6 +240,20 @@ import repository.Validaciones;
 									break;
 								case 2:
 									//ELIMINAR DESCUENTOS
+									//Descuento.EliminarDescuento(validarIngresoString("Ingrese el nombre del descuento a eliminar"));
+									
+									Descuento descuento = new Descuento().BuscarDescuento();
+
+								    if (descuento != null) {
+
+								        int confirmar = JOptionPane.showConfirmDialog(
+								                null,"¿Desea eliminar el descuento '" + descuento.getNombre_descuento() + "'?","Confirmar",JOptionPane.YES_NO_OPTION);
+
+								        if (confirmar == JOptionPane.YES_OPTION) {
+								            Descuento.EliminarDescuento(descuento.getNombre_descuento());
+								        }
+								    }
+									
 									break;
 
 								default:
@@ -254,7 +268,7 @@ import repository.Validaciones;
 
 						default:
 							break;
-						}
+						}//cierre de config
 						
 					} while (opcion_config != 2);
 					
@@ -265,87 +279,14 @@ import repository.Validaciones;
 				}
 				
 				
-				
-				
-				/*switch (opcion) {
-				
-				case 3:
-					//EDITAR Cajero
-					elegido = BuscarCajero();
-					String[] datos = { "Nombre", "Tipo", "Contraseña", "Editar" };
-					int elegir;
-					do {
-						elegir = JOptionPane.showOptionDialog(null,
-								"información actual:\n" + elegido + "\n Elija que campo quiere editar", "", 0, 0, null,
-								datos, datos[0]);
-						switch (elegir) {
-						case 0:
-							elegido.setNombre(JOptionPane.showInputDialog("Ingresar nombre"));
-							break;
-						case 1:
-							elegido.setTipo(JOptionPane.showInputDialog("Ingresar tipo"));
-							break;
-						case 2:
-							elegido.setPassword(JOptionPane.showInputDialog("Ingresar Contraseña"));
-							;
-							break;
-						default:
-							break;
-						}
-					} while (elegir != 3);
-
-					this.getController().EditarUsuario(elegido);
-					break;
-				case 4:
-					//MOSTRAR REPOSITOR
-					JOptionPane.showMessageDialog(null, this.getController().mostrarRepositores());
-					break;	
-				case 5:
-					//ELIMINAR REPOSITOR
-					Repositor elegido_repositor = BuscarRepositor();
-					int confirm = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar a : " + elegido_repositor);
-					if (confirm == JOptionPane.YES_OPTION) {
-						this.getController().EliminarUsuario(elegido_repositor);
-					}
-					break;	
-				case 6:
-					//EDITAR REPOSITOR
-					elegido_repositor = BuscarRepositor();
-					String[] datosrepositor = { "Nombre", "Tipo", "Contraseña", "Editar" };
-					int elegir_datos_repositor;
-					do {
-						elegir_datos_repositor = JOptionPane.showOptionDialog(null,
-								"información actual:\n" + elegido_repositor + "\n Elija que campo quiere editar", "", 0, 0, null,
-								datosrepositor, datosrepositor[0]);
-						switch (elegir_datos_repositor) {
-						case 0:
-							elegido_repositor.setNombre(JOptionPane.showInputDialog("Ingresar nombre"));
-							break;
-						case 1:
-							elegido_repositor.setTipo(JOptionPane.showInputDialog("Ingresar tipo"));
-							break;
-						case 2:
-							elegido_repositor.setPassword(JOptionPane.showInputDialog("Ingresar Contraseña"));
-							;
-							break;
-						default:
-							break;
-						}
-					} while (elegir_datos_repositor != 3);
-
-					this.getController().EditarUsuario(elegido_repositor);
-					break;
-				default:
-					break;
-				}*/
-				
-				
-				
-				
-				
 			} while (opcion != 4); //CIERRA SESION DE ADMIN
-
+			JOptionPane.showMessageDialog(null, "Sesion cerrada!\nHasta luego.");
+	
 		}
+		
+		
+		
+		
 
 		public Cajero BuscarCajero() {
 			LinkedList<Cajero> cajeros = this.getController().mostrarCajeros();
@@ -368,12 +309,6 @@ import repository.Validaciones;
 			return repositores.get(elegido);
 
 		}
-		
-		
-		
-		
-		
-		
 		
 		
 }

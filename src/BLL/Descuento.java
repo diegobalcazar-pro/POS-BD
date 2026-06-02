@@ -2,6 +2,8 @@ package BLL;
 
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
 import DLL.ControllerDescuento;
 
 public class Descuento {
@@ -22,6 +24,8 @@ public class Descuento {
 		super();
 		this.nombre_descuento = nombre_descuento;
 		this.porcentaje_descuento = porcentaje_descuento;
+	}
+	public Descuento() {
 	}
 
 
@@ -71,6 +75,28 @@ public class Descuento {
 	
 	public static void agregarDescuento(Descuento descuento) {
 	    controller.agregarDescuento(descuento);
+	}
+	public static void EliminarDescuento(String nombre_descuento) {
+		controller.EliminarDescuento(nombre_descuento);
+	}
+	
+	
+	public Descuento BuscarDescuento() {
+	    LinkedList<Descuento> descuentos = this.getController().mostrarDescuentos();
+	    if (descuentos.isEmpty()) {JOptionPane.showMessageDialog(null, "No hay descuentos registrados.");
+	        return null;
+	    }
+
+	    String[] nombre_descuentos = new String[descuentos.size()];
+	    for (int i = 0; i < descuentos.size(); i++) {
+	        nombre_descuentos[i] = descuentos.get(i).getNombre_descuento();
+	    }
+	    int elegido = JOptionPane.showOptionDialog(null,"Seleccione el descuento a eliminar", "Eliminar descuento",JOptionPane.DEFAULT_OPTION,JOptionPane.QUESTION_MESSAGE,null,nombre_descuentos,nombre_descuentos[0]);
+
+	    if (elegido == JOptionPane.CLOSED_OPTION) {
+	        return null;
+	    }
+	    return descuentos.get(elegido);
 	}
 
 }

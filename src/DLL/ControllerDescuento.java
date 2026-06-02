@@ -52,6 +52,22 @@ private static Connection con = Conexion.getInstance().getConnection();
         }
         return descuentos;
     }
+	
+	public void EliminarDescuento(String nombre_descuento) {
+        try {
+            PreparedStatement statement = con.prepareStatement(
+            		"DELETE FROM descuentos WHERE nombre_descuento = ?"
+            );
+            statement.setString(1, nombre_descuento);
+
+            int filas = statement.executeUpdate();
+            if (filas > 0) {
+                System.out.println("Descuento eliminado correctamente.");
+            }
+        }  catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 
