@@ -10,8 +10,8 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import repository.Validaciones;
 	public class Admin extends Usuario implements Validaciones {
 
-		public Admin(int id_usuario, String nombre, String apellido, String correo, String contrasenia, String rol) {
-			super(id_usuario, nombre, apellido, correo, contrasenia, rol);
+		public Admin(int id, String nombre, String apellido, String correo, String contrasenia, String rol) {
+			super(id, nombre, apellido, correo, contrasenia, rol);
 		}
 		
 		public Admin(String nombre, String apellido, String correo, String contrasenia, String rol) {
@@ -116,7 +116,7 @@ import repository.Validaciones;
 						        switch (elegir) {
 
 						        case 0:
-						            elegido.setNombre_usuario(JOptionPane.showInputDialog("Ingresar nombre"));
+						            elegido.setNombre(JOptionPane.showInputDialog("Ingresar nombre"));
 						            break;
 
 						        case 1:

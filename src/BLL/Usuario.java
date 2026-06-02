@@ -7,25 +7,25 @@ import javax.swing.JOptionPane;
 import DLL.ControllerUsuario;
 
 public abstract class Usuario {
-    protected int id_usuario;
-    protected String nombre_usuario;
-    protected String apellido_usuario;
+    protected int id;
+    protected String nombre;
+    protected String apellido;
     protected String correo;
     protected String contrasenia;
     protected String rol;
     private static ControllerUsuario controller = new ControllerUsuario();
 
-    public Usuario(int id_usuario, String nombre_usuario,String apellido_usuario, String correo,String contrasenia, String rol) {
-        this.id_usuario = id_usuario;
-        this.nombre_usuario = nombre_usuario;
-        this.apellido_usuario = apellido_usuario;
+    public Usuario(int id, String nombre,String apellido, String correo,String contrasenia, String rol) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.correo = correo;
         this.contrasenia = contrasenia;
         this.rol = rol; 
     }
-    public Usuario(String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
-    	    this.nombre_usuario = nombre_usuario;
-    	    this.apellido_usuario = apellido_usuario;
+    public Usuario(String nombre, String apellido, String correo, String contrasenia, String rol) {
+    	    this.nombre = nombre;
+    	    this.apellido = apellido;
     	    this.correo = correo;
     	    this.contrasenia = contrasenia;
     	    this.rol = rol;
@@ -36,23 +36,23 @@ public abstract class Usuario {
     
     
     
-	public int getId_usuario() {
-		return id_usuario;
+	public int getId() {
+		return id;
 	}
-	public void setId_usuario(int id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getNombre_usuario() {
-		return nombre_usuario;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setNombre_usuario(String nombre_usuario) {
-		this.nombre_usuario = nombre_usuario;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	public String getApellido_usuario() {
-		return apellido_usuario;
+	public String getApellido() {
+		return apellido;
 	}
-	public void setApellido_usuario(String apellido_usuario) {
-		this.apellido_usuario = apellido_usuario;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 	public String getCorreo() {
 		return correo;
@@ -82,7 +82,7 @@ public abstract class Usuario {
 	
 	@Override
 	public String toString() {
-		return "Usuarios:\n[id=" + id_usuario + ", " + nombre_usuario +" "+ apellido_usuario + ", " + correo + ","
+		return "Usuarios:\n[id=" + id + ", " + nombre +" "+ apellido + ", " + correo + ","
 				+ " rol=" + rol + "]\n";
 	}
 	

@@ -73,8 +73,8 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             PreparedStatement statement = con.prepareStatement(
                 "INSERT INTO usuarios (nombre_usuario, apellido_usuario, correo, contrasenia, rol) VALUES (?,?,?,?,?)"
             	 );
-            statement.setString(1, usuario.getNombre_usuario());
-            statement.setString(2, usuario.getApellido_usuario());
+            statement.setString(1, usuario.getNombre());
+            statement.setString(2, usuario.getApellido());
             statement.setString(3, usuario.getCorreo());
             statement.setString(4, usuario.getContrasenia());
             statement.setString(5, usuario.getRol());
@@ -181,9 +181,9 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String nombre = rs.getString("nombre");
-                String apellido = rs.getString("apellido");
+                int id = rs.getInt("id_usuario");
+                String nombre = rs.getString("nombre_usuario");
+                String apellido = rs.getString("apellido_usuario");
                 String correo = rs.getString("correo");
                 String rol = rs.getString("rol");
                 String contrasenia = rs.getString("contrasenia");
@@ -206,12 +206,12 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             		"UPDATE usuarios SET nombre_usuario=?, apellido_usuario=?, correo=?, contrasenia=?, rol=? WHERE id_usuario=?"
             	 );
             
-            statement.setString(1, usuario.getNombre_usuario());
-            statement.setString(2, usuario.getApellido_usuario());
+            statement.setString(1, usuario.getNombre());
+            statement.setString(2, usuario.getApellido());
             statement.setString(3, usuario.getCorreo());
             statement.setString(4, usuario.getContrasenia());
             statement.setString(5, usuario.getRol());
-            statement.setInt(6, usuario.getId_usuario());
+            statement.setInt(6, usuario.getId());
 
 
             int filas = statement.executeUpdate();
