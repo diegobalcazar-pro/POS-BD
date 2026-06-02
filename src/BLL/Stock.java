@@ -1,25 +1,25 @@
 package BLL;
 
 public class Stock {
-	protected int idStock;
+	protected int id_stock;
 	protected int cantidad;
 	protected Deposito deposito;
 	protected VarianteProducto varianteproducto;
 
-	public Stock(int idStock, int cantidad, Deposito deposito, VarianteProducto varianteproducto) {
+	public Stock(int id_stock, int cantidad, Deposito deposito, VarianteProducto varianteproducto) {
 		super();
-		this.idStock = idStock;
+		this.id_stock = id_stock;
 		this.cantidad = cantidad;
 		this.deposito = deposito;
 		this.varianteproducto = varianteproducto;
 	}
 
-	public int getIdStock() {
-		return idStock;
+	public int getid_stock() {
+		return id_stock;
 	}
 
-	public void setIdStock(int idStock) {
-		this.idStock = idStock;
+	public void setid_stock(int id_stock) {
+		this.id_stock = id_stock;
 	}
 
 	public int getCantidad() {

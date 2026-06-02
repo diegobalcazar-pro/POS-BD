@@ -7,12 +7,12 @@ import repository.Validaciones;
 public class Admin extends Usuario implements Validaciones {
 
 	// --- CONSTRUCTORES ---
-	public Admin(int id, String nombre, String apellido, String correo, String contrasenia, String rol) {
-		super(id, nombre, apellido, correo, contrasenia, rol);
+	public Admin(int id_usuario, String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
+		super(id_usuario, nombre_usuario, apellido_usuario, correo, contrasenia, rol);
 	}
 
-	public Admin(String nombre, String apellido, String correo, String contrasenia, String rol) {
-		super(0, nombre, apellido, correo, contrasenia, rol);
+	public Admin(String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
+		super(0, nombre_usuario, apellido_usuario, correo, contrasenia, rol);
 	}
 
 	public Admin() {

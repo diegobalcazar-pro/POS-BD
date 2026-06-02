@@ -4,43 +4,43 @@ import java.time.LocalDate;
 
 public class Envio {
 
-	protected int idEnvio;
-	protected String numeroSeguimiento;
+	protected int id_envio;
+	protected String numero_seguimiento;
 	protected String estado;
-	protected LocalDate fechaDespacho;
+	protected LocalDate fecha_despacho;
 	protected int fkVenta;
 
 	// Constructor
-	public Envio(int idEnvio, String numeroSeguimiento, String estado, LocalDate fechaDespacho, int fkVenta) {
-		this.idEnvio = idEnvio;
-		this.numeroSeguimiento = numeroSeguimiento;
+	public Envio(int id_envio, String numero_seguimiento, String estado, LocalDate fecha_despacho, int fkVenta) {
+		this.id_envio = id_envio;
+		this.numero_seguimiento = numero_seguimiento;
 		this.estado = estado;
-		this.fechaDespacho = fechaDespacho;
+		this.fecha_despacho = fecha_despacho;
 		this.fkVenta = fkVenta;
 	}
 
 	// Constructor para INSERTAR
-	public Envio(String numeroSeguimiento, String estado, int fkVenta) {
-		this.numeroSeguimiento = numeroSeguimiento;
+	public Envio(String numero_seguimiento, String estado, int fkVenta) {
+		this.numero_seguimiento = numero_seguimiento;
 		this.estado = estado;
 		this.fkVenta = fkVenta;
-		this.fechaDespacho = null;
+		this.fecha_despacho = null;
 	}
 
-	public int getIdEnvio() {
-		return idEnvio;
+	public int getid_envio() {
+		return id_envio;
 	}
 
-	public void setIdEnvio(int idEnvio) {
-		this.idEnvio = idEnvio;
+	public void setid_envio(int id_envio) {
+		this.id_envio = id_envio;
 	}
 
-	public String getNumeroSeguimiento() {
-		return numeroSeguimiento;
+	public String getnumero_seguimiento() {
+		return numero_seguimiento;
 	}
 
-	public void setNumeroSeguimiento(String numeroSeguimiento) {
-		this.numeroSeguimiento = numeroSeguimiento;
+	public void setnumero_seguimiento(String numero_seguimiento) {
+		this.numero_seguimiento = numero_seguimiento;
 	}
 
 	public String getEstado() {
@@ -51,12 +51,12 @@ public class Envio {
 		this.estado = estado;
 	}
 
-	public LocalDate getFechaDespacho() {
-		return fechaDespacho;
+	public LocalDate getfecha_despacho() {
+		return fecha_despacho;
 	}
 
-	public void setFechaDespacho(LocalDate fechaDespacho) {
-		this.fechaDespacho = fechaDespacho;
+	public void setfecha_despacho(LocalDate fecha_despacho) {
+		this.fecha_despacho = fecha_despacho;
 	}
 
 	public int getFkVenta() {
@@ -69,9 +69,9 @@ public class Envio {
 
 	@Override
 	public String toString() {
-		String fechaStr = (fechaDespacho != null) ? fechaDespacho.toString() : "Aún no despachado";
+		String fechaStr = (fecha_despacho != null) ? fecha_despacho.toString() : "Aún no despachado";
 
-		return "Envio [ID=" + idEnvio + ", Seguimiento=" + numeroSeguimiento + ", Estado=" + estado.toUpperCase()
+		return "Envio [ID=" + id_envio + ", Seguimiento=" + numero_seguimiento + ", Estado=" + estado.toUpperCase()
 				+ ", Despacho=" + fechaStr + ", Venta N°=" + fkVenta + "]";
 	}
 }

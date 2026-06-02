@@ -1,27 +1,27 @@
 package BLL;
 
 public class Proveedor {
-	protected int IdProveedor;
+	protected int id_proveedor;
 	protected String nombreEmpresa;
 	protected String nombreContacto;
 	protected String telefono;
 	protected String correo;
 
-	public Proveedor(int idProveedor, String nombreEmpresa, String nombreContacto, String telefono, String correo) {
+	public Proveedor(int id_proveedor, String nombreEmpresa, String nombreContacto, String telefono, String correo) {
 		super();
-		IdProveedor = idProveedor;
+		id_proveedor = id_proveedor;
 		this.nombreEmpresa = nombreEmpresa;
 		this.nombreContacto = nombreContacto;
 		this.telefono = telefono;
 		this.correo = correo;
 	}
 
-	public int getIdProveedor() {
-		return IdProveedor;
+	public int getid_proveedor() {
+		return id_proveedor;
 	}
 
-	public void setIdProveedor(int idProveedor) {
-		IdProveedor = idProveedor;
+	public void setid_proveedor(int id_proveedor) {
+		id_proveedor = id_proveedor;
 	}
 
 	public String getNombreEmpresa() {

@@ -51,7 +51,7 @@ public class ControllerCategoria implements CategoriaRepository {
 		String sql = "UPDATE categorias SET nombre_categoria = ? WHERE id_categoria = ?";
 		try (PreparedStatement stmt = con.prepareStatement(sql)) {
 			stmt.setString(1, c.getNombre_categoria());
-			stmt.setInt(2, c.getIdCategoria());
+			stmt.setInt(2, c.getid_categoria());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

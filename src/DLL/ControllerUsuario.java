@@ -72,8 +72,8 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
 		try {
 			PreparedStatement statement = con.prepareStatement(
 					"INSERT INTO usuarios (nombre_usuario, apellido_usuario, correo, rol, contrasenia) VALUES (?, ?, ?, ?, ?)");
-			statement.setString(1, usuario.getNombre());
-			statement.setString(2, usuario.getApellido());
+			statement.setString(1, usuario.getnombre_usuario());
+			statement.setString(2, usuario.getapellido_usuario());
 			statement.setString(3, usuario.getCorreo());
 			statement.setString(4, usuario.getRol());
 			statement.setString(5, usuario.getContrasenia());
@@ -151,7 +151,7 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
 	public void EliminarUsuario(Usuario usuario) {
 		try {
 			PreparedStatement statement = con.prepareStatement("DELETE FROM usuarios WHERE id_usuario = ?");
-			statement.setInt(1, usuario.getId());
+			statement.setInt(1, usuario.getid_usuario());
 
 			int filas = statement.executeUpdate();
 			if (filas > 0) {
@@ -166,12 +166,12 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
 		try {
 			PreparedStatement statement = con.prepareStatement(
 					"UPDATE usuarios SET nombre_usuario = ?, apellido_usuario = ?, correo = ?, rol = ?, contrasenia = ? WHERE id_usuario = ?");
-			statement.setString(1, usuario.getNombre());
-			statement.setString(2, usuario.getApellido());
+			statement.setString(1, usuario.getnombre_usuario());
+			statement.setString(2, usuario.getapellido_usuario());
 			statement.setString(3, usuario.getCorreo());
 			statement.setString(4, usuario.getRol());
 			statement.setString(5, usuario.getContrasenia());
-			statement.setInt(6, usuario.getId());
+			statement.setInt(6, usuario.getid_usuario());
 
 			int filas = statement.executeUpdate();
 			if (filas > 0) {

@@ -3,9 +3,8 @@ package BLL;
 import java.time.LocalDate;
 
 public class Venta {
-	protected int idVenta;
+	protected int id_venta;
 	protected LocalDate fecha;
-	protected String correo;
 	protected double total_neto;
 	protected double total_bruto;
 	protected Usuario usuario;
@@ -13,12 +12,11 @@ public class Venta {
 	protected MetodoDePago metododepago;
 	protected Descuento descuento;
 
-	public Venta(int idVenta, LocalDate fecha, String correo, double total_neto, double total_bruto, Usuario usuario,
+	public Venta(int id_venta, LocalDate fecha, double total_neto, double total_bruto, Usuario usuario,
 			Cliente cliente, MetodoDePago metododepago, Descuento descuento) {
 		super();
-		this.idVenta = idVenta;
+		this.id_venta = id_venta;
 		this.fecha = fecha;
-		this.correo = correo;
 		this.total_neto = total_neto;
 		this.total_bruto = total_bruto;
 		this.usuario = usuario;
@@ -27,12 +25,12 @@ public class Venta {
 		this.descuento = descuento;
 	}
 
-	public int getIdVenta() {
-		return idVenta;
+	public int getid_venta() {
+		return id_venta;
 	}
 
-	public void setIdVenta(int idVenta) {
-		this.idVenta = idVenta;
+	public void setid_venta(int id_venta) {
+		this.id_venta = id_venta;
 	}
 
 	public LocalDate getFecha() {
@@ -41,14 +39,6 @@ public class Venta {
 
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
-	}
-
-	public String getCorreo() {
-		return correo;
-	}
-
-	public void setCorreo(String correo) {
-		this.correo = correo;
 	}
 
 	public double getTotal_neto() {

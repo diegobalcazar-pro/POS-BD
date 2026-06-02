@@ -17,8 +17,8 @@ public class ControllerProducto implements ProductoRepository {
 		try (PreparedStatement stmt = con.prepareStatement(sql)) {
 			stmt.setString(1, p.getNombre_producto());
 			stmt.setString(2, p.getDescripcion_producto());
-			stmt.setInt(3, p.getCategoria().getIdCategoria()); 
-			stmt.setInt(4, p.getProveedor().getIdProveedor());
+			stmt.setInt(3, p.getCategoria().getid_categoria()); 
+			stmt.setInt(4, p.getProveedor().getid_proveedor());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,9 +64,9 @@ public class ControllerProducto implements ProductoRepository {
 		try (PreparedStatement stmt = con.prepareStatement(sql)) {
 			stmt.setString(1, p.getNombre_producto());
 			stmt.setString(2, p.getDescripcion_producto());
-			stmt.setInt(3, p.getCategoria().getIdCategoria());
-			stmt.setInt(4, p.getProveedor().getIdProveedor());
-			stmt.setInt(5, p.getIdProducto());
+			stmt.setInt(3, p.getCategoria().getid_categoria());
+			stmt.setInt(4, p.getProveedor().getid_proveedor());
+			stmt.setInt(5, p.getid_producto());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

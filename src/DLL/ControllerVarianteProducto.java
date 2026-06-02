@@ -75,7 +75,7 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 			stmtVar.setString(1, v.getTalle());
 			stmtVar.setString(2, v.getColor());
 			stmtVar.setDouble(3, v.getPrecio_venta());
-			stmtVar.setInt(4, v.getProducto().getIdProducto());
+			stmtVar.setInt(4, v.getProducto().getid_producto());
 			stmtVar.executeUpdate();
 
 			ResultSet rsKeys = stmtVar.getGeneratedKeys();
@@ -146,8 +146,8 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 			stmt.setString(1, v.getTalle());
 			stmt.setString(2, v.getColor());
 			stmt.setDouble(3, v.getPrecio_venta());
-			stmt.setInt(4, v.getProducto().getIdProducto());
-			stmt.setInt(5, v.getIdVarianteProducto());
+			stmt.setInt(4, v.getProducto().getid_producto());
+			stmt.setInt(5, v.getid_variante_producto());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

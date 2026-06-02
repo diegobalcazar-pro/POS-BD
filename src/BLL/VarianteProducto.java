@@ -1,28 +1,28 @@
 package BLL;
 
 public class VarianteProducto {
-	protected int idVarianteProducto;
+	protected int id_variante_producto;
 	protected String talle;
 	protected String color;
 	protected double precio_venta;
 	protected Producto producto;
 
-	public VarianteProducto(int idVarianteProducto, String talle, String color, double precio_venta,
+	public VarianteProducto(int id_variante_producto, String talle, String color, double precio_venta,
 			Producto producto) {
 		super();
-		this.idVarianteProducto = idVarianteProducto;
+		this.id_variante_producto = id_variante_producto;
 		this.talle = talle;
 		this.color = color;
 		this.precio_venta = precio_venta;
 		this.producto = producto;
 	}
 
-	public int getIdVarianteProducto() {
-		return idVarianteProducto;
+	public int getid_variante_producto() {
+		return id_variante_producto;
 	}
 
-	public void setIdVarianteProducto(int idVarianteProducto) {
-		this.idVarianteProducto = idVarianteProducto;
+	public void setid_variante_producto(int id_variante_producto) {
+		this.id_variante_producto = id_variante_producto;
 	}
 
 	public String getTalle() {

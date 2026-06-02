@@ -19,12 +19,12 @@ public class Repositor extends Usuario {
 	private static ControllerEnvio controllerEnvio = new ControllerEnvio();
 
 	// --- CONSTRUCTORES ---
-	public Repositor(int id, String nombre, String apellido, String correo, String contrasenia, String rol) {
-		super(id, nombre, apellido, correo, contrasenia, rol);
+	public Repositor(int id_usuario, String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
+		super(id_usuario, nombre_usuario, apellido_usuario, correo, contrasenia, rol);
 	}
 
-	public Repositor(String nombre, String apellido, String correo, String contrasenia, String rol) {
-		super(0, nombre, apellido, correo, contrasenia, rol);
+	public Repositor(String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
+		super(0, nombre_usuario, apellido_usuario, correo, contrasenia, rol);
 	}
 
 	public Repositor() {
@@ -73,7 +73,7 @@ public class Repositor extends Usuario {
 				"Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
 
 		if (confirm == JOptionPane.YES_OPTION) {
-			controllerCat.eliminarCategoria(cat.getIdCategoria());
+			controllerCat.eliminarCategoria(cat.getid_categoria());
 			JOptionPane.showMessageDialog(null, "Categoría eliminada.");
 		}
 	}
@@ -142,7 +142,7 @@ public class Repositor extends Usuario {
 				"Confirmar Eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
 		if (confirm == JOptionPane.YES_OPTION) {
-			controllerProd.eliminarProducto(p.getIdProducto());
+			controllerProd.eliminarProducto(p.getid_producto());
 			JOptionPane.showMessageDialog(null, "Producto eliminado.");
 		}
 	}
@@ -224,7 +224,7 @@ public class Repositor extends Usuario {
 			return;
 
 		VarianteProducto nuevaVar = new VarianteProducto(0, talle, color, precio, p);
-		controllerVar.agregarVarianteConStock(nuevaVar, cantidad, depSel.getIdDeposito());
+		controllerVar.agregarVarianteConStock(nuevaVar, cantidad, depSel.getid_deposito());
 
 		JOptionPane.showMessageDialog(null, "Variante creada y stock asignado exitosamente.");
 	}
@@ -260,7 +260,7 @@ public class Repositor extends Usuario {
 				"Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
 		if (confirm == JOptionPane.YES_OPTION) {
-			controllerVar.eliminarVariante(v.getIdVarianteProducto());
+			controllerVar.eliminarVariante(v.getid_variante_producto());
 			JOptionPane.showMessageDialog(null, "Variante eliminada exitosamente.");
 		}
 	}
@@ -325,7 +325,7 @@ public class Repositor extends Usuario {
 				"Confirmar Movimiento", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 
 		if (confirm == JOptionPane.YES_OPTION) {
-			controllerVar.moverVariante(v.getIdVarianteProducto(), depSel.getIdDeposito());
+			controllerVar.moverVariante(v.getid_variante_producto(), depSel.getid_deposito());
 			JOptionPane.showMessageDialog(null, "El stock ha sido movido exitosamente.");
 		}
 	}
@@ -538,7 +538,7 @@ public class Repositor extends Usuario {
 					JOptionPane.YES_NO_OPTION);
 
 			if (confirm == JOptionPane.YES_OPTION) {
-				controllerProveedor.eliminarProveedor(provAEliminar.getIdProveedor());
+				controllerProveedor.eliminarProveedor(provAEliminar.getid_proveedor());
 				JOptionPane.showMessageDialog(null, "Proveedor eliminado correctamente.");
 			}
 		}

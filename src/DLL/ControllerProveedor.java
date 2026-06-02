@@ -56,7 +56,7 @@ public class ControllerProveedor {
             stmt.setString(2, p.getNombreContacto());
             stmt.setString(3, p.getTelefono());
             stmt.setString(4, p.getCorreo());
-            stmt.setInt(5, p.getIdProveedor());
+            stmt.setInt(5, p.getid_proveedor());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

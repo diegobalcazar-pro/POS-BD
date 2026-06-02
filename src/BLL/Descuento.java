@@ -1,23 +1,23 @@
 package BLL;
 
 public class Descuento {
-	protected int idDescuento;
+	protected int id_descuento;
 	protected String nombre_descuento;
 	protected double porcentaje_descuento;
 
-	public Descuento(int idDescuento, String nombre_descuento, double porcentaje_descuento) {
+	public Descuento(int id_descuento, String nombre_descuento, double porcentaje_descuento) {
 		super();
-		this.idDescuento = idDescuento;
+		this.id_descuento = id_descuento;
 		this.nombre_descuento = nombre_descuento;
 		this.porcentaje_descuento = porcentaje_descuento;
 	}
 
-	public int getIdDescuento() {
-		return idDescuento;
+	public int getid_descuento() {
+		return id_descuento;
 	}
 
-	public void setIdDescuento(int idDescuento) {
-		this.idDescuento = idDescuento;
+	public void setid_descuento(int id_descuento) {
+		this.id_descuento = id_descuento;
 	}
 
 	public String getNombre_descuento() {

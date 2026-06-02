@@ -1,28 +1,28 @@
 package BLL;
 
 public class Producto {
-	protected int idProducto;
+	protected int id_producto;
 	protected String nombre_producto;
 	protected String descripcion_producto;
 	protected Categoria categoria;
 	protected Proveedor proveedor;
 
-	public Producto(int idProducto, String nombre_producto, String descripcion_producto, Categoria categoria,
+	public Producto(int id_producto, String nombre_producto, String descripcion_producto, Categoria categoria,
 			Proveedor proveedor) {
 		super();
-		this.idProducto = idProducto;
+		this.id_producto = id_producto;
 		this.nombre_producto = nombre_producto;
 		this.descripcion_producto = descripcion_producto;
 		this.categoria = categoria;
 		this.proveedor = proveedor;
 	}
 
-	public int getIdProducto() {
-		return idProducto;
+	public int getid_producto() {
+		return id_producto;
 	}
 
-	public void setIdProducto(int idProducto) {
-		this.idProducto = idProducto;
+	public void setid_producto(int id_producto) {
+		this.id_producto = id_producto;
 	}
 
 	public String getNombre_producto() {
