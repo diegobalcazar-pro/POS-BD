@@ -2,8 +2,12 @@ package BLL;
 
 import javax.swing.JOptionPane;
 
+import DLL.ControllerProducto;
+import repository.Validaciones;
+
 public class Repositor extends Usuario {
 
+	private static ControllerProducto controllerProducto = new ControllerProducto();
     
 	public Repositor(int id_usuario, String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
 		super(id_usuario, nombre_usuario, apellido_usuario, email, contrasenia, rol);
@@ -31,29 +35,39 @@ public class Repositor extends Usuario {
 			switch (opcion) {
 			case 0:
 				//GESTION PRODUCTOS
-				String[] opciones_gestion_usuario = { "Nuevo Producto", "Modificar Producto", "Eliminar Producto", "Mover Producto Stock", "← Salir" };
+				String[] opciones_gestion_usuario = { "Ver Productos", "Nuevo Producto", "Agregar Variante", "Ver Variantes de Producto", "Modificar Producto", "Eliminar Producto", "← Salir" };
 				int opcion_gestionar_usuario;
 				do {
 					opcion_gestionar_usuario = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion Productos", 0, 0, null, opciones_gestion_usuario, opciones_gestion_usuario);
 					switch (opcion_gestionar_usuario) {
 					case 0:
-						//NUEVO PRODUCTO
-						
+						//Ver Productos
+						JOptionPane.showMessageDialog(null,controllerProducto.mostrarProductosCompleto());
 						
 						break;
 					case 1:
-						//MODIFICAR PRODUCTO
-						
+						//Nuevo Producto
+						nuevoProducto();
 						
 						break;
 					case 2:
-						//ELIMINAR PRODUCTO
-						
+						//Agregar Variante
+						agregarVarianteAProducto();
 						
 						break;
 					case 3:
-						//MOVER PRODUCTO
+						//Ver Variantes de Producto
+						verVariantesDeProducto();
 						
+						break;
+					case 4:
+						//Modificar Producto
+						modificarProducto();
+						
+						break;
+					case 5:
+						//Eliminar Producto
+						eliminarProducto();
 						
 						break;
 
@@ -61,7 +75,7 @@ public class Repositor extends Usuario {
 						break;
 					}
 					
-				} while (opcion_gestionar_usuario != 4); //SALE DE GESTION PRODUCTOS
+				} while (opcion_gestionar_usuario != 6); //SALE DE GESTION PRODUCTOS
 				
 				
 				break;
@@ -155,7 +169,95 @@ public class Repositor extends Usuario {
 		} while (opcion != 4); //CIERRA SESION DE REPOSITOR
 
 	}
+	
+	public void nuevoProducto() {
+
+	    JOptionPane.showMessageDialog(null,"Categorías disponibles:\n\n" + controllerProducto.mostrarCategoriasTexto());
+
+	    int idCategoria = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID de la categoría"));
+
+	    JOptionPane.showMessageDialog(null,"Proveedores disponibles:\n\n" + controllerProducto.mostrarProveedoresTexto());
+
+	    int idProveedor = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID del proveedor"));
+
+	    String nombre = Validaciones.validarIngresoString("Ingrese nombre del producto");
+	    String descripcion = Validaciones.validarIngresoString("Ingrese descripción del producto");
+
+	    Producto producto = new Producto(nombre,descripcion,idCategoria,idProveedor);
+
+	    controllerProducto.agregarProducto(producto);
+
+	    JOptionPane.showMessageDialog(null,"Producto cargado.\nAhora podés ir a 'Ver Productos' para ver el ID y luego usar 'Agregar Variante'.");
+	}
+	
+	public void agregarVarianteAProducto() {
+
+	    JOptionPane.showMessageDialog(null,controllerProducto.mostrarProductosCompleto());
+
+	    int idProducto = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID del producto"));
+
+	    cargarVariante(idProducto);
+	}
     
+	public void cargarVariante(int idProducto) {
+
+	    String talle = Validaciones.validarIngresoString("Ingrese talle");
+	    String color = Validaciones.validarIngresoString("Ingrese color");
+
+	    double precio = Double.parseDouble(Validaciones.validarIngresoString("Ingrese precio de venta"));
+
+	    VarianteProducto variante = new VarianteProducto(talle,color,precio,idProducto);
+
+	    controllerProducto.agregarVariante(variante);
+	}
+	
+	public void verVariantesDeProducto() {
+
+	    JOptionPane.showMessageDialog(null,controllerProducto.mostrarProductosCompleto());
+
+	    int idProducto = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID del producto"));
+
+	    JOptionPane.showMessageDialog(null,controllerProducto.mostrarVariantesProducto(idProducto));
+	}
+	
+	public void modificarProducto() {
+
+	    JOptionPane.showMessageDialog(null,controllerProducto.mostrarProductosCompleto());
+
+	    int idProducto = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID del producto a modificar"));
+
+	    String nuevoNombre = Validaciones.validarIngresoString("Ingrese nuevo nombre");
+	    String nuevaDescripcion = Validaciones.validarIngresoString("Ingrese nueva descripción");
+
+	    JOptionPane.showMessageDialog(null,"Categorías disponibles:\n" + controllerProducto.mostrarCategoriasTexto());
+
+	    int idCategoria = Integer.parseInt(Validaciones.validarIngresoString("Ingrese nuevo ID de categoría"));
+
+	    JOptionPane.showMessageDialog(null,"Proveedores disponibles:\n" + controllerProducto.mostrarProveedoresTexto());
+
+	    int idProveedor = Integer.parseInt(Validaciones.validarIngresoString("Ingrese nuevo ID de proveedor"));
+	    
+	    Producto producto = new Producto(idProducto,nuevoNombre,nuevaDescripcion,idCategoria,idProducto);
+
+	    controllerProducto.modificarProducto(producto);
+	}
     
+	public void eliminarProducto() {
+
+	    JOptionPane.showMessageDialog(null,controllerProducto.mostrarProductosCompleto());
+
+	    int idProducto = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID del producto a eliminar"));
+
+	    int confirmar_eliminar_producto = JOptionPane.showConfirmDialog(
+	        null,
+	        "¿Está seguro que desea eliminar el producto ID " + idProducto + "?",
+	        "Confirmar eliminación",
+	        JOptionPane.YES_NO_OPTION
+	    );
+
+	    if (confirmar_eliminar_producto == JOptionPane.YES_OPTION) {
+	    	controllerProducto.eliminarProducto(idProducto);
+	    	}
+	}
    
 }
