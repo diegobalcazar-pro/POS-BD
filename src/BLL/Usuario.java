@@ -88,22 +88,22 @@ public abstract class Usuario {
 
 	// --- MÉTODOS ---
 	public static Usuario Login() {
-		String nombre = "";
-		while (nombre.isEmpty()) {
-			nombre = JOptionPane.showInputDialog("Ingrese nombre");
-			if (nombre == null || nombre.isEmpty()) {
+		String correo = "";
+		while (correo.isEmpty()) {
+			correo = JOptionPane.showInputDialog("Ingrese correo");
+			if (correo == null || correo.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Incorrecto");
 			}
 		}
 
 		String contraseniaInput = "";
 		while (contraseniaInput.isEmpty()) {
-			contraseniaInput = JOptionPane.showInputDialog("Ingrese contraseña");
+			contraseniaInput = JOptionPane.showInputDialog("Ingrese Contraseña");
 			if (contraseniaInput == null || contraseniaInput.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Incorrecto");
 			}
 		}
-		return controller.login(nombre, contraseniaInput);
+		return controller.login(correo, contraseniaInput);
 	}
 
 	public static void registrarse() {

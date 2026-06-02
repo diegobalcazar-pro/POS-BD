@@ -187,7 +187,7 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
 		LinkedList<Usuario> usuarios = new LinkedList<>();
 		try {
 			PreparedStatement stmt = con.prepareStatement("SELECT * FROM usuarios WHERE rol = 'repositor'");
-			ResultSet rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery(); 
 
 			while (rs.next()) {
 				int id = rs.getInt("id_usuario");
