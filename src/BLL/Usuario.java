@@ -25,6 +25,13 @@ public abstract class Usuario {
 		this.contrasenia = contrasenia;
 		this.rol = rol;
 	}
+	public Usuario(String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
+	    this.nombre_usuario = nombre_usuario;
+	    this.apellido_usuario = apellido_usuario;
+	    this.correo = correo;
+	    this.contrasenia = contrasenia;
+	    this.rol = rol;
+	}
 
 	public Usuario() {
 	}
