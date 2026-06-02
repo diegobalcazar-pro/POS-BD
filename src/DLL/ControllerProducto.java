@@ -178,7 +178,7 @@ public class ControllerProducto implements ProductoRepository {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace();  
         }
 
         return productos;
@@ -189,23 +189,22 @@ public class ControllerProducto implements ProductoRepository {
         String texto = "";
 
         try {
-            PreparedStatement stmt = con.prepareStatement(
-                "SELECT p.id_producto, p.nombre_producto, p.descripcion_producto, " +
-                "c.nombre_categoria, pr.nombreEmpresa " +
-                "FROM productos p " +
-                "INNER JOIN categorias c ON p.fk_categoria = c.id_categoria " +
-                "INNER JOIN proveedores pr ON p.fk_proveedor = pr.id_proveedor " +
-                "ORDER BY p.id_producto ASC"
-            );
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM productos");
 
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
+                int idCategoria = rs.getInt("fk_categoria");
+                int idProveedor = rs.getInt("fk_proveedor");
+
+                String nombreCategoria = buscarNombreCategoria(idCategoria);
+                String nombreProveedor = buscarNombreProveedor(idProveedor);
+
                 texto += "ID Producto: " + rs.getInt("id_producto") + "\n";
                 texto += "Nombre: " + rs.getString("nombre_producto") + "\n";
                 texto += "Descripción: " + rs.getString("descripcion_producto") + "\n";
-                texto += "Categoría: " + rs.getString("nombre_categoria") + "\n";
-                texto += "Proveedor: " + rs.getString("nombreEmpresa") + "\n";
+                texto += "Categoría: " + nombreCategoria + "\n";
+                texto += "Proveedor: " + nombreProveedor + "\n";
                 texto += "-----------------------------\n";
             }
 
@@ -218,6 +217,46 @@ public class ControllerProducto implements ProductoRepository {
         }
 
         return texto;
+    }
+    
+    public String buscarNombreCategoria(int idCategoria) {
+        String nombreCategoria = "";
+
+        try {
+            PreparedStatement stmt = con.prepareStatement("SELECT nombre_categoria FROM categorias WHERE id_categoria = ?");
+            stmt.setInt(1, idCategoria);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                nombreCategoria = rs.getString("nombre_categoria");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return nombreCategoria;
+    }
+    
+    public String buscarNombreProveedor(int idProveedor) {
+        String nombreProveedor = "";
+
+        try {
+            PreparedStatement stmt = con.prepareStatement("SELECT nombreEmpresa FROM proveedores WHERE id_proveedor = ?");
+            stmt.setInt(1, idProveedor);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                nombreProveedor = rs.getString("nombreEmpresa");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return nombreProveedor;
     }
 
     @Override

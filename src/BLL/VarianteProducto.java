@@ -8,8 +8,7 @@ public class VarianteProducto {
     private double precio_venta;
     private int fk_producto;
     
-	public VarianteProducto(int id_variante_producto, String talle, String color, double precio_venta,
-			int fk_producto) {
+	public VarianteProducto(int id_variante_producto, String talle, String color, double precio_venta, int fk_producto) {
 		super();
 		this.id_variante_producto = id_variante_producto;
 		this.talle = talle;

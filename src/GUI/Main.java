@@ -11,10 +11,6 @@ import BLL.Repositor;
 public class Main {
     public static void main(String[] args) {
         
-    	/*String contraseniaoculta = Hashing.hash("12345");
-        JOptionPane.showMessageDialog(null,contraseniaoculta );
-       	JOptionPane.showMessageDialog(null, Hashing.verificar("12345", contraseniaoculta));*/
-        
         String[] acciones = { "Login", "Registrar", "Salir" };
         int menu = 0;
         
