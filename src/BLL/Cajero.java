@@ -5,15 +5,14 @@ import javax.swing.JOptionPane;
 public class Cajero extends Usuario {
 
     
-    public Cajero(int id, String nombre, String email, String tipo, String password) {
-		super(id, nombre, email, tipo, password);
+	public Cajero(int id_usuario, String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+		super(id_usuario, nombre_usuario, apellido_usuario, email, contrasenia, rol);
 	}
-    public Cajero( String nombre, String email, String tipo, String password) {
-		super(0, nombre, email, tipo, password);
+	
+    public Cajero(String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+		super(0, nombre_usuario, apellido_usuario, email, contrasenia, rol);
 	}
-	public Cajero() {
-        super();
-    }
+
 	@Override
 	public String toString() {
 		return "Cajero [toString()=" + super.toString() + "]";
@@ -101,7 +100,7 @@ public class Cajero extends Usuario {
 					opcion_info_ventas = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Ver Stock", 0, 0, null, opciones_info_ventas, opciones_info_ventas);
 					switch (opcion_info_ventas) {
 					case 0:
-						//VER TODO
+						//VER TODOs
 						
 						break;
 					case 1:

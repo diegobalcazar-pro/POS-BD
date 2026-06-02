@@ -6,46 +6,46 @@ import repository.Hashing;
 import repository.Validaciones;
 
 public abstract class Usuario {
-	protected int id;
-	protected String nombre;
-	protected String apellido;
+	protected int id_usuario;
+	protected String nombre_usuario;
+	protected String apellido_usuario;
 	protected String email;
 	protected String contrasenia;
 	protected String rol;
 	private static ControllerUsuario controller = new ControllerUsuario();
 
-	public Usuario(int id, String nombre, String apellido, String email, String contrasenia, String rol) {
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
+	public Usuario(int id_usuario, String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+		this.id_usuario = id_usuario;
+		this.nombre_usuario = nombre_usuario;
+		this.apellido_usuario = apellido_usuario;
 		this.email = email;
 		this.contrasenia = contrasenia;
 		this.rol = rol;
 
 	}
 
-	public int getId() {
-		return id;
+	public int getId_usuario() {
+		return id_usuario;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getNombre_usuario() {
+		return nombre_usuario;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombre_usuario(String nombre_usuario) {
+		this.nombre_usuario = nombre_usuario;
+	}
+	
+	public String getApellido_usuario() {
+		return apellido_usuario;
 	}
 
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApellido_usuario(String apellido_usuario) {
+		this.apellido_usuario = apellido_usuario;
 	}
 
 	public String getEmail() {
@@ -81,10 +81,10 @@ public abstract class Usuario {
 	}
 	
 	public static Usuario Login() {
-		  String nombre = "";
-        while (nombre.isEmpty()) {
-            nombre = JOptionPane.showInputDialog("Ingrese nombre");
-            if (nombre.isEmpty()) {
+		  String email = "";
+        while (email.isEmpty()) {
+        	email = JOptionPane.showInputDialog("Ingrese email");
+            if (email.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Incorrecto");
             }
         }
@@ -96,7 +96,7 @@ public abstract class Usuario {
                 JOptionPane.showMessageDialog(null, "Incorrecto");
             }
         }
-      return controller.login(nombre, contrasenia);
+      return controller.login(email, contrasenia);
 
 	}
 	
@@ -126,11 +126,12 @@ public abstract class Usuario {
 		System.out.println("fin de registro");
 			   */
 			
-			    String nombre = Validaciones.validarIngresoString("Ingrese nombre");			    
-			    String mail = Validaciones.validarIngresoString("Ingrese mail");
+			    String nombre = Validaciones.validarIngresoString("Ingrese nombre");
+			    String apellido = Validaciones.validarIngresoString("Ingrese apellido");
+			    String email = Validaciones.validarIngresoString("Ingrese mail");
 				String contrasenia = Validaciones.validarIngresoString("Ingrese contraseña");
 				String contraseniaOculta = Hashing.hash(contrasenia);
-				getController().agregarUsuario(new Cajero(nombre,mail,"Cajero",contraseniaOculta));
+				getController().agregarUsuario(new Cajero(nombre,apellido,email,contraseniaOculta,"cajero"));
 			
 				
 			

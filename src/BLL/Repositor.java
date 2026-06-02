@@ -5,15 +5,14 @@ import javax.swing.JOptionPane;
 public class Repositor extends Usuario {
 
     
-    public Repositor(int id, String nombre, String email, String tipo, String password) {
-		super(id, nombre, email, tipo, password);
+	public Repositor(int id_usuario, String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+		super(id_usuario, nombre_usuario, apellido_usuario, email, contrasenia, rol);
 	}
-    public Repositor( String nombre, String email, String tipo, String password) {
-		super(0, nombre, email, tipo, password);
+	
+    public Repositor(String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+		super(0, nombre_usuario, apellido_usuario, email, contrasenia, rol);
 	}
-	public Repositor() {
-        super();
-    }
+
 	@Override
 	public String toString() {
 		return "Repositor [toString()=" + super.toString() + "]";

@@ -8,8 +8,8 @@ import repository.Validaciones;
 
 public class Admin extends Usuario implements Validaciones {
 
-	public Admin(int id, String nombre, String apellido, String email, String contrasenia, String rol) {
-		super(id, nombre, apellido, email, contrasenia, rol);
+	public Admin(int id_usuario, String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+		super(id_usuario, nombre_usuario, apellido_usuario, email, contrasenia, rol);
 	}
 
 	@Override
