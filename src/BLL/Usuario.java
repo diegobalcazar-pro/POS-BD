@@ -99,43 +99,35 @@ public abstract class Usuario {
 	public String toString() {
 		return "Usuario:\n" + nombre_usuario +" "+ apellido_usuario + ", " + correo + ", rol= " + rol + "\n------------------------\n";
 	}
-
-	// --- MÉTODOS ---
-	public static Usuario Login() {
-		String correo = "";
-		while (correo.isEmpty()) {
-			correo = JOptionPane.showInputDialog("Ingrese correo");
-			if (correo == null || correo.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Incorrecto");
-			}
-		}
-
-		String contraseniaInput = "";
-		while (contraseniaInput.isEmpty()) {
-			contraseniaInput = JOptionPane.showInputDialog("Ingrese Contraseña");
-			if (contraseniaInput == null || contraseniaInput.isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Incorrecto");
-			}
-		}
-		return controller.login(correo, contraseniaInput);
-	}
+	
+	public abstract void Menu();
 	
 	public void agregarUsuario(Usuario usuario) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public static void registrarse() {
-		String nombre_usuario = Validaciones.validarIngresoString("Ingrese nombre_usuario");
-		String apellido_usuario = Validaciones.validarIngresoString("Ingrese apellid_usuarioo");
-		String correo = Validaciones.validarIngresoString("Ingrese correo");
-		String contraseniaInput = Validaciones.validarIngresoString("Ingrese contraseña");
+	// --- MÉTODOS ---
+		public static Usuario Login() {
+			String correo = "";
+			while (correo.isEmpty()) {
+				correo = JOptionPane.showInputDialog("Ingrese correo");
+				if (correo == null || correo.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Incorrecto");
+				}
+			}
 
-		String contraseniaOculta = Hashing.hash(contraseniaInput);
-
-		getController().agregarUsuario(new Cajero(0, nombre_usuario, apellido_usuario, correo, contraseniaOculta, "cajero"));
-	}
-	
+			String contraseniaInput = "";
+			while (contraseniaInput.isEmpty()) {
+				contraseniaInput = JOptionPane.showInputDialog("Ingrese Contraseña");
+				if (contraseniaInput == null || contraseniaInput.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Incorrecto");
+				}
+			}
+			return controller.login(correo, contraseniaInput);
+		}
+		
+		
 	public Usuario BuscarUsuario() {
 		LinkedList<Usuario> usuarios = this.getController().mostrarUsuarios();
 		String[] correos = new String[usuarios.size()];
@@ -147,6 +139,6 @@ public abstract class Usuario {
 
 	}
 
-	public abstract void Menu();
+	
 
 }
