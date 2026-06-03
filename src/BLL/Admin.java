@@ -306,7 +306,5 @@ import repository.Validaciones;
 			int elegido = JOptionPane.showOptionDialog(null, "Seleccione mail", "", 0, 0, null, correos, correos[0]);
 			return repositores.get(elegido);
 
-		}
-		
-		
+		}				
 }

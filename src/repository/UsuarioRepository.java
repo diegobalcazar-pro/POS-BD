@@ -10,6 +10,6 @@ public interface UsuarioRepository {
 	<T> T login(String nombre, String password);
 	LinkedList<Usuario> mostrarCajeros();
 	LinkedList<Usuario> mostrarRepositores();
-	void EliminarUsuario(Usuario usuario);
+	void EliminarUsuario(String correo);
 	
 }

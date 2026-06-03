@@ -1,5 +1,7 @@
 package BLL;
 
+import java.util.LinkedList;
+
 import javax.swing.JOptionPane;
 import DLL.ControllerUsuario;
 import repository.Hashing;
@@ -37,27 +39,27 @@ public abstract class Usuario {
 	}
 
 	// --- GETTERS Y SETTERS ---
-	public int getid_usuario() {
+	public int getId_usuario() {
 		return id_usuario;
 	}
 
-	public void setid_usuario(int id_usuario) {
+	public void setId_usuario(int id_usuario) {
 		this.id_usuario = id_usuario;
 	}
 
-	public String getnombre_usuario() {
+	public String getNombre_usuario() {
 		return nombre_usuario;
 	}
 
-	public void setnombre_usuario(String nombre_usuario) {
+	public void setNombre_usuario(String nombre_usuario) {
 		this.nombre_usuario = nombre_usuario;
 	}
 
-	public String getapellido_usuario() {
+	public String getApellido_usuario() {
 		return apellido_usuario;
 	}
 
-	public void setapellido_usuario(String apellido_usuario) {
+	public void setApellido_usuario(String apellido_usuario) {
 		this.apellido_usuario = apellido_usuario;
 	}
 
@@ -92,6 +94,11 @@ public abstract class Usuario {
 	public static void setController(ControllerUsuario controller) {
 		Usuario.controller = controller;
 	}
+	
+	@Override
+	public String toString() {
+		return "Usuario:\n" + nombre_usuario +" "+ apellido_usuario + ", " + correo + ", rol= " + rol + "\n------------------------\n";
+	}
 
 	// --- MÉTODOS ---
 	public static Usuario Login() {
@@ -112,6 +119,11 @@ public abstract class Usuario {
 		}
 		return controller.login(correo, contraseniaInput);
 	}
+	
+	public void agregarUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	public static void registrarse() {
 		String nombre_usuario = Validaciones.validarIngresoString("Ingrese nombre_usuario");
@@ -123,13 +135,18 @@ public abstract class Usuario {
 
 		getController().agregarUsuario(new Cajero(0, nombre_usuario, apellido_usuario, correo, contraseniaOculta, "cajero"));
 	}
+	
+	public Usuario BuscarUsuario() {
+		LinkedList<Usuario> usuarios = this.getController().mostrarUsuarios();
+		String[] correos = new String[usuarios.size()];
+		for (int i = 0; i < correos.length; i++) {
+			correos[i] = usuarios.get(i).getCorreo();
+		}
+		int elegido = JOptionPane.showOptionDialog(null, "Seleccione Correo", "", 0, 0, null, correos, correos[0]);
+		return usuarios.get(elegido);
+
+	}
 
 	public abstract void Menu();
 
-	// --- TO STRING ---
-	@Override
-	public String toString() {
-		return "Usuario [id_usuario=" + id_usuario + ", nombre_usuario=" + nombre_usuario + ", apellido_usuario=" + apellido_usuario + ", correo=" + correo + ", rol="
-				+ rol + ", contrasenia=" + contrasenia + "]";
-	}
 }
