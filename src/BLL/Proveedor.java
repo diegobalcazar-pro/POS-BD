@@ -9,7 +9,7 @@ public class Proveedor {
 
 	public Proveedor(int id_proveedor, String nombreEmpresa, String nombreContacto, String telefono, String correo) {
 		super();
-		id_proveedor = id_proveedor;
+		this.id_proveedor = id_proveedor;
 		this.nombreEmpresa = nombreEmpresa;
 		this.nombreContacto = nombreContacto;
 		this.telefono = telefono;
@@ -21,7 +21,7 @@ public class Proveedor {
 	}
 
 	public void setid_proveedor(int id_proveedor) {
-		id_proveedor = id_proveedor;
+		this.id_proveedor = id_proveedor;
 	}
 
 	public String getNombreEmpresa() {
