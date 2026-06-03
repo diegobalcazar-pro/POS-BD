@@ -219,11 +219,11 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
             e.printStackTrace();
         }
     }
-	/*@Override
+	@Override
 	public void EliminarUsuario(Usuario usuario) {
 		// TODO Auto-generated method stub
 		
-	}*/
+	}
 
 	
 }
