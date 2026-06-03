@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2026 a las 17:20:52
+-- Tiempo de generación: 03-06-2026 a las 15:13:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -54,9 +54,8 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`) VALUES
-(1, 'Remeras'),
-(2, 'Pantalones'),
-(3, 'Buzos');
+(1, 'Deporte'),
+(2, 'Invienro');
 
 -- --------------------------------------------------------
 
@@ -79,7 +78,7 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id_cliente`, `nombre_cliente`, `apellido_cliente`, `correo`, `telefono`, `direccion`, `tipo`) VALUES
-(1, 'Santiago', 'Contreras', 'santiago@gmail.com', '12345678', 'Venezuela', 'minorista');
+(1, 'matias', 'castro', 'matias@presente.com', '87654321', 'nose', 'minorista');
 
 -- --------------------------------------------------------
 
@@ -117,8 +116,7 @@ CREATE TABLE `descuentos` (
 --
 
 INSERT INTO `descuentos` (`id_descuento`, `nombre_descuento`, `porcentaje_descuento`) VALUES
-(1, 'Descuento de talles', 25),
-(2, 'Descuento mayorista', 10);
+(5, 'Verano', 10);
 
 -- --------------------------------------------------------
 
@@ -146,13 +144,6 @@ CREATE TABLE `envios` (
   `fecha_despacho` date DEFAULT NULL,
   `fk_venta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Volcado de datos para la tabla `envios`
---
-
-INSERT INTO `envios` (`id_envio`, `numero_seguimiento`, `estado`, `fecha_despacho`, `fk_venta`) VALUES
-(1, '123456789', 'pendiente', '2026-05-31', 1);
 
 -- --------------------------------------------------------
 
@@ -193,7 +184,11 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre_producto`, `descripcion_producto`, `fk_categoria`, `fk_proveedor`) VALUES
-(1, 'DaVinci 2026', 'Remera de DaVinci 2026', 1, 1);
+(1, 'Camiseta ARg', 'Camiseta titular de Messi', 1, 0),
+(2, 'Buzo DV', 'Davinci', 3, 0),
+(3, 'dadawda', 'dawdasdwa', 1, 0),
+(4, 'dawdasdaw', '', 2, 0),
+(5, 'pantalon', 'pantalon largo', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -214,7 +209,7 @@ CREATE TABLE `proveedores` (
 --
 
 INSERT INTO `proveedores` (`id_proveedor`, `nombreEmpresa`, `nombreContacto`, `telefono`, `correo`) VALUES
-(1, 'Adibas', 'Gamaliel', '12345678', 'gamaliel@adibas.com');
+(1, 'SportMax', 'Santiago Contreras', '1122334455', 'mayonesa@Deajo.com');
 
 -- --------------------------------------------------------
 
@@ -234,8 +229,8 @@ CREATE TABLE `stocks` (
 --
 
 INSERT INTO `stocks` (`id_stock`, `cantidad`, `fk_deposito`, `fk_variante_producto`) VALUES
-(1, 100, 1, 1),
-(2, 100, 2, 2);
+(1, 10000, 1, 1),
+(2, 100, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -248,7 +243,7 @@ CREATE TABLE `usuarios` (
   `nombre_usuario` varchar(45) NOT NULL,
   `apellido_usuario` varchar(45) NOT NULL,
   `correo` varchar(45) NOT NULL,
-  `contrasenia` varchar(255) NOT NULL,
+  `contrasenia` varchar(200) NOT NULL,
   `rol` enum('admin','cajero','repositor') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -257,8 +252,10 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `correo`, `contrasenia`, `rol`) VALUES
-(1, 'Matias', 'Castro', 'matias@tienda.com', '$2a$10$VG1d8BxlN1O5jBEM5krjoeOWpBADv6LkKAJIz.MdK6HgcAuOI1bRy', 'repositor'),
-(2, 'Pepe', 'Sech', 'pepe@tienda.com', '$2a$10$kOuVTlm/Qmmyt3ZCkMmo8OQfU0TYo4xsnLgYMMgSUIA2Q.yhK9sIq', 'cajero');
+(1, 'Beison', 'Torres', 'beison@torres.com', '$2a$10$6b3BW.PqK7wlClZnOddDFukNOTfMMoGUKiM.8snO5S2aDwjIv9CFS', 'admin'),
+(2, 'Diego', 'Balcazar', 'diego@balcazar.com', '$2a$10$ZzS9GlSO2Vsm5q9.qRWx7.D1JA3WFFps8ewmCYJZ1W65OZ17aPZUm', 'cajero'),
+(3, 'Ian', 'Japan', 'ian@japan.com', '$2a$10$Zi6lwrMPLygCI1fA5A4Xbuhx/cMMEPo9Mvffcep6H3dlxL6Kl2BQS', 'repositor'),
+(5, 'Santiago', 'Contreras', 'santi@contreras.com', '$2a$10$txnRRGFoztAbxA/ksID3r.RsVGRFXeETpmv.hEEoA.RYG5tnakeWW', 'cajero');
 
 -- --------------------------------------------------------
 
@@ -279,8 +276,8 @@ CREATE TABLE `variantes_productos` (
 --
 
 INSERT INTO `variantes_productos` (`id_variante_producto`, `talle`, `color`, `precio_venta`, `fk_producto`) VALUES
-(1, 'XL', 'Negro', 10000, 1),
-(2, 'XL', 'Blanco', 10000, 1);
+(1, 'Xl', 'Negro', 10000, 1),
+(2, 's', 'blanco', 10000, 5);
 
 -- --------------------------------------------------------
 
@@ -304,7 +301,7 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id_venta`, `fecha`, `total_neto`, `total_bruto`, `fk_usuario`, `fk_cliente`, `fk_metodo_de_pago`, `fk_descuento`) VALUES
-(1, '2026-05-29 00:00:00', 10000, 9000, 2, 1, 1, 1);
+(1, '2026-06-03 03:00:00', 1000, 700, 2, 1, 1, 3);
 
 --
 -- Índices para tablas volcadas
@@ -440,7 +437,7 @@ ALTER TABLE `depositos`
 -- AUTO_INCREMENT de la tabla `descuentos`
 --
 ALTER TABLE `descuentos`
-  MODIFY `id_descuento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_descuento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `detalles_ventas`
@@ -464,13 +461,13 @@ ALTER TABLE `metodos_de_pagos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `stocks`
@@ -482,7 +479,7 @@ ALTER TABLE `stocks`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `variantes_productos`
