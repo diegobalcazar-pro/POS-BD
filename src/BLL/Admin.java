@@ -1,11 +1,10 @@
 package BLL;
 
 import java.util.LinkedList;
-
 import javax.swing.JOptionPane;
-
-
 import repository.Validaciones;
+
+
 	public class Admin extends Usuario implements Validaciones {
 
 		public Admin(int id_usuario, String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
