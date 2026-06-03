@@ -27,15 +27,15 @@ public class Main {
                     Usuario usuario = Usuario.Login();
                     if (usuario != null) {
                         if (usuario instanceof Admin) {
-                            JOptionPane.showMessageDialog(null, "Bienvenido Admin " + usuario.getnombre_usuario());
+                            JOptionPane.showMessageDialog(null, "Bienvenido Admin " + usuario.getNombre_usuario());
                             // Ir a menu de admin
                             usuario.Menu();
                         } else if (usuario instanceof Cajero) {
-                            JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + usuario.getnombre_usuario());
+                            JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + usuario.getNombre_usuario());
                             // Ir a menu de cajero
                             usuario.Menu();
                         } else if (usuario instanceof Repositor) {
-                        	JOptionPane.showMessageDialog(null, "Bienvenido Repositor " + usuario.getnombre_usuario());
+                        	JOptionPane.showMessageDialog(null, "Bienvenido Repositor " + usuario.getNombre_usuario());
                             // Ir a menu de repositor
                         	usuario.Menu();
                         }
