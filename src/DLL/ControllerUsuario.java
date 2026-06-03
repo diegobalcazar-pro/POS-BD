@@ -97,23 +97,6 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
         }
     }
     
-    public void EliminarUsuario(String correo) {
-        try {
-            PreparedStatement statement = con.prepareStatement(
-            		"DELETE FROM usuarios WHERE correo = ?"
-            );
-            statement.setString(1, correo);
-          
-
-            int filas = statement.executeUpdate();
-            if (filas > 0) {
-                System.out.println("Usuario elinado correctamente.");
-            }
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     
     
     @Override
@@ -151,6 +134,29 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
         }
         return usuarios;
     }
+    
+    
+    
+    public void EliminarUsuario(String correo) {
+        try {
+            PreparedStatement statement = con.prepareStatement(
+            		"DELETE FROM usuarios WHERE correo = ?"
+            );
+            statement.setString(1, correo);
+          
+
+            int filas = statement.executeUpdate();
+            if (filas > 0) {
+                System.out.println("Usuario elinado correctamente.");
+            }
+        }  catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+    
+    
     
     
     

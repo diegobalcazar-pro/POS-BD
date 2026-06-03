@@ -85,6 +85,12 @@ public abstract class Usuario {
 		return "Usuario:\n" + nombre_usuario +" "+ apellido_usuario + ", " + correo + ", rol= " + rol + "\n------------------------\n";
 	}
 	
+    public abstract void Menu();
+	
+	public void agregarUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	public static Usuario Login() {
 		  String correo = "";
@@ -107,12 +113,7 @@ public abstract class Usuario {
 	}
 	
 	
-	public abstract void Menu();
 	
-	public void agregarUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public Usuario BuscarUsuario() {
 		LinkedList<Usuario> usuarios = this.getController().mostrarUsuarios();
