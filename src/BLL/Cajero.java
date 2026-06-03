@@ -197,8 +197,6 @@ public class Cajero extends Usuario {
 	
 	public void seleccionarCliente() {
 
-	    JOptionPane.showMessageDialog(null, "Entró al método seleccionarCliente");
-
 	    JOptionPane.showMessageDialog(
 	        null,
 	        "Clientes disponibles:\n" + controllerVenta.mostrarClientesTexto()
@@ -213,10 +211,7 @@ public class Cajero extends Usuario {
 	    if (cliente != null) {
 	        clienteSeleccionado = cliente;
 
-	        JOptionPane.showMessageDialog(
-	            null,
-	            "Cliente seleccionado:\n" + clienteSeleccionado
-	        );
+	        JOptionPane.showMessageDialog(null,"Cliente seleccionado:\n" + clienteSeleccionado);
 	    } else {
 	        JOptionPane.showMessageDialog(null, "No se encontró el cliente.");
 	    }
@@ -224,18 +219,11 @@ public class Cajero extends Usuario {
 	
 	public void agregarProducto() {
 
-	    JOptionPane.showMessageDialog(
-	        null,
-	        "Productos disponibles:\n" + controllerVenta.mostrarProductosConStock()
-	    );
+	    JOptionPane.showMessageDialog(null,"Productos disponibles:\n" + controllerVenta.mostrarProductosConStock());
 
-	    int idVariante = Integer.parseInt(
-	        Validaciones.validarIngresoString("Ingrese el ID de la variante")
-	    );
+	    int idVariante = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID de la variante"));
 
-	    int cantidad = Integer.parseInt(
-	        Validaciones.validarIngresoString("Ingrese cantidad")
-	    );
+	    int cantidad = Integer.parseInt(Validaciones.validarIngresoString("Ingrese cantidad"));
 
 	    if (cantidad <= 0) {
 	        JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0.");
@@ -253,7 +241,7 @@ public class Cajero extends Usuario {
 	            int nuevaCantidad = item.getCantidad() + cantidad;
 
 	            if (controllerVenta.hayStockSuficiente(idVariante, nuevaCantidad)) {
-	                item.setCantidad(nuevaCantidad);
+	            	item.setCantidad(nuevaCantidad);
 	                JOptionPane.showMessageDialog(null, "Cantidad actualizada en el carrito.");
 	            } else {
 	                JOptionPane.showMessageDialog(null, "No hay stock suficiente para sumar esa cantidad.");
@@ -265,25 +253,20 @@ public class Cajero extends Usuario {
 
 	    carrito.add(itemNuevo);
 
-	    JOptionPane.showMessageDialog(
-	        null,
-	        "Producto agregado al carrito:\n" + itemNuevo
-	    );
+	    JOptionPane.showMessageDialog(null,"Producto agregado al carrito:\n" + itemNuevo);
 	}
 	
 	
 	public void borrarProducto() {
 
 	    if (carrito.isEmpty()) {
-	        JOptionPane.showMessageDialog(null, "El carrito está vacío.");
+	    	JOptionPane.showMessageDialog(null, "El carrito está vacío.");
 	        return;
 	    }
 
 	    JOptionPane.showMessageDialog(null, mostrarCarrito());
 
-	    int idVariante = Integer.parseInt(
-	        Validaciones.validarIngresoString("Ingrese el ID de la variante a borrar")
-	    );
+	    int idVariante = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID de la variante a borrar"));
 
 	    ItemVenta itemEliminar = null;
 
@@ -304,14 +287,9 @@ public class Cajero extends Usuario {
 	
 	public void agregarDescuento() {
 
-	    JOptionPane.showMessageDialog(
-	        null,
-	        "Descuentos disponibles:\n" + controllerVenta.mostrarDescuentosTexto()
-	    );
+	    JOptionPane.showMessageDialog(null,"Descuentos disponibles:\n" + controllerVenta.mostrarDescuentosTexto());
 
-	    int idDescuento = Integer.parseInt(
-	        Validaciones.validarIngresoString("Ingrese el ID del descuento. Ingrese 0 para no aplicar descuento")
-	    );
+	    int idDescuento = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID del descuento. Ingrese 0 para no aplicar descuento"));
 
 	    if (idDescuento == 0) {
 	        idDescuentoSeleccionado = 0;
@@ -325,10 +303,7 @@ public class Cajero extends Usuario {
 	    idDescuentoSeleccionado = idDescuento;
 	    porcentajeDescuento = porcentaje;
 
-	    JOptionPane.showMessageDialog(
-	        null,
-	        "Descuento aplicado: " + porcentajeDescuento + "%"
-	    );
+	    JOptionPane.showMessageDialog(null,"Descuento aplicado: " + porcentajeDescuento + "%");
 	}
 	
 	public void procesarCobro() {
@@ -356,36 +331,11 @@ public class Cajero extends Usuario {
 	        "\nTotal neto: $" + totalNeto
 	    );
 
-	    JOptionPane.showMessageDialog(
-	        null,
-	        "Métodos de pago disponibles:\n" + controllerVenta.mostrarMetodosPagoTexto()
-	    );
+	    JOptionPane.showMessageDialog(null,"Métodos de pago disponibles:\n" + controllerVenta.mostrarMetodosPagoTexto());
 
-	    int idMetodoPago = Integer.parseInt(
-	        Validaciones.validarIngresoString("Ingrese el ID del método de pago")
-	    );
+	    int idMetodoPago = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID del método de pago"));
 
-	    int confirmar = JOptionPane.showConfirmDialog(
-	        null,
-	        "¿Confirmar venta por $" + totalNeto + "?",
-	        "Confirmar venta",
-	        JOptionPane.YES_NO_OPTION
-	    );
-
-	    if (confirmar != JOptionPane.YES_OPTION) {
-	        JOptionPane.showMessageDialog(null, "Venta cancelada.");
-	        return;
-	    }
-
-	    boolean ventaOk = controllerVenta.procesarVenta(
-	        getId_usuario(),
-	        clienteSeleccionado.getId_cliente(),
-	        idMetodoPago,
-	        idDescuentoSeleccionado,
-	        totalBruto,
-	        totalNeto,
-	        carrito
-	    );
+	    boolean ventaOk = controllerVenta.procesarVenta(getId_usuario(),clienteSeleccionado.getId_cliente(),idMetodoPago,idDescuentoSeleccionado,totalBruto,totalNeto,carrito);
 
 	    if (ventaOk) {
 	        carrito.clear();
