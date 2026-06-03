@@ -2,6 +2,8 @@ package BLL;
 
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
+
+import repository.ProductoRepository;
 import repository.Validaciones;
 
 
@@ -162,7 +164,8 @@ import repository.Validaciones;
 						switch (opcion_gestionar_productos) {
 						case 0:
 							//VER PRODUCTOS
-							JOptionPane.showMessageDialog(null, Producto.mostrarProductos());
+							//JOptionPane.showMessageDialog(null, Producto.mostrarProductos());
+							
 						
 							break;
 						case 1:

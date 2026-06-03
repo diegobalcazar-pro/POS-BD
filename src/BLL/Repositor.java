@@ -764,6 +764,7 @@ public class Repositor extends Usuario {
 				break;
 			}
 
-		} while (opcion != 4 && opcion != -1);
+		} while (opcion != 4 && opcion != -1);//CIERRA SESION DE ADMIN
+		JOptionPane.showMessageDialog(null, "Sesion cerrada!\nHasta luego.");
 	}
 }
