@@ -57,4 +57,34 @@ public class ControllerCategoria implements CategoriaRepository {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public String categoriaMasVendida() {
+
+	    StringBuilder resultado = new StringBuilder();
+
+	    try {
+	        PreparedStatement statement = con.prepareStatement(
+	           "SELECT categorias.nombre_categoria, SUM(detalles_ventas.cantidad) AS total_vendido FROM detalles_ventas INNER JOIN variantes_productos " +
+	           "ON detalles_ventas.fk_variante_producto = variantes_productos.id_variante_producto INNER JOIN productos ON variantes_productos.fk_producto = productos.id_producto " +
+	           "INNER JOIN categorias ON productos.fk_categoria = categorias.id_categoria GROUP BY categorias.id_categoria, categorias.nombre_categoria ORDER BY total_vendido DESC LIMIT 1"
+	        );
+
+	        ResultSet rs = statement.executeQuery();
+
+	        if (rs.next()) {
+
+	            resultado.append("Categoría más vendida: ")
+	                     .append(rs.getString("nombre_categoria"))
+	                     .append("\nTotal vendido: ")
+	                     .append(rs.getInt("total_vendido"))
+	                     .append(" unidades");
+	        } else {
+	            resultado.append("No hay ventas registradas.");
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return resultado.toString();
+	}
 }

@@ -232,7 +232,8 @@ import repository.Validaciones;
 							
 						case 2:
 							//CATEGORIAS MAS VENDIDAS
-							JOptionPane.showMessageDialog(null, "Por el momento no forma parte del MVP");
+							//JOptionPane.showMessageDialog(null, "Por el momento no forma parte del MVP");
+							JOptionPane.showMessageDialog( null,Categoria.categoriaMasVendida(),"Categoría más vendida",JOptionPane.INFORMATION_MESSAGE);
 							break;
 
 						default:

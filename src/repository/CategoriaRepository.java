@@ -8,5 +8,5 @@ public interface CategoriaRepository {
     void eliminarCategoria(int id);
     void modificarCategoria(Categoria c);
     List<Categoria> obtenerCategorias();
-
+    String categoriaMasVendida();
 }

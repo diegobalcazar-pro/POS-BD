@@ -1,8 +1,11 @@
 package BLL;
 
+import DLL.ControllerCategoria;
+
 public class Categoria {
 	protected int id_categoria;
 	protected String nombre_categoria;
+	private static ControllerCategoria controller = new ControllerCategoria();
 
 	public Categoria(int id_categoria, String nombre_categoria) {
 		super();
@@ -24,6 +27,12 @@ public class Categoria {
 
 	public void setNombre_categoria(String nombre_categoria) {
 		this.nombre_categoria = nombre_categoria;
+	}
+	
+	
+	//METODO CATEGORIA MAS VENDIDA
+	public static String categoriaMasVendida() {
+	    return controller.categoriaMasVendida();
 	}
 
 }
