@@ -5,16 +5,16 @@ public class Cliente {
     private int id_cliente;
     private String nombre_cliente;
     private String apellido_cliente;
-    private String email;
+    private String correo;
     private String telefono;
     private String direccion;
     private String tipo;
 
-    public Cliente(int id_cliente, String nombre_cliente, String apellido_cliente, String email, String telefono, String direccion, String tipo) {
+    public Cliente(int id_cliente, String nombre_cliente, String apellido_cliente, String correo, String telefono, String direccion, String tipo) {
         this.id_cliente = id_cliente;
         this.nombre_cliente = nombre_cliente;
         this.apellido_cliente = apellido_cliente;
-        this.email = email;
+        this.correo = correo;
         this.telefono = telefono;
         this.direccion = direccion;
         this.tipo = tipo;
@@ -32,8 +32,8 @@ public class Cliente {
         return apellido_cliente;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCorreo() {
+        return correo;
     }
 
     public String getTelefono() {
@@ -52,7 +52,7 @@ public class Cliente {
     public String toString() {
         return "ID Cliente: " + id_cliente +
                "\nNombre: " + nombre_cliente + " " + apellido_cliente +
-               "\nEmail: " + email +
+               "\nCorreo: " + correo +
                "\nTeléfono: " + telefono +
                "\nDirección: " + direccion +
                "\nTipo: " + tipo;

@@ -9,12 +9,12 @@ public class Repositor extends Usuario {
 
 	private static ControllerProducto controllerProducto = new ControllerProducto();
     
-	public Repositor(int id_usuario, String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
-		super(id_usuario, nombre_usuario, apellido_usuario, email, contrasenia, rol);
+	public Repositor(int id_usuario, String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
+		super(id_usuario, nombre_usuario, apellido_usuario, correo, contrasenia, rol);
 	}
 	
-    public Repositor(String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
-		super(0, nombre_usuario, apellido_usuario, email, contrasenia, rol);
+    public Repositor(String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
+		super(0, nombre_usuario, apellido_usuario, correo, contrasenia, rol);
 	}
 
     @Override

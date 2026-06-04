@@ -9,16 +9,16 @@ public abstract class Usuario {
 	protected int id_usuario;
 	protected String nombre_usuario;
 	protected String apellido_usuario;
-	protected String email;
+	protected String correo;
 	protected String contrasenia;
 	protected String rol;
 	private static ControllerUsuario controller = new ControllerUsuario();
 
-	public Usuario(int id_usuario, String nombre_usuario, String apellido_usuario, String email, String contrasenia, String rol) {
+	public Usuario(int id_usuario, String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
 		this.id_usuario = id_usuario;
 		this.nombre_usuario = nombre_usuario;
 		this.apellido_usuario = apellido_usuario;
-		this.email = email;
+		this.correo = correo;
 		this.contrasenia = contrasenia;
 		this.rol = rol;
 
@@ -48,12 +48,12 @@ public abstract class Usuario {
 		this.apellido_usuario = apellido_usuario;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getCorreo() {
+		return correo;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 	public String getContrasenia() {
@@ -85,7 +85,7 @@ public abstract class Usuario {
 		return "ID: " + id_usuario +
 		           "\nNombre: " + nombre_usuario +
 		           "\nApellido: " + apellido_usuario +
-		           "\nEmail: " + email +
+		           "\nEmail: " + correo +
 		           "\nRol: " + rol +
 		           "\n-------------------------\n";
 	}
@@ -93,7 +93,7 @@ public abstract class Usuario {
 	public static Usuario Login() {
 		  String email = "";
         while (email.isEmpty()) {
-        	email = JOptionPane.showInputDialog("Ingrese email");
+        	email = JOptionPane.showInputDialog("Ingrese correo");
             if (email.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Incorrecto");
             }
