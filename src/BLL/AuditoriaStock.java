@@ -2,6 +2,8 @@ package BLL;
 
 import java.time.LocalDate;
 
+import DLL.ControllerAuditoriaStock;
+
 public class AuditoriaStock {
 	protected int id_auditoria_stock;
 	protected String tipo_movimiento;
@@ -11,6 +13,7 @@ public class AuditoriaStock {
 	protected Usuario usuario;
 	protected Deposito depositoOrigen;
 	protected Deposito depositoDestino;
+	private static ControllerAuditoriaStock controller = new ControllerAuditoriaStock();
 
 	public AuditoriaStock(int id_auditoria_stock, String tipo_movimiento, int cantidad, LocalDate fecha,
 			VarianteProducto varianteproducto, Usuario usuario, Deposito depositoOrigen, Deposito depositoDestino) {
@@ -89,4 +92,7 @@ public class AuditoriaStock {
 		this.depositoDestino = depositoDestino;
 	}
 
+	public static String mostrarMovimientosStock() {
+	    return controller.mostrarMovimientosStock();
+	}
 }

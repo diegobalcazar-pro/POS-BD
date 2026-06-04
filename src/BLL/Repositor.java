@@ -300,34 +300,46 @@ public class Repositor extends Usuario {
 	}
 
 	// --- MOVER PRODUCTO ---
-	public void moverProducto() {
-		VarianteProducto v = seleccionarVariante();
-		if (v == null)
-			return;
-		List<BLL.Deposito> depositos = controllerVar.obtenerDepositos();
-		if (depositos.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Error: No hay depósitos registrados.");
-			return;
-		}
+	public void moverProducto(Usuario usuario) {
 
-		Object[] depArray = depositos.toArray();
-		BLL.Deposito depSel = (BLL.Deposito) JOptionPane.showInputDialog(null,
-				"Mover variante: " + v.getProducto().getNombre_producto() + " (Talle: " + v.getTalle() + ")\n\n"
-						+ "Seleccione el NUEVO depósito de destino:",
-				"Mover Stock", JOptionPane.QUESTION_MESSAGE, null, depArray, depArray[0]);
+	    VarianteProducto v = seleccionarVariante();
 
-		if (depSel == null)
-			return;
+	    if (v == null)
+	        return;
 
-		int confirm = JOptionPane.showConfirmDialog(null,
-				"¿Confirmar el traslado al depósito: " + depSel.getLugarDeposito().toUpperCase() + "?\n"
-						+ "(Se moverá todo el stock de esta variante a la nueva ubicación)",
-				"Confirmar Movimiento", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+	    List<BLL.Deposito> depositos = controllerVar.obtenerDepositos();
 
-		if (confirm == JOptionPane.YES_OPTION) {
-			controllerVar.moverVariante(v.getid_variante_producto(), depSel.getid_deposito());
-			JOptionPane.showMessageDialog(null, "El stock ha sido movido exitosamente.");
-		}
+	    if (depositos.isEmpty()) {JOptionPane.showMessageDialog(null, "Error: No hay depósitos registrados.");
+	        return;
+	    }
+
+	    Object[] depArray = depositos.toArray();
+
+	    BLL.Deposito depSel = (BLL.Deposito) JOptionPane.showInputDialog(
+	            null, "Mover variante: " + v.getProducto().getNombre_producto()  + " (Talle: " + v.getTalle() + ")\n\n"
+	                    + "Seleccione el NUEVO depósito de destino:", "Mover Stock",
+	            JOptionPane.QUESTION_MESSAGE, null, depArray, depArray[0]);
+
+	    if (depSel == null)
+	        return;
+
+	    int confirm = JOptionPane.showConfirmDialog(
+	            null,
+	            "¿Confirmar el traslado al depósito: "
+	                    + depSel.getLugarDeposito().toUpperCase()
+	                    + "?\n(Se moverá todo el stock de esta variante a la nueva ubicación)", "Confirmar Movimiento", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+
+	    if (confirm == JOptionPane.YES_OPTION) {
+
+	        controllerVar.moverVariante(
+	                v.getid_variante_producto(),
+	                depSel.getid_deposito(),
+	                usuario.getId_usuario());
+
+	        JOptionPane.showMessageDialog(
+	                null,
+	                "El stock ha sido movido exitosamente.");
+	    }
 	}
 
 	// --- GESTIÓN DE ENVÍOS ---
@@ -680,7 +692,7 @@ public class Repositor extends Usuario {
 						break;
 
 					case 4:
-						moverProducto();
+						moverProducto(this);
 						break;
 					}
 				} while (opGestionSel != 5 && opGestionSel != -1);

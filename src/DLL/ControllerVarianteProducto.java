@@ -154,8 +154,8 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 		}
 	}
 
-	@Override
-	public void moverVariante(int idVariante, int idNuevoDeposito) {
+	/*@Override
+	public void moverVariante(int idVariante, int idNuevoDeposito, int idUsuario) {
 		String sql = "UPDATE stocks SET fk_deposito = ? WHERE fk_variante_producto = ?";
 		try (PreparedStatement stmt = con.prepareStatement(sql)) {
 			stmt.setInt(1, idNuevoDeposito);
@@ -168,6 +168,60 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}*/
+	@Override
+	public void moverVariante(int idVariante, int idNuevoDeposito, int idUsuario) {
+
+	    try {
+
+	        // Obtener datos actuales del stock
+	        PreparedStatement consulta = con.prepareStatement(
+	                "SELECT cantidad, fk_deposito FROM stocks WHERE fk_variante_producto = ?");
+
+	        consulta.setInt(1, idVariante);
+
+	        ResultSet resultado = consulta.executeQuery();
+
+	        if (!resultado.next()) {
+	            System.out.println("No se encontró stock asociado a esta variante para mover.");
+	            return;
+	        }
+
+	        int cantidad = resultado.getInt("cantidad");
+	        int depositoOrigen = resultado.getInt("fk_deposito");
+
+	        // Actualizar depósito
+	        PreparedStatement actualizar = con.prepareStatement(
+	                "UPDATE stocks SET fk_deposito = ? WHERE fk_variante_producto = ?");
+
+	        actualizar.setInt(1, idNuevoDeposito);
+	        actualizar.setInt(2, idVariante);
+
+	        int filasAfectadas = actualizar.executeUpdate();
+
+	        if (filasAfectadas > 0) {
+
+	            // Registrar auditoría
+	            PreparedStatement auditoria = con.prepareStatement(
+	                    "INSERT INTO auditorias_stocks "
+	                  + "(tipo_movimiento, cantidad, fecha, fk_variante_producto, fk_usuario, fk_deposito_origen, fk_deposito_destino) "
+	                  + "VALUES (?, ?, NOW(), ?, ?, ?, ?)");
+
+	            auditoria.setString(1, "traslado");
+	            auditoria.setInt(2, cantidad);
+	            auditoria.setInt(3, idVariante);
+	            auditoria.setInt(4, idUsuario);
+	            auditoria.setInt(5, depositoOrigen);
+	            auditoria.setInt(6, idNuevoDeposito);
+
+	            auditoria.executeUpdate();
+
+	            System.out.println("Movimiento registrado en auditoría.");
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	@Override
