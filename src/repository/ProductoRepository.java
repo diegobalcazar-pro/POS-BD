@@ -8,5 +8,6 @@ public interface ProductoRepository {
     void eliminarProducto(int id);
     void modificarProducto(Producto p);
     List<Producto> obtenerProductos();
-    
+    String MostrarProductosMasVendidos();
+    String MostrarProductosMenosVendidos();
 }

@@ -72,4 +72,74 @@ public class ControllerProducto implements ProductoRepository {
 			e.printStackTrace();
 		}
 	}
+	public String MostrarProductosMasVendidos() {
+	    StringBuilder resultado = new StringBuilder();
+	    try {
+	        PreparedStatement statement = con.prepareStatement(
+	       "SELECT productos.nombre_producto, SUM(detalles_ventas.cantidad) AS total_vendido FROM detalles_ventas "
+	       + "INNER JOIN variantes_productos ON detalles_ventas.fk_variante_producto = variantes_productos.id_variante_producto"
+	       + " INNER JOIN productos ON variantes_productos.fk_producto = productos.id_producto GROUP BY productos.id_producto, productos.nombre_producto ORDER BY total_vendido DESC");
+
+            ResultSet resultSet = statement.executeQuery();
+
+            int posicion = 1;
+
+            while (resultSet.next()) {
+
+             resultado.append(posicion)
+                      .append("° ")
+                      .append(resultSet.getString("nombre_producto"))
+                      .append(" - ")
+                      .append(resultSet.getInt("total_vendido"))
+                      .append(" unidades vendidas\n");
+
+             posicion++;
+                         }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+	    if (resultado.length() == 0) {
+	        return "No existen ventas registradas.";
+	    }
+           return resultado.toString();
+         }
+	
+	
+	
+	
+	
+	public String MostrarProductosMenosVendidos() {
+		StringBuilder resultado = new StringBuilder();
+	    try {
+	        PreparedStatement statement = con.prepareStatement(
+	        		"SELECT productos.nombre_producto, SUM(detalles_ventas.cantidad) AS total_vendido FROM detalles_ventas\r\n"
+	        		+ "INNER JOIN variantes_productos ON detalles_ventas.fk_variante_producto = variantes_productos.id_variante_producto\r\n"
+	        		+ "INNER JOIN productos ON variantes_productos.fk_producto = productos.id_producto GROUP BY productos.id_producto, productos.nombre_producto\r\n"
+	        		+ "ORDER BY total_vendido ASC");
+
+            ResultSet resultSet = statement.executeQuery();
+
+            int posicion = 1;
+
+            while (resultSet.next()) {
+
+             resultado.append(posicion)
+                      .append("° ")
+                      .append(resultSet.getString("nombre_producto"))
+                      .append(" - ")
+                      .append(resultSet.getInt("total_vendido"))
+                      .append(" unidades vendidas\n");
+
+             posicion++;
+                         }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+	    if (resultado.length() == 0) {
+	        return "No existen ventas registradas.";
+	    }
+           return resultado.toString();
+         }
 }
