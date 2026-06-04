@@ -1,6 +1,8 @@
 package BLL;
 
 import javax.swing.JOptionPane;
+
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 import DLL.ControllerVenta;
@@ -47,9 +49,16 @@ public class Cajero extends Usuario {
 				String[] opciones_gestion_usuario = { "Cliente", "Agregar Producto", "Borrar Producto", "Agregar Descuento", "Procesar Cobro", "Ver Carrito", "← Salir" };
 
 				int opcion_gestionar_usuario;
-
+				
 				do {
-				    opcion_gestionar_usuario = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Realizar Venta", 0, 0, null, opciones_gestion_usuario, opciones_gestion_usuario[0]);
+					
+					String clienteseleccion="Ninguno";
+					
+					if (clienteSeleccionado != null) {
+						clienteseleccion = clienteSeleccionado.getNombre_cliente() + " " + clienteSeleccionado.getApellido_cliente();
+			        }
+					
+				    opcion_gestionar_usuario = JOptionPane.showOptionDialog(null, "Seleccione una opción\n Cliente Seleccionado: "+clienteseleccion, "Realizar Venta", 0, 0, null, opciones_gestion_usuario, opciones_gestion_usuario[0]);
 
 				    System.out.println("Opción elegida en Realizar Venta: " + opcion_gestionar_usuario);
 
@@ -93,18 +102,24 @@ public class Cajero extends Usuario {
 				break;
 			case 1:
 				//VER CAJA
-				String[] opciones_gestion_productos = { "Imprimir Dia", "Añadir Gasto", "← Salir" };
+				String[] opciones_gestion_productos = { "Ver Caja", "Imprimir Ticket", "← Salir" };
 				int opcion_gestionar_productos;
 				do {
 					opcion_gestionar_productos = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Ver Caja", 0, 0, null, opciones_gestion_productos, opciones_gestion_productos);
 					switch (opcion_gestionar_productos) {
 					case 0:
-						//IMPRIMIR DIA
-						
+						//Ver Caja
+						String fechaCaja = "2026-06-04";
+
+			            JOptionPane.showMessageDialog(null, controllerVenta.mostrarCajaDelDia(fechaCaja));
+			            
 						break;
 					case 1:
-						//AÑADIR GASTO
-						
+						//Imprimir Ticket
+						String fechaTicket = "2026-06-04";
+
+			            JOptionPane.showMessageDialog(null, controllerVenta.imprimirTicketDelDia(fechaTicket));
+			            
 						break;
 
 					default:
@@ -117,7 +132,7 @@ public class Cajero extends Usuario {
 
 			case 2:
 				//VER VENTAS
-				String[] opciones_config = { "Por Fecha", "Por Cliente", "← Salir" };
+				String[] opciones_config = { "Por Fecha", "Por Cliente", "Ventas Hoy", "← Salir" };
 				int opcion_config;
 				do {
 					opcion_config = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Ver Ventas", 0, 0, null, opciones_config, opciones_config);
@@ -135,6 +150,12 @@ public class Cajero extends Usuario {
 			            int idCliente = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID del cliente"));
 			            JOptionPane.showMessageDialog(null, controllerVenta.mostrarVentasPorCliente(idCliente));
 			            
+						break;
+					case 2:
+						//Ventas HOY
+						String fechahoy = "2026-06-04";
+			            JOptionPane.showMessageDialog(null, controllerVenta.mostrarVentasPorFecha(fechahoy));
+						
 						break;
 
 					default:
@@ -155,7 +176,7 @@ public class Cajero extends Usuario {
 						//SI, CERRAR CAJA
 						
 						opcion_cerrar_caja = 1;
-						
+						opcion=4;
 						break;
 
 					default:
@@ -177,14 +198,9 @@ public class Cajero extends Usuario {
 	
 	public void seleccionarCliente() {
 
-	    JOptionPane.showMessageDialog(
-	        null,
-	        "Clientes disponibles:\n" + controllerVenta.mostrarClientesTexto()
-	    );
+	    JOptionPane.showMessageDialog(null,"Clientes disponibles:\n" + controllerVenta.mostrarClientesTexto());
 
-	    int idCliente = Integer.parseInt(
-	        Validaciones.validarIngresoString("Ingrese el ID del cliente")
-	    );
+	    int idCliente = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID del cliente"));
 
 	    Cliente cliente = controllerVenta.buscarClientePorId(idCliente);
 
