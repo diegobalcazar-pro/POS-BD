@@ -460,30 +460,29 @@ public class ControllerVenta implements VentaRepository {
         String texto = "";
 
         try {
-            PreparedStatement consultaVentas = con.prepareStatement("SELECT * FROM ventas");
+            PreparedStatement consultaVentas = con.prepareStatement("SELECT * FROM ventas WHERE fecha >= ? AND fecha <= ?");
+
+            consultaVentas.setString(1, fecha + " 00:00:00");
+            consultaVentas.setString(2, fecha + " 23:59:59");
 
             ResultSet resultadoVentas = consultaVentas.executeQuery();
 
             while (resultadoVentas.next()) {
-                String fechaVenta = resultadoVentas.getString("fecha");
+                int idVenta = resultadoVentas.getInt("id_venta");
+                int idCliente = resultadoVentas.getInt("fk_cliente");
+                int idUsuario = resultadoVentas.getInt("fk_usuario");
+                int idMetodoPago = resultadoVentas.getInt("fk_metodo_de_pago");
 
-                if (fechaVenta.startsWith(fecha)) {
-                    int idVenta = resultadoVentas.getInt("id_venta");
-                    int idCliente = resultadoVentas.getInt("fk_cliente");
-                    int idUsuario = resultadoVentas.getInt("fk_usuario");
-                    int idMetodoPago = resultadoVentas.getInt("fk_metodo_de_pago");
-
-                    texto += "N° Venta: " + idVenta + "\n";
-                    texto += "Fecha: " + fechaVenta + "\n";
-                    texto += "Cliente: " + buscarNombreCliente(idCliente) + "\n";
-                    texto += "Usuario/Cajero ID: " + idUsuario + "\n";
-                    texto += "Método de pago: " + buscarNombreMetodoPago(idMetodoPago) + "\n";
-                    texto += "Total bruto: $" + resultadoVentas.getDouble("total_bruto") + "\n";
-                    texto += "Total neto: $" + resultadoVentas.getDouble("total_neto") + "\n";
-                    texto += "\nDetalle:\n";
-                    texto += mostrarDetalleVenta(idVenta);
-                    texto += "-----------------------------\n";
-                }
+                texto += "N° Venta: " + idVenta + "\n";
+                texto += "Fecha: " + resultadoVentas.getString("fecha") + "\n";
+                texto += "Cliente: " + buscarNombreCliente(idCliente) + "\n";
+                texto += "Usuario/Cajero ID: " + idUsuario + "\n";
+                texto += "Método de pago: " + buscarNombreMetodoPago(idMetodoPago) + "\n";
+                texto += "Total bruto: $" + resultadoVentas.getDouble("total_bruto") + "\n";
+                texto += "Total neto: $" + resultadoVentas.getDouble("total_neto") + "\n";
+                texto += "\nDetalle:\n";
+                texto += mostrarDetalleVenta(idVenta);
+                texto += "-----------------------------\n";
             }
 
         } catch (Exception e) {
@@ -496,6 +495,8 @@ public class ControllerVenta implements VentaRepository {
 
         return texto;
     }
+    
+
     
     @Override
     public String mostrarVentasPorCliente(int idCliente) {
@@ -534,6 +535,9 @@ public class ControllerVenta implements VentaRepository {
 
         return texto;
     }
+    
+    
+    
     
     public String buscarNombreCliente(int idCliente) {
         String nombreCliente = "";
@@ -611,6 +615,117 @@ public class ControllerVenta implements VentaRepository {
 
         if (texto.isEmpty()) {
             texto = "Esta venta no tiene productos cargados.\n";
+        }
+
+        return texto;
+    }
+    
+    @Override
+    public String mostrarCajaDelDia(String fecha) {
+        String texto = "";
+
+        int cantidadVentas = 0;
+        double totalBruto = 0;
+        double totalNeto = 0;
+        double totalDescontado = 0;
+
+        try {
+            PreparedStatement consultaVentas = con.prepareStatement("SELECT * FROM ventas WHERE fecha >= ? AND fecha <= ?");
+
+            consultaVentas.setString(1, fecha + " 00:00:00");
+            consultaVentas.setString(2, fecha + " 23:59:59");
+
+            ResultSet resultadoVentas = consultaVentas.executeQuery();
+
+            while (resultadoVentas.next()) {
+                cantidadVentas++;
+
+                double bruto = resultadoVentas.getDouble("total_bruto");
+                double neto = resultadoVentas.getDouble("total_neto");
+
+                totalBruto += bruto;
+                totalNeto += neto;
+                totalDescontado += bruto - neto;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (cantidadVentas == 0) {
+            texto = "No se encontraron ventas para esa fecha.";
+        } else {
+            texto += "CAJA DEL DÍA\n";
+            texto += "Fecha: " + fecha + "\n";
+            texto += "-----------------------------\n";
+            texto += "Cantidad de ventas: " + cantidadVentas + "\n";
+            texto += "Total bruto: $" + totalBruto + "\n";
+            texto += "Total descontado: $" + totalDescontado + "\n";
+            texto += "Total neto cobrado: $" + totalNeto + "\n";
+            texto += "-----------------------------\n";
+        }
+
+        return texto;
+    }
+    
+    @Override
+    public String imprimirTicketDelDia(String fecha) {
+        String texto = "";
+
+        int cantidadVentas = 0;
+        double totalBruto = 0;
+        double totalNeto = 0;
+        double totalDescontado = 0;
+
+        texto += "TICKET DEL DÍA\n";
+        texto += "Fecha: " + fecha + "\n";
+        texto += "-------------------------------\n";
+
+        try {
+            PreparedStatement consultaVentas = con.prepareStatement("SELECT * FROM ventas WHERE fecha >= ? AND fecha <= ?");
+
+            consultaVentas.setString(1, fecha + " 00:00:00");
+            consultaVentas.setString(2, fecha + " 23:59:59");
+
+            ResultSet resultadoVentas = consultaVentas.executeQuery();
+
+            while (resultadoVentas.next()) {
+                int idVenta = resultadoVentas.getInt("id_venta");
+                int idCliente = resultadoVentas.getInt("fk_cliente");
+                int idMetodoPago = resultadoVentas.getInt("fk_metodo_de_pago");
+
+                double bruto = resultadoVentas.getDouble("total_bruto");
+                double neto = resultadoVentas.getDouble("total_neto");
+
+                cantidadVentas++;
+                totalBruto += bruto;
+                totalNeto += neto;
+                totalDescontado += bruto - neto;
+
+                texto += "N° Venta: " + idVenta + "\n";
+                texto += "Fecha y hora: " + resultadoVentas.getString("fecha") + "\n";
+                texto += "Cliente: " + buscarNombreCliente(idCliente) + "\n";
+                texto += "Método de pago: " + buscarNombreMetodoPago(idMetodoPago) + "\n";
+                texto += "Total bruto: $" + bruto + "\n";
+                texto += "Total neto: $" + neto + "\n";
+                texto += "\nProductos:\n";
+                texto += mostrarDetalleVenta(idVenta);
+                texto += "------------------------------------\n";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (cantidadVentas == 0) {
+            texto = "No se encontraron ventas para esa fecha.";
+        } else {
+            texto += "========== RESUMEN FINAL ==========\n";
+            texto += "Cantidad de ventas: " + cantidadVentas + "\n";
+            texto += "Total bruto: $" + totalBruto + "\n";
+            texto += "Total descontado: $" + totalDescontado + "\n";
+            texto += "Total neto cobrado: $" + totalNeto + "\n";
+            texto += "===================================\n";
         }
 
         return texto;

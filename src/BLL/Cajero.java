@@ -1,6 +1,8 @@
 package BLL;
 
 import javax.swing.JOptionPane;
+
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 import DLL.ControllerVenta;
@@ -107,11 +109,17 @@ public class Cajero extends Usuario {
 					switch (opcion_gestionar_productos) {
 					case 0:
 						//Ver Caja
-						
+						String fechaCaja = "2026-06-04";
+
+			            JOptionPane.showMessageDialog(null, controllerVenta.mostrarCajaDelDia(fechaCaja));
+			            
 						break;
 					case 1:
 						//Imprimir Ticket
-						
+						String fechaTicket = "2026-06-04";
+
+			            JOptionPane.showMessageDialog(null, controllerVenta.imprimirTicketDelDia(fechaTicket));
+			            
 						break;
 
 					default:
@@ -124,7 +132,7 @@ public class Cajero extends Usuario {
 
 			case 2:
 				//VER VENTAS
-				String[] opciones_config = { "Por Fecha", "Por Cliente", "← Salir" };
+				String[] opciones_config = { "Por Fecha", "Por Cliente", "Ventas Hoy", "← Salir" };
 				int opcion_config;
 				do {
 					opcion_config = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Ver Ventas", 0, 0, null, opciones_config, opciones_config);
@@ -142,6 +150,12 @@ public class Cajero extends Usuario {
 			            int idCliente = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID del cliente"));
 			            JOptionPane.showMessageDialog(null, controllerVenta.mostrarVentasPorCliente(idCliente));
 			            
+						break;
+					case 2:
+						//Ventas HOY
+						String fechahoy = "2026-06-04";
+			            JOptionPane.showMessageDialog(null, controllerVenta.mostrarVentasPorFecha(fechahoy));
+						
 						break;
 
 					default:
@@ -162,7 +176,7 @@ public class Cajero extends Usuario {
 						//SI, CERRAR CAJA
 						
 						opcion_cerrar_caja = 1;
-						
+						opcion=4;
 						break;
 
 					default:
