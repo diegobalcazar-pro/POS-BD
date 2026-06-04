@@ -19,6 +19,5 @@ public interface VentaRepository {
     String mostrarVentasPorFecha(String fecha);
     String mostrarVentasPorCliente(int idCliente);
     String mostrarDetalleVenta(int idVenta);
-    String mostrarCajaDelDia(String fecha);
-    String imprimirTicketDelDia(String fecha);
+    String MostrarHistorialVentas();
 }

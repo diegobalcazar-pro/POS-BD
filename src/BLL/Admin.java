@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 import repository.ProductoRepository;
 import repository.Validaciones;
-
+import DLL.ControllerVenta;
 
 	public class Admin extends Usuario implements Validaciones {
 
@@ -164,8 +164,7 @@ import repository.Validaciones;
 						switch (opcion_gestionar_productos) {
 						case 0:
 							//VER PRODUCTOS
-							//JOptionPane.showMessageDialog(null, Producto.mostrarProductos());
-							
+							JOptionPane.showMessageDialog(null,"Productos disponibles:\n" + controllerVenta.mostrarProductosConStock());
 						
 							break;
 						case 1:
@@ -190,7 +189,7 @@ import repository.Validaciones;
 						switch (opcion_info_ventas) {
 						case 0:
 							//HISTORIAL DE VENTAS
-							
+							JOptionPane.showMessageDialog(null, Venta.MostrarHistorialVentas(), "Historial de Ventas", JOptionPane.INFORMATION_MESSAGE);
 							break;
 						case 1:
 							//TOP DE PRODUCTOS
