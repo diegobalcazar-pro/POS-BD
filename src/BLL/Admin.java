@@ -194,8 +194,13 @@ import repository.Validaciones;
 							break;
 						case 1:
 							//PRODUCTOS MAS VENDIDOS
+							JOptionPane.showMessageDialog(
+						            null,
+						            Producto.MostrarProductosMasVendidos(),
+						            "Top Productos Más Vendidos",
+						            JOptionPane.INFORMATION_MESSAGE);
+						    break;
 							
-							break;
 						case 2:
 							//CATEGORIAS MAS VENDIDAS
 							
