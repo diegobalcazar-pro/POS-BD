@@ -27,7 +27,7 @@ public class ControllerVenta implements VentaRepository {
             while (resultadoClientes.next()) {
                 texto += "ID Cliente: " + resultadoClientes.getInt("id_cliente") + "\n";
                 texto += "Nombre: " + resultadoClientes.getString("nombre_cliente") + " " + resultadoClientes.getString("apellido_cliente") + "\n";
-                texto += "Email: " + resultadoClientes.getString("email") + "\n";
+                texto += "Correo: " + resultadoClientes.getString("correo") + "\n";
                 texto += "Teléfono: " + resultadoClientes.getString("telefono") + "\n";
                 texto += "Tipo: " + resultadoClientes.getString("tipo") + "\n";
                 texto += "-----------------------------\n";
@@ -59,7 +59,7 @@ public class ControllerVenta implements VentaRepository {
                     resultadoCliente.getInt("id_cliente"),
                     resultadoCliente.getString("nombre_cliente"),
                     resultadoCliente.getString("apellido_cliente"),
-                    resultadoCliente.getString("email"),
+                    resultadoCliente.getString("correo"),
                     resultadoCliente.getString("telefono"),
                     resultadoCliente.getString("direccion"),
                     resultadoCliente.getString("tipo")
