@@ -453,5 +453,170 @@ public class ControllerVenta implements VentaRepository {
 
         return precioVenta;
     }
+    
+    
+    @Override
+    public String mostrarVentasPorFecha(String fecha) {
+        String texto = "";
+
+        try {
+            PreparedStatement consultaVentas = con.prepareStatement("SELECT * FROM ventas");
+
+            ResultSet resultadoVentas = consultaVentas.executeQuery();
+
+            while (resultadoVentas.next()) {
+                String fechaVenta = resultadoVentas.getString("fecha");
+
+                if (fechaVenta.startsWith(fecha)) {
+                    int idVenta = resultadoVentas.getInt("id_venta");
+                    int idCliente = resultadoVentas.getInt("fk_cliente");
+                    int idUsuario = resultadoVentas.getInt("fk_usuario");
+                    int idMetodoPago = resultadoVentas.getInt("fk_metodo_de_pago");
+
+                    texto += "N° Venta: " + idVenta + "\n";
+                    texto += "Fecha: " + fechaVenta + "\n";
+                    texto += "Cliente: " + buscarNombreCliente(idCliente) + "\n";
+                    texto += "Usuario/Cajero ID: " + idUsuario + "\n";
+                    texto += "Método de pago: " + buscarNombreMetodoPago(idMetodoPago) + "\n";
+                    texto += "Total bruto: $" + resultadoVentas.getDouble("total_bruto") + "\n";
+                    texto += "Total neto: $" + resultadoVentas.getDouble("total_neto") + "\n";
+                    texto += "\nDetalle:\n";
+                    texto += mostrarDetalleVenta(idVenta);
+                    texto += "-----------------------------\n";
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (texto.isEmpty()) {
+            texto = "No se encontraron ventas para esa fecha.";
+        }
+
+        return texto;
+    }
+    
+    @Override
+    public String mostrarVentasPorCliente(int idCliente) {
+        String texto = "";
+
+        try {
+            PreparedStatement consultaVentas = con.prepareStatement("SELECT * FROM ventas WHERE fk_cliente = ?");
+            consultaVentas.setInt(1, idCliente);
+
+            ResultSet resultadoVentas = consultaVentas.executeQuery();
+
+            while (resultadoVentas.next()) {
+                int idVenta = resultadoVentas.getInt("id_venta");
+                int idUsuario = resultadoVentas.getInt("fk_usuario");
+                int idMetodoPago = resultadoVentas.getInt("fk_metodo_de_pago");
+
+                texto += "N° Venta: " + idVenta + "\n";
+                texto += "Fecha: " + resultadoVentas.getString("fecha") + "\n";
+                texto += "Cliente: " + buscarNombreCliente(idCliente) + "\n";
+                texto += "Usuario/Cajero ID: " + idUsuario + "\n";
+                texto += "Método de pago: " + buscarNombreMetodoPago(idMetodoPago) + "\n";
+                texto += "Total bruto: $" + resultadoVentas.getDouble("total_bruto") + "\n";
+                texto += "Total neto: $" + resultadoVentas.getDouble("total_neto") + "\n";
+                texto += "\nDetalle:\n";
+                texto += mostrarDetalleVenta(idVenta);
+                texto += "-----------------------------\n";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (texto.isEmpty()) {
+            texto = "No se encontraron ventas para ese cliente.";
+        }
+
+        return texto;
+    }
+    
+    public String buscarNombreCliente(int idCliente) {
+        String nombreCliente = "";
+
+        try {
+            PreparedStatement consultaCliente = con.prepareStatement("SELECT * FROM clientes WHERE id_cliente = ?");
+            consultaCliente.setInt(1, idCliente);
+
+            ResultSet resultadoCliente = consultaCliente.executeQuery();
+
+            if (resultadoCliente.next()) {
+                nombreCliente = resultadoCliente.getString("nombre_cliente") + " " + resultadoCliente.getString("apellido_cliente");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return nombreCliente;
+    }
+    
+    public String buscarNombreMetodoPago(int idMetodoPago) {
+        String nombreMetodoPago = "";
+
+        try {
+            PreparedStatement consultaMetodoPago = con.prepareStatement("SELECT * FROM metodos_de_pagos WHERE id_metodo_de_pago = ?");
+            consultaMetodoPago.setInt(1, idMetodoPago);
+
+            ResultSet resultadoMetodoPago = consultaMetodoPago.executeQuery();
+
+            if (resultadoMetodoPago.next()) {
+                nombreMetodoPago = resultadoMetodoPago.getString("tipo");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return nombreMetodoPago;
+    }
+    
+    @Override
+    public String mostrarDetalleVenta(int idVenta) {
+        String texto = "";
+
+        try {
+            PreparedStatement consultaDetalle = con.prepareStatement("SELECT * FROM detalles_ventas WHERE fk_venta = ?");
+            consultaDetalle.setInt(1, idVenta);
+
+            ResultSet resultadoDetalle = consultaDetalle.executeQuery();
+
+            while (resultadoDetalle.next()) {
+                int idVarianteProducto = resultadoDetalle.getInt("fk_variante_producto");
+                int cantidad = resultadoDetalle.getInt("cantidad");
+
+                String nombreProducto = buscarNombreProductoPorVariante(idVarianteProducto);
+                String talle = buscarTallePorVariante(idVarianteProducto);
+                String color = buscarColorPorVariante(idVarianteProducto);
+                double precioVenta = buscarPrecioPorVariante(idVarianteProducto);
+                double subtotal = precioVenta * cantidad;
+
+                texto += "\nProducto: " + nombreProducto;
+                texto += "\nID Variante: " + idVarianteProducto;
+                texto += "\nTalle: " + talle;
+                texto += "\nColor: " + color;
+                texto += "\nPrecio unitario: $" + precioVenta;
+                texto += "\nCantidad: " + cantidad;
+                texto += "\nSubtotal: $" + subtotal;
+                texto += "\n-----------------------------\n";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (texto.isEmpty()) {
+            texto = "Esta venta no tiene productos cargados.\n";
+        }
+
+        return texto;
+    }
+    
+    
+    
 
 }

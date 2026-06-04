@@ -16,4 +16,7 @@ public interface VentaRepository {
     double obtenerPorcentajeDescuento(int idDescuento);
     boolean hayStockSuficiente(int idVarianteProducto, int cantidad);
     boolean procesarVenta(int idUsuario,int idCliente,int idMetodoPago,int idDescuento,double totalBruto,double totalNeto,LinkedList<ItemVenta> carrito);
+    String mostrarVentasPorFecha(String fecha);
+    String mostrarVentasPorCliente(int idCliente);
+    String mostrarDetalleVenta(int idVenta);
 }

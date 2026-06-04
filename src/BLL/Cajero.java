@@ -35,7 +35,7 @@ public class Cajero extends Usuario {
 	//------------------------------------------------------------------ MENU DE CAJERO ----------------------------------------------------------------------------------------------------------------
 	public void Menu() {
 
-		String[] opciones = { "Realizar Venta", "Ver Caja", "Ver Stock", "Ver Ventas", "Cerra Caja", "Cerrar Sesion" };
+		String[] opciones = { "Realizar Venta", "Ver Caja", "Ver Ventas", "Cerra Caja", "Cerrar Sesion" };
 		
 		int opcion;
 		do {
@@ -114,57 +114,37 @@ public class Cajero extends Usuario {
 				} while (opcion_gestionar_productos != 2); //SALE DE VER CAJA
 				
 				break;
-			case 2:
-				//VER STOCK
-				String[] opciones_info_ventas = { "Ver Todo", "Buscar Producto", "← Salir" };
-				int opcion_info_ventas;
-				do {
-					opcion_info_ventas = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Ver Stock", 0, 0, null, opciones_info_ventas, opciones_info_ventas);
-					switch (opcion_info_ventas) {
-					case 0:
-						//VER TODOs
-						
-						break;
-					case 1:
-						//BUSCAR PRODUCTO
-						
-						break;
 
-					default:
-						break;
-					}
-					
-				} while (opcion_info_ventas != 2); //SALE DE VER STOCK
-				
-				break;
-			case 3:
+			case 2:
 				//VER VENTAS
-				String[] opciones_config = { "Por Fecha", "Por Cliente", "Por N° Venta", "← Salir" };
+				String[] opciones_config = { "Por Fecha", "Por Cliente", "← Salir" };
 				int opcion_config;
 				do {
 					opcion_config = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Ver Ventas", 0, 0, null, opciones_config, opciones_config);
 					switch (opcion_config) {
 					case 0:
 						//POR FECHA
+						String fecha = Validaciones.validarIngresoString("Ingrese fecha con formato AAAA-MM-DD");
+			            JOptionPane.showMessageDialog(null, controllerVenta.mostrarVentasPorFecha(fecha));
 						
 						break;
 					case 1:
 						//POR CLIENTE
-						
-						break;
-					case 2:
-						//POR N°VENTA
-						
+						JOptionPane.showMessageDialog(null, "Clientes disponibles:\n" + controllerVenta.mostrarClientesTexto());
+
+			            int idCliente = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID del cliente"));
+			            JOptionPane.showMessageDialog(null, controllerVenta.mostrarVentasPorCliente(idCliente));
+			            
 						break;
 
 					default:
 						break;
 					}
 					
-				} while (opcion_config != 3); //SALE DE VER VENTAS
+				} while (opcion_config != 2); //SALE DE VER VENTAS
 				
 				break;	
-			case 4:
+			case 3:
 				//CERRAR CAJA
 				String[] opciones_cerrar_caja = { "Si", "← No, Salir" };
 				int opcion_cerrar_caja;
@@ -190,7 +170,7 @@ public class Cajero extends Usuario {
 				break;
 			}
 			
-		} while (opcion != 5); //CIERRA SESION DE CAJERO
+		} while (opcion != 4); //CIERRA SESION DE CAJERO
 
 	}
 	
