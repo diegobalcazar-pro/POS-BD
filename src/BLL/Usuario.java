@@ -1,107 +1,144 @@
 package BLL;
 
+import java.util.LinkedList;
+
 import javax.swing.JOptionPane;
 import DLL.ControllerUsuario;
 import repository.Hashing;
 import repository.Validaciones;
 
 public abstract class Usuario {
-    protected int id;
-    protected String nombre;
-    protected String email;
-    protected String tipo;
-    protected String password;
-    private static ControllerUsuario controller = new ControllerUsuario();
 
-    public Usuario(int id, String nombre, String email,String tipo,String password) {
-        this.id = id;
-        this.nombre = nombre;
-        this.email = email;
-        this.tipo = tipo;
-        this.password = password;
-        
-    }
-    public Usuario() {
-      
-    }
-	public int getId() {
-		return id;
+	protected int id_usuario;
+	protected String nombre_usuario;
+	protected String apellido_usuario;
+	protected String correo;
+	protected String contrasenia;
+	protected String rol;
+
+	private static ControllerUsuario controller = new ControllerUsuario();
+
+	// --- CONSTRUCTORES ---
+	public Usuario(int id_usuario, String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
+		this.id_usuario = id_usuario;
+		this.nombre_usuario = nombre_usuario;
+		this.apellido_usuario = apellido_usuario;
+		this.correo = correo;
+		this.contrasenia = contrasenia;
+		this.rol = rol;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public Usuario(String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
+	    this.nombre_usuario = nombre_usuario;
+	    this.apellido_usuario = apellido_usuario;
+	    this.correo = correo;
+	    this.contrasenia = contrasenia;
+	    this.rol = rol;
 	}
-	public String getNombre() {
-		return nombre;
+
+	public Usuario() {
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+	// --- GETTERS Y SETTERS ---
+	public int getId_usuario() {
+		return id_usuario;
 	}
-	public String getEmail() {
-		return email;
+
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public String getNombre_usuario() {
+		return nombre_usuario;
 	}
-	public String getTipo() {
-		return tipo;
+
+	public void setNombre_usuario(String nombre_usuario) {
+		this.nombre_usuario = nombre_usuario;
 	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+
+	public String getApellido_usuario() {
+		return apellido_usuario;
 	}
-	public String getPassword() {
-		return password;
+
+	public void setApellido_usuario(String apellido_usuario) {
+		this.apellido_usuario = apellido_usuario;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+
+	public String getCorreo() {
+		return correo;
 	}
-	
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
 	public static ControllerUsuario getController() {
 		return controller;
 	}
+
 	public static void setController(ControllerUsuario controller) {
 		Usuario.controller = controller;
 	}
+	
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", email=" + email + ", tipo=" + tipo + ", password="
-				+ password + "]";
+		return "Usuario:\n" + nombre_usuario +" "+ apellido_usuario + ", " + correo + ", rol= " + rol + "\n------------------------\n";
 	}
-	public static Usuario Login() {
-		  String nombre = "";
-          while (nombre.isEmpty()) {
-              nombre = JOptionPane.showInputDialog("Ingrese nombre");
-              if (nombre.isEmpty()) {
-                  JOptionPane.showMessageDialog(null, "Incorrecto");
-              }
-          }
-
-          String contrasenia = "";
-          while (contrasenia.isEmpty()) {
-              contrasenia = JOptionPane.showInputDialog("Ingrese contraseña");
-              if (contrasenia.isEmpty()) {
-                  JOptionPane.showMessageDialog(null, "Incorrecto");
-              }
-          }
-        return controller.login(nombre, contrasenia);
-
-	}
-	
 	
 	public abstract void Menu();
 	
-   public static void registrarse() {
-		
-		String nombre = Validaciones.validarIngresoString("Ingrese nombre");
-		String mail = Validaciones.validarIngresoString("Ingrese mail");
-		
-		String contrasenia = Validaciones.validarIngresoString("Ingrese contraseña");
-		String contraseniaOculta = Hashing.hash(contrasenia);
-		getController().agregarUsuario(new Cajero(nombre,mail,"Cajero",contraseniaOculta));
-		
+	public void agregarUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
 		
 	}
+
+	// --- MÉTODOS ---
+		public static Usuario Login() {
+			String correo = "";
+			while (correo.isEmpty()) {
+				correo = JOptionPane.showInputDialog("Ingrese correo");
+				if (correo == null || correo.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Incorrecto");
+				}
+			}
+
+			String contraseniaInput = "";
+			while (contraseniaInput.isEmpty()) {
+				contraseniaInput = JOptionPane.showInputDialog("Ingrese Contraseña");
+				if (contraseniaInput == null || contraseniaInput.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Incorrecto");
+				}
+			}
+			return controller.login(correo, contraseniaInput);
+		}
+		
+		
+	public Usuario BuscarUsuario() {
+		LinkedList<Usuario> usuarios = this.getController().mostrarUsuarios();
+		String[] correos = new String[usuarios.size()];
+		for (int i = 0; i < correos.length; i++) {
+			correos[i] = usuarios.get(i).getCorreo();
+		}
+		int elegido = JOptionPane.showOptionDialog(null, "Seleccione Correo", "", 0, 0, null, correos, correos[0]);
+		return usuarios.get(elegido);
+
+	}
+
 	
-	
-    
 
 }

@@ -15,11 +15,11 @@ public class Main {
         JOptionPane.showMessageDialog(null,contraseniaoculta );
        	JOptionPane.showMessageDialog(null, Hashing.verificar("12345", contraseniaoculta));*/
         
-        String[] acciones = { "Login", "Registrar", "Salir" };
+        String[] acciones = { "Login", /*"Registrar",*/ "Salir" };
         int menu = 0;
         
         do {
-            menu = JOptionPane.showOptionDialog(null, "Bienvenido", null, 0, 0, null, acciones, acciones[0]);
+            menu = JOptionPane.showOptionDialog(null, "Bienvenido a POS", null, 0, 0, null, acciones, acciones[0]);
 
             switch (menu) {
                 case 0:
@@ -27,15 +27,15 @@ public class Main {
                     Usuario usuario = Usuario.Login();
                     if (usuario != null) {
                         if (usuario instanceof Admin) {
-                            JOptionPane.showMessageDialog(null, "Bienvenido Admin " + usuario.getNombre());
+                            JOptionPane.showMessageDialog(null, "Bienvenido Admin " + usuario.getNombre_usuario());
                             // Ir a menu de admin
                             usuario.Menu();
                         } else if (usuario instanceof Cajero) {
-                            JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + usuario.getNombre());
+                            JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + usuario.getNombre_usuario());
                             // Ir a menu de cajero
                             usuario.Menu();
                         } else if (usuario instanceof Repositor) {
-                        	JOptionPane.showMessageDialog(null, "Bienvenido Repositor " + usuario.getNombre());
+                        	JOptionPane.showMessageDialog(null, "Bienvenido Repositor " + usuario.getNombre_usuario());
                             // Ir a menu de repositor
                         	usuario.Menu();
                         }
@@ -44,12 +44,10 @@ public class Main {
                     }
                     break;
 
-                case 1: 
-                	
+                /*case 1: 
                 	Usuario.registrarse();
-                    
-                    break;
+                    break;*/
             }
-        } while (menu != 2);
+        } while (menu != 1);
     }
 }

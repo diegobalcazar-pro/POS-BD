@@ -1,7 +1,7 @@
 package BLL;
 
 public class Cliente {
-	protected int idCliente;
+	protected int id_cliente;
 	protected String nombre_cliente;
 	protected String apellido_cliente;
 	protected String correo;
@@ -9,10 +9,10 @@ public class Cliente {
 	protected String direccion;
 	protected String tipo;
 
-	public Cliente(int idCliente, String nombre_cliente, String apellido_cliente, String correo, String telefono,
+	public Cliente(int id_cliente, String nombre_cliente, String apellido_cliente, String correo, String telefono,
 			String direccion, String tipo) {
 		super();
-		this.idCliente = idCliente;
+		this.id_cliente = id_cliente;
 		this.nombre_cliente = nombre_cliente;
 		this.apellido_cliente = apellido_cliente;
 		this.correo = correo;
@@ -21,12 +21,12 @@ public class Cliente {
 		this.tipo = tipo;
 	}
 
-	public int getIdCliente() {
-		return idCliente;
+	public int getid_cliente() {
+		return id_cliente;
 	}
 
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setid_cliente(int id_cliente) {
+		this.id_cliente = id_cliente;
 	}
 
 	public String getNombre_cliente() {

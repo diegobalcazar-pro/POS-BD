@@ -3,7 +3,7 @@ package BLL;
 import java.time.LocalDate;
 
 public class AuditoriaStock {
-	protected int idAuditoriaStock;
+	protected int id_auditoria_stock;
 	protected String tipo_movimiento;
 	protected int cantidad;
 	protected LocalDate fecha;
@@ -12,10 +12,10 @@ public class AuditoriaStock {
 	protected Deposito depositoOrigen;
 	protected Deposito depositoDestino;
 
-	public AuditoriaStock(int idAuditoriaStock, String tipo_movimiento, int cantidad, LocalDate fecha,
+	public AuditoriaStock(int id_auditoria_stock, String tipo_movimiento, int cantidad, LocalDate fecha,
 			VarianteProducto varianteproducto, Usuario usuario, Deposito depositoOrigen, Deposito depositoDestino) {
 		super();
-		this.idAuditoriaStock = idAuditoriaStock;
+		this.id_auditoria_stock = id_auditoria_stock;
 		this.tipo_movimiento = tipo_movimiento;
 		this.cantidad = cantidad;
 		this.fecha = fecha;
@@ -25,12 +25,12 @@ public class AuditoriaStock {
 		this.depositoDestino = depositoDestino;
 	}
 
-	public int getIdAuditoriaStock() {
-		return idAuditoriaStock;
+	public int getid_auditoria_stock() {
+		return id_auditoria_stock;
 	}
 
-	public void setIdAuditoriaStock(int idAuditoriaStock) {
-		this.idAuditoriaStock = idAuditoriaStock;
+	public void setid_auditoria_stock(int id_auditoria_stock) {
+		this.id_auditoria_stock = id_auditoria_stock;
 	}
 
 	public String getTipo_movimiento() {

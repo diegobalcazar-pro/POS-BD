@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public interface Validaciones {
 
-	static String validarIngresoString(String mensaje) {
+	default String validarIngresoString(String mensaje) {
 		 
 		String dato;
 		do {
@@ -13,4 +13,18 @@ public interface Validaciones {
 		
 		return dato;
 	}
+	
+	
+	default double validarIngresoDouble(String mensaje) {
+		
+		double dato = Double.parseDouble(validarIngresoString(mensaje));
+	return dato;
+    }
+	
+   default int validarIngresoInt(String mensaje) {
+		
+		int dato = Integer.parseInt(validarIngresoString(mensaje));
+	return dato;
+    }
+	
 }

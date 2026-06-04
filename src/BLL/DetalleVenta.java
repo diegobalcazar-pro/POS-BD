@@ -1,25 +1,25 @@
 package BLL;
 
 public class DetalleVenta {
-	protected int idDetalleVenta;
+	protected int id_detalleventa;
 	protected String cantidad;
 	protected Venta venta;
 	protected VarianteProducto varianteproducto;
 
-	public DetalleVenta(int idDetalleVenta, String cantidad, Venta venta, VarianteProducto varianteproducto) {
+	public DetalleVenta(int id_detalleventa, String cantidad, Venta venta, VarianteProducto varianteproducto) {
 		super();
-		this.idDetalleVenta = idDetalleVenta;
+		this.id_detalleventa = id_detalleventa;
 		this.cantidad = cantidad;
 		this.venta = venta;
 		this.varianteproducto = varianteproducto;
 	}
 
-	public int getIdDetalleVenta() {
-		return idDetalleVenta;
+	public int getid_detalleventa() {
+		return id_detalleventa;
 	}
 
-	public void setIdDetalleVenta(int idDetalleVenta) {
-		this.idDetalleVenta = idDetalleVenta;
+	public void setid_detalleventa(int id_detalleventa) {
+		this.id_detalleventa = id_detalleventa;
 	}
 
 	public String getCantidad() {
