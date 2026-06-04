@@ -65,27 +65,27 @@ import repository.Validaciones;
 								switch (opcion_agregar_usuario) {
 								case 0:
 									//AGREGAR ADMIN
-					                getController().agregarUsuario( new Admin(validarIngresoString("Ingrese nombre: "),
-							                validarIngresoString("Ingrese apellido: "),
-								            validarIngresoString("Ingrese correo: "),
-								            validarIngresoString("Ingrese contraseña: "),
+					                getController().agregarUsuario( new Admin(Validaciones.validarIngresoString("Ingrese nombre: "),
+					                		Validaciones.validarIngresoString("Ingrese apellido: "),
+					                		Validaciones.validarIngresoString("Ingrese correo: "),
+					                		Validaciones.validarIngresoString("Ingrese contraseña: "),
 								            "Admin"));
 					                JOptionPane.showMessageDialog(null, "Admin Agregado con exito!");
 									
 									break;
 								case 1: //AGREGAR REPOSITOR
-									getController().agregarUsuario( new Repositor(validarIngresoString("Ingrese nombre: "),
-								            validarIngresoString("Ingrese apellido: "),
-									        validarIngresoString("Ingrese correo: "),
-									        validarIngresoString("Ingrese contraseña: "),
+									getController().agregarUsuario( new Repositor(Validaciones.validarIngresoString("Ingrese nombre: "),
+											Validaciones.validarIngresoString("Ingrese apellido: "),
+								            Validaciones.validarIngresoString("Ingrese correo: "),
+									        Validaciones.validarIngresoString("Ingrese contraseña: "),
 									        "Repositor"));
 									JOptionPane.showMessageDialog(null, "Repositor Agregado con exito!");
 									break;
 								case 2: //AGREGAR CAJERO
-									getController().agregarUsuario( new Cajero(validarIngresoString("Ingrese nombre: "),
-								            validarIngresoString("Ingrese apellido: "),
-									        validarIngresoString("Ingrese correo: "),
-									        validarIngresoString("Ingrese contraseña: "),
+									getController().agregarUsuario( new Cajero(Validaciones.validarIngresoString("Ingrese nombre: "),
+											Validaciones.validarIngresoString("Ingrese apellido: "),
+											Validaciones.validarIngresoString("Ingrese correo: "),
+											Validaciones.validarIngresoString("Ingrese contraseña: "),
 									        "Cajero"));
 									JOptionPane.showMessageDialog(null, "Cajero Agregado con exito!");
 									break;
@@ -97,7 +97,7 @@ import repository.Validaciones;
 							
 						case 2:
 							//ELIMINAR USUARIO EMPLEADO
-							getController().EliminarUsuario(validarIngresoString("Ingrese correo de usuario que desea eliminar: "));
+							getController().EliminarUsuario(Validaciones.validarIngresoString("Ingrese correo de usuario que desea eliminar: "));
 							JOptionPane.showMessageDialog(null, "El usuario se elimino correctamente");
 							break;
 							
@@ -112,17 +112,17 @@ import repository.Validaciones;
 						          switch (elegir) {
 
 						          case 0:
-						              elegido.setNombre_usuario(validarIngresoString("Ingresar nuevo nombre"));
+						              elegido.setNombre_usuario(Validaciones.validarIngresoString("Ingresar nuevo nombre"));
 						              JOptionPane.showMessageDialog(null, "El nombre fue modificado correctamente!");
 						              break;
 						              
 						          case 1:
-						              elegido.setApellido_usuario(validarIngresoString("Ingresar nuevo apellido"));
+						              elegido.setApellido_usuario(Validaciones.validarIngresoString("Ingresar nuevo apellido"));
 						              JOptionPane.showMessageDialog(null, "El apellido fue mofidicado correctamente!");
 						              break;
 						              
 						          case 2:
-						              elegido.setCorreo(validarIngresoString("Ingresar nuevo correo"));
+						              elegido.setCorreo(Validaciones.validarIngresoString("Ingresar nuevo correo"));
 						              JOptionPane.showMessageDialog(null, "El correo fue mofidicado correctamente!");
 						              break;
 
@@ -234,7 +234,7 @@ import repository.Validaciones;
 									break;
 								case 1:
 									//AGREGAR DESCUENTOS
-									Descuento.agregarDescuento( new Descuento(validarIngresoString("Ingrese nombre de descuento: "),
+									Descuento.agregarDescuento( new Descuento(Validaciones.validarIngresoString("Ingrese nombre de descuento: "),
 							                validarIngresoDouble("Ingrese el valor del porcentaje del descuento: ")));
 					                JOptionPane.showMessageDialog(null, "Descuento Agregado con exito!");
 									break;
