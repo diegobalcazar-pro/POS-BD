@@ -1,13 +1,18 @@
 package BLL;
 
-import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
+import java.util.LinkedList;
+
+import DLL.ControllerVenta;
 import repository.ProductoRepository;
 import repository.Validaciones;
-import DLL.ControllerVenta;
+
 
 	public class Admin extends Usuario implements Validaciones {
+		
+		private ControllerVenta controllerVenta = new ControllerVenta();
+		String movimientos = AuditoriaStock.mostrarMovimientosStock();
 
 		public Admin(int id_usuario, String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
 			super(id_usuario, nombre_usuario, apellido_usuario, correo, contrasenia, rol);
@@ -163,13 +168,14 @@ import DLL.ControllerVenta;
 						opcion_gestionar_productos = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Gestion de Productos", 0, 0, null, opciones_gestion_productos, opciones_gestion_productos);
 						switch (opcion_gestionar_productos) {
 						case 0:
+							
 							//VER PRODUCTOS
 							JOptionPane.showMessageDialog(null,"Productos disponibles:\n" + controllerVenta.mostrarProductosConStock());
 						
 							break;
 						case 1:
 							//VER MOVIMIENTOS DE STOCK
-							
+							JOptionPane.showMessageDialog(null,AuditoriaStock.mostrarMovimientosStock(), "Movimientos de Stock",JOptionPane.INFORMATION_MESSAGE);
 							break;
 
 						default:
@@ -226,7 +232,7 @@ import DLL.ControllerVenta;
 							
 						case 2:
 							//CATEGORIAS MAS VENDIDAS
-							
+							JOptionPane.showMessageDialog(null, "Por el momento no forma parte del MVP");
 							break;
 
 						default:
@@ -268,7 +274,6 @@ import DLL.ControllerVenta;
 									break;
 								case 2:
 									//ELIMINAR DESCUENTOS
-									//Descuento.EliminarDescuento(validarIngresoString("Ingrese el nombre del descuento a eliminar"));
 									
 									Descuento descuento = new Descuento().BuscarDescuento();
 
