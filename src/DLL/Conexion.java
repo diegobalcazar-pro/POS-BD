@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-    private static String URL ="jdbc:mysql://localhost:3306/POS";
+    private static String URL ="jdbc:mysql://localhost:3306/pos2";
     private static String USER = "root";
     private static String PASSWORD ="";
     

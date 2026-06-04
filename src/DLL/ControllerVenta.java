@@ -3,7 +3,6 @@ package DLL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Types;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
@@ -15,8 +14,6 @@ import repository.VentaRepository;
 public class ControllerVenta implements VentaRepository {
 
     private static Connection con = Conexion.getInstance().getConnection();
-
-    private static final int DEPOSITO_LOCAL = 1;
 
     @Override
     public String mostrarClientesTexto() {
@@ -82,7 +79,7 @@ public class ControllerVenta implements VentaRepository {
 
         try {
             PreparedStatement consultaStock = con.prepareStatement("SELECT * FROM stocks WHERE fk_deposito = ?");
-            consultaStock.setInt(1, DEPOSITO_LOCAL);
+            consultaStock.setInt(1, 1);
 
             ResultSet resultadoStock = consultaStock.executeQuery();
 
@@ -122,7 +119,7 @@ public class ControllerVenta implements VentaRepository {
         try {
             PreparedStatement consultaStock = con.prepareStatement("SELECT * FROM stocks WHERE fk_variante_producto = ? AND fk_deposito = ?");
             consultaStock.setInt(1, idVarianteProducto);
-            consultaStock.setInt(2, DEPOSITO_LOCAL);
+            consultaStock.setInt(2, 1);
 
             ResultSet resultadoStock = consultaStock.executeQuery();
 
@@ -243,7 +240,7 @@ public class ControllerVenta implements VentaRepository {
         try {
             PreparedStatement consultaStock = con.prepareStatement("SELECT * FROM stocks WHERE fk_variante_producto = ? AND fk_deposito = ?");
             consultaStock.setInt(1, idVarianteProducto);
-            consultaStock.setInt(2, DEPOSITO_LOCAL);
+            consultaStock.setInt(2, 1);
 
             ResultSet resultadoStock = consultaStock.executeQuery();
 
@@ -277,18 +274,27 @@ public class ControllerVenta implements VentaRepository {
                     return false;
                 }
             }
+            
+            int idVenta = obtenerProximoIdVenta();
 
-            PreparedStatement insertarVenta = con.prepareStatement("INSERT INTO ventas (fecha, total_neto, total_bruto, fk_usuario, fk_cliente, fk_metodo_de_pago, fk_descuento) VALUES (NOW(), ?, ?, ?, ?, ?, ?)");
-
-            insertarVenta.setDouble(1, totalNeto);
-            insertarVenta.setDouble(2, totalBruto);
-            insertarVenta.setInt(3, idUsuario);
-            insertarVenta.setInt(4, idCliente);
-            insertarVenta.setInt(5, idMetodoPago);
+            PreparedStatement insertarVenta;
 
             if (idDescuento == 0) {
-                insertarVenta.setNull(6, Types.INTEGER);
+                insertarVenta = con.prepareStatement("INSERT INTO ventas (fecha, total_neto, total_bruto, fk_usuario, fk_cliente, fk_metodo_de_pago) VALUES (NOW(), ?, ?, ?, ?, ?)");
+
+                insertarVenta.setDouble(1, totalNeto);
+                insertarVenta.setDouble(2, totalBruto);
+                insertarVenta.setInt(3, idUsuario);
+                insertarVenta.setInt(4, idCliente);
+                insertarVenta.setInt(5, idMetodoPago);
             } else {
+                insertarVenta = con.prepareStatement("INSERT INTO ventas (fecha, total_neto, total_bruto, fk_usuario, fk_cliente, fk_metodo_de_pago, fk_descuento) VALUES (NOW(), ?, ?, ?, ?, ?, ?)");
+
+                insertarVenta.setDouble(1, totalNeto);
+                insertarVenta.setDouble(2, totalBruto);
+                insertarVenta.setInt(3, idUsuario);
+                insertarVenta.setInt(4, idCliente);
+                insertarVenta.setInt(5, idMetodoPago);
                 insertarVenta.setInt(6, idDescuento);
             }
 
@@ -296,13 +302,6 @@ public class ControllerVenta implements VentaRepository {
 
             if (filasVenta == 0) {
                 JOptionPane.showMessageDialog(null, "No se pudo guardar la venta.");
-                return false;
-            }
-
-            int idVenta = obtenerUltimaVentaUsuario(idUsuario);
-
-            if (idVenta == 0) {
-                JOptionPane.showMessageDialog(null, "No se pudo obtener el ID de la venta.");
                 return false;
             }
 
@@ -319,7 +318,7 @@ public class ControllerVenta implements VentaRepository {
 
                 actualizarStock.setInt(1, item.getCantidad());
                 actualizarStock.setInt(2, item.getId_variante_producto());
-                actualizarStock.setInt(3, DEPOSITO_LOCAL);
+                actualizarStock.setInt(3, 1);
 
                 actualizarStock.executeUpdate();
 
@@ -328,17 +327,12 @@ public class ControllerVenta implements VentaRepository {
                 insertarAuditoriaStock.setInt(1, item.getCantidad());
                 insertarAuditoriaStock.setInt(2, item.getId_variante_producto());
                 insertarAuditoriaStock.setInt(3, idUsuario);
-                insertarAuditoriaStock.setInt(4, DEPOSITO_LOCAL);
+                insertarAuditoriaStock.setInt(4, 1);
 
                 insertarAuditoriaStock.executeUpdate();
             }
 
-            String texto = "";
-
-            texto += "Venta procesada correctamente.\n";
-            texto += "N° Venta: " + idVenta;
-
-            JOptionPane.showMessageDialog(null, texto);
+            JOptionPane.showMessageDialog(null, "Venta procesada correctamente.\n N° Venta: "+ idVenta);
 
             return true;
 
@@ -348,6 +342,29 @@ public class ControllerVenta implements VentaRepository {
         }
     }
 
+    public int obtenerProximoIdVenta() {
+        int idMayor = 0;
+
+        try {
+            PreparedStatement consultaVentas = con.prepareStatement("SELECT * FROM ventas");
+
+            ResultSet resultadoVentas = consultaVentas.executeQuery();
+
+            while (resultadoVentas.next()) {
+                int idVentaActual = resultadoVentas.getInt("id_venta");
+
+                if (idVentaActual > idMayor) {
+                    idMayor = idVentaActual;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return idMayor + 1;
+    }
+    
     public String buscarNombreProductoPorVariante(int idVarianteProducto) {
         String nombreProducto = "";
 
@@ -437,23 +454,4 @@ public class ControllerVenta implements VentaRepository {
         return precioVenta;
     }
 
-    private int obtenerUltimaVentaUsuario(int idUsuario) {
-        int idVenta = 0;
-
-        try {
-            PreparedStatement consultaVenta = con.prepareStatement("SELECT MAX(id_venta) FROM ventas WHERE fk_usuario = ?");
-            consultaVenta.setInt(1, idUsuario);
-
-            ResultSet resultadoVenta = consultaVenta.executeQuery();
-
-            if (resultadoVenta.next()) {
-                idVenta = resultadoVenta.getInt(1);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return idVenta;
-    }
 }

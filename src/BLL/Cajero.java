@@ -335,9 +335,9 @@ public class Cajero extends Usuario {
 
 	    int idMetodoPago = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID del método de pago"));
 
-	    boolean ventaOk = controllerVenta.procesarVenta(getId_usuario(),clienteSeleccionado.getId_cliente(),idMetodoPago,idDescuentoSeleccionado,totalBruto,totalNeto,carrito);
+	    boolean venta = controllerVenta.procesarVenta(getId_usuario(),clienteSeleccionado.getid_cliente(),idMetodoPago,idDescuentoSeleccionado,totalBruto,totalNeto,carrito);
 
-	    if (ventaOk) {
+	    if (venta) {
 	        carrito.clear();
 	        clienteSeleccionado = null;
 	        idDescuentoSeleccionado = 0;
