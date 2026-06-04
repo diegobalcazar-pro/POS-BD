@@ -116,6 +116,8 @@ public class Venta {
 				+ ", descuento=" + descuento + "]";
 	}
 	
-	
+	public static String MostrarHistorialVentas() {
+	    return controller.MostrarHistorialVentas();
+	}
 
 }
