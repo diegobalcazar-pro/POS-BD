@@ -2,6 +2,8 @@ package BLL;
 
 import java.time.LocalDate;
 
+import DLL.ControllerVenta;
+
 public class Venta {
 	protected int id_venta;
 	protected LocalDate fecha;
@@ -11,6 +13,7 @@ public class Venta {
 	protected Cliente cliente;
 	protected MetodoDePago metododepago;
 	protected Descuento descuento;
+	private static ControllerVenta controller = new ControllerVenta();
 
 	public Venta(int id_venta, LocalDate fecha, double total_neto, double total_bruto, Usuario usuario,
 			Cliente cliente, MetodoDePago metododepago, Descuento descuento) {
@@ -87,6 +90,10 @@ public class Venta {
 
 	public void setDescuento(Descuento descuento) {
 		this.descuento = descuento;
+	}
+	
+	public static String MostrarHistorialVentas() {
+	    return controller.MostrarHistorialVentas();
 	}
 
 }

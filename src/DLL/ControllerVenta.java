@@ -617,6 +617,75 @@ public class ControllerVenta implements VentaRepository {
     }
     
     
+    public String MostrarHistorialVentas() {
+
+        StringBuilder resultado = new StringBuilder();
+
+        try {
+
+            PreparedStatement statement = con.prepareStatement(
+                "SELECT ventas.id_venta, ventas.fecha, ventas.total_neto, ventas.total_bruto, " +
+                "usuarios.nombre_usuario, usuarios.apellido_usuario, " +
+                "clientes.nombre_cliente, clientes.apellido_cliente, " +
+                "metodos_de_pagos.tipo, descuentos.nombre_descuento " +
+                "FROM ventas " +
+                "INNER JOIN usuarios ON ventas.fk_usuario = usuarios.id_usuario " +
+                "INNER JOIN clientes ON ventas.fk_cliente = clientes.id_cliente " +
+                "INNER JOIN metodos_de_pagos ON ventas.fk_metodo_de_pago = metodos_de_pagos.id_metodo_de_pago " +
+                "LEFT JOIN descuentos ON ventas.fk_descuento = descuentos.id_descuento " +
+                "ORDER BY ventas.fecha DESC"
+            );
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+
+                resultado.append("Venta N°: ")
+                         .append(resultSet.getInt("id_venta"))
+                         .append("\n");
+
+                resultado.append("Fecha: ")
+                         .append(resultSet.getString("fecha"))
+                         .append("\n");
+
+                resultado.append("Cliente: ")
+                         .append(resultSet.getString("nombre_cliente"))
+                         .append(" ")
+                         .append(resultSet.getString("apellido_cliente"))
+                         .append("\n");
+
+                resultado.append("Vendedor: ")
+                         .append(resultSet.getString("nombre_usuario"))
+                         .append(" ")
+                         .append(resultSet.getString("apellido_usuario"))
+                         .append("\n");
+
+                resultado.append("Método de pago: ")
+                         .append(resultSet.getString("tipo"))
+                         .append("\n");
+
+                resultado.append("Descuento: ")
+                         .append(resultSet.getString("nombre_descuento"))
+                         .append("\n");
+
+                resultado.append("Total Neto: $")
+                         .append(resultSet.getDouble("total_neto"))
+                         .append("\n");
+
+                resultado.append("Total Bruto: $")
+                         .append(resultSet.getDouble("total_bruto"))
+                         .append("\n");
+
+                resultado.append("--------------------------------------------------\n");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (resultado.length() == 0) {
+            return "No existen ventas registradas.";
+        }
+        return resultado.toString();
+    }
     
 
 }
