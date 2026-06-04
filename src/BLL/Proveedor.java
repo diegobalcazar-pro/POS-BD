@@ -1,14 +1,12 @@
 package BLL;
 
 public class Proveedor {
+	protected int id_proveedor;
+	protected String nombreEmpresa;
+	protected String nombreContacto;
+	protected String telefono;
+	protected String correo;
 
-	private int id_proveedor;
-    private String nombreEmpresa;
-    private String nombreContacto;
-    private String telefono;
-    private String correo;
-    
-    
 	public Proveedor(int id_proveedor, String nombreEmpresa, String nombreContacto, String telefono, String correo) {
 		super();
 		this.id_proveedor = id_proveedor;
@@ -17,35 +15,45 @@ public class Proveedor {
 		this.telefono = telefono;
 		this.correo = correo;
 	}
-	
-	public Proveedor(String nombreEmpresa, String nombreContacto, String telefono, String correo) {
-        this(0, nombreEmpresa, nombreContacto, telefono, correo);
-    }
-	
-	public int getId_proveedor() {
-        return id_proveedor;
-    }
 
-    public String getNombreEmpresa() {
-        return nombreEmpresa;
-    }
+	public int getid_proveedor() {
+		return id_proveedor;
+	}
 
-    public String getNombreContacto() {
-        return nombreContacto;
-    }
+	public void setid_proveedor(int id_proveedor) {
+		this.id_proveedor = id_proveedor;
+	}
 
-    public String getTelefono() {
-        return telefono;
-    }
+	public String getNombreEmpresa() {
+		return nombreEmpresa;
+	}
 
-    public String getCorreo() {
-        return correo;
-    }
+	public void setNombreEmpresa(String nombreEmpresa) {
+		this.nombreEmpresa = nombreEmpresa;
+	}
 
-    @Override
-    public String toString() {
-        return id_proveedor + " - " + nombreEmpresa + " | Contacto: " + nombreContacto;
-    }
-    
-    
+	public String getNombreContacto() {
+		return nombreContacto;
+	}
+
+	public void setNombreContacto(String nombreContacto) {
+		this.nombreContacto = nombreContacto;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
 }

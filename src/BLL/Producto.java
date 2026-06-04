@@ -1,66 +1,60 @@
 package BLL;
 
 public class Producto {
-	
-	private int id_producto;
-    private String nombre_producto;
-    private String descripcion_producto;
-    private int fk_categoria;
-    private int fk_proveedor;
-    
-	public Producto(int id_producto, String nombre_producto, String descripcion_producto, int fk_categoria,
-			int fk_proveedor) {
+	protected int id_producto;
+	protected String nombre_producto;
+	protected String descripcion_producto;
+	protected Categoria categoria;
+	protected Proveedor proveedor;
+
+	public Producto(int id_producto, String nombre_producto, String descripcion_producto, Categoria categoria,
+			Proveedor proveedor) {
 		super();
 		this.id_producto = id_producto;
 		this.nombre_producto = nombre_producto;
 		this.descripcion_producto = descripcion_producto;
-		this.fk_categoria = fk_categoria;
-		this.fk_proveedor = fk_proveedor;
+		this.categoria = categoria;
+		this.proveedor = proveedor;
 	}
-    
-	public Producto(String nombre_producto, String descripcion_producto, int fk_categoria, int fk_proveedor) {
-        this(0, nombre_producto, descripcion_producto, fk_categoria, fk_proveedor);
-    }
-	
-	public int getId_producto() {
-        return id_producto;
-    }
 
-    public String getNombre_producto() {
-        return nombre_producto;
-    }
+	public int getid_producto() {
+		return id_producto;
+	}
 
-    public String getDescripcion_producto() {
-        return descripcion_producto;
-    }
+	public void setid_producto(int id_producto) {
+		this.id_producto = id_producto;
+	}
 
-    public int getFk_categoria() {
-        return fk_categoria;
-    }
+	public String getNombre_producto() {
+		return nombre_producto;
+	}
 
-    public int getFk_proveedor() {
-        return fk_proveedor;
-    }
+	public void setNombre_producto(String nombre_producto) {
+		this.nombre_producto = nombre_producto;
+	}
 
-    public void setNombre_producto(String nombre_producto) {
-        this.nombre_producto = nombre_producto;
-    }
+	public String getDescripcion_producto() {
+		return descripcion_producto;
+	}
 
-    public void setDescripcion_producto(String descripcion_producto) {
-        this.descripcion_producto = descripcion_producto;
-    }
+	public void setDescripcion_producto(String descripcion_producto) {
+		this.descripcion_producto = descripcion_producto;
+	}
 
-    public void setFk_categoria(int fk_categoria) {
-        this.fk_categoria = fk_categoria;
-    }
+	public Categoria getCategoria() {
+		return categoria;
+	}
 
-    public void setFk_proveedor(int fk_proveedor) {
-        this.fk_proveedor = fk_proveedor;
-    }
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 
-    @Override
-    public String toString() {
-        return id_producto + " - " + nombre_producto + " | " + descripcion_producto;
-    }
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
+
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
+	}
 
 }
