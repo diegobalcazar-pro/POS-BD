@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.3
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2026 a las 15:13:14
+-- Tiempo de generación: 04-06-2026 a las 11:25:08
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -38,6 +38,13 @@ CREATE TABLE `auditorias_stocks` (
   `fk_deposito_destino` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Volcado de datos para la tabla `auditorias_stocks`
+--
+
+INSERT INTO `auditorias_stocks` (`id_auditoria_stock`, `tipo_movimiento`, `cantidad`, `fecha`, `fk_variante_producto`, `fk_usuario`, `fk_deposito_origen`, `fk_deposito_destino`) VALUES
+(1, 'traslado', 9, '2026-06-04 05:57:38', 1, 3, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -55,7 +62,9 @@ CREATE TABLE `categorias` (
 
 INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`) VALUES
 (1, 'Deporte'),
-(2, 'Invienro');
+(2, 'Moda'),
+(3, 'Moda'),
+(4, 'Deporte');
 
 -- --------------------------------------------------------
 
@@ -78,7 +87,7 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id_cliente`, `nombre_cliente`, `apellido_cliente`, `correo`, `telefono`, `direccion`, `tipo`) VALUES
-(1, 'matias', 'castro', 'matias@presente.com', '87654321', 'nose', 'minorista');
+(1, 'Augusto', 'Von', 'augusto@von.com', '1155221144', 'flores 123', 'minorista');
 
 -- --------------------------------------------------------
 
@@ -116,7 +125,7 @@ CREATE TABLE `descuentos` (
 --
 
 INSERT INTO `descuentos` (`id_descuento`, `nombre_descuento`, `porcentaje_descuento`) VALUES
-(5, 'Verano', 10);
+(3, 'Invierno', 20);
 
 -- --------------------------------------------------------
 
@@ -130,6 +139,13 @@ CREATE TABLE `detalles_ventas` (
   `fk_venta` int(11) NOT NULL,
   `fk_variante_producto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `detalles_ventas`
+--
+
+INSERT INTO `detalles_ventas` (`id_detalle_venta`, `cantidad`, `fk_venta`, `fk_variante_producto`) VALUES
+(1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -162,8 +178,8 @@ CREATE TABLE `metodos_de_pagos` (
 
 INSERT INTO `metodos_de_pagos` (`id_metodo_de_pago`, `tipo`) VALUES
 (1, 'efectivo'),
-(2, 'transferencia'),
-(3, 'debito');
+(2, 'debito'),
+(3, 'transferencia');
 
 -- --------------------------------------------------------
 
@@ -184,11 +200,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre_producto`, `descripcion_producto`, `fk_categoria`, `fk_proveedor`) VALUES
-(1, 'Camiseta ARg', 'Camiseta titular de Messi', 1, 0),
-(2, 'Buzo DV', 'Davinci', 3, 0),
-(3, 'dadawda', 'dawdasdwa', 1, 0),
-(4, 'dawdasdaw', '', 2, 0),
-(5, 'pantalon', 'pantalon largo', 1, 2);
+(2, 'Camiseta Afa', 'Camiseta de la selección', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -209,7 +221,8 @@ CREATE TABLE `proveedores` (
 --
 
 INSERT INTO `proveedores` (`id_proveedor`, `nombreEmpresa`, `nombreContacto`, `telefono`, `correo`) VALUES
-(1, 'SportMax', 'Santiago Contreras', '1122334455', 'mayonesa@Deajo.com');
+(1, 'SportMax', 'Santiago Contreras', '1122334455', 'mayonesa@Deajo.com'),
+(2, 'Alma', 'Almita', '1555221133', 'alma@marsolier.com');
 
 -- --------------------------------------------------------
 
@@ -229,8 +242,7 @@ CREATE TABLE `stocks` (
 --
 
 INSERT INTO `stocks` (`id_stock`, `cantidad`, `fk_deposito`, `fk_variante_producto`) VALUES
-(1, 10000, 1, 1),
-(2, 100, 1, 2);
+(1, 9, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -276,8 +288,7 @@ CREATE TABLE `variantes_productos` (
 --
 
 INSERT INTO `variantes_productos` (`id_variante_producto`, `talle`, `color`, `precio_venta`, `fk_producto`) VALUES
-(1, 'Xl', 'Negro', 10000, 1),
-(2, 's', 'blanco', 10000, 5);
+(1, 'L', 'Blanco', 15000, 2);
 
 -- --------------------------------------------------------
 
@@ -301,7 +312,7 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id_venta`, `fecha`, `total_neto`, `total_bruto`, `fk_usuario`, `fk_cliente`, `fk_metodo_de_pago`, `fk_descuento`) VALUES
-(1, '2026-06-03 03:00:00', 1000, 700, 2, 1, 1, 3);
+(1, '2026-06-01 15:30:00', 12000, 15000, 2, 1, 1, 3);
 
 --
 -- Índices para tablas volcadas
@@ -413,13 +424,13 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `auditorias_stocks`
 --
 ALTER TABLE `auditorias_stocks`
-  MODIFY `id_auditoria_stock` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_auditoria_stock` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -437,19 +448,19 @@ ALTER TABLE `depositos`
 -- AUTO_INCREMENT de la tabla `descuentos`
 --
 ALTER TABLE `descuentos`
-  MODIFY `id_descuento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_descuento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `detalles_ventas`
 --
 ALTER TABLE `detalles_ventas`
-  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detalle_venta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `envios`
 --
 ALTER TABLE `envios`
-  MODIFY `id_envio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_envio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `metodos_de_pagos`
@@ -461,7 +472,7 @@ ALTER TABLE `metodos_de_pagos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
@@ -473,19 +484,19 @@ ALTER TABLE `proveedores`
 -- AUTO_INCREMENT de la tabla `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id_stock` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_stock` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `variantes_productos`
 --
 ALTER TABLE `variantes_productos`
-  MODIFY `id_variante_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_variante_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `ventas`
