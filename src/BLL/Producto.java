@@ -1,4 +1,6 @@
 package BLL;
+import DLL.ControllerProducto;
+
 
 public class Producto {
 	protected int id_producto;
@@ -6,6 +8,7 @@ public class Producto {
 	protected String descripcion_producto;
 	protected Categoria categoria;
 	protected Proveedor proveedor;
+	private static ControllerProducto controller = new ControllerProducto();
 
 	public Producto(int id_producto, String nombre_producto, String descripcion_producto, Categoria categoria,
 			Proveedor proveedor) {
@@ -55,6 +58,15 @@ public class Producto {
 
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
+	}
+	
+	//METODOS
+	public static String MostrarProductosMasVendidos() {
+	    return controller.MostrarProductosMasVendidos();
+	}
+
+	public static String MostrarProductosMenosVendidos() {
+	    return controller.MostrarProductosMenosVendidos();
 	}
 
 }
