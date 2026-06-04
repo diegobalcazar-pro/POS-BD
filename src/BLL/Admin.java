@@ -183,7 +183,7 @@ import repository.Validaciones;
 					
 				case 2:
 					//INFORMACION DE VENTAS
-					String[] opciones_info_ventas = { "Historial de Ventas", "Productos Más Vendidos", "Categorias Más Vendidas", "← Salir" };
+					String[] opciones_info_ventas = { "Historial de Ventas", "TOP de Productos", "Categorias Más Vendidas", "← Salir" };
 					int opcion_info_ventas;
 					do {
 						opcion_info_ventas = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Informacion de Ventas", 0, 0, null, opciones_info_ventas, opciones_info_ventas);
@@ -193,13 +193,37 @@ import repository.Validaciones;
 							
 							break;
 						case 1:
-							//PRODUCTOS MAS VENDIDOS
-							JOptionPane.showMessageDialog(
-						            null,
-						            Producto.MostrarProductosMasVendidos(),
-						            "Top Productos Más Vendidos",
-						            JOptionPane.INFORMATION_MESSAGE);
-						    break;
+							//TOP DE PRODUCTOS
+							String[] opciones_top_productos = { "Productos más vendidos", "Productos menos vendidos", "← Salir" };
+							int opcion_top_productos;
+							do {
+								opcion_top_productos = JOptionPane.showOptionDialog(null, "Seleccione una opción", "Informacion de Ventas", 0, 0, null, opciones_top_productos, opciones_top_productos);
+								switch (opcion_top_productos) {
+								case 0:
+									//TOP DE PRODUCTOS MAS VENDIDOS
+									JOptionPane.showMessageDialog(
+								            null,
+								            Producto.MostrarProductosMasVendidos(),
+								            "Top Productos Más Vendidos",
+								            JOptionPane.INFORMATION_MESSAGE);
+									break;
+								case 1:
+									//TOP DE PRODUCTOS MENOS VENDIDOS
+									JOptionPane.showMessageDialog(
+								            null,
+								            Producto.MostrarProductosMenosVendidos(),
+								            "Top Productos Menos Vendidos",
+								            JOptionPane.INFORMATION_MESSAGE);
+								    break;
+
+								default:
+									break;
+								}
+								
+							} while (opcion_top_productos != 2); //SALE DE TOP DE VENTAS
+							
+							break;
+
 							
 						case 2:
 							//CATEGORIAS MAS VENDIDAS

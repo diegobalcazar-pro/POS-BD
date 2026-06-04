@@ -101,6 +101,9 @@ public class ControllerProducto implements ProductoRepository {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+	    if (resultado.length() == 0) {
+	        return "No existen ventas registradas.";
+	    }
            return resultado.toString();
          }
 	
@@ -136,6 +139,9 @@ public class ControllerProducto implements ProductoRepository {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+	    if (resultado.length() == 0) {
+	        return "No existen ventas registradas.";
+	    }
            return resultado.toString();
          }
 	        		
