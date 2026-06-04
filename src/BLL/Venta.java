@@ -2,6 +2,8 @@ package BLL;
 
 import java.time.LocalDate;
 
+import DLL.ControllerVenta;
+
 public class Venta {
 	protected int id_venta;
 	protected LocalDate fecha;
@@ -11,6 +13,8 @@ public class Venta {
 	protected Cliente cliente;
 	protected MetodoDePago metododepago;
 	protected Descuento descuento;
+	
+	private static ControllerVenta controller = new ControllerVenta();
 
 	public Venta(int id_venta, LocalDate fecha, double total_neto, double total_bruto, Usuario usuario,
 			Cliente cliente, MetodoDePago metododepago, Descuento descuento) {
@@ -88,5 +92,30 @@ public class Venta {
 	public void setDescuento(Descuento descuento) {
 		this.descuento = descuento;
 	}
+
+	public int getId_venta() {
+		return id_venta;
+	}
+
+	public void setId_venta(int id_venta) {
+		this.id_venta = id_venta;
+	}
+
+	public static ControllerVenta getController() {
+		return controller;
+	}
+
+	public static void setController(ControllerVenta controller) {
+		Venta.controller = controller;
+	}
+
+	@Override
+	public String toString() {
+		return "Venta [id_venta=" + id_venta + ", fecha=" + fecha + ", total_neto=" + total_neto + ", total_bruto="
+				+ total_bruto + ", usuario=" + usuario + ", cliente=" + cliente + ", metododepago=" + metododepago
+				+ ", descuento=" + descuento + "]";
+	}
+	
+	
 
 }
