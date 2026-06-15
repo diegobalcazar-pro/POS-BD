@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JPasswordField;
+import javax.swing.JButton;
 
 public class Login extends JFrame {
 
@@ -73,8 +74,16 @@ public class Login extends JFrame {
 		
 		JLabel lblNewLabel_2 = new JLabel("..");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(302, 90, 77, 27);
+		lblNewLabel_2.setBounds(288, 0, 268, 371);
 		contentPane.add(lblNewLabel_2);
+		
+		JButton btnNewButton = new JButton("Iniciar Sesion");
+		btnNewButton.setBounds(20, 281, 121, 27);
+		contentPane.add(btnNewButton);
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.setBounds(151, 281, 121, 27);
+		contentPane.add(btnSalir);
 
 	}
 }
