@@ -12,6 +12,9 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import javax.swing.JSeparator;
 
 public class Login extends JFrame {
 
@@ -72,18 +75,28 @@ public class Login extends JFrame {
 		passwordField.setBounds(20, 221, 166, 27);
 		contentPane.add(passwordField);
 		
-		JLabel lblNewLabel_2 = new JLabel("..");
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setBackground(new Color(255, 255, 255));
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Ryzen 5 3500X\\Documents\\GitHub\\POS-BD\\src\\GUI\\logo.png"));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(288, 0, 268, 371);
+		lblNewLabel_2.setBounds(278, 0, 268, 334);
 		contentPane.add(lblNewLabel_2);
 		
 		JButton btnNewButton = new JButton("Iniciar Sesion");
-		btnNewButton.setBounds(20, 281, 121, 27);
+		btnNewButton.setBounds(147, 307, 121, 27);
 		contentPane.add(btnNewButton);
 		
 		JButton btnSalir = new JButton("Salir");
-		btnSalir.setBounds(151, 281, 121, 27);
+		btnSalir.setBounds(278, 307, 121, 27);
 		contentPane.add(btnSalir);
+		
+		JSeparator separator = new JSeparator();
+		separator.setToolTipText("hola");
+		separator.setOrientation(SwingConstants.VERTICAL);
+		separator.setForeground(new Color(0, 0, 0));
+		separator.setBackground(new Color(0, 0, 0));
+		separator.setBounds(272, 70, 29, 190);
+		contentPane.add(separator);
 
 	}
 }
