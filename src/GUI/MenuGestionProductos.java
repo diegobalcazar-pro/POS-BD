@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.JSeparator;
+import java.awt.Color;
 
 public class MenuGestionProductos extends JFrame {
 
@@ -21,11 +23,11 @@ public class MenuGestionProductos extends JFrame {
 	private JTextField txtProductos;
 	private JButton btnCrearProd;
 	private JButton btnElimProd;
-	private JButton btnEditProd;
+	private JButton btnModiProd;
 	private JTextField txtVariantesProducto;
 	private JButton btnCrearVarProd;
 	private JButton btnElimVarProd;
-	private JButton btnEditVarProd;
+	private JButton btnModiVarProd;
 	private JButton btnMoverProd;
 	private JButton btnAtras;
 
@@ -71,13 +73,13 @@ public class MenuGestionProductos extends JFrame {
 		contentPane.add(txtCategoria);
 		txtCategoria.setColumns(10);
 		
-		JButton btnEditCat = new JButton("Editar");
-		btnEditCat.addActionListener(new ActionListener() {
+		JButton btnModiCat = new JButton("Modificar");
+		btnModiCat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnEditCat.setBounds(66, 340, 88, 22);
-		contentPane.add(btnEditCat);
+		btnModiCat.setBounds(66, 340, 88, 22);
+		contentPane.add(btnModiCat);
 		
 		JButton btnCrearCat = new JButton("Crear");
 		btnCrearCat.setBounds(66, 276, 88, 22);
@@ -98,9 +100,9 @@ public class MenuGestionProductos extends JFrame {
 		btnElimProd.setBounds(183, 308, 88, 22);
 		contentPane.add(btnElimProd);
 		
-		btnEditProd = new JButton("Editar");
-		btnEditProd.setBounds(183, 340, 88, 22);
-		contentPane.add(btnEditProd);
+		btnModiProd = new JButton("Modificar");
+		btnModiProd.setBounds(183, 340, 88, 22);
+		contentPane.add(btnModiProd);
 		
 		txtVariantesProducto = new JTextField();
 		txtVariantesProducto.setText("Variantes Producto");
@@ -117,17 +119,22 @@ public class MenuGestionProductos extends JFrame {
 		btnElimVarProd.setBounds(301, 308, 88, 22);
 		contentPane.add(btnElimVarProd);
 		
-		btnEditVarProd = new JButton("Editar");
-		btnEditVarProd.setBounds(301, 340, 88, 22);
-		contentPane.add(btnEditVarProd);
+		btnModiVarProd = new JButton("Modificar");
+		btnModiVarProd.setBounds(301, 340, 88, 22);
+		contentPane.add(btnModiVarProd);
 		
 		btnMoverProd = new JButton("Mover Producto");
 		btnMoverProd.setBounds(408, 308, 115, 22);
 		contentPane.add(btnMoverProd);
 		
 		btnAtras = new JButton("Atrás");
-		btnAtras.setBounds(418, 340, 88, 22);
+		btnAtras.setBounds(408, 340, 115, 22);
 		contentPane.add(btnAtras);
+		
+		JSeparator separator = new JSeparator();
+		separator.setForeground(new Color(0, 0, 0));
+		separator.setBounds(10, 238, 538, 124);
+		contentPane.add(separator);
 
 	}
 }
