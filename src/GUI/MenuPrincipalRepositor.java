@@ -38,25 +38,25 @@ public class MenuPrincipalRepositor extends JFrame {
 	 */
 	public MenuPrincipalRepositor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 572, 410);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JButton botonGstProd = new JButton("Gestión Productos");
-		botonGstProd.setBounds(80, 145, 133, 23);
+		botonGstProd.setBounds(150, 183, 133, 23);
 		contentPane.add(botonGstProd);
 
 		bienvenidaRepositor = new JTextField();
 		bienvenidaRepositor.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		bienvenidaRepositor.setText("¡Bienvenido, Repositor [nombre]!");
-		bienvenidaRepositor.setBounds(62, 48, 311, 54);
+		bienvenidaRepositor.setBounds(132, 86, 311, 54);
 		contentPane.add(bienvenidaRepositor);
 		bienvenidaRepositor.setColumns(10);
 
 		JButton botonGstPed = new JButton("Gestión Pedidos");
-		botonGstPed.setBounds(223, 145, 133, 23);
+		botonGstPed.setBounds(293, 183, 133, 23);
 		contentPane.add(botonGstPed);
 
 		JButton botonGstStock = new JButton("Gestión Stock");
@@ -64,7 +64,7 @@ public class MenuPrincipalRepositor extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		botonGstStock.setBounds(80, 179, 133, 23);
+		botonGstStock.setBounds(150, 217, 133, 23);
 		contentPane.add(botonGstStock);
 
 		JButton botonCerrarSes = new JButton("Cerrar sesión");
@@ -72,11 +72,11 @@ public class MenuPrincipalRepositor extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		botonCerrarSes.setBounds(151, 213, 133, 22);
+		botonCerrarSes.setBounds(221, 251, 133, 22);
 		contentPane.add(botonCerrarSes);
 
 		JButton botonGstProv = new JButton("Gestión Proveedores");
-		botonGstProv.setBounds(223, 178, 133, 23);
+		botonGstProv.setBounds(293, 216, 133, 23);
 		contentPane.add(botonGstProv);
 
 	}
