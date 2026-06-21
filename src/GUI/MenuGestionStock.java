@@ -48,11 +48,11 @@ public class MenuGestionStock extends JFrame {
 		contentPane.add(table);
 		
 		JButton btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(234, 274, 88, 22);
+		btnModificar.setBounds(126, 296, 88, 22);
 		contentPane.add(btnModificar);
 		
 		JButton btnAtrs = new JButton("Atrás");
-		btnAtrs.setBounds(234, 306, 88, 22);
+		btnAtrs.setBounds(341, 296, 88, 22);
 		contentPane.add(btnAtrs);
 		
 		JSeparator separator = new JSeparator();
