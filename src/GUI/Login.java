@@ -133,6 +133,23 @@ public class Login extends JFrame {
 		btnLogin.setBounds(445, 349, 220, 23);
 		contentPane.add(btnLogin);
 		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//Cierra la Ventana login
+				Login frame = new Login();
+				frame.setVisible(false);
+				dispose();
+				
+			}
+		});
+		btnSalir.setForeground(Color.WHITE);
+		btnSalir.setFont(new Font("Segoe UI", Font.BOLD, 11));
+		btnSalir.setBackground(new Color(0, 64, 128));
+		btnSalir.setBounds(445, 383, 220, 23);
+		contentPane.add(btnSalir);
+		
 		JLabel lblNewLabel_1_2 = new JLabel("LOGIN | POS");
 		lblNewLabel_1_2.setFont(new Font("Arial Black", Font.PLAIN, 25));
 		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
