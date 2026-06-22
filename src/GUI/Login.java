@@ -90,7 +90,7 @@ public class Login extends JFrame {
 		contentPane.add(lblError);
 		JButton btnLogin = new JButton("Ingresar");
 		btnLogin.setBackground(new Color(0, 64, 128));//fondo del boton
-		btnLogin.setForeground(new Color(0, 0, 0));
+		btnLogin.setForeground(new Color(255, 255, 255));
 		btnLogin.setFont(new Font("Segoe UI", Font.BOLD, 11));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
