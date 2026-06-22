@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JSeparator;
+import javax.swing.JTabbedPane;
 
 public class Login extends JFrame {
 
@@ -50,53 +51,64 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(10, 21, 536, 339);
+		contentPane.add(tabbedPane);
+		
+		JPanel panel_1 = new JPanel();
+		tabbedPane.addTab("Login", null, panel_1, null);
+		panel_1.setLayout(null);
+		
 		JLabel lblNewLabel = new JLabel("LOGIN | POS");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblNewLabel.setBounds(10, 0, 186, 42);
+		panel_1.add(lblNewLabel);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel.setBounds(20, 21, 226, 44);
-		contentPane.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
 		textField = new JTextField();
-		textField.setBounds(20, 124, 166, 27);
-		contentPane.add(textField);
 		textField.setColumns(10);
+		textField.setBounds(10, 101, 166, 27);
+		panel_1.add(textField);
 		
 		JLabel lblNewLabel_1 = new JLabel("Correo:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(20, 86, 77, 27);
-		contentPane.add(lblNewLabel_1);
+		lblNewLabel_1.setBounds(10, 65, 77, 27);
+		panel_1.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Contraseña:");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_1.setBounds(20, 183, 121, 27);
-		contentPane.add(lblNewLabel_1_1);
+		lblNewLabel_1_1.setBounds(10, 137, 121, 27);
+		panel_1.add(lblNewLabel_1_1);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(20, 221, 166, 27);
-		contentPane.add(passwordField);
+		passwordField.setBounds(10, 177, 166, 27);
+		panel_1.add(passwordField);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBackground(new Color(255, 255, 255));
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Ryzen 5 3500X\\Documents\\GitHub\\POS-BD\\src\\GUI\\logo.png"));
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Intel I5\\Downloads\\e2b0d189-dd63-4116-930e-50b2dc34f23a.jpg"));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(278, 0, 268, 334);
-		contentPane.add(lblNewLabel_2);
+		lblNewLabel_2.setBackground(Color.WHITE);
+		lblNewLabel_2.setBounds(263, -12, 268, 334);
+		panel_1.add(lblNewLabel_2);
 		
 		JButton btnNewButton = new JButton("Iniciar Sesion");
-		btnNewButton.setBounds(147, 307, 121, 27);
-		contentPane.add(btnNewButton);
+		btnNewButton.setBounds(10, 230, 121, 27);
+		panel_1.add(btnNewButton);
 		
 		JButton btnSalir = new JButton("Salir");
-		btnSalir.setBounds(278, 307, 121, 27);
-		contentPane.add(btnSalir);
+		btnSalir.setBounds(10, 261, 121, 27);
+		panel_1.add(btnSalir);
 		
 		JSeparator separator = new JSeparator();
 		separator.setToolTipText("hola");
 		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setForeground(new Color(0, 0, 0));
-		separator.setBackground(new Color(0, 0, 0));
-		separator.setBounds(272, 70, 29, 190);
-		contentPane.add(separator);
+		separator.setForeground(Color.BLACK);
+		separator.setBackground(Color.BLACK);
+		separator.setBounds(258, 64, 29, 190);
+		panel_1.add(separator);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("Registrarse", null, panel, null);
 
 	}
 }

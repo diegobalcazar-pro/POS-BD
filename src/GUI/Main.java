@@ -24,7 +24,9 @@ public class Main {
             switch (menu) {
                 case 0:
                   
-                    Usuario usuario = Usuario.Login();
+                	String correo = JOptionPane.showInputDialog("Ingrese su correo:");
+                	String contrasenia = JOptionPane.showInputDialog("Ingrese su contraseña:");
+                    Usuario usuario = Usuario.Login(correo, contrasenia);
                     if (usuario != null) {
                         if (usuario instanceof Admin) {
                             JOptionPane.showMessageDialog(null, "Bienvenido Admin " + usuario.getNombre_usuario());

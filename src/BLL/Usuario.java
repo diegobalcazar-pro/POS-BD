@@ -108,7 +108,8 @@ public abstract class Usuario {
 	}
 
 	// --- MÉTODOS ---
-		public static Usuario Login() {
+	/*
+	 public static Usuario Login() {
 			String correo = "";
 			while (correo.isEmpty()) {
 				correo = JOptionPane.showInputDialog("Ingrese correo");
@@ -120,6 +121,24 @@ public abstract class Usuario {
 			String contraseniaInput = "";
 			while (contraseniaInput.isEmpty()) {
 				contraseniaInput = JOptionPane.showInputDialog("Ingrese Contraseña");
+				if (contraseniaInput == null || contraseniaInput.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Incorrecto");
+				}
+			}
+			return controller.login(correo, contraseniaInput);
+		}
+	  
+	  */
+		public static Usuario Login(String correoInput, String contraseniaInput2) {
+			String correo = correoInput;
+			while (correo.isEmpty()) {
+				if (correo == null || correo.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Incorrecto");
+				}
+			}
+
+			String contraseniaInput = contraseniaInput2;
+			while (contraseniaInput.isEmpty()) {
 				if (contraseniaInput == null || contraseniaInput.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Incorrecto");
 				}
