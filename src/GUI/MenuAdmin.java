@@ -10,6 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import BLL.Admin;
+import BLL.Cajero;
+import BLL.Repositor;
+import BLL.Usuario;
+import DLL.ControllerUsuario;
 
 public class MenuAdmin extends JFrame {
 
@@ -17,7 +21,7 @@ public class MenuAdmin extends JFrame {
 	private JPanel contentPane;
 
 	
-	public MenuAdmin(Admin admin) {
+	public MenuAdmin(Usuario logueado) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -25,7 +29,7 @@ public class MenuAdmin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Bienvenido Admin:" + admin.getNombre_usuario());
+		JLabel lblNewLabel = new JLabel("Bienvenido Admin:" + logueado.getNombre_usuario());
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 17));
 		lblNewLabel.setBounds(90, 32, 310, 16);
 		contentPane.add(lblNewLabel);

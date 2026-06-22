@@ -112,7 +112,11 @@ public class Login extends JFrame {
                         if (logueado instanceof Admin) {
                             JOptionPane.showMessageDialog(null, "Bienvenido Admin " + logueado.getNombre_usuario());
                             // Ir a menu de admin
-                            logueado.Menu();
+                            //logueado.Menu();
+                            MenuAdmin menuadm = new MenuAdmin(logueado);
+                            menuadm.setVisible(true);
+            				dispose();
+            				
                         } else if (logueado instanceof Cajero) {
                             JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + logueado.getNombre_usuario());
                             // Ir a menu de cajero
@@ -124,7 +128,10 @@ public class Login extends JFrame {
                         } else if (logueado instanceof Repositor) {
                         	JOptionPane.showMessageDialog(null, "Bienvenido Repositor " + logueado.getNombre_usuario());
                             // Ir a menu de repositor
-                        	logueado.Menu();
+                        	//logueado.Menu();
+                        	/*Menu menucaj = new MenuCajero2(logueado);
+                            menucaj.setVisible(true);
+            				dispose();*/
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
