@@ -34,41 +34,41 @@ public class MenuAdmin extends JFrame {
 		JButton btnGestionUsuarios = new JButton("Gestión de Usuarios");
 		btnGestionUsuarios.setBounds(48, 98, 158, 29);
 		contentPane.add(btnGestionUsuarios);
-		/*btnGestionUsuarios.addActionListener(e -> {
+		btnGestionUsuarios.addActionListener(e -> {
 		   PantallaGestionUsuarios nueva = new PantallaGestionUsuarios();
 		   nueva.setVisible(true);
 		    dispose();
-		});*/
+		});
 		
 		//Info de ventas
 		JButton btnInfoVentas = new JButton("Info de ventas");
 		btnInfoVentas.setBounds(58, 139, 133, 29);
 		contentPane.add(btnInfoVentas);
-		/*btnInfoVentas.addActionListener(e -> {
+		btnInfoVentas.addActionListener(e -> {
 			PantallaInfoVentas nueva = new PantallaInfoVentas();
 			   nueva.setVisible(true);
 			   dispose();
-			});*/
+			});
 		
 		//Gestión Productos
 		JButton btnGestionProductos = new JButton("Gestión de Productos");
 		btnGestionProductos.setBounds(242, 98, 158, 29);
 		contentPane.add(btnGestionProductos);
-		/*btnGestionProductos.addActionListener(e -> {
+		btnGestionProductos.addActionListener(e -> {
 			   PantallaGestionProductos nueva = new PantallaGestionProductos();
 			   nueva.setVisible(true);
 			    dispose();
-			});*/
+			});
 		
 		//Configuración
 		JButton btnConfiguracion = new JButton("Configuración");
 		btnConfiguracion.setBounds(252, 139, 137, 29);
 		contentPane.add(btnConfiguracion);
-		/*btnConfiguracion.addActionListener(e -> {
+		btnConfiguracion.addActionListener(e -> {
 			   PantallaConfiguracion nueva = new PantallaConfiguracion();
 			   nueva.setVisible(true);
 			    dispose();
-			});*/
+			});
 		
 		//Salir
 		JButton btnCerrarSesion = new JButton("Cerrar Sesión");

@@ -36,11 +36,11 @@ public class PantallaConfiguracion extends JFrame {
 		JButton btnConfiDescuentos = new JButton("Configurar Descuentos");
 		btnConfiDescuentos.setBounds(233, 94, 175, 29);
 		contentPane.add(btnConfiDescuentos);
-		/*btnConfiDescuentos.addActionListener(e -> {
+		btnConfiDescuentos.addActionListener(e -> {
 			   PantallaConfiDescuentos nueva = new PantallaConfiDescuentos();
 			   nueva.setVisible(true);
 			    dispose();
-			});*/
+			});
 		
 		JButton btnNewButton_2 = new JButton("<- Salir");
 		btnNewButton_2.setBackground(Color.RED);
