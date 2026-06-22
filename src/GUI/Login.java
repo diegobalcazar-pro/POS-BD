@@ -141,7 +141,7 @@ public class Login extends JFrame {
 		
 				JLabel lblNewLabel = new JLabel("");
 				lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Intel I5\\Downloads\\fondologin.jpg"));
+				lblNewLabel.setIcon(new ImageIcon("src\\img\\fondologin.jpg"));
 				lblNewLabel.setBounds(0, 0, 385, 512);
 				contentPane.add(lblNewLabel);
 				
