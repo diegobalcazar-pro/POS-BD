@@ -27,7 +27,7 @@ import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 import java.awt.Button;
 
-public class Login extends JFrame {
+public class MenuCajero2 extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -41,7 +41,7 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login frame = new Login();
+					MenuCajero2 frame = new MenuCajero2(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,7 +53,7 @@ public class Login extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Login() {
+	public MenuCajero2(Usuario logueado) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Intel I5\\Downloads\\92b80f55c7e3a2476cc2ff9481e357c3.jpg"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 742, 551);
@@ -63,10 +63,11 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblNewLabel_1 = new JLabel("Correo:");
-		lblNewLabel_1.setForeground(new Color(0, 0, 0));
-		lblNewLabel_1.setFont(new Font("Verdana", Font.BOLD, 15));
-		lblNewLabel_1.setBounds(445, 179, 220, 14);
+		JLabel lblNewLabel_1 = new JLabel(logueado.getNombre_usuario());
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1.setFont(new Font("Nirmala UI", Font.BOLD, 11));
+		lblNewLabel_1.setBounds(580, 46, 115, 20);
 		contentPane.add(lblNewLabel_1);
 		
 				inpEmail = new JTextField();
@@ -101,9 +102,7 @@ public class Login extends JFrame {
 				} else {
 					
 			
-					Login frame = new Login();
-					frame.setVisible(false);
-					dispose();
+				
 						
 					System.out.println("Bienvenido " + logueado.getNombre_usuario());
 					
@@ -116,11 +115,7 @@ public class Login extends JFrame {
                         } else if (logueado instanceof Cajero) {
                             JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + logueado.getNombre_usuario());
                             // Ir a menu de cajero
-                            //logueado.Menu();
-                            MenuCajero2 menucaj = new MenuCajero2(logueado);
-                            menucaj.setVisible(true);
-            				dispose();
-                            
+                            logueado.Menu();
                         } else if (logueado instanceof Repositor) {
                         	JOptionPane.showMessageDialog(null, "Bienvenido Repositor " + logueado.getNombre_usuario());
                             // Ir a menu de repositor
@@ -134,36 +129,19 @@ public class Login extends JFrame {
 				}
 			}
 		});
-		btnLogin.setBounds(445, 349, 220, 23);
+		btnLogin.setBounds(38, 119, 110, 38);
 		contentPane.add(btnLogin);
-		
-		JButton btnSalir = new JButton("Salir");
-		btnSalir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				//Cierra la Ventana login
-				Login frame = new Login();
-				frame.setVisible(false);
-				dispose();
-				
-			}
-		});
-		btnSalir.setForeground(Color.WHITE);
-		btnSalir.setFont(new Font("Segoe UI", Font.BOLD, 11));
-		btnSalir.setBackground(new Color(0, 64, 128));
-		btnSalir.setBounds(445, 383, 220, 23);
-		contentPane.add(btnSalir);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("LOGIN | POS");
 		lblNewLabel_1_2.setFont(new Font("Arial Black", Font.PLAIN, 25));
 		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_2.setBounds(434, 93, 237, 32);
+		lblNewLabel_1_2.setBounds(60, 480, 237, 32);
 		contentPane.add(lblNewLabel_1_2);
 		
 				JLabel lblNewLabel = new JLabel("");
 				lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				lblNewLabel.setIcon(new ImageIcon("src\\img\\fondologin.jpg"));
-				lblNewLabel.setBounds(0, 0, 374, 512);
+				lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Intel I5\\Downloads\\Abierto.png"));
+				lblNewLabel.setBounds(0, 0, 726, 512);
 				contentPane.add(lblNewLabel);
 				
 				JLabel lblNewLabel_1_2_1 = new JLabel("Bienvenido");
