@@ -129,9 +129,9 @@ public class Login extends JFrame {
                         	JOptionPane.showMessageDialog(null, "Bienvenido Repositor " + logueado.getNombre_usuario());
                             // Ir a menu de repositor
                         	//logueado.Menu();
-                        	/*Menu menucaj = new MenuCajero2(logueado);
-                            menucaj.setVisible(true);
-            				dispose();*/
+                        	MenuRepositor menurep = new MenuRepositor(logueado);
+                            menurep.setVisible(true);
+            				dispose();
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");

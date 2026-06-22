@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.EventQueue;
 
+import BLL.Usuario;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,7 +14,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
-public class MenuPrincipalRepositor extends JFrame {
+public class MenuRepositor extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -24,7 +26,7 @@ public class MenuPrincipalRepositor extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MenuPrincipalRepositor frame = new MenuPrincipalRepositor();
+					MenuRepositor frame = new MenuRepositor(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +38,7 @@ public class MenuPrincipalRepositor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuPrincipalRepositor() {
+	public MenuRepositor(Usuario logueado) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 572, 410);
 		contentPane = new JPanel();

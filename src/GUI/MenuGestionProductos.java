@@ -128,7 +128,7 @@ public class MenuGestionProductos extends JFrame {
 		btnAtras = new JButton("Atrás");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuPrincipalRepositor ventanaProductos = new MenuPrincipalRepositor();
+				MenuRepositor ventanaProductos = new MenuRepositor(null);
 		        ventanaProductos.setVisible(true);
 		        dispose();
 			}
