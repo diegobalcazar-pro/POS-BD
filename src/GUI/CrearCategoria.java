@@ -64,10 +64,6 @@ public class CrearCategoria extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(342, 322, 88, 22);
 		contentPane.add(btnCancelar);
-		
-		JLabel lblNewJgoodiesTitle_1 = DefaultComponentFactory.getInstance().createTitle("New JGoodies title");
-		lblNewJgoodiesTitle_1.setBounds(203, 106, 88, 14);
-		contentPane.add(lblNewJgoodiesTitle_1);
 
 	}
 }
