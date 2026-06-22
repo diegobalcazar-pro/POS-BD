@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -59,11 +58,11 @@ public class CrearCategoria extends JFrame {
 		contentPane.add(lblNewJgoodiesLabel);
 		
 		JButton btnConf = new JButton("Confirmar");
-		btnConf.setBounds(127, 307, 88, 22);
+		btnConf.setBounds(127, 322, 88, 22);
 		contentPane.add(btnConf);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(342, 307, 88, 22);
+		btnCancelar.setBounds(342, 322, 88, 22);
 		contentPane.add(btnCancelar);
 
 	}

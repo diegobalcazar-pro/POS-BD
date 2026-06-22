@@ -48,19 +48,19 @@ public class MenuGestionProveedores extends JFrame {
 		contentPane.add(table);
 		
 		JButton btnCrearProv = new JButton("Crear");
-		btnCrearProv.setBounds(169, 296, 88, 22);
+		btnCrearProv.setBounds(168, 322, 88, 22);
 		contentPane.add(btnCrearProv);
 		
 		JButton btnElimProv = new JButton("Eliminar");
-		btnElimProv.setBounds(40, 296, 88, 22);
+		btnElimProv.setBounds(39, 322, 88, 22);
 		contentPane.add(btnElimProv);
 		
 		JButton btnModiProv = new JButton("Modificar");
-		btnModiProv.setBounds(298, 296, 88, 22);
+		btnModiProv.setBounds(297, 322, 88, 22);
 		contentPane.add(btnModiProv);
 		
 		JButton btnAtras = new JButton("Atrás");
-		btnAtras.setBounds(427, 296, 88, 22);
+		btnAtras.setBounds(426, 322, 88, 22);
 		contentPane.add(btnAtras);
 		
 		JSeparator separator = new JSeparator();

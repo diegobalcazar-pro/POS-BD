@@ -5,17 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JLabel;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 public class MenuPrincipalRepositor extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField bienvenidaRepositor;
 
 	/**
 	 * Launch the application.
@@ -48,13 +48,6 @@ public class MenuPrincipalRepositor extends JFrame {
 		botonGstProd.setBounds(150, 183, 133, 23);
 		contentPane.add(botonGstProd);
 
-		bienvenidaRepositor = new JTextField();
-		bienvenidaRepositor.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		bienvenidaRepositor.setText("¡Bienvenido, Repositor [nombre]!");
-		bienvenidaRepositor.setBounds(132, 86, 311, 54);
-		contentPane.add(bienvenidaRepositor);
-		bienvenidaRepositor.setColumns(10);
-
 		JButton botonGstPed = new JButton("Gestión Pedidos");
 		botonGstPed.setBounds(293, 183, 133, 23);
 		contentPane.add(botonGstPed);
@@ -78,6 +71,11 @@ public class MenuPrincipalRepositor extends JFrame {
 		JButton botonGstProv = new JButton("Gestión Proveedores");
 		botonGstProv.setBounds(293, 216, 133, 23);
 		contentPane.add(botonGstProv);
+		
+		JLabel lblNewJgoodiesLabel = DefaultComponentFactory.getInstance().createLabel("¡Bienvenido, Repositor [nombre]!");
+		lblNewJgoodiesLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblNewJgoodiesLabel.setBounds(99, 104, 360, 52);
+		contentPane.add(lblNewJgoodiesLabel);
 
 	}
 }

@@ -7,24 +7,22 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JSeparator;
 import java.awt.Color;
+import javax.swing.JLabel;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 public class MenuGestionProductos extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable tablaProd;
-	private JTextField txtCategoria;
-	private JTextField txtProductos;
 	private JButton btnCrearProd;
 	private JButton btnElimProd;
 	private JButton btnModiProd;
-	private JTextField txtVariantesProducto;
 	private JButton btnCrearVarProd;
 	private JButton btnElimVarProd;
 	private JButton btnModiVarProd;
@@ -66,13 +64,6 @@ public class MenuGestionProductos extends JFrame {
 		btnElimCat.setBounds(66, 308, 88, 22);
 		contentPane.add(btnElimCat);
 		
-		txtCategoria = new JTextField();
-		txtCategoria.setHorizontalAlignment(SwingConstants.CENTER);
-		txtCategoria.setText("Categorias");
-		txtCategoria.setBounds(62, 245, 96, 20);
-		contentPane.add(txtCategoria);
-		txtCategoria.setColumns(10);
-		
 		JButton btnModiCat = new JButton("Modificar");
 		btnModiCat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -85,13 +76,6 @@ public class MenuGestionProductos extends JFrame {
 		btnCrearCat.setBounds(66, 276, 88, 22);
 		contentPane.add(btnCrearCat);
 		
-		txtProductos = new JTextField();
-		txtProductos.setText("Productos");
-		txtProductos.setHorizontalAlignment(SwingConstants.CENTER);
-		txtProductos.setColumns(10);
-		txtProductos.setBounds(179, 245, 96, 20);
-		contentPane.add(txtProductos);
-		
 		btnCrearProd = new JButton("Crear");
 		btnCrearProd.setBounds(183, 276, 88, 22);
 		contentPane.add(btnCrearProd);
@@ -103,13 +87,6 @@ public class MenuGestionProductos extends JFrame {
 		btnModiProd = new JButton("Modificar");
 		btnModiProd.setBounds(183, 340, 88, 22);
 		contentPane.add(btnModiProd);
-		
-		txtVariantesProducto = new JTextField();
-		txtVariantesProducto.setText("Variantes Producto");
-		txtVariantesProducto.setHorizontalAlignment(SwingConstants.CENTER);
-		txtVariantesProducto.setColumns(10);
-		txtVariantesProducto.setBounds(293, 245, 104, 20);
-		contentPane.add(txtVariantesProducto);
 		
 		btnCrearVarProd = new JButton("Crear");
 		btnCrearVarProd.setBounds(301, 276, 88, 22);
@@ -130,6 +107,21 @@ public class MenuGestionProductos extends JFrame {
 		btnAtras = new JButton("Atrás");
 		btnAtras.setBounds(408, 340, 115, 22);
 		contentPane.add(btnAtras);
+		
+		JLabel lblNewJgoodiesLabel = DefaultComponentFactory.getInstance().createLabel("Categorias");
+		lblNewJgoodiesLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewJgoodiesLabel.setBounds(62, 251, 96, 14);
+		contentPane.add(lblNewJgoodiesLabel);
+		
+		JLabel lblNewJgoodiesLabel_1 = DefaultComponentFactory.getInstance().createLabel("Productos");
+		lblNewJgoodiesLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewJgoodiesLabel_1.setBounds(179, 251, 96, 14);
+		contentPane.add(lblNewJgoodiesLabel_1);
+		
+		JLabel lblNewJgoodiesLabel_2 = DefaultComponentFactory.getInstance().createLabel("Variantes");
+		lblNewJgoodiesLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewJgoodiesLabel_2.setBounds(297, 251, 96, 14);
+		contentPane.add(lblNewJgoodiesLabel_2);
 		
 		JSeparator separator = new JSeparator();
 		separator.setForeground(new Color(0, 0, 0));
