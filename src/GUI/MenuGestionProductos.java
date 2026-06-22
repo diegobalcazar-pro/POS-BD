@@ -73,10 +73,24 @@ public class MenuGestionProductos extends JFrame {
 		contentPane.add(btnModiCat);
 		
 		JButton btnCrearCat = new JButton("Crear");
+		btnCrearCat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearCategoria ventanaProductos = new CrearCategoria();
+		        ventanaProductos.setVisible(true);
+		        dispose();
+			}
+		});
 		btnCrearCat.setBounds(66, 276, 88, 22);
 		contentPane.add(btnCrearCat);
 		
 		btnCrearProd = new JButton("Crear");
+		btnCrearProd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearProducto ventanaProductos = new CrearProducto();
+		        ventanaProductos.setVisible(true);
+		        dispose();
+			}
+		});
 		btnCrearProd.setBounds(183, 276, 88, 22);
 		contentPane.add(btnCrearProd);
 		
@@ -89,6 +103,13 @@ public class MenuGestionProductos extends JFrame {
 		contentPane.add(btnModiProd);
 		
 		btnCrearVarProd = new JButton("Crear");
+		btnCrearVarProd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearVariante ventanaProductos = new CrearVariante();
+		        ventanaProductos.setVisible(true);
+		        dispose();
+			}
+		});
 		btnCrearVarProd.setBounds(301, 276, 88, 22);
 		contentPane.add(btnCrearVarProd);
 		
@@ -101,10 +122,17 @@ public class MenuGestionProductos extends JFrame {
 		contentPane.add(btnModiVarProd);
 		
 		btnMoverProd = new JButton("Mover Producto");
-		btnMoverProd.setBounds(408, 308, 115, 22);
+		btnMoverProd.setBounds(399, 308, 133, 22);
 		contentPane.add(btnMoverProd);
 		
 		btnAtras = new JButton("Atrás");
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuPrincipalRepositor ventanaProductos = new MenuPrincipalRepositor();
+		        ventanaProductos.setVisible(true);
+		        dispose();
+			}
+		});
 		btnAtras.setBounds(408, 340, 115, 22);
 		contentPane.add(btnAtras);
 		
