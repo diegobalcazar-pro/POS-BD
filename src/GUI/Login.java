@@ -104,8 +104,6 @@ public class Login extends JFrame {
 					Login frame = new Login();
 					frame.setVisible(false);
 					dispose();
-						
-					System.out.println("Bienvenido " + logueado.getNombre_usuario());
 					
 				
                     if (logueado != null) {
@@ -118,7 +116,7 @@ public class Login extends JFrame {
             				dispose();
             				
                         } else if (logueado instanceof Cajero) {
-                            JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + logueado.getNombre_usuario());
+                            // JOptionPane.showMessageDialog(null, "Bienvenido Cajero " + logueado.getNombre_usuario());
                             // Ir a menu de cajero
                             //logueado.Menu();
                             MenuCajero2 menucaj = new MenuCajero2(logueado);
