@@ -55,7 +55,7 @@ public class Login extends JFrame {
 	 */
 	public Login() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Intel I5\\Downloads\\92b80f55c7e3a2476cc2ff9481e357c3.jpg"));
-		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo4.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 742, 551);
 		contentPane = new JPanel();
@@ -71,6 +71,7 @@ public class Login extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 				inpEmail = new JTextField();
+				inpEmail.setFont(new Font("Segoe UI", Font.BOLD, 12));
 				inpEmail.setToolTipText("correo");
 				inpEmail.setBounds(445, 205, 220, 30);
 				contentPane.add(inpEmail);
@@ -82,6 +83,7 @@ public class Login extends JFrame {
 		contentPane.add(lblNewLabel_1_1);
 
 		inpContrasenia = new JPasswordField();
+		inpContrasenia.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		inpContrasenia.setBounds(445, 286, 220, 30);
 		contentPane.add(inpContrasenia);
 
@@ -92,7 +94,7 @@ public class Login extends JFrame {
 		JButton btnLogin = new JButton("Ingresar");
 		btnLogin.setBackground(new Color(0, 64, 128));//fondo del boton
 		btnLogin.setForeground(new Color(255, 255, 255));
-		btnLogin.setFont(new Font("Segoe UI", Font.BOLD, 11));
+		btnLogin.setFont(new Font("Segoe UI", Font.BOLD, 12));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -140,7 +142,7 @@ public class Login extends JFrame {
 				}
 			}
 		});
-		btnLogin.setBounds(445, 349, 220, 23);
+		btnLogin.setBounds(445, 349, 220, 26);
 		contentPane.add(btnLogin);
 		
 		JButton btnSalir = new JButton("Salir");
@@ -157,7 +159,7 @@ public class Login extends JFrame {
 		btnSalir.setForeground(Color.WHITE);
 		btnSalir.setFont(new Font("Segoe UI", Font.BOLD, 11));
 		btnSalir.setBackground(new Color(0, 64, 128));
-		btnSalir.setBounds(445, 383, 220, 23);
+		btnSalir.setBounds(445, 385, 220, 25);
 		contentPane.add(btnSalir);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("LOGIN | POS");
@@ -168,7 +170,7 @@ public class Login extends JFrame {
 		
 				JLabel lblNewLabel = new JLabel("");
 				lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-				lblNewLabel.setIcon(new ImageIcon("src\\img\\fondologin.jpg"));
+				lblNewLabel.setIcon(new ImageIcon("src\\img\\fondologin1.png"));
 				lblNewLabel.setBounds(0, 0, 374, 512);
 				contentPane.add(lblNewLabel);
 				

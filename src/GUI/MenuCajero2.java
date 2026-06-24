@@ -81,7 +81,7 @@ public class MenuCajero2 extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuCajero2(Usuario logueado) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo4.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 742, 551);
 		contentPane = new JPanel();
@@ -161,6 +161,23 @@ public class MenuCajero2 extends JFrame {
 								button_1_1_1.setActionCommand("Cerrar Sesion");
 								button_1_1_1.setBounds(10, 464, 169, 27);
 								contentPane.add(button_1_1_1);
+								button_1_1_1.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										
+										//Cierra la Ventana Cajero
+										MenuCajero2 mcajero = new MenuCajero2(logueado);
+										mcajero.setVisible(false);
+										dispose();
+										
+										//Abre la Ventana login
+										Login jframe = new Login();
+										jframe.setVisible(true);
+										dispose();
+										
+									}
+								});
+								
+								
 								
 								Button button_2_1 = new Button("Imprimir Ticket");
 								button_2_1.setForeground(Color.WHITE);
