@@ -8,14 +8,19 @@ import javax.swing.border.EmptyBorder;
 
 import BLL.Admin;
 import BLL.Cajero;
+import BLL.Producto;
 import BLL.Repositor;
 import BLL.Usuario;
+import BLL.VarianteProducto;
+import DLL.ControllerProducto;
 import DLL.ControllerUsuario;
+import DLL.ControllerVarianteProducto;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.List;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
@@ -24,6 +29,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
@@ -37,12 +43,23 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTabbedPane;
+import javax.swing.JLayeredPane;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class MenuCajero2 extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTable table;
 	private JTextField inpEmail;
+	
+    private DefaultTableModel model;
+    private Usuario usuarioSeleccionado;
+    private JTextField inpFiltro;
 
 	/**
 	 * Launch the application.
@@ -75,13 +92,13 @@ public class MenuCajero2 extends JFrame {
 		
 				inpEmail = new JTextField();
 				inpEmail.setToolTipText("correo");
-				inpEmail.setBounds(213, 156, 179, 30);
+				inpEmail.setBounds(213, 142, 179, 27);
 				contentPane.add(inpEmail);
 				inpEmail.setColumns(10);
 
-		JLabel lblNewLabel_1_1 = new JLabel("Contraseña:");
-		lblNewLabel_1_1.setFont(new Font("Verdana", Font.BOLD, 15));
-		lblNewLabel_1_1.setBounds(213, 131, 220, 14);
+		JLabel lblNewLabel_1_1 = new JLabel("Cliente:");
+		lblNewLabel_1_1.setFont(new Font("Verdana", Font.BOLD, 12));
+		lblNewLabel_1_1.setBounds(213, 126, 179, 14);
 		contentPane.add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("MODULO CAJERO");
@@ -91,11 +108,11 @@ public class MenuCajero2 extends JFrame {
 		lblNewLabel_1_2.setBounds(190, 15, 202, 27);
 		contentPane.add(lblNewLabel_1_2);
 				
-				JLabel lblNewLabel_1_2_1 = new JLabel("Bienvenido");
+				JLabel lblNewLabel_1_2_1 = new JLabel("REALIZAR VENTA");
 				lblNewLabel_1_2_1.setForeground(new Color(128, 128, 128));
-				lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.CENTER);
+				lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.LEFT);
 				lblNewLabel_1_2_1.setFont(new Font("Arial Black", Font.PLAIN, 13));
-				lblNewLabel_1_2_1.setBounds(420, 288, 237, 32);
+				lblNewLabel_1_2_1.setBounds(213, 87, 169, 32);
 				contentPane.add(lblNewLabel_1_2_1);
 								
 								JLabel lblNewLabel_2 = new JLabel("");
@@ -105,15 +122,15 @@ public class MenuCajero2 extends JFrame {
 								lblNewLabel_2.setBounds(4, 1, 169, 76);
 								contentPane.add(lblNewLabel_2);
 								
-								Button button = new Button("Cerrar Sesion");
+								Button button = new Button("Realizar Venta");
 								button.setFont(new Font("Ebrima", Font.BOLD, 13));
 								button.setForeground(new Color(255, 255, 255));
 								button.setBackground(new Color(128, 0, 0));
-								button.setActionCommand("Cerrar Sesion");
+								button.setActionCommand("Realizar Venta");
 								button.setBounds(10, 96, 169, 44);
 								contentPane.add(button);
 								
-								Button button_1 = new Button("Cerrar Sesion");
+								Button button_1 = new Button("Ver Ventas");
 								button_1.setForeground(Color.WHITE);
 								button_1.setFont(new Font("Ebrima", Font.BOLD, 13));
 								button_1.setBackground(new Color(128, 0, 0));
@@ -121,7 +138,7 @@ public class MenuCajero2 extends JFrame {
 								button_1.setBounds(10, 156, 169, 44);
 								contentPane.add(button_1);
 								
-								Button button_1_1 = new Button("Cerrar Sesion");
+								Button button_1_1 = new Button("Nuevo Cliente");
 								button_1_1.setForeground(Color.WHITE);
 								button_1_1.setFont(new Font("Ebrima", Font.BOLD, 13));
 								button_1_1.setBackground(new Color(128, 0, 0));
@@ -129,7 +146,7 @@ public class MenuCajero2 extends JFrame {
 								button_1_1.setBounds(10, 276, 169, 44);
 								contentPane.add(button_1_1);
 								
-								Button button_2 = new Button("Cerrar Sesion");
+								Button button_2 = new Button("Ver Caja");
 								button_2.setForeground(Color.WHITE);
 								button_2.setFont(new Font("Ebrima", Font.BOLD, 13));
 								button_2.setBackground(new Color(128, 0, 0));
@@ -145,7 +162,7 @@ public class MenuCajero2 extends JFrame {
 								button_1_1_1.setBounds(10, 464, 169, 27);
 								contentPane.add(button_1_1_1);
 								
-								Button button_2_1 = new Button("Cerrar Sesion");
+								Button button_2_1 = new Button("Imprimir Ticket");
 								button_2_1.setForeground(Color.WHITE);
 								button_2_1.setFont(new Font("Ebrima", Font.BOLD, 13));
 								button_2_1.setBackground(new Color(128, 0, 0));
@@ -153,7 +170,7 @@ public class MenuCajero2 extends JFrame {
 								button_2_1.setBounds(10, 396, 169, 44);
 								contentPane.add(button_2_1);
 								
-								Button button_1_2 = new Button("Cerrar Sesion");
+								Button button_1_2 = new Button("Cerrar Caja");
 								button_1_2.setForeground(Color.WHITE);
 								button_1_2.setFont(new Font("Ebrima", Font.BOLD, 13));
 								button_1_2.setBackground(new Color(128, 0, 0));
@@ -174,6 +191,74 @@ public class MenuCajero2 extends JFrame {
 										lblNewLabel_1_3.setHorizontalAlignment(SwingConstants.CENTER);
 										lblNewLabel_1_3.setForeground(Color.WHITE);
 										lblNewLabel_1_3.setFont(new Font("Nirmala UI", Font.BOLD, 12));
+										
+										Button button_3 = new Button("Seleccionar");
+										button_3.setBounds(396, 144, 70, 22);
+										contentPane.add(button_3);
+										
+										Button button_4 = new Button("X");
+										button_4.setForeground(new Color(128, 0, 0));
+										button_4.setFont(new Font("Dialog", Font.BOLD, 26));
+										button_4.setBounds(213, 442, 60, 60);
+										contentPane.add(button_4);
+										
+										Button button_4_1 = new Button("+");
+										button_4_1.setForeground(new Color(0, 128, 0));
+										button_4_1.setFont(new Font("Dialog", Font.BOLD, 37));
+										button_4_1.setBounds(572, 442, 60, 60);
+										contentPane.add(button_4_1);
+										
+										Button button_4_1_1 = new Button("%");
+										button_4_1_1.setForeground(new Color(0, 0, 0));
+										button_4_1_1.setFont(new Font("Dialog", Font.BOLD, 32));
+										button_4_1_1.setBounds(502, 442, 60, 60);
+										contentPane.add(button_4_1_1);
+										
+										JScrollPane scrollPane = new JScrollPane();
+										scrollPane.setBounds(213, 189, 497, 179);
+										contentPane.add(scrollPane);
+										
+										model = new DefaultTableModel(new String[]{"ID", "Nombre", "Precio", "Cantidad"}, 0);
+										table = new JTable(model);
+										scrollPane.setViewportView(table);
+										contentPane.add(scrollPane);
+										
+										cargarTabla();
+										
+										
+										JLabel lblNewLabel_3 = new JLabel("SUBTOTAL:");
+										lblNewLabel_3.setFont(new Font("Verdana", Font.BOLD, 11));
+										lblNewLabel_3.setBounds(238, 374, 93, 22);
+										contentPane.add(lblNewLabel_3);
+										
+										JLabel lblNewLabel_3_1 = new JLabel("DESCUENTO:");
+										lblNewLabel_3_1.setFont(new Font("Verdana", Font.BOLD, 11));
+										lblNewLabel_3_1.setBounds(238, 394, 93, 22);
+										contentPane.add(lblNewLabel_3_1);
+										
+										JLabel lblNewLabel_3_1_1 = new JLabel("TOTAL:");
+										lblNewLabel_3_1_1.setFont(new Font("Verdana", Font.BOLD, 11));
+										lblNewLabel_3_1_1.setBounds(238, 414, 93, 22);
+										contentPane.add(lblNewLabel_3_1_1);
+										
+										JLabel lblNewLabel_3_2 = new JLabel("ITEMS:");
+										lblNewLabel_3_2.setFont(new Font("Verdana", Font.BOLD, 11));
+										lblNewLabel_3_2.setBounds(519, 374, 93, 22);
+										contentPane.add(lblNewLabel_3_2);
+										
+										Button button_4_1_2 = new Button("COBRAR");
+										button_4_1_2.setForeground(new Color(64, 0, 0));
+										button_4_1_2.setFont(new Font("Dialog", Font.BOLD, 13));
+										button_4_1_2.setBounds(650, 442, 60, 60);
+										contentPane.add(button_4_1_2);
+										
+										JSeparator separator = new JSeparator();
+										separator.setOrientation(SwingConstants.VERTICAL);
+										separator.setToolTipText("|");
+										separator.setForeground(new Color(0, 0, 0));
+										separator.setBackground(new Color(0, 0, 0));
+										separator.setBounds(640, 447, 26, 49);
+										contentPane.add(separator);
 										
 										JPanel panel = new JPanel();
 										panel.setBackground(new Color(64, 0, 0));
@@ -238,4 +323,22 @@ public class MenuCajero2 extends JFrame {
 */
 		
 	}
+	
+	
+	private void cargarTabla() {
+    	//vacia la tabla
+        model.setRowCount(0);
+        //???? traigo todos los productos
+        LinkedList<Producto> productos = ControllerProducto.mostrarProductos();
+
+        		
+        //recorro cada Producto
+        for (Producto p : productos) {
+        	//Si cambio el formato, acà tambièn cambia
+        	//da el formato de la tabla a los datos
+            model.addRow(new Object[]{p.getid_producto(), p.getNombre_producto(), p.getProveedor(), p.getNombre_producto()});
+        }
+    }
+	
+	
 }

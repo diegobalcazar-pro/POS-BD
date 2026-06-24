@@ -3,9 +3,11 @@ package DLL;
 import BLL.Producto;
 import BLL.Categoria;
 import BLL.Proveedor;
+import BLL.VarianteProducto;
 import repository.ProductoRepository;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ControllerProducto implements ProductoRepository {
@@ -45,6 +47,27 @@ public class ControllerProducto implements ProductoRepository {
 			e.printStackTrace();
 		}
 		return lista;
+	}
+	
+	public static LinkedList<Producto> mostrarProductos() {
+		LinkedList<Producto> productos = new LinkedList<>();
+		String sql = "SELECT p.*, c.nombre_categoria, prov.nombreEmpresa " + "FROM productos p "
+				+ "JOIN categorias c ON p.fk_categoria = c.id_categoria "
+				+ "JOIN proveedores prov ON p.fk_proveedor = prov.id_proveedor";
+
+		try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+			while (rs.next()) {
+				Categoria cat = new Categoria(rs.getInt("fk_categoria"), rs.getString("nombre_categoria"));
+
+				Proveedor prov = new Proveedor(rs.getInt("fk_proveedor"), rs.getString("nombreEmpresa"), "", "", "");
+
+				productos.add(new Producto(rs.getInt("id_producto"), rs.getString("nombre_producto"),
+						rs.getString("descripcion_producto"), cat, prov));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return productos;
 	}
 
 	@Override

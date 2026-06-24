@@ -2,9 +2,11 @@ package DLL;
 
 import BLL.VarianteProducto;
 import BLL.Producto;
+import BLL.Usuario;
 import repository.VarianteProductoRepository;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ControllerVarianteProducto implements VarianteProductoRepository {
@@ -115,7 +117,8 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 		String sql = "SELECT v.*, p.nombre_producto FROM variantes_productos v "
 				+ "JOIN productos p ON v.fk_producto = p.id_producto";
 
-		try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+		try (Statement stmt = con.createStatement();
+				ResultSet rs = stmt.executeQuery(sql)) {
 			while (rs.next()) {
 				Producto prod = new Producto(rs.getInt("fk_producto"), rs.getString("nombre_producto"), "", null, null);
 
@@ -127,6 +130,8 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 		}
 		return lista;
 	}
+	
+	
 
 	@Override
 	public void eliminarVariante(int id) {
