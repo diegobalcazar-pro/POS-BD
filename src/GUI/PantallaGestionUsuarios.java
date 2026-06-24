@@ -3,6 +3,7 @@ package GUI;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
@@ -40,6 +41,7 @@ public class PantallaGestionUsuarios extends JFrame {
     private ControllerUsuario controller = new ControllerUsuario();
 	
 	public PantallaGestionUsuarios() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 500);
         contentPane = new JPanel();

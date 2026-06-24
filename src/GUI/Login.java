@@ -55,6 +55,7 @@ public class Login extends JFrame {
 	 */
 	public Login() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Intel I5\\Downloads\\92b80f55c7e3a2476cc2ff9481e357c3.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 742, 551);
 		contentPane = new JPanel();

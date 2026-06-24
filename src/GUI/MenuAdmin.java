@@ -1,14 +1,18 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import BLL.Admin;
@@ -24,22 +28,26 @@ public class MenuAdmin extends JFrame {
 
 	
 	public MenuAdmin(Usuario logueado) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 552, 375);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		MenuAdmin menu = this;
 		
-		JLabel lblNewLabel = new JLabel("Bienvenido Admin: " + logueado.getNombre_usuario());
-		lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 17));
-		lblNewLabel.setBounds(90, 32, 310, 16);
-		contentPane.add(lblNewLabel);
+		
+		
+		
+		
+		JLabel lblNewLabel5 = new JLabel("Bienvenido Admin: " + logueado.getNombre_usuario());
+		lblNewLabel5.setFont(new Font("Lucida Grande", Font.BOLD, 17));
+		lblNewLabel5.setBounds(132, 42, 310, 16);
+		contentPane.add(lblNewLabel5);
 		
 		//Gestión Usuarios
 		JButton btnGestionUsuarios = new JButton("Gestión de Usuarios");
-		btnGestionUsuarios.setBounds(48, 98, 158, 29);
+		btnGestionUsuarios.setBounds(48, 128, 158, 29);
 		contentPane.add(btnGestionUsuarios);
 		
 		btnGestionUsuarios.addActionListener(new ActionListener() {
@@ -53,7 +61,7 @@ public class MenuAdmin extends JFrame {
 		
 		//Info de ventas
 		JButton btnInfoVentas = new JButton("Info de ventas");
-		btnInfoVentas.setBounds(58, 139, 133, 29);
+		btnInfoVentas.setBounds(66, 184, 133, 29);
 		contentPane.add(btnInfoVentas);
 		btnInfoVentas.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -66,7 +74,7 @@ public class MenuAdmin extends JFrame {
 		
 		//Gestión Productos
 		JButton btnGestionProductos = new JButton("Gestión de Productos");
-		btnGestionProductos.setBounds(242, 98, 158, 29);
+		btnGestionProductos.setBounds(284, 128, 158, 29);
 		contentPane.add(btnGestionProductos);
 		btnGestionProductos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -79,7 +87,7 @@ public class MenuAdmin extends JFrame {
 		
 		//Configuración
 		JButton btnConfiguracion = new JButton("Configuración");
-		btnConfiguracion.setBounds(252, 139, 137, 29);
+		btnConfiguracion.setBounds(292, 184, 137, 29);
 		contentPane.add(btnConfiguracion);
 		//MenuAdmin menu = this;
 		btnConfiguracion.addActionListener(new ActionListener() {
@@ -93,7 +101,7 @@ public class MenuAdmin extends JFrame {
 		
 		//Salir
 		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
-		btnCerrarSesion.setBounds(170, 191, 117, 29);
+		btnCerrarSesion.setBounds(193, 262, 117, 29);
 		contentPane.add(btnCerrarSesion);
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
