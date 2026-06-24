@@ -198,8 +198,7 @@ import BLL.AuditoriaStock;
 						    );
 
 						    break;
-							//JOptionPane.showMessageDialog(null,AuditoriaStock.mostrarMovimientosStock(), "Movimientos de Stock",JOptionPane.INFORMATION_MESSAGE);
-							//break;
+							
 
 						default:
 							break;
@@ -255,7 +254,6 @@ import BLL.AuditoriaStock;
 							
 						case 2:
 							//CATEGORIAS MAS VENDIDAS
-							//JOptionPane.showMessageDialog(null, "Por el momento no forma parte del MVP");
 							JOptionPane.showMessageDialog( null,Categoria.categoriaMasVendida(),"Categoría más vendida",JOptionPane.INFORMATION_MESSAGE);
 							break;
 
@@ -319,8 +317,6 @@ import BLL.AuditoriaStock;
 								
 							} while (opcion_descuentos != 3);
 							
-							
-		
 							break;
 
 						default:

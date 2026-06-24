@@ -8,13 +8,17 @@ import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 import BLL.Cliente;
+import BLL.Descuento;
 import BLL.ItemVenta;
+import BLL.MetodoDePago;
+import BLL.Usuario;
+import BLL.Venta;
 import repository.VentaRepository;
 
 public class ControllerVenta implements VentaRepository {
 
     private static Connection con = Conexion.getInstance().getConnection();
-
+    private ControllerUsuario controllerUsuario = new ControllerUsuario();
     @Override
     public String mostrarClientesTexto() {
         String texto = "";
@@ -800,6 +804,107 @@ public class ControllerVenta implements VentaRepository {
             return "No existen ventas registradas.";
         }
         return resultado.toString();
+    }
+    
+    //Me muestra en lista para las tablas
+    public LinkedList<Venta> mostrarVentas() {
+
+        LinkedList<Venta> lista = new LinkedList<>();
+
+        try {
+
+            PreparedStatement statement = con.prepareStatement(
+            		"SELECT "
+            			    + "ventas.id_venta,"
+            			    + "ventas.fecha,"
+            			    + "ventas.total_neto,"
+            			    + "ventas.total_bruto,"
+            			    + "ventas.fk_usuario,"
+            			    + "ventas.fk_cliente,"
+            			    + "ventas.fk_metodo_de_pago,"
+            			    + "ventas.fk_descuento,"
+            			    + "usuarios.nombre_usuario,"
+            			    + "usuarios.apellido_usuario,"
+            			    + "clientes.nombre_cliente,"
+            			    + "clientes.apellido_cliente,"
+            			    + "metodos_de_pagos.tipo,"
+            			    + "descuentos.nombre_descuento,"
+            			    + "descuentos.porcentaje_descuento "
+            			    + "FROM ventas "
+            			    + "INNER JOIN usuarios ON ventas.fk_usuario = usuarios.id_usuario "
+            			    + "INNER JOIN clientes ON ventas.fk_cliente = clientes.id_cliente "
+            			    + "INNER JOIN metodos_de_pagos ON ventas.fk_metodo_de_pago = metodos_de_pagos.id_metodo_de_pago "
+            			    + "LEFT JOIN descuentos ON ventas.fk_descuento = descuentos.id_descuento "
+            			    + "ORDER BY ventas.fecha DESC"
+            );
+
+            ResultSet rs = statement.executeQuery();
+            
+
+            while(rs.next()) {
+
+            	// Usuario
+            	Usuario usuario = controllerUsuario.buscarUsuarioPorId(
+            	        rs.getInt("fk_usuario")
+            	);
+
+
+            	// Cliente
+            	Cliente cliente = new Cliente(
+            	        rs.getInt("fk_cliente"),
+            	        rs.getString("nombre_cliente"),
+            	        rs.getString("apellido_cliente"),
+            	        "",
+            	        "",
+            	        "",
+            	        ""
+            	);
+
+
+            	// Metodo de pago
+            	MetodoDePago metodo = new MetodoDePago(
+            	        rs.getInt("fk_metodo_de_pago"),
+            	        rs.getString("tipo")
+            	);
+
+
+            	// Descuento
+            	Descuento descuento = null;
+
+            	if(rs.getString("nombre_descuento") != null) {
+
+            	    descuento = new Descuento(
+            	        rs.getInt("fk_descuento"),
+            	        rs.getString("nombre_descuento"),
+            	        rs.getDouble("porcentaje_descuento")
+            	    );
+
+            	}else{
+
+            	    descuento = new Descuento(
+            	        0,
+            	        "Sin descuento",
+            	        0
+            	    );
+            	}
+
+                Venta venta = new Venta(
+                    rs.getInt("id_venta"),
+                    rs.getDate("fecha").toLocalDate(),
+                    rs.getDouble("total_neto"),
+                    rs.getDouble("total_bruto"),
+                    usuario,
+                    cliente,
+                    metodo,
+                    descuento
+                );
+                lista.add(venta);
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
     
 
