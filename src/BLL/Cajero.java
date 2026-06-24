@@ -13,7 +13,7 @@ public class Cajero extends Usuario {
 	private static ControllerVenta controllerVenta = new ControllerVenta();
 
     private Cliente clienteSeleccionado = null;
-    private LinkedList<ItemVenta> carrito = new LinkedList<ItemVenta>();
+    private static LinkedList<ItemVenta> carrito = new LinkedList<ItemVenta>();
 
     private int idDescuentoSeleccionado = 0;
     private double porcentajeDescuento = 0;
@@ -214,6 +214,45 @@ public class Cajero extends Usuario {
 	}
 	
 	public void agregarProducto() {
+
+	    JOptionPane.showMessageDialog(null,"Productos disponibles:\n" + controllerVenta.mostrarProductosConStock());
+
+	    int idVariante = Integer.parseInt(Validaciones.validarIngresoString("Ingrese el ID de la variante"));
+
+	    int cantidad = Integer.parseInt(Validaciones.validarIngresoString("Ingrese cantidad"));
+
+	    if (cantidad <= 0) {
+	        JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0.");
+	        return;
+	    }
+
+	    ItemVenta itemNuevo = controllerVenta.buscarItemVenta(idVariante, cantidad);
+
+	    if (itemNuevo == null) {
+	        return;
+	    }
+
+	    for (ItemVenta item : carrito) {
+	        if (item.getId_variante_producto() == idVariante) {
+	            int nuevaCantidad = item.getCantidad() + cantidad;
+
+	            if (controllerVenta.hayStockSuficiente(idVariante, nuevaCantidad)) {
+	            	item.setCantidad(nuevaCantidad);
+	                JOptionPane.showMessageDialog(null, "Cantidad actualizada en el carrito.");
+	            } else {
+	                JOptionPane.showMessageDialog(null, "No hay stock suficiente para sumar esa cantidad.");
+	            }
+
+	            return;
+	        }
+	    }
+
+	    carrito.add(itemNuevo);
+
+	    JOptionPane.showMessageDialog(null,"Producto agregado al carrito:\n" + itemNuevo);
+	}
+	
+	public static void agregarProducto_JFRAME() {
 
 	    JOptionPane.showMessageDialog(null,"Productos disponibles:\n" + controllerVenta.mostrarProductosConStock());
 
