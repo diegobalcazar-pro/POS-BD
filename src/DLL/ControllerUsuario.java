@@ -178,7 +178,7 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
         return usuarios;
     }
 
-	public void EliminarUsuario(String correo) {
+	public static void EliminarUsuario(String correo) {
         try {
             PreparedStatement statement = con.prepareStatement("DELETE FROM usuarios WHERE correo = ?");
             statement.setString(1, correo);
