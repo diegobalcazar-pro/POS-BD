@@ -43,7 +43,6 @@ public class MenuCajero2 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField inpEmail;
-	private JPasswordField inpContrasenia;
 
 	/**
 	 * Launch the application.
@@ -65,7 +64,7 @@ public class MenuCajero2 extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuCajero2(Usuario logueado) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Intel I5\\Downloads\\logo.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 742, 551);
 		contentPane = new JPanel();
@@ -76,36 +75,33 @@ public class MenuCajero2 extends JFrame {
 		
 				inpEmail = new JTextField();
 				inpEmail.setToolTipText("correo");
-				inpEmail.setBounds(445, 205, 220, 30);
+				inpEmail.setBounds(213, 156, 179, 30);
 				contentPane.add(inpEmail);
 				inpEmail.setColumns(10);
 
 		JLabel lblNewLabel_1_1 = new JLabel("Contraseña:");
 		lblNewLabel_1_1.setFont(new Font("Verdana", Font.BOLD, 15));
-		lblNewLabel_1_1.setBounds(445, 261, 220, 14);
+		lblNewLabel_1_1.setBounds(213, 131, 220, 14);
 		contentPane.add(lblNewLabel_1_1);
-
-		inpContrasenia = new JPasswordField();
-		inpContrasenia.setBounds(445, 286, 220, 30);
-		contentPane.add(inpContrasenia);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("LOGIN | POS");
-		lblNewLabel_1_2.setFont(new Font("Arial Black", Font.PLAIN, 25));
+		JLabel lblNewLabel_1_2 = new JLabel("MODULO CAJERO");
+		lblNewLabel_1_2.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1_2.setFont(new Font("Arial Black", Font.PLAIN, 17));
 		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_2.setBounds(263, 162, 237, 32);
+		lblNewLabel_1_2.setBounds(190, 15, 202, 27);
 		contentPane.add(lblNewLabel_1_2);
 				
 				JLabel lblNewLabel_1_2_1 = new JLabel("Bienvenido");
 				lblNewLabel_1_2_1.setForeground(new Color(128, 128, 128));
 				lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.CENTER);
 				lblNewLabel_1_2_1.setFont(new Font("Arial Black", Font.PLAIN, 13));
-				lblNewLabel_1_2_1.setBounds(442, 121, 237, 32);
+				lblNewLabel_1_2_1.setBounds(420, 288, 237, 32);
 				contentPane.add(lblNewLabel_1_2_1);
 								
 								JLabel lblNewLabel_2 = new JLabel("");
 								lblNewLabel_2.setBackground(new Color(0, 0, 0));
 								lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-								lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Intel I5\\Downloads\\thunder express.png"));
+								lblNewLabel_2.setIcon(new ImageIcon("src\\\\img\\\\logo1.png"));
 								lblNewLabel_2.setBounds(4, 1, 169, 76);
 								contentPane.add(lblNewLabel_2);
 								
@@ -186,7 +182,7 @@ public class MenuCajero2 extends JFrame {
 										
 										JLabel lblNewLabel = new JLabel("");
 										lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-										lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Intel I5\\Downloads\\Carpeta compartida Aula\\icono.jpg"));
+										lblNewLabel.setIcon(new ImageIcon("src\\\\img\\\\logo.png"));
 										
 										JLabel lblNewLabel_1_4 = new JLabel(LocalDate.now().getDayOfWeek().toString()+" | "+LocalDate.now().toString()+" | "+LocalDateTime.now().getHour()+":"+LocalDateTime.now().getMinute()+"hs");
 										lblNewLabel_1_4.setHorizontalAlignment(SwingConstants.CENTER);
@@ -204,15 +200,12 @@ public class MenuCajero2 extends JFrame {
 										);
 										gl_panel.setVerticalGroup(
 											gl_panel.createParallelGroup(Alignment.LEADING)
-												.addGroup(gl_panel.createSequentialGroup()
+												.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
 													.addContainerGap(15, Short.MAX_VALUE)
-													.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-														.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-															.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-															.addContainerGap())
-														.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-															.addComponent(lblNewLabel_1_4, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-															.addGap(19))))
+													.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+														.addComponent(lblNewLabel_1_4, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+														.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+													.addContainerGap())
 										);
 										panel.setLayout(gl_panel);
 										
