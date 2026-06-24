@@ -70,7 +70,6 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
 		return usuario;
 	}
 
-	@Override
 	public void agregarUsuario(Usuario usuario) {
 		try {
 			PreparedStatement statement = con.prepareStatement(
@@ -95,7 +94,7 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
 		}
 	}
 
-	@Override
+	
 	public LinkedList<Usuario> mostrarUsuarios() {
 		LinkedList<Usuario> usuarios = new LinkedList<>();
 		try {

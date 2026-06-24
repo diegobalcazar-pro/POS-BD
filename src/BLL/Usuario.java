@@ -102,10 +102,6 @@ public abstract class Usuario {
 	
 	public abstract void Menu();
 	
-	public void agregarUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	// --- MÉTODOS ---
 	/*

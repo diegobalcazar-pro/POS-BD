@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,6 +45,13 @@ public class PantallaConfiDescuentos extends JFrame {
 		JButton btnSalir = new JButton("<- Salir");
 		btnSalir.setBounds(262, 167, 117, 29);
 		contentPane.add(btnSalir);
+		btnSalir.addActionListener(new ActionListener() {
+			   public void actionPerformed(ActionEvent e) {
+				 PantallaConfiguracion nueva = new PantallaConfiguracion();
+			     nueva.setVisible(true);
+			     dispose();
+				   }
+			    });
 
 	}
 

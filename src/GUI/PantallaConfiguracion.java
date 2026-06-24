@@ -3,6 +3,8 @@ package GUI;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,11 +12,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import BLL.Usuario;
+
 public class PantallaConfiguracion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
 	
 	public PantallaConfiguracion() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,16 +39,24 @@ public class PantallaConfiguracion extends JFrame {
 		JButton btnConfiDescuentos = new JButton("Configurar Descuentos");
 		btnConfiDescuentos.setBounds(233, 94, 175, 29);
 		contentPane.add(btnConfiDescuentos);
-		btnConfiDescuentos.addActionListener(e -> {
-			   PantallaConfiDescuentos nueva = new PantallaConfiDescuentos();
-			   nueva.setVisible(true);
-			    dispose();
-			});
+		btnConfiDescuentos.addActionListener(new ActionListener() {
+			   public void actionPerformed(ActionEvent e) {
+				 PantallaConfiDescuentos nueva = new PantallaConfiDescuentos();
+			     nueva.setVisible(true);
+			     dispose();
+				   }
+			    });
 		
 		JButton btnNewButton_2 = new JButton("<- Salir");
 		btnNewButton_2.setBackground(Color.RED);
 		btnNewButton_2.setBounds(164, 157, 117, 29);
 		contentPane.add(btnNewButton_2);
+		btnNewButton_2.addActionListener(new ActionListener() {
+			   public void actionPerformed(ActionEvent e) {
+				   
+				
+				 }
+			   });
 
 	}
 

@@ -26,9 +26,6 @@ import repository.Validaciones;
 	    }
 		
 		
-		 @Override
-		    public void agregarUsuario(Usuario usuario) {
-		    }
 		
 		
 
