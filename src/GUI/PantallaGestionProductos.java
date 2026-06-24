@@ -1,7 +1,6 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -21,7 +20,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import BLL.Producto;
-import BLL.Usuario;
 import DLL.ControllerProducto;
 
 public class PantallaGestionProductos extends JFrame {
@@ -31,12 +29,8 @@ public class PantallaGestionProductos extends JFrame {
 	private JTable table;
     private DefaultTableModel model;
     private JTextField inpFiltro;
-    private ControllerProducto controller = new ControllerProducto();
-	
-	public PantallaGestionProductos() {
+    public PantallaGestionProductos() {
 		
-		
-	
 			setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        setBounds(100, 100, 800, 500);
@@ -45,13 +39,11 @@ public class PantallaGestionProductos extends JFrame {
 	        contentPane.setLayout(null);
 	        setContentPane(contentPane);
 	        
-	        
-	        JLabel lblSeleccionado = new JLabel("Productos:");
-	        lblSeleccionado.setForeground(new Color(255, 255, 255));
-	        lblSeleccionado.setBackground(new Color(255, 255, 255));
-	        lblSeleccionado.setBounds(19, 66, 760, 20);
-	        contentPane.add(lblSeleccionado);
-	        
+	        JLabel lblProductos = new JLabel("Productos:");
+	        lblProductos.setForeground(new Color(255, 255, 255));
+	        lblProductos.setBackground(new Color(255, 255, 255));
+	        lblProductos.setBounds(19, 66, 760, 20);
+	        contentPane.add(lblProductos);
 	        
 	        //defino el nombre qeu va a tener cada columna
 	        model = new DefaultTableModel(new String[]{"ID", "Nombre", "Descripción", "Categoria", "Proveedor"}, 0);
@@ -62,26 +54,31 @@ public class PantallaGestionProductos extends JFrame {
 	        scrollPane.setBounds(18, 87, 749, 200);
 	        contentPane.add(scrollPane);
 
-	        JButton btnMovimientos = new JButton("Movimientos de sock");
+	        JButton btnMovimientos = new JButton("Movimientos de stock");
 	        btnMovimientos.setForeground(new Color(255, 255, 255));
 	        btnMovimientos.setBackground(new Color(0, 128, 128));
 	        btnMovimientos.setBounds(323, 326, 187, 33);
 	        contentPane.add(btnMovimientos);
+	        btnMovimientos.addActionListener(new ActionListener() {
+	 		   public void actionPerformed(ActionEvent e) {
+	 		     PantallaVerMovimientosStock nueva = new PantallaVerMovimientosStock();
+	 		     nueva.setVisible(true);
+	 		     dispose();
+	 			   }
+	 		    });
 	        
 	        JButton filtrarProducto = new JButton("Buscar por Categoria");
 	        filtrarProducto.setForeground(new Color(255, 255, 255));
 	        filtrarProducto.setBackground(new Color(0, 128, 128));
 	        filtrarProducto.addActionListener(new ActionListener() {
-	        	public void actionPerformed(ActionEvent e) {
-	        		
+	        	public void actionPerformed(ActionEvent e) {	        		
 	        		if (inpFiltro.getText().isEmpty()) {
 	        			cargarTablaFiltrada("Categoria");
 					}else {
 	        			cargarTablaFiltrada(inpFiltro.getText());
-
 					}
 	        	}
-	        });
+	        });	        
 	        filtrarProducto.setBounds(73, 350, 152, 23);
 	        contentPane.add(filtrarProducto);
 	        
@@ -89,8 +86,7 @@ public class PantallaGestionProductos extends JFrame {
 	        btnFiltrarNombre.setForeground(new Color(255, 255, 255));
 	        btnFiltrarNombre.setBackground(new Color(0, 128, 128));
 	        btnFiltrarNombre.addActionListener(new ActionListener() {
-	        	public void actionPerformed(ActionEvent e) {
-	        		
+	        	public void actionPerformed(ActionEvent e) {	        		
 	        		if (inpFiltro.getText().isEmpty()) {
 	        			cargarTablaFiltrada("Nombre");
 					}else {
@@ -123,21 +119,24 @@ public class PantallaGestionProductos extends JFrame {
 	        contentPane.add(inpFiltro);
 	        inpFiltro.setColumns(10);
 
-	     // Cargar datos
+	        //Muestra la Cargar datos en la tabla
 	        cargarTabla();
 	        
+	        //Titulo
 	        JLabel lblGestionProductos = new JLabel("Gestion de Productos");
 	        lblGestionProductos.setForeground(new Color(255, 250, 250));
 	        lblGestionProductos.setFont(new Font("Tahoma", Font.BOLD, 22));
 	        lblGestionProductos.setBounds(275, 23, 235, 33);
 	    	contentPane.add(lblGestionProductos);
 	        
+	    	//Boton de salir
 	    	JButton btnSalir = new JButton("<- Salir");
 	    	btnSalir.setForeground(new Color(255, 255, 255));
 	    	btnSalir.setBackground(new Color(165, 42, 42));
 	    	btnSalir.setBounds(612, 326, 122, 33);
 	    	contentPane.add(btnSalir);
 	    	
+	    	//Imagen de Fondo
 	        JLabel lblNewLabelFONDO = new JLabel("");
 	        lblNewLabelFONDO.setHorizontalAlignment(SwingConstants.CENTER);
 	        lblNewLabelFONDO.setIcon(new ImageIcon("src\\img\\FondoAdmin.jpg"));
@@ -151,7 +150,7 @@ public class PantallaGestionProductos extends JFrame {
 	    	//vacia la tabla
 	        model.setRowCount(0);
 	        // traigo todos los usuarios
-	        LinkedList<Producto> productos = controller.mostrarProductos();
+	        LinkedList<Producto> productos = ControllerProducto.mostrarProductos();
 	        //recorro cada usuario
 	        for (Producto u : productos) {
 	        	model.addRow(new Object[]{
@@ -167,10 +166,10 @@ public class PantallaGestionProductos extends JFrame {
 	    	//vacia la tabla
 	        model.setRowCount(0);
 	        // traigo todos los productos
-	        LinkedList<Producto> productos = controller.mostrarProductos();
+	        LinkedList<Producto> productos = ControllerProducto.mostrarProductos();
 	        //recorro cada producto
 	        for (Producto u : productos) {
-	        	if (u.getCategoria().equals(filtro) || u.getNombre_producto().equals(filtro) /*|| u.getProveedor().startsWith(filtro)*/) {
+	        	if (u.getCategoria().getNombre_categoria().equals(filtro) || u.getNombre_producto().equals(filtro)) {
 					
 	        		model.addRow(new Object[]{
 	        			    u.getid_producto(),

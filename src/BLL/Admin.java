@@ -4,15 +4,15 @@ import javax.swing.JOptionPane;
 
 import java.util.LinkedList;
 
+import DLL.ControllerAuditoriaStock;
 import DLL.ControllerVenta;
 import repository.ProductoRepository;
 import repository.Validaciones;
-
+import BLL.AuditoriaStock;
 
 	public class Admin extends Usuario implements Validaciones {
 		
 		private ControllerVenta controllerVenta = new ControllerVenta();
-		String movimientos = AuditoriaStock.mostrarMovimientosStock();
 
 		public Admin(int id_usuario, String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
 			super(id_usuario, nombre_usuario, apellido_usuario, correo, contrasenia, rol);
@@ -171,9 +171,35 @@ import repository.Validaciones;
 						
 							break;
 						case 1:
+							ControllerAuditoriaStock controllerAuditoriaStock = null;
 							//VER MOVIMIENTOS DE STOCK
-							JOptionPane.showMessageDialog(null,AuditoriaStock.mostrarMovimientosStock(), "Movimientos de Stock",JOptionPane.INFORMATION_MESSAGE);
-							break;
+							LinkedList<AuditoriaStock> movimientos = controllerAuditoriaStock.mostrarMovimientosStock();
+
+						    StringBuilder texto = new StringBuilder();
+
+						    for (AuditoriaStock a : movimientos) {
+
+						        texto.append("ID: ")
+						             .append(a.getid_auditoria_stock())
+						             .append("\nMovimiento: ")
+						             .append(a.getTipo_movimiento())
+						             .append("\nCantidad: ")
+						             .append(a.getCantidad())
+						             .append("\nFecha: ")
+						             .append(a.getFecha())
+						             .append("\n-------------------------\n");
+						    }
+
+						    JOptionPane.showMessageDialog(
+						        null,
+						        texto.toString(),
+						        "Movimientos de Stock",
+						        JOptionPane.INFORMATION_MESSAGE
+						    );
+
+						    break;
+							//JOptionPane.showMessageDialog(null,AuditoriaStock.mostrarMovimientosStock(), "Movimientos de Stock",JOptionPane.INFORMATION_MESSAGE);
+							//break;
 
 						default:
 							break;

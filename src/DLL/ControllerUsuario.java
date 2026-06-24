@@ -223,6 +223,44 @@ public class ControllerUsuario<T extends Usuario> implements UsuarioRepository {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public Usuario buscarUsuarioPorId(int id_usuario) {
+	    Usuario usuario = null;
+	    try {
+	        PreparedStatement stmt = con.prepareStatement(
+	            "SELECT * FROM usuarios WHERE id_usuario = ?"
+	        );
+
+	        stmt.setInt(1, id_usuario);
+
+	        ResultSet rs = stmt.executeQuery();
+
+	        if (rs.next()) {
+
+	            int id = rs.getInt("id_usuario");
+	            String nombre = rs.getString("nombre_usuario");
+	            String apellido = rs.getString("apellido_usuario");
+	            String correo = rs.getString("correo");
+	            String contrasenia = rs.getString("contrasenia");
+	            String rol = rs.getString("rol");
+
+	            switch (rol.toLowerCase()) {
+	                case "cajero":
+	                    usuario = new Cajero(id, nombre, apellido, correo, contrasenia, rol);
+	                    break;
+	                case "repositor":
+	                    usuario = new Repositor(id, nombre, apellido, correo, contrasenia, rol);
+	                    break;
+	                case "admin":
+	                    usuario = new Admin(id, nombre, apellido, correo, contrasenia, rol);
+	                    break;
+	            }
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return usuario;
+	}
 
 	
 }

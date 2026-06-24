@@ -16,7 +16,7 @@ public abstract class Usuario {
 	protected String contrasenia;
 	protected String rol;
 
-	private static ControllerUsuario controller = new ControllerUsuario();
+	protected static ControllerUsuario controller = new ControllerUsuario();
 
 	// --- CONSTRUCTORES ---
 	public Usuario(int id_usuario, String nombre_usuario, String apellido_usuario, String correo, String contrasenia, String rol) {
@@ -104,27 +104,7 @@ public abstract class Usuario {
 	
 
 	// --- MÉTODOS ---
-	/*
-	 public static Usuario Login() {
-			String correo = "";
-			while (correo.isEmpty()) {
-				correo = JOptionPane.showInputDialog("Ingrese correo");
-				if (correo == null || correo.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Incorrecto");
-				}
-			}
-
-			String contraseniaInput = "";
-			while (contraseniaInput.isEmpty()) {
-				contraseniaInput = JOptionPane.showInputDialog("Ingrese Contraseña");
-				if (contraseniaInput == null || contraseniaInput.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Incorrecto");
-				}
-			}
-			return controller.login(correo, contraseniaInput);
-		}
-	  
-	  */
+	
 		public static Usuario Login(String correoInput, String contraseniaInput2) {
 			String correo = correoInput;
 			while (correo.isEmpty()) {

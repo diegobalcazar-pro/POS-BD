@@ -92,7 +92,5 @@ public class AuditoriaStock {
 		this.depositoDestino = depositoDestino;
 	}
 
-	public static String mostrarMovimientosStock() {
-	    return controller.mostrarMovimientosStock();
-	}
+	
 }

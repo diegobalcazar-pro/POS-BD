@@ -263,4 +263,30 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 			e.printStackTrace();
 		}
 	}
+	
+	public VarianteProducto buscarPorId(int id) {
+	    VarianteProducto variante = null;
+	    try {
+	        PreparedStatement stmt = con.prepareStatement(
+	            "SELECT v.*, p.nombre_producto FROM variantes_productos v JOIN productos p ON v.fk_producto = p.id_producto WHERE v.id_variante_producto = ?"
+	        );
+	        stmt.setInt(1, id);
+	        ResultSet rs = stmt.executeQuery();
+	        if (rs.next()) {
+	            Producto producto = new Producto(rs.getInt("fk_producto"), rs.getString("nombre_producto"), "", null, null
+	            );
+	            variante = new VarianteProducto(
+	                rs.getInt("id_variante_producto"),
+	                rs.getString("talle"),
+	                rs.getString("color"),
+	                rs.getDouble("precio_venta"),
+	                producto
+	            );
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return variante;
+	}
 }
