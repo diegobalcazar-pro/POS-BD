@@ -85,37 +85,38 @@ public class PantallaGestionUsuarios extends JFrame {
         btnEliminar.setBounds(330, 270, 150, 40);
         contentPane.add(btnEliminar);
         
-        JButton filtrarEmpleado = new JButton("Filtrar Empleado");
+        JButton filtrarEmpleado = new JButton("Filtrar Rol");
         filtrarEmpleado.setForeground(new Color(255, 255, 255));
         filtrarEmpleado.setBackground(new Color(0, 128, 128));
         filtrarEmpleado.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
         		if (inpFiltro.getText().isEmpty()) {
-        			cargarTablaFiltrada("Usuario");
+        			cargarTablaFiltrada("Rol");
 				}else {
         			cargarTablaFiltrada(inpFiltro.getText());
 
 				}
-        		
-        		
         	}
         });
         filtrarEmpleado.setBounds(502, 270, 150, 40);
         contentPane.add(filtrarEmpleado);
         
-        JButton btnFiitrarAdmin = new JButton("Fiitrar Admin");
-        btnFiitrarAdmin.setForeground(new Color(255, 255, 255));
-        btnFiitrarAdmin.setBackground(new Color(0, 128, 128));
-        btnFiitrarAdmin.addActionListener(new ActionListener() {
+        JButton btnFiltrarNombre = new JButton("Filtrar Nombre");
+        btnFiltrarNombre.setForeground(new Color(255, 255, 255));
+        btnFiltrarNombre.setBackground(new Color(0, 128, 128));
+        btnFiltrarNombre.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
-        		cargarTablaFiltrada("Admin");
-
+        		if (inpFiltro.getText().isEmpty()) {
+        			cargarTablaFiltrada("Nombre");
+				}else {
+        			cargarTablaFiltrada(inpFiltro.getText());
+				}
         	}
         });
-        btnFiitrarAdmin.setBounds(502, 335, 150, 40);
-        contentPane.add(btnFiitrarAdmin);
+        btnFiltrarNombre.setBounds(502, 335, 150, 40);
+        contentPane.add(btnFiltrarNombre);
         
         JButton btnLimpiarFiltro = new JButton("Limpiar filtro");
         btnLimpiarFiltro.setForeground(new Color(255, 255, 255));
@@ -169,14 +170,16 @@ public class PantallaGestionUsuarios extends JFrame {
         // Acción: Agregar usuario
         btnAgregar.addActionListener(e -> {
             JTextField nombreField = new JTextField();
+            JTextField apellidoField = new JTextField();
             JTextField emailField = new JTextField();
-            JTextField tipoField = new JTextField();
+            JTextField rolField = new JTextField();
             JPasswordField passwordField = new JPasswordField();
 
             Object[] fields = {
                 "Nombre:", nombreField,
+                "Apellido", apellidoField,
                 "Email:", emailField,
-                "Tipo:", tipoField,
+                "Rol:", rolField,
                 "Contraseña:", passwordField
             };
 
@@ -186,10 +189,10 @@ public class PantallaGestionUsuarios extends JFrame {
             	Usuario nuevo = new Admin(
             	        0,
             	        nombreField.getText(),
-            	        "apellido",
+            	        apellidoField.getText(),
             	        emailField.getText(),
             	        new String(passwordField.getPassword()),
-            	        "admin"
+            	        rolField.getText()
             	);
             
 
@@ -255,7 +258,7 @@ public class PantallaGestionUsuarios extends JFrame {
         LinkedList<Usuario> usuarios = controller.mostrarUsuarios();
         //recorro cada usuario
         for (Usuario u : usuarios) {
-        	if (u.getRol().equals(filtro) || u.getRol().equals(filtro) || u.getRol().startsWith(filtro)) {
+        	if (u.getRol().equals(filtro) || u.getNombre_usuario().equals(filtro) || u.getRol().startsWith(filtro)) {
 				
         		model.addRow(new Object[]{
         			    u.getId_usuario(),
