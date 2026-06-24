@@ -3,7 +3,6 @@ package DLL;
 import BLL.Producto;
 import BLL.Categoria;
 import BLL.Proveedor;
-import BLL.VarianteProducto;
 import repository.ProductoRepository;
 import java.sql.*;
 import java.util.ArrayList;
