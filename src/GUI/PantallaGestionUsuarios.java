@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,6 +28,7 @@ import BLL.Repositor;
 
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import java.awt.Component;
 
@@ -48,8 +50,11 @@ public class PantallaGestionUsuarios extends JFrame {
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
         contentPane.setLayout(null);
         setContentPane(contentPane);
-
+        
+        
         JLabel lblSeleccionado = new JLabel("Seleccionado:");
+        lblSeleccionado.setForeground(new Color(255, 255, 255));
+        lblSeleccionado.setBackground(new Color(255, 255, 255));
         lblSeleccionado.setBounds(10, 10, 760, 20);
         contentPane.add(lblSeleccionado);
         //si lo adapto, primero cambio las columnas -> depende de cada tabla 
@@ -63,18 +68,26 @@ public class PantallaGestionUsuarios extends JFrame {
         contentPane.add(scrollPane);
         //botones
         JButton btnAgregar = new JButton("Agregar");
+        btnAgregar.setForeground(new Color(255, 255, 255));
+        btnAgregar.setBackground(new Color(0, 128, 128));
         btnAgregar.setBounds(10, 270, 150, 40);
         contentPane.add(btnAgregar);
 
         JButton btnEditar = new JButton("Editar");
+        btnEditar.setForeground(new Color(255, 255, 255));
+        btnEditar.setBackground(new Color(0, 128, 128));
         btnEditar.setBounds(170, 270, 150, 40);
         contentPane.add(btnEditar);
 
         JButton btnEliminar = new JButton("Eliminar");
+        btnEliminar.setForeground(new Color(255, 255, 255));
+        btnEliminar.setBackground(new Color(0, 128, 128));
         btnEliminar.setBounds(330, 270, 150, 40);
         contentPane.add(btnEliminar);
         
         JButton filtrarEmpleado = new JButton("Filtrar Empleado");
+        filtrarEmpleado.setForeground(new Color(255, 255, 255));
+        filtrarEmpleado.setBackground(new Color(0, 128, 128));
         filtrarEmpleado.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
@@ -92,6 +105,8 @@ public class PantallaGestionUsuarios extends JFrame {
         contentPane.add(filtrarEmpleado);
         
         JButton btnFiitrarAdmin = new JButton("Fiitrar Admin");
+        btnFiitrarAdmin.setForeground(new Color(255, 255, 255));
+        btnFiitrarAdmin.setBackground(new Color(0, 128, 128));
         btnFiitrarAdmin.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		
@@ -103,6 +118,8 @@ public class PantallaGestionUsuarios extends JFrame {
         contentPane.add(btnFiitrarAdmin);
         
         JButton btnLimpiarFiltro = new JButton("Limpiar filtro");
+        btnLimpiarFiltro.setForeground(new Color(255, 255, 255));
+        btnLimpiarFiltro.setBackground(new Color(0, 128, 128));
         btnLimpiarFiltro.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		cargarTabla();
@@ -112,6 +129,7 @@ public class PantallaGestionUsuarios extends JFrame {
         contentPane.add(btnLimpiarFiltro);
         
         JLabel lblNewLabel = new JLabel("filtro");
+        lblNewLabel.setForeground(new Color(255, 255, 255));
         lblNewLabel.setBounds(668, 270, 46, 14);
         contentPane.add(lblNewLabel);
         
@@ -205,6 +223,11 @@ public class PantallaGestionUsuarios extends JFrame {
                 JOptionPane.showMessageDialog(null, "Seleccione un usuario.");
             }
         });
+        JLabel lblNewLabelFONDO = new JLabel("");
+        lblNewLabelFONDO.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabelFONDO.setIcon(new ImageIcon("src\\img\\FondoAdmin.jpg"));
+        lblNewLabelFONDO.setBounds(0, 0, 784, 461);
+    	contentPane.add(lblNewLabelFONDO);
     }
 
     private void cargarTabla() {
@@ -216,7 +239,13 @@ public class PantallaGestionUsuarios extends JFrame {
         for (Usuario u : usuarios) {
         	//Si cambio el formato, acà tambièn cambia
         	//da el formato de la tabla a los datos
-            model.addRow(new Object[]{u.getId_usuario(), u.getNombre_usuario(), u.getRol(), u.getRol()});
+        	model.addRow(new Object[]{
+    			    u.getId_usuario(),
+    			    u.getNombre_usuario(),
+    			    u.getApellido_usuario(),
+    			    u.getCorreo(),
+    			    u.getRol()
+    			});
         }
     }
     private void cargarTablaFiltrada(String filtro) {
@@ -238,4 +267,8 @@ public class PantallaGestionUsuarios extends JFrame {
 			}
         }
     }
+
+    
+
+    
 }

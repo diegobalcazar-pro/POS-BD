@@ -20,6 +20,8 @@ import BLL.Cajero;
 import BLL.Repositor;
 import BLL.Usuario;
 import DLL.ControllerUsuario;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class MenuAdmin extends JFrame {
 
@@ -28,10 +30,13 @@ public class MenuAdmin extends JFrame {
 
 	
 	public MenuAdmin(Usuario logueado) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Intel I5\\Downloads\\92b80f55c7e3a2476cc2ff9481e357c3.jpg"));
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 552, 375);
 		contentPane = new JPanel();
+		contentPane.setForeground(new Color(255, 255, 255));
+		contentPane.setBackground(new Color(211, 211, 211));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -41,13 +46,17 @@ public class MenuAdmin extends JFrame {
 		
 		
 		JLabel lblNewLabel5 = new JLabel("Bienvenido Admin: " + logueado.getNombre_usuario());
-		lblNewLabel5.setFont(new Font("Lucida Grande", Font.BOLD, 17));
-		lblNewLabel5.setBounds(132, 42, 310, 16);
+		lblNewLabel5.setForeground(new Color(255, 255, 255));
+		lblNewLabel5.setBackground(new Color(255, 0, 255));
+		lblNewLabel5.setFont(new Font("Arial Black", Font.BOLD, 19));
+		lblNewLabel5.setBounds(107, 48, 360, 29);
 		contentPane.add(lblNewLabel5);
 		
 		//Gestión Usuarios
 		JButton btnGestionUsuarios = new JButton("Gestión de Usuarios");
-		btnGestionUsuarios.setBounds(48, 128, 158, 29);
+		btnGestionUsuarios.setForeground(new Color(255, 255, 255));
+		btnGestionUsuarios.setBackground(new Color(128, 128, 192));
+		btnGestionUsuarios.setBounds(66, 128, 158, 29);
 		contentPane.add(btnGestionUsuarios);
 		
 		btnGestionUsuarios.addActionListener(new ActionListener() {
@@ -61,7 +70,9 @@ public class MenuAdmin extends JFrame {
 		
 		//Info de ventas
 		JButton btnInfoVentas = new JButton("Info de ventas");
-		btnInfoVentas.setBounds(66, 184, 133, 29);
+		btnInfoVentas.setForeground(new Color(255, 255, 255));
+		btnInfoVentas.setBackground(new Color(128, 128, 192));
+		btnInfoVentas.setBounds(82, 184, 133, 29);
 		contentPane.add(btnInfoVentas);
 		btnInfoVentas.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -74,7 +85,9 @@ public class MenuAdmin extends JFrame {
 		
 		//Gestión Productos
 		JButton btnGestionProductos = new JButton("Gestión de Productos");
-		btnGestionProductos.setBounds(284, 128, 158, 29);
+		btnGestionProductos.setForeground(new Color(255, 255, 255));
+		btnGestionProductos.setBackground(new Color(128, 128, 192));
+		btnGestionProductos.setBounds(307, 128, 158, 29);
 		contentPane.add(btnGestionProductos);
 		btnGestionProductos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -87,7 +100,9 @@ public class MenuAdmin extends JFrame {
 		
 		//Configuración
 		JButton btnConfiguracion = new JButton("Configuración");
-		btnConfiguracion.setBounds(292, 184, 137, 29);
+		btnConfiguracion.setForeground(new Color(255, 255, 255));
+		btnConfiguracion.setBackground(new Color(128, 128, 192));
+		btnConfiguracion.setBounds(317, 184, 137, 29);
 		contentPane.add(btnConfiguracion);
 		//MenuAdmin menu = this;
 		btnConfiguracion.addActionListener(new ActionListener() {
@@ -101,7 +116,10 @@ public class MenuAdmin extends JFrame {
 		
 		//Salir
 		JButton btnCerrarSesion = new JButton("Cerrar Sesión");
-		btnCerrarSesion.setBounds(193, 262, 117, 29);
+		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		btnCerrarSesion.setForeground(new Color(255, 255, 255));
+		btnCerrarSesion.setBackground(new Color(160, 82, 45));
+		btnCerrarSesion.setBounds(215, 280, 109, 23);
 		contentPane.add(btnCerrarSesion);
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -110,6 +128,11 @@ public class MenuAdmin extends JFrame {
 		        dispose();
 			}
 		});
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setIcon(new ImageIcon("src\\img\\FondoAdmin.jpg"));
+		lblNewLabel.setBounds(0, 0, 536, 336);
+		contentPane.add(lblNewLabel);
 		
 
 	}
