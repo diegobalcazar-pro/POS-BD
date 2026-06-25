@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import BLL.Usuario;
 import BLL.Venta;
 import DLL.ControllerVenta;
 
@@ -30,8 +31,10 @@ public class PantallaInfoVentas extends JFrame {
     private DefaultTableModel model;
     private JTextField inpFiltro;
     private ControllerVenta controller = new ControllerVenta();
-    public PantallaInfoVentas() {
-		
+    private Usuario logueado;
+    
+    public PantallaInfoVentas(Usuario logueado) {
+    	    this.logueado = logueado;
 			setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        setBounds(100, 100, 800, 500);
@@ -62,7 +65,7 @@ public class PantallaInfoVentas extends JFrame {
 	        contentPane.add(btnMovimientos);
 	        btnMovimientos.addActionListener(new ActionListener() {
 	 		   public void actionPerformed(ActionEvent e) {
-	 		     PantallaTopVentas nueva = new PantallaTopVentas();
+	 		     PantallaTopVentas nueva = new PantallaTopVentas(logueado);
 	 		     nueva.setVisible(true);
 	 		     dispose();
 	 			   }
@@ -136,6 +139,13 @@ public class PantallaInfoVentas extends JFrame {
 	    	btnSalir.setBackground(new Color(165, 42, 42));
 	    	btnSalir.setBounds(612, 326, 122, 33);
 	    	contentPane.add(btnSalir);
+	    	btnSalir.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					MenuAdmin nueva = new MenuAdmin(logueado);
+				     nueva.setVisible(true);
+				     dispose();
+					   }
+				    });
 	    	
 	    	//Imagen de Fondo
 	        JLabel lblNewLabelFONDO = new JLabel("");

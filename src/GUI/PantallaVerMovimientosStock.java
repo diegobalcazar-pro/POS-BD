@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import BLL.AuditoriaStock;
+import BLL.Usuario;
 import DLL.ControllerAuditoriaStock;
 
 public class PantallaVerMovimientosStock extends JFrame {
@@ -30,8 +31,10 @@ public class PantallaVerMovimientosStock extends JFrame {
     private DefaultTableModel model;
     private JTextField inpFiltro;
     private ControllerAuditoriaStock controller = new ControllerAuditoriaStock();
+    private Usuario logueado;
 	
-	public PantallaVerMovimientosStock() {
+	public PantallaVerMovimientosStock(Usuario logueado) {
+		this.logueado = logueado;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 500);
@@ -122,6 +125,13 @@ public class PantallaVerMovimientosStock extends JFrame {
     	btnSalir.setBackground(new Color(165, 42, 42));
     	btnSalir.setBounds(614, 326, 122, 33);
     	contentPane.add(btnSalir);
+    	btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PantallaGestionProductos nueva = new PantallaGestionProductos(logueado);
+			     nueva.setVisible(true);
+			     dispose();
+				   }
+			    });
     	
     	//Imagen de Fondo
         JLabel lblNewLabelFONDO = new JLabel("");

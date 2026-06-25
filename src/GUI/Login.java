@@ -111,7 +111,7 @@ public class Login extends JFrame {
 				
                     if (logueado != null) {
                         if (logueado instanceof Admin) {
-                            JOptionPane.showMessageDialog(null, "Bienvenido Admin " + logueado.getNombre_usuario());
+                            //JOptionPane.showMessageDialog(null, "Bienvenido Admin " + logueado.getNombre_usuario());
                             // Ir a menu de admin
                             //logueado.Menu();
                             MenuAdmin menuadm = new MenuAdmin(logueado);

@@ -3,6 +3,8 @@ package GUI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
@@ -16,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import BLL.Usuario;
 import DLL.ControllerCategoria;
 import DLL.ControllerProducto;
 
@@ -29,8 +32,10 @@ public class PantallaTopVentas extends JFrame {
 	private DefaultTableModel modelProducto;
 	private ControllerProducto controllerProducto = new ControllerProducto();
 	private ControllerCategoria controllerCategoria = new ControllerCategoria();
+	private Usuario logueado;
 	
-	public PantallaTopVentas() {
+	public PantallaTopVentas(Usuario logueado) {
+		this.logueado = logueado;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 500);
@@ -83,6 +88,13 @@ public class PantallaTopVentas extends JFrame {
     	btnSalir.setBackground(new Color(165, 42, 42));
     	btnSalir.setBounds(281, 359, 122, 33);
     	contentPane.add(btnSalir);
+    	btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PantallaInfoVentas nueva = new PantallaInfoVentas(logueado);
+			     nueva.setVisible(true);
+			     dispose();
+				   }
+			    });
     	
     	//Imagen de Fondo
         JLabel lblNewLabelFONDO = new JLabel("");

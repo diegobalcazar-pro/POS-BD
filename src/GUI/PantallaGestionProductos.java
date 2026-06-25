@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import BLL.Producto;
+import BLL.Usuario;
 import DLL.ControllerProducto;
 
 public class PantallaGestionProductos extends JFrame {
@@ -29,8 +30,10 @@ public class PantallaGestionProductos extends JFrame {
 	private JTable table;
     private DefaultTableModel model;
     private JTextField inpFiltro;
-    public PantallaGestionProductos() {
-		
+    private Usuario logueado;
+    
+    public PantallaGestionProductos(Usuario logueado) {
+    	    this.logueado = logueado;
 			setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	        setBounds(100, 100, 800, 500);
@@ -61,7 +64,7 @@ public class PantallaGestionProductos extends JFrame {
 	        contentPane.add(btnMovimientos);
 	        btnMovimientos.addActionListener(new ActionListener() {
 	 		   public void actionPerformed(ActionEvent e) {
-	 		     PantallaVerMovimientosStock nueva = new PantallaVerMovimientosStock();
+	 		     PantallaVerMovimientosStock nueva = new PantallaVerMovimientosStock(logueado);
 	 		     nueva.setVisible(true);
 	 		     dispose();
 	 			   }
@@ -135,6 +138,13 @@ public class PantallaGestionProductos extends JFrame {
 	    	btnSalir.setBackground(new Color(165, 42, 42));
 	    	btnSalir.setBounds(612, 326, 122, 33);
 	    	contentPane.add(btnSalir);
+	    	btnSalir.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					MenuAdmin nueva = new MenuAdmin(logueado);
+				     nueva.setVisible(true);
+				     dispose();
+					   }
+				    });
 	    	
 	    	//Imagen de Fondo
 	        JLabel lblNewLabelFONDO = new JLabel("");

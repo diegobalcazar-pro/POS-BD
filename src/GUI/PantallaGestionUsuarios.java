@@ -42,8 +42,10 @@ public class PantallaGestionUsuarios extends JFrame {
     private Usuario usuarioSeleccionado;
     private JTextField inpFiltro;
     private ControllerUsuario controller = new ControllerUsuario();
+    private Usuario logueado;
 	
-	public PantallaGestionUsuarios() {
+	public PantallaGestionUsuarios(Usuario logueado) {
+		this.logueado = logueado;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 500);
@@ -310,6 +312,13 @@ public class PantallaGestionUsuarios extends JFrame {
     	btnSalir.setBackground(new Color(165, 42, 42));
     	btnSalir.setBounds(631, 326, 122, 33);
     	contentPane.add(btnSalir);
+    	btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuAdmin nueva = new MenuAdmin(logueado);
+			     nueva.setVisible(true);
+			     dispose();
+				   }
+			    });
     	
         JLabel lblNewLabelFONDO = new JLabel("");
         lblNewLabelFONDO.setHorizontalAlignment(SwingConstants.CENTER);

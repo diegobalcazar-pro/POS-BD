@@ -49,19 +49,18 @@ public class MenuAdmin extends JFrame {
 		lblNewLabel5.setForeground(new Color(255, 255, 255));
 		lblNewLabel5.setBackground(new Color(255, 0, 255));
 		lblNewLabel5.setFont(new Font("Arial Black", Font.BOLD, 19));
-		lblNewLabel5.setBounds(107, 48, 360, 29);
+		lblNewLabel5.setBounds(119, 30, 360, 29);
 		contentPane.add(lblNewLabel5);
 		
-		//Gestión Usuarios
+		//Gestión Usuarios BOTON LOGUEADO
 		JButton btnGestionUsuarios = new JButton("Gestión de Usuarios");
 		btnGestionUsuarios.setForeground(new Color(255, 255, 255));
 		btnGestionUsuarios.setBackground(new Color(128, 128, 192));
 		btnGestionUsuarios.setBounds(66, 128, 158, 29);
 		contentPane.add(btnGestionUsuarios);
-		
 		btnGestionUsuarios.addActionListener(new ActionListener() {
 		   public void actionPerformed(ActionEvent e) {
-		     PantallaGestionUsuarios nueva = new PantallaGestionUsuarios();
+		     PantallaGestionUsuarios nueva = new PantallaGestionUsuarios(logueado);
 		     nueva.setVisible(true);
 		     dispose();
 			   }
@@ -76,7 +75,7 @@ public class MenuAdmin extends JFrame {
 		contentPane.add(btnInfoVentas);
 		btnInfoVentas.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			PantallaInfoVentas nueva = new PantallaInfoVentas();
+			PantallaInfoVentas nueva = new PantallaInfoVentas(logueado);
 		     nueva.setVisible(true);
 		     dispose();
 			   }
@@ -91,7 +90,7 @@ public class MenuAdmin extends JFrame {
 		contentPane.add(btnGestionProductos);
 		btnGestionProductos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PantallaGestionProductos nueva = new PantallaGestionProductos();
+				PantallaGestionProductos nueva = new PantallaGestionProductos(logueado);
 			     nueva.setVisible(true);
 			     dispose();
 				   }
@@ -107,7 +106,7 @@ public class MenuAdmin extends JFrame {
 		//MenuAdmin menu = this;
 		btnGestionDescuentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PantallaConfiDescuentos nueva = new PantallaConfiDescuentos();
+				PantallaConfiDescuentos nueva = new PantallaConfiDescuentos(logueado);
 			     nueva.setVisible(true);
 			     dispose();
 				   }
@@ -128,11 +127,21 @@ public class MenuAdmin extends JFrame {
 		        dispose();
 			}
 		});
+		
+		JLabel lblNewLabel_1 = new JLabel("Menu Administrador");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1.setForeground(new Color(255, 255, 255));
+		lblNewLabel_1.setBackground(new Color(160, 82, 45));
+		lblNewLabel_1.setBounds(196, 82, 158, 23);
+		contentPane.add(lblNewLabel_1);
+		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon("src\\img\\FondoAdmin.jpg"));
 		lblNewLabel.setBounds(0, 0, 536, 336);
 		contentPane.add(lblNewLabel);
+		
+		
 		
 
 	}

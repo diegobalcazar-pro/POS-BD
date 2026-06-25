@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import BLL.Descuento;
+import BLL.Usuario;
 import DLL.ControllerDescuento;
 
 public class PantallaConfiDescuentos extends JFrame {
@@ -32,8 +33,10 @@ public class PantallaConfiDescuentos extends JFrame {
     private Descuento descuentoSeleccionado;  
     private JTextField inpFiltro;
     private ControllerDescuento controller = new ControllerDescuento();
-	
-	public PantallaConfiDescuentos() {
+    private Usuario logueado;
+    
+	public PantallaConfiDescuentos(Usuario logueado) {
+		this.logueado = logueado;
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 500);
@@ -254,6 +257,14 @@ public class PantallaConfiDescuentos extends JFrame {
     	btnSalir.setBackground(new Color(165, 42, 42));
     	btnSalir.setBounds(657, 326, 96, 33);
     	contentPane.add(btnSalir);
+    	btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuAdmin nueva = new MenuAdmin(logueado);
+			     nueva.setVisible(true);
+			     dispose();
+				   }
+			    });
+    	
     	
         JLabel lblNewLabelFONDO = new JLabel("");
         lblNewLabelFONDO.setHorizontalAlignment(SwingConstants.CENTER);
