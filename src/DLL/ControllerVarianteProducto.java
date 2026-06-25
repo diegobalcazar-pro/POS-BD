@@ -291,4 +291,36 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 		}
 		return cantidad;
 	}
+	
+	public static List<Object[]> obtenerInventarioParaTabla() {
+	    List<Object[]> lista = new ArrayList<>();
+
+	    String sql =
+	        "SELECT v.id_variante_producto, p.nombre_producto, " +
+	        "v.talle, v.color, v.precio_venta, d.lugar_deposito " +
+	        "FROM productos p " +
+	        "JOIN variantes_productos v ON p.id_producto = v.fk_producto " +
+	        "JOIN stocks s ON v.id_variante_producto = s.fk_variante_producto " +
+	        "JOIN depositos d ON s.fk_deposito = d.id_deposito";
+
+	    try (Statement stmt = con.createStatement();
+	         ResultSet rs = stmt.executeQuery(sql)) {
+
+	        while (rs.next()) {
+	            lista.add(new Object[] {
+	                rs.getInt("id_variante_producto"),
+	                rs.getString("nombre_producto"),
+	                rs.getString("talle"),
+	                rs.getString("color"),
+	                rs.getDouble("precio_venta"),
+	                rs.getString("lugar_deposito")
+	            });
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return lista;
+	}
 }
