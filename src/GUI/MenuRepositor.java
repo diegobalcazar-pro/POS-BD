@@ -51,31 +51,31 @@ public class MenuRepositor extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JPanel nav = new JPanel();
 		nav.setBackground(new Color(90, 0, 0));
 		nav.setBounds(0, 76, 190, 437);
 		contentPane.add(nav);
 		nav.setLayout(null);
-		
-				JButton botonGstProd = new JButton("Gestión Productos");
-				botonGstProd.setForeground(new Color(255, 255, 255));
-				botonGstProd.setFont(new Font("Ebrima", Font.BOLD, 13));
-				botonGstProd.setBackground(new Color(128, 0, 0));
-				botonGstProd.setBounds(10, 15, 170, 45);
-				botonGstProd.setContentAreaFilled(false);
-				botonGstProd.setOpaque(true);
-				nav.add(botonGstProd);
-						
-								JButton botonGstStock = new JButton("Gestión Stock");
-								botonGstStock.setBackground(new Color(128, 0, 0));
-								botonGstStock.setFont(new Font("Ebrima", Font.BOLD, 13));
-								botonGstStock.setForeground(new Color(255, 255, 255));
-								botonGstStock.setBounds(10, 115, 170, 45);
-								botonGstStock.setContentAreaFilled(false);
-								botonGstStock.setOpaque(true);
-								nav.add(botonGstStock);
-								
+
+		JButton botonGstProd = new JButton("Gestión Productos");
+		botonGstProd.setForeground(new Color(255, 255, 255));
+		botonGstProd.setFont(new Font("Ebrima", Font.BOLD, 13));
+		botonGstProd.setBackground(new Color(128, 0, 0));
+		botonGstProd.setBounds(10, 15, 170, 45);
+		botonGstProd.setContentAreaFilled(false);
+		botonGstProd.setOpaque(true);
+		nav.add(botonGstProd);
+
+		JButton botonGstStock = new JButton("Gestión Stock");
+		botonGstStock.setBackground(new Color(128, 0, 0));
+		botonGstStock.setFont(new Font("Ebrima", Font.BOLD, 13));
+		botonGstStock.setForeground(new Color(255, 255, 255));
+		botonGstStock.setBounds(10, 115, 170, 45);
+		botonGstStock.setContentAreaFilled(false);
+		botonGstStock.setOpaque(true);
+		nav.add(botonGstStock);
+
 		JButton botonGstProv = new JButton("Gestión Proveedores");
 		botonGstProv.setBackground(new Color(128, 0, 0));
 		botonGstProv.setFont(new Font("Ebrima", Font.BOLD, 13));
@@ -84,62 +84,62 @@ public class MenuRepositor extends JFrame {
 		botonGstProv.setContentAreaFilled(false);
 		botonGstProv.setOpaque(true);
 		nav.add(botonGstProv);
-		
-				JButton botonCerrarSes = new JButton("Cerrar sesión");
-				botonCerrarSes.setFont(new Font("Ebrima", Font.BOLD, 13));
-				botonCerrarSes.setBounds(10, 380, 170, 45);
-				nav.add(botonCerrarSes);
-				
-						JButton botonGstPed = new JButton("Gestión Pedidos");
-						botonGstPed.setBackground(new Color(128, 0, 0));
-						botonGstPed.setFont(new Font("Ebrima", Font.BOLD, 13));
-						botonGstPed.setForeground(new Color(255, 255, 255));
-						botonGstPed.setBounds(10, 65, 170, 45);
-						botonGstPed.setContentAreaFilled(false);
-						botonGstPed.setOpaque(true);
-						nav.add(botonGstPed);
-						botonGstPed.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-								MenuGestionPedidos ventanaProductos = new MenuGestionPedidos();
-						        ventanaProductos.setVisible(true);
-						        dispose();
-							}
-						});
-				botonCerrarSes.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Login ventanaProductos = new Login();
-				        ventanaProductos.setVisible(true);
-				        dispose();
-					}
-				});
-		botonGstProv.addActionListener(new ActionListener() {
+
+		JButton botonCerrarSes = new JButton("Cerrar sesión");
+		botonCerrarSes.setFont(new Font("Ebrima", Font.BOLD, 13));
+		botonCerrarSes.setBounds(10, 380, 170, 45);
+		nav.add(botonCerrarSes);
+
+		JButton botonGstPed = new JButton("Gestión Pedidos");
+		botonGstPed.setBackground(new Color(128, 0, 0));
+		botonGstPed.setFont(new Font("Ebrima", Font.BOLD, 13));
+		botonGstPed.setForeground(new Color(255, 255, 255));
+		botonGstPed.setBounds(10, 65, 170, 45);
+		botonGstPed.setContentAreaFilled(false);
+		botonGstPed.setOpaque(true);
+		nav.add(botonGstPed);
+		botonGstPed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuGestionProveedores ventanaProductos = new MenuGestionProveedores();
-		        ventanaProductos.setVisible(true);
-		        dispose();
+				MenuGestionPedidos ventanaProductos = new MenuGestionPedidos();
+				ventanaProductos.setVisible(true);
+				dispose();
 			}
 		});
-								botonGstStock.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
-										MenuGestionStock ventanaProductos = new MenuGestionStock();
-								        ventanaProductos.setVisible(true);
-								        dispose();
-									}
-								});
-				botonGstProd.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						MenuGestionProductos ventanaProductos = new MenuGestionProductos();
-				        ventanaProductos.setVisible(true);
-				        dispose();
-					}
-				});
-		
+		botonCerrarSes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login ventanaProductos = new Login();
+				ventanaProductos.setVisible(true);
+				dispose();
+			}
+		});
+		botonGstProv.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuGestionProveedores ventanaProductos = new MenuGestionProveedores(null);
+				ventanaProductos.setVisible(true);
+				dispose();
+			}
+		});
+		botonGstStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuGestionStock ventanaProductos = new MenuGestionStock();
+				ventanaProductos.setVisible(true);
+				dispose();
+			}
+		});
+		botonGstProd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuGestionProductos ventanaProductos = new MenuGestionProductos();
+				ventanaProductos.setVisible(true);
+				dispose();
+			}
+		});
+
 		JPanel header = new JPanel();
 		header.setBackground(new Color(64, 0, 0));
 		header.setBounds(0, 1, 726, 75);
 		contentPane.add(header);
 		header.setLayout(null);
-		
+
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setBounds(621, 0, 95, 75);
 		header.add(lblLogo);
@@ -147,7 +147,7 @@ public class MenuRepositor extends JFrame {
 		ImageIcon imagenOriginal = new ImageIcon("src\\\\img\\\\logo.png");
 		Image imgEscalada = imagenOriginal.getImage().getScaledInstance(95, 75, Image.SCALE_SMOOTH);
 		lblLogo.setIcon(new ImageIcon(imgEscalada));
-		
+
 		JLabel lblLogo1 = new JLabel("");
 		lblLogo1.setBounds(10, 0, 169, 76);
 		header.add(lblLogo1);
@@ -155,12 +155,12 @@ public class MenuRepositor extends JFrame {
 		lblLogo1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogo1.setIcon(new ImageIcon("src\\\\img\\\\logo1.png"));
 		lblLogo1.setBackground(new Color(0, 0, 0));
-		
-		JLabel lblBienvenida = new JLabel("¡Bienvenido, Repositor "+ logueado.getNombre_usuario() + "!");
+
+		JLabel lblBienvenida = new JLabel("¡Bienvenido, Repositor " + logueado.getNombre_usuario() + "!");
 		lblBienvenida.setForeground(new Color(255, 255, 255));
 		lblBienvenida.setBounds(225, 11, 256, 52);
 		header.add(lblBienvenida);
 		lblBienvenida.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
+
 	}
 }
