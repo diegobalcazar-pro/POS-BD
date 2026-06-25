@@ -3,6 +3,8 @@ package GUI;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import BLL.Usuario;
 
@@ -21,6 +23,8 @@ public class MenuGestionProveedores extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	
+	private Usuario usuarioLogueado;
 
 	/**
 	 * Launch the application.
@@ -42,6 +46,9 @@ public class MenuGestionProveedores extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuGestionProveedores(Usuario logueado) {
+		
+		this.usuarioLogueado = logueado;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 740, 550);
 		contentPane = new JPanel();
@@ -87,6 +94,14 @@ public class MenuGestionProveedores extends JFrame {
 		btnAtras.setBounds(10, 380, 170, 45);
 		nav.add(btnAtras);
 		
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuRepositor menu = new MenuRepositor(usuarioLogueado);
+				menu.setVisible(true);
+				dispose();
+			}
+		});
+		
 		JPanel header = new JPanel();
 		header.setBounds(0, 1, 726, 75);
 		header.setBackground(new Color(64, 0, 0));
@@ -109,7 +124,8 @@ public class MenuGestionProveedores extends JFrame {
 		lblLogo1.setIcon(new ImageIcon("src\\\\img\\\\logo1.png"));
 		lblLogo1.setBackground(new Color(0, 0, 0));
 		
-		JLabel lblBienvenida = new JLabel("Gestión Proveedores - Repositor <dynamic>");
+		String nombreExhibido = (usuarioLogueado != null) ? usuarioLogueado.getNombre_usuario() : "Invitado";
+		JLabel lblBienvenida = new JLabel("Gestión Proveedores - Repositor " + nombreExhibido);
 		lblBienvenida.setForeground(new Color(255, 255, 255));
 		lblBienvenida.setBounds(225, 11, 315, 52);
 		header.add(lblBienvenida);

@@ -1,10 +1,15 @@
 package GUI;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import BLL.Usuario;
+
 import javax.swing.JTable;
 import javax.swing.JSeparator;
 import java.awt.Color;
@@ -15,6 +20,8 @@ public class MenuGestionStock extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	
+	private Usuario usuarioLogueado;
 
 	/**
 	 * Launch the application.
@@ -23,7 +30,7 @@ public class MenuGestionStock extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MenuGestionStock frame = new MenuGestionStock();
+					MenuGestionStock frame = new MenuGestionStock(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +42,10 @@ public class MenuGestionStock extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuGestionStock() {
+	public MenuGestionStock(Usuario logueado) {
+		
+		this.usuarioLogueado = logueado;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 572, 410);
 		contentPane = new JPanel();
@@ -54,6 +64,14 @@ public class MenuGestionStock extends JFrame {
 		JButton btnAtrs = new JButton("Atrás");
 		btnAtrs.setBounds(340, 322, 88, 22);
 		contentPane.add(btnAtrs);
+		
+		btnAtrs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuRepositor menu = new MenuRepositor(usuarioLogueado);
+				menu.setVisible(true);
+				dispose();
+			}
+		});
 		
 		JSeparator separator = new JSeparator();
 		separator.setForeground(Color.BLACK);

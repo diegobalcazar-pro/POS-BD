@@ -15,6 +15,8 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
+import BLL.Usuario;
+
 public class MenuGestionProductos extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -28,6 +30,8 @@ public class MenuGestionProductos extends JFrame {
 	private JButton btnModiVarProd;
 	private JButton btnMoverProd;
 	private JButton btnAtras;
+	
+	private Usuario usuarioLogueado;
 
 	/**
 	 * Launch the application.
@@ -36,7 +40,7 @@ public class MenuGestionProductos extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MenuGestionProductos frame = new MenuGestionProductos();
+					MenuGestionProductos frame = new MenuGestionProductos(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +52,10 @@ public class MenuGestionProductos extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuGestionProductos() {
+	public MenuGestionProductos(Usuario logueado) {
+		
+		this.usuarioLogueado = logueado;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 572, 410);
 		contentPane = new JPanel();
@@ -128,9 +135,9 @@ public class MenuGestionProductos extends JFrame {
 		btnAtras = new JButton("Atrás");
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuRepositor ventanaProductos = new MenuRepositor(null);
-		        ventanaProductos.setVisible(true);
-		        dispose();
+				MenuRepositor menu = new MenuRepositor(usuarioLogueado);
+				menu.setVisible(true);
+				dispose();
 			}
 		});
 		btnAtras.setBounds(408, 340, 115, 22);

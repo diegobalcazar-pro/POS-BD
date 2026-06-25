@@ -23,6 +23,8 @@ public class MenuRepositor extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	
+	private Usuario usuarioLogueado;
 
 	/**
 	 * Launch the application.
@@ -44,6 +46,9 @@ public class MenuRepositor extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuRepositor(Usuario logueado) {
+		
+		this.usuarioLogueado = logueado;
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 740, 550);
@@ -98,37 +103,42 @@ public class MenuRepositor extends JFrame {
 		botonGstPed.setContentAreaFilled(false);
 		botonGstPed.setOpaque(true);
 		nav.add(botonGstPed);
+		
 		botonGstPed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuGestionPedidos ventanaProductos = new MenuGestionPedidos();
-				ventanaProductos.setVisible(true);
+				MenuGestionPedidos ventanaPedidos = new MenuGestionPedidos(usuarioLogueado);
+				ventanaPedidos.setVisible(true);
 				dispose();
 			}
 		});
+
 		botonCerrarSes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Login ventanaProductos = new Login();
-				ventanaProductos.setVisible(true);
+				Login ventanaLogin = new Login();
+				ventanaLogin.setVisible(true);
 				dispose();
 			}
 		});
+
 		botonGstProv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuGestionProveedores ventanaProductos = new MenuGestionProveedores(null);
-				ventanaProductos.setVisible(true);
+				MenuGestionProveedores ventanaProveedores = new MenuGestionProveedores(usuarioLogueado);
+				ventanaProveedores.setVisible(true);
 				dispose();
 			}
 		});
+
 		botonGstStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuGestionStock ventanaProductos = new MenuGestionStock();
-				ventanaProductos.setVisible(true);
+				MenuGestionStock ventanaStock = new MenuGestionStock(usuarioLogueado);
+				ventanaStock.setVisible(true);
 				dispose();
 			}
 		});
+
 		botonGstProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuGestionProductos ventanaProductos = new MenuGestionProductos();
+				MenuGestionProductos ventanaProductos = new MenuGestionProductos(usuarioLogueado);
 				ventanaProductos.setVisible(true);
 				dispose();
 			}
@@ -156,7 +166,8 @@ public class MenuRepositor extends JFrame {
 		lblLogo1.setIcon(new ImageIcon("src\\\\img\\\\logo1.png"));
 		lblLogo1.setBackground(new Color(0, 0, 0));
 
-		JLabel lblBienvenida = new JLabel("¡Bienvenido, Repositor " + logueado.getNombre_usuario() + "!");
+		String nombreExhibido = (usuarioLogueado != null) ? usuarioLogueado.getNombre_usuario() : "Invitado";
+		JLabel lblBienvenida = new JLabel("¡Bienvenido, Repositor " + nombreExhibido + "!");
 		lblBienvenida.setForeground(new Color(255, 255, 255));
 		lblBienvenida.setBounds(225, 11, 256, 52);
 		header.add(lblBienvenida);
