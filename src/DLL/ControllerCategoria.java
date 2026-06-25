@@ -91,9 +91,7 @@ public class ControllerCategoria implements CategoriaRepository {
 	public LinkedList<Object[]> MostrarCategoriasMasVendidasLista(){
 
 	    LinkedList<Object[]> lista = new LinkedList<>();
-
 	    try {
-
 	        PreparedStatement statement = con.prepareStatement(
 	            "SELECT categorias.nombre_categoria, " +
 	            "SUM(detalles_ventas.cantidad) AS total_vendido " +
@@ -108,27 +106,19 @@ public class ControllerCategoria implements CategoriaRepository {
 	            "ORDER BY total_vendido DESC"
 	        );
 
-
 	        ResultSet rs = statement.executeQuery();
 
 	        int posicion = 1;
-
 	        while(rs.next()){
-
 	            lista.add(new Object[]{
 	                posicion,
 	                rs.getString("nombre_categoria")
 	            });
-
 	            posicion++;
 	        }
-
-
 	    } catch(Exception e){
 	        e.printStackTrace();
 	    }
-
-
 	    return lista;
 	}
 }

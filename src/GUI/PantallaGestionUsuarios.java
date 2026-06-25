@@ -58,7 +58,7 @@ public class PantallaGestionUsuarios extends JFrame {
         lblSeleccionado.setBackground(new Color(255, 255, 255));
         lblSeleccionado.setBounds(10, 67, 760, 20);
         contentPane.add(lblSeleccionado);
-        //si lo adapto, primero cambio las columnas -> depende de cada tabla 
+        
         
         //defino el nombre qeu va a tener cada columna
         model = new DefaultTableModel(new String[]{"ID", "Nombre", "Apellido", "Email", "Rol"}, 0);

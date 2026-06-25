@@ -72,7 +72,7 @@ public class MenuAdmin extends JFrame {
 		JButton btnInfoVentas = new JButton("Info de ventas");
 		btnInfoVentas.setForeground(new Color(255, 255, 255));
 		btnInfoVentas.setBackground(new Color(128, 128, 192));
-		btnInfoVentas.setBounds(82, 184, 133, 29);
+		btnInfoVentas.setBounds(66, 184, 158, 29);
 		contentPane.add(btnInfoVentas);
 		btnInfoVentas.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -99,15 +99,15 @@ public class MenuAdmin extends JFrame {
 		
 		
 		//Configuración
-		JButton btnConfiguracion = new JButton("Configuración");
-		btnConfiguracion.setForeground(new Color(255, 255, 255));
-		btnConfiguracion.setBackground(new Color(128, 128, 192));
-		btnConfiguracion.setBounds(317, 184, 137, 29);
-		contentPane.add(btnConfiguracion);
+		JButton btnGestionDescuentos = new JButton("Gestión de Descuentos");
+		btnGestionDescuentos.setForeground(new Color(255, 255, 255));
+		btnGestionDescuentos.setBackground(new Color(128, 128, 192));
+		btnGestionDescuentos.setBounds(307, 184, 158, 29);
+		contentPane.add(btnGestionDescuentos);
 		//MenuAdmin menu = this;
-		btnConfiguracion.addActionListener(new ActionListener() {
+		btnGestionDescuentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PantallaConfiguracion nueva = new PantallaConfiguracion();
+				PantallaConfiDescuentos nueva = new PantallaConfiDescuentos();
 			     nueva.setVisible(true);
 			     dispose();
 				   }

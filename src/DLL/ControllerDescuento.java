@@ -13,7 +13,7 @@ public class ControllerDescuento<T extends Descuento> implements DescuentoReposi
 private static Connection con = Conexion.getInstance().getConnection();
 	
 	
-	
+	//Agregar Descuentos
 	public void agregarDescuento(Descuento descuento) {
         try {
             PreparedStatement statement = con.prepareStatement(
@@ -32,7 +32,7 @@ private static Connection con = Conexion.getInstance().getConnection();
     }
 	
 	
-	
+	//Mostrar Descuentos lista
 	public LinkedList<Descuento> mostrarDescuentos() {
         LinkedList<Descuento> descuentos = new LinkedList<>();
         try {
@@ -45,7 +45,6 @@ private static Connection con = Conexion.getInstance().getConnection();
                 double porcentaje_descuento = rs.getDouble("porcentaje_descuento");
                 
                  descuentos.add(new Descuento(id_descuento, nombre_descuento, porcentaje_descuento));
-          
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,6 +52,7 @@ private static Connection con = Conexion.getInstance().getConnection();
         return descuentos;
     }
 	
+	//Eliminar por nombre Seleccionado
 	public void EliminarDescuento(String nombre_descuento) {
         try {
             PreparedStatement statement = con.prepareStatement(
@@ -68,4 +68,23 @@ private static Connection con = Conexion.getInstance().getConnection();
             e.printStackTrace();
         }
     }
+	
+	//Editar por nombre seleccionado
+	public void EditarDescuento(Descuento descuento) {
+	    try {
+	        PreparedStatement statement = con.prepareStatement(
+	            "UPDATE descuentos SET nombre_descuento=?, porcentaje_descuento=? WHERE id_descuento=?"
+	        );
+	        statement.setString(1, descuento.getNombre_descuento());
+	        statement.setDouble(2, descuento.getPorcentaje_descuento());
+	        statement.setInt(3, descuento.getId_descuento());
+
+	        int filas = statement.executeUpdate();
+	        if (filas > 0) {
+	            System.out.println("Descuento editado correctamente.");
+	        }
+	    } catch(Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 }
