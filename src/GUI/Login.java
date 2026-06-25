@@ -126,7 +126,7 @@ public class Login extends JFrame {
 							dispose();
 
 						} else if (logueado instanceof Repositor) {
-							JOptionPane.showMessageDialog(null, "Bienvenido Repositor " + logueado.getNombre_usuario());
+							//JOptionPane.showMessageDialog(null, "Bienvenido Repositor " + logueado.getNombre_usuario());
 							// Ir a menu de repositor
 							// logueado.Menu();
 							MenuRepositor menurep = new MenuRepositor(logueado);

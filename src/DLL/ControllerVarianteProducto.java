@@ -2,11 +2,9 @@ package DLL;
 
 import BLL.VarianteProducto;
 import BLL.Producto;
-import BLL.Usuario;
 import repository.VarianteProductoRepository;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ControllerVarianteProducto implements VarianteProductoRepository {
@@ -117,8 +115,7 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 		String sql = "SELECT v.*, p.nombre_producto FROM variantes_productos v "
 				+ "JOIN productos p ON v.fk_producto = p.id_producto";
 
-		try (Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery(sql)) {
+		try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 			while (rs.next()) {
 				Producto prod = new Producto(rs.getInt("fk_producto"), rs.getString("nombre_producto"), "", null, null);
 
@@ -130,8 +127,6 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 		}
 		return lista;
 	}
-	
-	
 
 	@Override
 	public void eliminarVariante(int id) {
@@ -159,74 +154,70 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 		}
 	}
 
-	/*@Override
-	public void moverVariante(int idVariante, int idNuevoDeposito, int idUsuario) {
-		String sql = "UPDATE stocks SET fk_deposito = ? WHERE fk_variante_producto = ?";
-		try (PreparedStatement stmt = con.prepareStatement(sql)) {
-			stmt.setInt(1, idNuevoDeposito);
-			stmt.setInt(2, idVariante);
-
-			int filasAfectadas = stmt.executeUpdate();
-			if (filasAfectadas == 0) {
-				System.out.println("No se encontró stock asociado a esta variante para mover.");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
+	/*
+	 * @Override public void moverVariante(int idVariante, int idNuevoDeposito, int
+	 * idUsuario) { String sql =
+	 * "UPDATE stocks SET fk_deposito = ? WHERE fk_variante_producto = ?"; try
+	 * (PreparedStatement stmt = con.prepareStatement(sql)) { stmt.setInt(1,
+	 * idNuevoDeposito); stmt.setInt(2, idVariante);
+	 * 
+	 * int filasAfectadas = stmt.executeUpdate(); if (filasAfectadas == 0) {
+	 * System.out.
+	 * println("No se encontró stock asociado a esta variante para mover."); } }
+	 * catch (SQLException e) { e.printStackTrace(); } }
+	 */
 	@Override
 	public void moverVariante(int idVariante, int idNuevoDeposito, int idUsuario) {
 
-	    try {
+		try {
 
-	        // Obtener datos actuales del stock
-	        PreparedStatement consulta = con.prepareStatement(
-	                "SELECT cantidad, fk_deposito FROM stocks WHERE fk_variante_producto = ?");
+			// Obtener datos actuales del stock
+			PreparedStatement consulta = con
+					.prepareStatement("SELECT cantidad, fk_deposito FROM stocks WHERE fk_variante_producto = ?");
 
-	        consulta.setInt(1, idVariante);
+			consulta.setInt(1, idVariante);
 
-	        ResultSet resultado = consulta.executeQuery();
+			ResultSet resultado = consulta.executeQuery();
 
-	        if (!resultado.next()) {
-	            System.out.println("No se encontró stock asociado a esta variante para mover.");
-	            return;
-	        }
+			if (!resultado.next()) {
+				System.out.println("No se encontró stock asociado a esta variante para mover.");
+				return;
+			}
 
-	        int cantidad = resultado.getInt("cantidad");
-	        int depositoOrigen = resultado.getInt("fk_deposito");
+			int cantidad = resultado.getInt("cantidad");
+			int depositoOrigen = resultado.getInt("fk_deposito");
 
-	        // Actualizar depósito
-	        PreparedStatement actualizar = con.prepareStatement(
-	                "UPDATE stocks SET fk_deposito = ? WHERE fk_variante_producto = ?");
+			// Actualizar depósito
+			PreparedStatement actualizar = con
+					.prepareStatement("UPDATE stocks SET fk_deposito = ? WHERE fk_variante_producto = ?");
 
-	        actualizar.setInt(1, idNuevoDeposito);
-	        actualizar.setInt(2, idVariante);
+			actualizar.setInt(1, idNuevoDeposito);
+			actualizar.setInt(2, idVariante);
 
-	        int filasAfectadas = actualizar.executeUpdate();
+			int filasAfectadas = actualizar.executeUpdate();
 
-	        if (filasAfectadas > 0) {
+			if (filasAfectadas > 0) {
 
-	            // Registrar auditoría
-	            PreparedStatement auditoria = con.prepareStatement(
-	                    "INSERT INTO auditorias_stocks "
-	                  + "(tipo_movimiento, cantidad, fecha, fk_variante_producto, fk_usuario, fk_deposito_origen, fk_deposito_destino) "
-	                  + "VALUES (?, ?, NOW(), ?, ?, ?, ?)");
+				// Registrar auditoría
+				PreparedStatement auditoria = con.prepareStatement("INSERT INTO auditorias_stocks "
+						+ "(tipo_movimiento, cantidad, fecha, fk_variante_producto, fk_usuario, fk_deposito_origen, fk_deposito_destino) "
+						+ "VALUES (?, ?, NOW(), ?, ?, ?, ?)");
 
-	            auditoria.setString(1, "traslado");
-	            auditoria.setInt(2, cantidad);
-	            auditoria.setInt(3, idVariante);
-	            auditoria.setInt(4, idUsuario);
-	            auditoria.setInt(5, depositoOrigen);
-	            auditoria.setInt(6, idNuevoDeposito);
+				auditoria.setString(1, "traslado");
+				auditoria.setInt(2, cantidad);
+				auditoria.setInt(3, idVariante);
+				auditoria.setInt(4, idUsuario);
+				auditoria.setInt(5, depositoOrigen);
+				auditoria.setInt(6, idNuevoDeposito);
 
-	            auditoria.executeUpdate();
+				auditoria.executeUpdate();
 
-	            System.out.println("Movimiento registrado en auditoría.");
-	        }
+				System.out.println("Movimiento registrado en auditoría.");
+			}
 
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -263,30 +254,41 @@ public class ControllerVarianteProducto implements VarianteProductoRepository {
 			e.printStackTrace();
 		}
 	}
-	
-	public VarianteProducto buscarPorId(int id) {
-	    VarianteProducto variante = null;
-	    try {
-	        PreparedStatement stmt = con.prepareStatement(
-	            "SELECT v.*, p.nombre_producto FROM variantes_productos v JOIN productos p ON v.fk_producto = p.id_producto WHERE v.id_variante_producto = ?"
-	        );
-	        stmt.setInt(1, id);
-	        ResultSet rs = stmt.executeQuery();
-	        if (rs.next()) {
-	            Producto producto = new Producto(rs.getInt("fk_producto"), rs.getString("nombre_producto"), "", null, null
-	            );
-	            variante = new VarianteProducto(
-	                rs.getInt("id_variante_producto"),
-	                rs.getString("talle"),
-	                rs.getString("color"),
-	                rs.getDouble("precio_venta"),
-	                producto
-	            );
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
 
-	    return variante;
+	public VarianteProducto buscarPorId(int id) {
+		VarianteProducto variante = null;
+		try {
+			PreparedStatement stmt = con.prepareStatement(
+					"SELECT v.*, p.nombre_producto FROM variantes_productos v JOIN productos p ON v.fk_producto = p.id_producto WHERE v.id_variante_producto = ?");
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				Producto producto = new Producto(rs.getInt("fk_producto"), rs.getString("nombre_producto"), "", null,
+						null);
+				variante = new VarianteProducto(rs.getInt("id_variante_producto"), rs.getString("talle"),
+						rs.getString("color"), rs.getDouble("precio_venta"), producto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return variante;
+	}
+
+	public int obtenerCantidadStock(int idVariante) {
+		int cantidad = 0;
+		String sql = "SELECT cantidad FROM stocks WHERE fk_variante_producto = ?";
+
+		try (PreparedStatement stmt = con.prepareStatement(sql)) {
+			stmt.setInt(1, idVariante);
+			try (ResultSet rs = stmt.executeQuery()) {
+				if (rs.next()) {
+					cantidad = rs.getInt("cantidad");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cantidad;
 	}
 }
