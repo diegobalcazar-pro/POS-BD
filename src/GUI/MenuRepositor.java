@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import BLL.Usuario;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -23,7 +24,7 @@ public class MenuRepositor extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	
+
 	private Usuario usuarioLogueado;
 
 	/**
@@ -33,8 +34,9 @@ public class MenuRepositor extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MenuRepositor frame = new MenuRepositor(null);
-					frame.setVisible(true);
+					JOptionPane.showMessageDialog(null,
+							"No se puede iniciar esta ventana de manera independiente sin iniciar sesión.",
+							"Acceso Denegado", JOptionPane.ERROR_MESSAGE);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,9 +48,18 @@ public class MenuRepositor extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuRepositor(Usuario logueado) {
-		
+		if (logueado == null) {
+			JOptionPane.showMessageDialog(null, "Acceso Denegado: Debe iniciar sesión para acceder a este menú.",
+					"Error de Seguridad", JOptionPane.ERROR_MESSAGE);
+			Login login = new Login();
+			login.setVisible(true);
+
+			this.dispose();
+			return;
+		}
+
 		this.usuarioLogueado = logueado;
-		
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 740, 550);
@@ -103,7 +114,7 @@ public class MenuRepositor extends JFrame {
 		botonGstPed.setContentAreaFilled(false);
 		botonGstPed.setOpaque(true);
 		nav.add(botonGstPed);
-		
+
 		botonGstPed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MenuGestionPedidos ventanaPedidos = new MenuGestionPedidos(usuarioLogueado);
@@ -166,8 +177,7 @@ public class MenuRepositor extends JFrame {
 		lblLogo1.setIcon(new ImageIcon("src\\\\img\\\\logo1.png"));
 		lblLogo1.setBackground(new Color(0, 0, 0));
 
-		String nombreExhibido = (usuarioLogueado != null) ? usuarioLogueado.getNombre_usuario() : "Invitado";
-		JLabel lblBienvenida = new JLabel("¡Bienvenido, Repositor " + nombreExhibido + "!");
+		JLabel lblBienvenida = new JLabel("¡Bienvenido, Repositor " + usuarioLogueado.getNombre_usuario() + "!");
 		lblBienvenida.setForeground(new Color(255, 255, 255));
 		lblBienvenida.setBounds(225, 11, 256, 52);
 		header.add(lblBienvenida);
