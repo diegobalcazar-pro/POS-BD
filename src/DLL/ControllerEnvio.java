@@ -3,6 +3,8 @@ package DLL;
 import repository.EnvioRepository;
 import java.sql.*;
 
+import BLL.Envio;
+
 public class ControllerEnvio implements EnvioRepository {
 	private Connection con = Conexion.getInstance().getConnection();
 
@@ -148,5 +150,29 @@ public class ControllerEnvio implements EnvioRepository {
     @Override
     public boolean verificarCupoDiario() {
         return obtenerCantidadDespachosHoy() < 10;
+    }
+    
+    public java.util.List<Envio> listarEnvios() {
+        java.util.List<Envio> lista = new java.util.ArrayList<>();
+        String sql = "SELECT id_envio, numero_seguimiento, estado, fecha_despacho, fk_venta FROM envios";
+        
+        try (Statement stmt = con.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                java.sql.Date sqlDate = rs.getDate("fecha_despacho");
+                java.time.LocalDate localDate = (sqlDate != null) ? sqlDate.toLocalDate() : null;
+                
+                Envio env = new Envio(
+                    rs.getInt("id_envio"),
+                    rs.getString("numero_seguimiento"),
+                    rs.getString("estado"),
+                    localDate,
+                    rs.getInt("fk_venta")
+                );
+                lista.add(env);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
 }
