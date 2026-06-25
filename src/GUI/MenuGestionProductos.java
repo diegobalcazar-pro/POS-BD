@@ -3,6 +3,7 @@ package GUI;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -58,6 +59,7 @@ public class MenuGestionProductos extends JFrame {
 		
 		this.usuarioLogueado = logueado;
 		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo3.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 740, 550);
 		contentPane = new JPanel();
@@ -87,7 +89,7 @@ public class MenuGestionProductos extends JFrame {
 		lblLogo1.setIcon(new ImageIcon("src\\\\img\\\\logo1.png"));
 		lblLogo1.setBackground(new Color(0, 0, 0));
 
-		JLabel lblBienvenida = new JLabel("Gestión Proveedores - Repositor " + usuarioLogueado.getNombre_usuario());
+		JLabel lblBienvenida = new JLabel("Gestión Productos - Repositor " + usuarioLogueado.getNombre_usuario());
 		lblBienvenida.setForeground(new Color(255, 255, 255));
 		lblBienvenida.setBounds(225, 11, 315, 52);
 		header.add(lblBienvenida);
@@ -125,27 +127,43 @@ public class MenuGestionProductos extends JFrame {
 		lblNewJgoodiesLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JButton btnElimCat = new JButton("Eliminar");
+		btnElimCat.setForeground(new Color(255, 255, 255));
+		btnElimCat.setFont(new Font("Ebrima", Font.BOLD, 13));
 		btnElimCat.setBackground(new Color(128, 0, 0));
 		btnElimCat.setForeground(new Color(255, 255, 255));
 		btnElimCat.setBounds(51, 68, 88, 22);
+		btnElimCat.setContentAreaFilled(false);
+		btnElimCat.setOpaque(true);
 		nav.add(btnElimCat);
 		
 		JButton btnModiCat = new JButton("Modificar");
+		btnModiCat.setForeground(new Color(255, 255, 255));
+		btnModiCat.setFont(new Font("Ebrima", Font.BOLD, 13));
 		btnModiCat.setBackground(new Color(128, 0, 0));
 		btnModiCat.setForeground(new Color(255, 255, 255));
-		btnModiCat.setBounds(51, 100, 88, 22);
+		btnModiCat.setBounds(49, 100, 96, 22);
+		btnModiCat.setContentAreaFilled(false);
+		btnModiCat.setOpaque(true);
 		nav.add(btnModiCat);
 		
 		btnElimProd = new JButton("Eliminar");
+		btnElimProd.setForeground(new Color(255, 255, 255));
+		btnElimProd.setFont(new Font("Ebrima", Font.BOLD, 13));
 		btnElimProd.setBackground(new Color(128, 0, 0));
 		btnElimProd.setForeground(new Color(255, 255, 255));
 		btnElimProd.setBounds(51, 190, 88, 22);
+		btnElimProd.setContentAreaFilled(false);
+		btnElimProd.setOpaque(true);
 		nav.add(btnElimProd);
 		
 		btnCrearProd = new JButton("Crear");
+		btnCrearProd.setForeground(new Color(255, 255, 255));
+		btnCrearProd.setFont(new Font("Ebrima", Font.BOLD, 13));
 		btnCrearProd.setBackground(new Color(128, 0, 0));
 		btnCrearProd.setForeground(new Color(255, 255, 255));
 		btnCrearProd.setBounds(51, 158, 88, 22);
+		btnCrearProd.setContentAreaFilled(false);
+		btnCrearProd.setOpaque(true);
 		nav.add(btnCrearProd);
 		
 		JLabel lblNewJgoodiesLabel_1 = DefaultComponentFactory.getInstance().createLabel("Productos");
@@ -156,25 +174,37 @@ public class MenuGestionProductos extends JFrame {
 		lblNewJgoodiesLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		btnModiProd = new JButton("Modificar");
+		btnModiProd.setForeground(new Color(255, 255, 255));
+		btnModiProd.setFont(new Font("Ebrima", Font.BOLD, 13));
 		btnModiProd.setBackground(new Color(128, 0, 0));
 		btnModiProd.setForeground(new Color(255, 255, 255));
 		btnModiProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnModiProd.setBounds(51, 222, 88, 22);
+		btnModiProd.setContentAreaFilled(false);
+		btnModiProd.setOpaque(true);
+		btnModiProd.setBounds(49, 222, 96, 22);
 		nav.add(btnModiProd);
 		
 		btnModiVarProd = new JButton("Modificar");
+		btnModiVarProd.setForeground(new Color(255, 255, 255));
+		btnModiVarProd.setFont(new Font("Ebrima", Font.BOLD, 13));
 		btnModiVarProd.setBackground(new Color(128, 0, 0));
 		btnModiVarProd.setForeground(new Color(255, 255, 255));
-		btnModiVarProd.setBounds(51, 338, 88, 22);
+		btnModiVarProd.setBounds(47, 338, 96, 22);
+		btnModiVarProd.setContentAreaFilled(false);
+		btnModiVarProd.setOpaque(true);
 		nav.add(btnModiVarProd);
 		
 		btnMoverProd = new JButton("Mover Producto");
+		btnMoverProd.setForeground(new Color(255, 255, 255));
+		btnMoverProd.setFont(new Font("Ebrima", Font.BOLD, 13));
 		btnMoverProd.setBackground(new Color(128, 0, 0));
 		btnMoverProd.setForeground(new Color(255, 255, 255));
 		btnMoverProd.setBounds(29, 371, 133, 22);
+		btnMoverProd.setContentAreaFilled(false);
+		btnMoverProd.setOpaque(true);
 		nav.add(btnMoverProd);
 		
 		btnAtras = new JButton("Atrás");
@@ -189,9 +219,13 @@ public class MenuGestionProductos extends JFrame {
 		lblNewJgoodiesLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		btnCrearVarProd = new JButton("Crear");
+		btnCrearVarProd.setForeground(new Color(255, 255, 255));
+		btnCrearVarProd.setFont(new Font("Ebrima", Font.BOLD, 13));
 		btnCrearVarProd.setBackground(new Color(128, 0, 0));
 		btnCrearVarProd.setForeground(new Color(255, 255, 255));
 		btnCrearVarProd.setBounds(51, 277, 88, 22);
+		btnCrearVarProd.setContentAreaFilled(false);
+		btnCrearVarProd.setOpaque(true);
 		nav.add(btnCrearVarProd);
 		btnCrearVarProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
