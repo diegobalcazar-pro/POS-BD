@@ -52,7 +52,7 @@ public class MenuGestionPedidos extends JFrame {
         lblLogo1.setHorizontalAlignment(SwingConstants.CENTER);
         lblLogo1.setIcon(new ImageIcon("src\\\\img\\\\logo1.png"));
 
-        JLabel lblBienvenida = new JLabel("Gestión Pedidos - " + usuarioLogueado.getNombre_usuario());
+        JLabel lblBienvenida = new JLabel("Gestión Pedidos - Repositor " + usuarioLogueado.getNombre_usuario());
         lblBienvenida.setForeground(Color.WHITE);
         lblBienvenida.setFont(new Font("Tahoma", Font.PLAIN, 16));
         lblBienvenida.setBounds(225, 11, 350, 52);
