@@ -101,7 +101,7 @@ public class MenuAdmin extends JFrame {
 		JButton btnGestionDescuentos = new JButton("Gestión de Descuentos");
 		btnGestionDescuentos.setForeground(new Color(255, 255, 255));
 		btnGestionDescuentos.setBackground(new Color(128, 128, 192));
-		btnGestionDescuentos.setBounds(307, 184, 158, 29);
+		btnGestionDescuentos.setBounds(297, 184, 168, 29);
 		contentPane.add(btnGestionDescuentos);
 		//MenuAdmin menu = this;
 		btnGestionDescuentos.addActionListener(new ActionListener() {

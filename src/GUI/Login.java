@@ -148,8 +148,8 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				// Cierra la Ventana login
-				Login frame = new Login();
-				frame.setVisible(false);
+				PantallaSalida frame = new PantallaSalida();
+				frame.setVisible(true);
 				dispose();
 
 			}
