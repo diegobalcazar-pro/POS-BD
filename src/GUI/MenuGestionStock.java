@@ -122,7 +122,7 @@ public class MenuGestionStock extends JFrame {
 		lblLogo1.setIcon(new ImageIcon("src\\\\img\\\\logo1.png"));
 		lblLogo1.setBackground(new Color(0, 0, 0));
 
-		JLabel lblBienvenida = new JLabel("Gestión Inventario - Repositor " + usuarioLogueado.getNombre_usuario());
+		JLabel lblBienvenida = new JLabel("Gestión Stock - Repositor " + usuarioLogueado.getNombre_usuario());
 		lblBienvenida.setForeground(new Color(255, 255, 255));
 		lblBienvenida.setBounds(225, 11, 315, 52);
 		header.add(lblBienvenida);
