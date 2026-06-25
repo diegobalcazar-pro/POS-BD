@@ -121,7 +121,7 @@ public class Login extends JFrame {
 							// logueado.getNombre_usuario());
 							// Ir a menu de cajero
 							// logueado.Menu();
-							MenuCajero2 menucaj = new MenuCajero2(logueado);
+							MenuCajero menucaj = new MenuCajero(logueado);
 							menucaj.setVisible(true);
 							dispose();
 
