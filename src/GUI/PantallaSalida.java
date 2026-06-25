@@ -58,13 +58,13 @@ public class PantallaSalida extends JFrame {
 		btnSalir.setForeground(Color.WHITE);
 		btnSalir.setFont(new Font("Segoe UI", Font.BOLD, 11));
 		btnSalir.setBackground(new Color(0, 64, 128));
-		btnSalir.setBounds(445, 385, 220, 25);
+		btnSalir.setBounds(439, 385, 220, 25);
 		contentPane.add(btnSalir);
 
 		JLabel lblNewLabel_1_2 = new JLabel("Sistema POS");
 		lblNewLabel_1_2.setFont(new Font("Arial Black", Font.PLAIN, 25));
 		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_2.setBounds(428, 104, 237, 32);
+		lblNewLabel_1_2.setBounds(426, 104, 237, 32);
 		contentPane.add(lblNewLabel_1_2);
 
 		JLabel lblNewLabel = new JLabel("");
@@ -77,7 +77,7 @@ public class PantallaSalida extends JFrame {
 		lblNewLabel_1_2_1.setForeground(new Color(128, 128, 128));
 		lblNewLabel_1_2_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1_2_1.setFont(new Font("Arial Black", Font.PLAIN, 18));
-		lblNewLabel_1_2_1.setBounds(439, 159, 237, 32);
+		lblNewLabel_1_2_1.setBounds(426, 147, 237, 32);
 		contentPane.add(lblNewLabel_1_2_1);
 
 		
