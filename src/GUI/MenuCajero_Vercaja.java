@@ -73,6 +73,7 @@ public class MenuCajero_Vercaja extends JFrame {
     private JLabel lblTransferencia;
     private JLabel lblTotal;
     private JLabel lblItems;
+    private JLabel lblTotalVendido;
 
     private double porcentajeDescuento = 0;
     private int idDescuentoSeleccionado = 0;
@@ -105,7 +106,7 @@ public class MenuCajero_Vercaja extends JFrame {
 	    VentaSeleccionado = controllerVenta.buscarClientePorId(1);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo4.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 497, 484);
+		setBounds(100, 100, 620, 484);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -115,21 +116,21 @@ public class MenuCajero_Vercaja extends JFrame {
 		JLabel lblNewLabel_1_1 = new JLabel(" Ultimas Ventas");
 		lblNewLabel_1_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1_1.setFont(new Font("Verdana", Font.BOLD, 16));
-		lblNewLabel_1_1.setBounds(11, 93, 461, 27);
+		lblNewLabel_1_1.setBounds(11, 93, 583, 27);
 		contentPane.add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("VER CAJA");
 		lblNewLabel_1_2.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1_2.setFont(new Font("Arial Black", Font.PLAIN, 17));
 		lblNewLabel_1_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1_2.setBounds(0, 15, 488, 27);
+		lblNewLabel_1_2.setBounds(0, 15, 604, 27);
 		contentPane.add(lblNewLabel_1_2);
 										
 										Button button_4 = new Button("Salir");
 										button_4.setBackground(new Color(64, 0, 0));
 										button_4.setForeground(new Color(255, 255, 255));
 										button_4.setFont(new Font("Dialog", Font.BOLD, 15));
-										button_4.setBounds(410, 366, 62, 60);
+										button_4.setBounds(499, 366, 62, 60);
 										contentPane.add(button_4);
 										button_4.addActionListener(new ActionListener() {
 											public void actionPerformed(ActionEvent e) {
@@ -147,7 +148,7 @@ public class MenuCajero_Vercaja extends JFrame {
 										});
 										
 										JScrollPane scrollPane = new JScrollPane();
-										scrollPane.setBounds(10, 131, 462, 186);
+										scrollPane.setBounds(10, 131, 584, 186);
 										contentPane.add(scrollPane);
 										
 										model = new DefaultTableModel(new String[]{"ID", "Fecha", "Total Neto", "Total Bruto", "Cliente", "M. Pago", "Desuento"}, 0);
@@ -162,40 +163,39 @@ public class MenuCajero_Vercaja extends JFrame {
 										JLabel lblTextoSubtotal = new JLabel("DEBITO:");
 										lblTextoSubtotal.setHorizontalAlignment(SwingConstants.RIGHT);
 										lblTextoSubtotal.setFont(new Font("Verdana", Font.BOLD, 11));
-										lblTextoSubtotal.setBounds(20, 339, 110, 22);
+										lblTextoSubtotal.setBounds(62, 338, 110, 22);
 										contentPane.add(lblTextoSubtotal);
 
 										lblDebito = new JLabel("$0.0");
 										lblDebito.setFont(new Font("Verdana", Font.PLAIN, 11));
-										lblDebito.setBounds(140, 339, 75, 22);
+										lblDebito.setBounds(182, 338, 75, 22);
 										contentPane.add(lblDebito);
 										
-										JLabel lblTextoTotal = new JLabel("TOTAL EN CAJA:");
+										JLabel lblTextoTotal = new JLabel("EFECTIVO:");
 										lblTextoTotal.setHorizontalAlignment(SwingConstants.RIGHT);
 										lblTextoTotal.setFont(new Font("Verdana", Font.BOLD, 11));
-										lblTextoTotal.setBounds(20, 399, 110, 22);
+										lblTextoTotal.setBounds(62, 398, 110, 22);
 										contentPane.add(lblTextoTotal);
 
 										lblTotal = new JLabel("$0.0");
-										lblTotal.setFont(new Font("Verdana", Font.BOLD, 12));
-										lblTotal.setBounds(140, 399, 120, 22);
+										lblTotal.setFont(new Font("Verdana", Font.PLAIN, 11));
+										lblTotal.setBounds(182, 398, 120, 22);
 										contentPane.add(lblTotal);
 
-										JLabel lblTextoItems = new JLabel("ITEMS:");
-										lblTextoItems.setFont(new Font("Verdana", Font.BOLD, 11));
-										lblTextoItems.setBounds(219, 339, 53, 22);
-										contentPane.add(lblTextoItems);
+										JLabel lblTextoVentas = new JLabel("VENTAS:");
+										lblTextoVentas.setFont(new Font("Verdana", Font.BOLD, 11));
+										lblTextoVentas.setBounds(261, 338, 63, 22);
+										contentPane.add(lblTextoVentas);
 
 										lblItems = new JLabel("0");
 										lblItems.setFont(new Font("Verdana", Font.PLAIN, 11));
-										lblItems.setBounds(279, 339, 47, 22);
+										lblItems.setBounds(334, 338, 62, 22);
 										contentPane.add(lblItems);
 
-										cargartablaventas();
 										
 										JPanel panel = new JPanel();
 										panel.setBackground(new Color(64, 0, 0));
-										panel.setBounds(0, 1, 488, 75);
+										panel.setBounds(0, 1, 604, 75);
 										contentPane.add(panel);
 										
 										JLabel lblNewLabel_1_4 = new JLabel(LocalDate.now().getDayOfWeek().toString()+" | "+LocalDate.now().toString()+" | "+LocalDateTime.now().getHour()+":"+LocalDateTime.now().getMinute()+"hs");
@@ -219,13 +219,26 @@ public class MenuCajero_Vercaja extends JFrame {
 												JLabel lblTextoSubtotal_1 = new JLabel("TRANSFERENCIA:");
 												lblTextoSubtotal_1.setHorizontalAlignment(SwingConstants.CENTER);
 												lblTextoSubtotal_1.setFont(new Font("Verdana", Font.BOLD, 11));
-												lblTextoSubtotal_1.setBounds(20, 366, 110, 22);
+												lblTextoSubtotal_1.setBounds(62, 365, 110, 22);
 												contentPane.add(lblTextoSubtotal_1);
 												
 												lblTransferencia = new JLabel("$0.0");
 												lblTransferencia.setFont(new Font("Verdana", Font.PLAIN, 11));
-												lblTransferencia.setBounds(140, 366, 75, 22);
+												lblTransferencia.setBounds(182, 365, 75, 22);
 												contentPane.add(lblTransferencia);
+												
+												lblTotalVendido = new JLabel("TOTAL VENDIDO:");
+												lblTotalVendido.setHorizontalAlignment(SwingConstants.RIGHT);
+												lblTotalVendido.setFont(new Font("Verdana", Font.BOLD, 11));
+												lblTotalVendido.setBounds(253, 398, 110, 22);
+												contentPane.add(lblTotalVendido);
+												
+												lblTotalVendido = new JLabel("$0.0");
+												lblTotalVendido.setFont(new Font("Verdana", Font.BOLD, 12));
+												lblTotalVendido.setBounds(373, 398, 120, 22);
+												contentPane.add(lblTotalVendido);
+												
+												cargartablaventas();
 									
 		
 		
@@ -235,17 +248,43 @@ public class MenuCajero_Vercaja extends JFrame {
 	private void cargartablaventas() {
 	    model.setRowCount(0);
 
-	    LinkedList<Venta> ventas = controllerVenta.mostrarVentas();
+	    ventas = controllerVenta.mostrarVentas();
+
 
 	    for (Venta venta : ventas) {
+	    	
+	    	String cliente = "";
+
+	        if (venta.getCliente() != null) {
+	            cliente = venta.getCliente().getNombre_cliente() + " " + venta.getCliente().getApellido_cliente();
+	        } else {
+	            cliente = "Sin cliente";
+	        }
+
+	        String metodoPago = "";
+
+	        if (venta.getMetododepago() != null) {
+	            metodoPago = venta.getMetododepago().getTipo();
+	        } else {
+	            metodoPago = "Sin método";
+	        }
+
+	        String descuento = "";
+
+	        if (venta.getDescuento() != null) {
+	            descuento = venta.getDescuento().getNombre_descuento();
+	        } else {
+	            descuento = "Sin descuento";
+	        }
+
 	        model.addRow(new Object[] {
 	            venta.getid_venta(),
 	            venta.getFecha(),
 	            venta.getTotal_neto(),
 	            venta.getTotal_bruto(),
-	            venta.getCliente(),
-	            venta.getMetododepago(),
-	            venta.getDescuento()
+	            cliente,
+	            metodoPago,
+	            descuento
 	        });
 	    }
 
@@ -253,47 +292,97 @@ public class MenuCajero_Vercaja extends JFrame {
 	}
 	
 
-	private double calcularTotalTransferencia() {
+	private double calcularTotalEfectivo() {
 
-	    double subtotal = 0;
+	    double totalEfectivo = 0;
 
-	    for (Venta vent : ventas) {
-	        subtotal += vent.getTotal_neto();
+	    for (Venta venta : ventas) {
+
+	        if (venta.getMetododepago() != null) {
+
+	            int idMetodoPago = venta.getMetododepago().getid_metodo_de_pago();
+
+	            if (idMetodoPago == 1) {
+	                totalEfectivo += venta.getTotal_neto();
+	            }
+	        }
 	    }
 
-	    return subtotal;
+	    return totalEfectivo;
 	}
 
-	private double calcularTotal() {
+	private double calcularTotalDebito() {
 
-	    double subtotal = calcularTotalTransferencia();
-	    double descuento = subtotal * porcentajeDescuento / 100;
-	    double total = subtotal - descuento;
+	    double totalDebito = 0;
 
-	    return total;
+	    for (Venta venta : ventas) {
+
+	        if (venta.getMetododepago() != null) {
+
+	            int idMetodoPago = venta.getMetododepago().getid_metodo_de_pago();
+
+	            if (idMetodoPago == 2) {
+	                totalDebito += venta.getTotal_neto();
+	            }
+	        }
+	    }
+
+	    return totalDebito;
 	}
 
-	
-	/*private int calcularItems() {
+	private double calcularTotalTransferencia() {
+
+	    double totalTransferencia = 0;
+
+	    for (Venta venta : ventas) {
+
+	        if (venta.getMetododepago() != null) {
+
+	            int idMetodoPago = venta.getMetododepago().getid_metodo_de_pago();
+
+	            if (idMetodoPago == 3) {
+	                totalTransferencia += venta.getTotal_neto();
+	            }
+	        }
+	    }
+
+	    return totalTransferencia;
+	}
+
+	private double calcularTotalVendido() {
+
+	    double totalVendido = 0;
+
+	    for (Venta venta : ventas) {
+	        totalVendido += venta.getTotal_neto();
+	    }
+
+	    return totalVendido;
+	}
+
+	private int calcularItems() {
 
 	    int items = 0;
 
-	    for (ItemVenta item : carrito) {
-	        items += item.getCantidad();
+	    for (Venta venta : ventas) {
+	        items++;
 	    }
 
 	    return items;
-	}*/
+	}
 
 	private void actualizarTotales() {
 
-	    double subtotal = calcularTotalTransferencia();
-	    double total = calcularTotal();
-	    /*int items = calcularItems();*/
+		double totalEfectivo = calcularTotalEfectivo();
+	    double totalDebito = calcularTotalDebito();
+	    double totalTransferencia = calcularTotalTransferencia();
+	    double totalVendido = calcularTotalVendido();
+	    int items = calcularItems();
 
-	    lblDebito.setText("$" + subtotal);
-	    lblTotal.setText("$" + total);
-	    /*lblItems.setText(String.valueOf(items));*/
+	    lblDebito.setText("$" + totalDebito);
+	    lblTransferencia.setText("$" + totalTransferencia);
+	    lblTotal.setText("$" + totalEfectivo);
+	    lblTotalVendido.setText("$" + totalVendido);
+	    lblItems.setText(String.valueOf(items));
 	}
-	
 }
