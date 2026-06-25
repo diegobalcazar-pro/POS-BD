@@ -136,20 +136,12 @@ public class MenuCajero extends JFrame {
 								lblNewLabel_2.setBounds(4, 1, 169, 76);
 								contentPane.add(lblNewLabel_2);
 								
-								Button realizar_venta = new Button("Realizar Venta");
-								realizar_venta.setFont(new Font("Ebrima", Font.BOLD, 13));
-								realizar_venta.setForeground(new Color(255, 255, 255));
-								realizar_venta.setBackground(new Color(128, 0, 0));
-								realizar_venta.setActionCommand("Realizar Venta");
-								realizar_venta.setBounds(10, 96, 169, 44);
-								contentPane.add(realizar_venta);
-								
 								Button ver_ventas = new Button("Ver Ventas");
 								ver_ventas.setForeground(Color.WHITE);
 								ver_ventas.setFont(new Font("Ebrima", Font.BOLD, 13));
 								ver_ventas.setBackground(new Color(128, 0, 0));
 								ver_ventas.setActionCommand("Cerrar Sesion");
-								ver_ventas.setBounds(10, 156, 169, 44);
+								ver_ventas.setBounds(10, 96, 169, 44);
 								contentPane.add(ver_ventas);
 								ver_ventas.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
@@ -169,7 +161,7 @@ public class MenuCajero extends JFrame {
 								agregar_cliente.setFont(new Font("Ebrima", Font.BOLD, 13));
 								agregar_cliente.setBackground(new Color(128, 0, 0));
 								agregar_cliente.setActionCommand("Cerrar Sesion");
-								agregar_cliente.setBounds(10, 276, 169, 44);
+								agregar_cliente.setBounds(10, 218, 169, 44);
 								contentPane.add(agregar_cliente);
 								
 								Button ver_caja = new Button("Ver Caja");
@@ -177,7 +169,7 @@ public class MenuCajero extends JFrame {
 								ver_caja.setFont(new Font("Ebrima", Font.BOLD, 13));
 								ver_caja.setBackground(new Color(128, 0, 0));
 								ver_caja.setActionCommand("ver caja");
-								ver_caja.setBounds(10, 216, 169, 44);
+								ver_caja.setBounds(10, 158, 169, 44);
 								contentPane.add(ver_caja);
 								ver_caja.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
@@ -199,7 +191,7 @@ public class MenuCajero extends JFrame {
 								cerrar_sesion.setFont(new Font("Ebrima", Font.BOLD, 13));
 								cerrar_sesion.setBackground(new Color(128, 0, 0));
 								cerrar_sesion.setActionCommand("Cerrar Sesion");
-								cerrar_sesion.setBounds(10, 464, 169, 27);
+								cerrar_sesion.setBounds(10, 459, 169, 32);
 								contentPane.add(cerrar_sesion);
 								cerrar_sesion.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
@@ -222,7 +214,7 @@ public class MenuCajero extends JFrame {
 								cerrar_caja.setFont(new Font("Ebrima", Font.BOLD, 13));
 								cerrar_caja.setBackground(new Color(128, 0, 0));
 								cerrar_caja.setActionCommand("Cerrar Sesion");
-								cerrar_caja.setBounds(10, 336, 169, 44);
+								cerrar_caja.setBounds(10, 278, 169, 44);
 								contentPane.add(cerrar_caja);
 										
 								        Button seleccionarCliente = new Button("Seleccionar");
