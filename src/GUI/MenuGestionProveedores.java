@@ -97,27 +97,10 @@ public class MenuGestionProveedores extends JFrame {
 
 		btnCrearProv.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nombreEmpresa = JOptionPane.showInputDialog("Ingrese nombre de la empresa:");
-				if (nombreEmpresa == null || nombreEmpresa.trim().isEmpty())
-					return;
+				CrearProveedor ventanaCrear = new CrearProveedor(usuarioLogueado);
+				ventanaCrear.setVisible(true);
 
-				String nombreContacto = JOptionPane.showInputDialog("Ingrese nombre del contacto:");
-				if (nombreContacto == null || nombreContacto.trim().isEmpty())
-					return;
-
-				String telefono = JOptionPane.showInputDialog("Ingrese teléfono:");
-				if (telefono == null || telefono.trim().isEmpty())
-					return;
-
-				String correo = JOptionPane.showInputDialog("Ingrese correo electrónico:");
-				if (correo == null || correo.trim().isEmpty())
-					return;
-
-				Proveedor nuevoProveedor = new Proveedor(0, nombreEmpresa, nombreContacto, telefono, correo);
-				controllerProveedor.agregarProveedor(nuevoProveedor);
-				JOptionPane.showMessageDialog(null, "Proveedor '" + nombreEmpresa + "' registrado con éxito.");
-
-				cargarProveedoresEnTabla();
+				dispose();
 			}
 		});
 
@@ -147,27 +130,11 @@ public class MenuGestionProveedores extends JFrame {
 				String telActual = (String) table.getValueAt(filaSeleccionada, 3);
 				String correoActual = (String) table.getValueAt(filaSeleccionada, 4);
 
-				String nombre = JOptionPane.showInputDialog("Modificar empresa:", nombreActual);
-				if (nombre == null)
-					return;
+				ModificarProveedor ventanaModificar = new ModificarProveedor(usuarioLogueado, id, nombreActual,
+						contactoActual, telActual, correoActual);
+				ventanaModificar.setVisible(true);
 
-				String contacto = JOptionPane.showInputDialog("Modificar contacto:", contactoActual);
-				if (contacto == null)
-					return;
-
-				String tel = JOptionPane.showInputDialog("Modificar teléfono:", telActual);
-				if (tel == null)
-					return;
-
-				String correo = JOptionPane.showInputDialog("Modificar correo:", correoActual);
-				if (correo == null)
-					return;
-
-				Proveedor p = new Proveedor(id, nombre, contacto, tel, correo);
-				controllerProveedor.editarProveedor(p);
-
-				JOptionPane.showMessageDialog(null, "Proveedor actualizado correctamente.");
-				cargarProveedoresEnTabla();
+				dispose();
 			}
 		});
 
