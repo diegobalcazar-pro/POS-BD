@@ -16,20 +16,20 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import BLL.Usuario;
-import BLL.Categoria;
-import DLL.ControllerCategoria;
+import BLL.Producto;
+import DLL.ControllerProducto;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
-public class EliminarCategoria extends JFrame {
+public class EliminarProducto extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JComboBox<String> comboCategorias;
+	private JComboBox<String> comboProductos;
 	private DefaultComboBoxModel<String> modeloCombo;
-	
+
 	private Usuario usuarioLogueado;
-	private ControllerCategoria controllerCategoria = new ControllerCategoria();
-	private List<Categoria> listaCategorias;
+	private ControllerProducto controllerProducto = new ControllerProducto();
+	private List<Producto> listaProductos;
 
 	/**
 	 * Launch the application.
@@ -51,16 +51,16 @@ public class EliminarCategoria extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EliminarCategoria(Usuario logueado) {
+	public EliminarProducto(Usuario logueado) {
 		if (logueado == null) {
-			JOptionPane.showMessageDialog(null, "Acceso Denegado: Debe iniciar sesión para acceder a este formulario.", 
+			JOptionPane.showMessageDialog(null, "Acceso Denegado: Debe iniciar sesión para acceder a este formulario.",
 					"Error de Seguridad", JOptionPane.ERROR_MESSAGE);
 			Login login = new Login();
 			login.setVisible(true);
 			this.dispose();
-			return; 
+			return;
 		}
-		
+
 		this.usuarioLogueado = logueado;
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -70,59 +70,60 @@ public class EliminarCategoria extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel lblTitle = DefaultComponentFactory.getInstance().createTitle("Eliminar categoría");
+
+		JLabel lblTitle = DefaultComponentFactory.getInstance().createTitle("Eliminar producto");
 		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		lblTitle.setBounds(178, 50, 230, 29);
 		contentPane.add(lblTitle);
-		
-		JLabel lblSeleccionar = DefaultComponentFactory.getInstance().createLabel("Seleccionar categoría a eliminar:");
+
+		JLabel lblSeleccionar = DefaultComponentFactory.getInstance().createLabel("Seleccionar producto a eliminar:");
 		lblSeleccionar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblSeleccionar.setBounds(160, 120, 250, 20);
 		contentPane.add(lblSeleccionar);
 
 		modeloCombo = new DefaultComboBoxModel<>();
-		comboCategorias = new JComboBox<>(modeloCombo);
-		comboCategorias.setBounds(160, 160, 240, 30);
-		contentPane.add(comboCategorias);
-		
+		comboProductos = new JComboBox<>(modeloCombo);
+		comboProductos.setBounds(160, 160, 240, 30);
+		contentPane.add(comboProductos);
+
 		JButton btnConf = new JButton("Confirmar");
 		btnConf.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnConf.setBounds(127, 270, 110, 35);
 		contentPane.add(btnConf);
-		
+
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCancelar.setBounds(330, 270, 110, 35);
 		contentPane.add(btnCancelar);
 
-		cargarCategoriasEnCombo();
+		cargarProductosEnCombo();
 
 		btnConf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selectedIndex = comboCategorias.getSelectedIndex();
-				
+				int selectedIndex = comboProductos.getSelectedIndex();
+
 				if (selectedIndex <= 0) {
-					JOptionPane.showMessageDialog(null, "Por favor, seleccione una categoría para eliminar.", "Atención", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Por favor, seleccione un producto para eliminar.", "Atención",
+							JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 
-				Categoria catSeleccionada = listaCategorias.get(selectedIndex - 1);
-				
-				int confirm = JOptionPane.showConfirmDialog(null, 
-						"¿Está seguro de eliminar la categoría '" + catSeleccionada.getNombre_categoria() + "'?", 
-						"Confirmar Eliminación", 
-						JOptionPane.YES_NO_OPTION, 
-						JOptionPane.WARNING_MESSAGE);
-				
+				Producto prodSeleccionado = listaProductos.get(selectedIndex - 1);
+
+				int confirm = JOptionPane.showConfirmDialog(null,
+						"¿Está seguro de eliminar el producto '" + prodSeleccionado.getNombre_producto() + "'?",
+						"Confirmar Eliminación", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
 				if (confirm == JOptionPane.YES_OPTION) {
 					try {
-						controllerCategoria.eliminarCategoria(catSeleccionada.getid_categoria());
-						JOptionPane.showMessageDialog(null, "Categoría eliminada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+						controllerProducto.eliminarProducto(prodSeleccionado.getid_producto());
+						JOptionPane.showMessageDialog(null, "Producto eliminado con éxito.", "Éxito",
+								JOptionPane.INFORMATION_MESSAGE);
 						volverAlMenu();
 					} catch (Exception ex) {
 						ex.printStackTrace();
-						JOptionPane.showMessageDialog(null, "Error al eliminar la categoría.", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Error al eliminar el producto.", "Error",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
@@ -135,15 +136,15 @@ public class EliminarCategoria extends JFrame {
 		});
 	}
 
-	private void cargarCategoriasEnCombo() {
+	private void cargarProductosEnCombo() {
 		modeloCombo.removeAllElements();
-		modeloCombo.addElement("-- Seleccionar Categoría --");
-		
-		listaCategorias = controllerCategoria.obtenerCategorias();
-		
-		if (listaCategorias != null) {
-			for (Categoria cat : listaCategorias) {
-				modeloCombo.addElement(cat.getNombre_categoria());
+		modeloCombo.addElement("-- Seleccionar Producto --");
+
+		listaProductos = controllerProducto.obtenerProductos();
+
+		if (listaProductos != null) {
+			for (Producto p : listaProductos) {
+				modeloCombo.addElement(p.getNombre_producto());
 			}
 		}
 	}
