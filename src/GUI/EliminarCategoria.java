@@ -13,7 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import BLL.Usuario;
@@ -21,14 +20,13 @@ import BLL.Categoria;
 import DLL.ControllerCategoria;
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
-public class ModificarCategoria extends JFrame {
+public class EliminarCategoria extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtNombreCat;
 	private JComboBox<String> comboCategorias;
 	private DefaultComboBoxModel<String> modeloCombo;
-
+	
 	private Usuario usuarioLogueado;
 	private ControllerCategoria controllerCategoria = new ControllerCategoria();
 	private List<Categoria> listaCategorias;
@@ -53,16 +51,16 @@ public class ModificarCategoria extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ModificarCategoria(Usuario logueado) {
+	public EliminarCategoria(Usuario logueado) {
 		if (logueado == null) {
-			JOptionPane.showMessageDialog(null, "Acceso Denegado: Debe iniciar sesión para acceder a este formulario.",
+			JOptionPane.showMessageDialog(null, "Acceso Denegado: Debe iniciar sesión para acceder a este formulario.", 
 					"Error de Seguridad", JOptionPane.ERROR_MESSAGE);
 			Login login = new Login();
 			login.setVisible(true);
 			this.dispose();
-			return;
+			return; 
 		}
-
+		
 		this.usuarioLogueado = logueado;
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -72,85 +70,62 @@ public class ModificarCategoria extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		JLabel lblNewJgoodiesTitle = DefaultComponentFactory.getInstance().createTitle("Modificar categoría");
-		lblNewJgoodiesTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewJgoodiesTitle.setBounds(178, 30, 230, 29);
-		contentPane.add(lblNewJgoodiesTitle);
-
-		JLabel lblSeleccionar = DefaultComponentFactory.getInstance().createLabel("Seleccionar categoría a editar:");
+		
+		JLabel lblTitle = DefaultComponentFactory.getInstance().createTitle("Eliminar categoría");
+		lblTitle.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblTitle.setBounds(178, 50, 230, 29);
+		contentPane.add(lblTitle);
+		
+		JLabel lblSeleccionar = DefaultComponentFactory.getInstance().createLabel("Seleccionar categoría a eliminar:");
 		lblSeleccionar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblSeleccionar.setBounds(180, 85, 220, 20);
+		lblSeleccionar.setBounds(160, 120, 250, 20);
 		contentPane.add(lblSeleccionar);
 
 		modeloCombo = new DefaultComboBoxModel<>();
 		comboCategorias = new JComboBox<>(modeloCombo);
-		comboCategorias.setBounds(180, 115, 210, 25);
+		comboCategorias.setBounds(160, 160, 240, 30);
 		contentPane.add(comboCategorias);
-
-		JLabel lblNewJgoodiesLabel = DefaultComponentFactory.getInstance().createLabel("Nuevo Nombre:");
-		lblNewJgoodiesLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewJgoodiesLabel.setBounds(180, 170, 210, 20);
-		contentPane.add(lblNewJgoodiesLabel);
-
-		txtNombreCat = new JTextField();
-		txtNombreCat.setBounds(180, 200, 210, 25);
-		contentPane.add(txtNombreCat);
-		txtNombreCat.setColumns(10);
-
+		
 		JButton btnConf = new JButton("Confirmar");
-		btnConf.setBounds(127, 300, 110, 30);
+		btnConf.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnConf.setBounds(127, 270, 110, 35);
 		contentPane.add(btnConf);
-
+		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(330, 300, 110, 30);
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnCancelar.setBounds(330, 270, 110, 35);
 		contentPane.add(btnCancelar);
 
 		cargarCategoriasEnCombo();
 
-		comboCategorias.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int selectedIndex = comboCategorias.getSelectedIndex();
-				if (selectedIndex > 0) {
-					Categoria catSeleccionada = listaCategorias.get(selectedIndex - 1);
-					txtNombreCat.setText(catSeleccionada.getNombre_categoria());
-				} else {
-					txtNombreCat.setText("");
-				}
-			}
-		});
-
 		btnConf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedIndex = comboCategorias.getSelectedIndex();
-
+				
 				if (selectedIndex <= 0) {
-					JOptionPane.showMessageDialog(null, "Por favor, seleccione una categoría para modificar.",
-							"Atención", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Por favor, seleccione una categoría para eliminar.", "Atención", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 
-				String nuevoNombre = txtNombreCat.getText().trim();
-				if (nuevoNombre.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "El nombre de la categoría no puede estar vacío.", "Atención",
-							JOptionPane.WARNING_MESSAGE);
-					return;
+				Categoria catSeleccionada = listaCategorias.get(selectedIndex - 1);
+				
+				int confirm = JOptionPane.showConfirmDialog(null, 
+						"¿Está seguro de eliminar la categoría '" + catSeleccionada.getNombre_categoria() + "'?", 
+						"Confirmar Eliminación", 
+						JOptionPane.YES_NO_OPTION, 
+						JOptionPane.WARNING_MESSAGE);
+				
+				if (confirm == JOptionPane.YES_OPTION) {
+					try {
+						controllerCategoria.eliminarCategoria(catSeleccionada.getid_categoria());
+						JOptionPane.showMessageDialog(null, "Categoría eliminada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+						volverAlMenu();
+					} catch (Exception ex) {
+						ex.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Error al eliminar la categoría.", "Error", JOptionPane.ERROR_MESSAGE);
+					}
 				}
-
-				try {
-					Categoria original = listaCategorias.get(selectedIndex - 1);
-					Categoria categoriaActualizada = new Categoria(original.getid_categoria(), nuevoNombre);
-
-					controllerCategoria.modificarCategoria(categoriaActualizada);
-
-					JOptionPane.showMessageDialog(null, "Categoría modificada con éxito.", "Éxito",
-							JOptionPane.INFORMATION_MESSAGE);
-					volverAlMenu();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Error al modificar la categoría.", "Error",
-							JOptionPane.ERROR_MESSAGE);
-				}
+				// Si elige NO, simplemente permanece en esta ventana (no se hace nada)
 			}
 		});
 
@@ -164,9 +139,9 @@ public class ModificarCategoria extends JFrame {
 	private void cargarCategoriasEnCombo() {
 		modeloCombo.removeAllElements();
 		modeloCombo.addElement("-- Seleccionar Categoría --");
-
+		
 		listaCategorias = controllerCategoria.obtenerCategorias();
-
+		
 		if (listaCategorias != null) {
 			for (Categoria cat : listaCategorias) {
 				modeloCombo.addElement(cat.getNombre_categoria());
