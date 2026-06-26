@@ -71,16 +71,12 @@ public class MenuCajero_AgregarClient extends JFrame {
     private Usuario logueado;
     private LinkedList<Venta> ventas = new LinkedList<Venta>();
 
-    private Cliente VentaSeleccionado;
-    private JLabel lblTotalVendido;
-
-    private double porcentajeDescuento = 0;
-    private int idDescuentoSeleccionado = 0;
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
-    private JTextField textField_3;
-    private JTextField textField_4;
+    private JTextField inpNombre;
+    private JTextField inpApellido;
+    private JTextField inpCorreo;
+    private JTextField inpTelefono;
+    private JTextField inpDireccion;
+    private JComboBox<String> selectTipo;
     
 
 	/**
@@ -107,7 +103,7 @@ public class MenuCajero_AgregarClient extends JFrame {
 	public MenuCajero_AgregarClient(Usuario logueado) {
 	    this.logueado = logueado;
 
-	    VentaSeleccionado = controllerVenta.buscarClientePorId(1);
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src\\\\img\\\\logo4.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 520, 484);
@@ -189,10 +185,10 @@ public class MenuCajero_AgregarClient extends JFrame {
 												);
 												panel.setLayout(gl_panel);
 												
-												textField = new JTextField();
-												textField.setBounds(198, 143, 169, 27);
-												contentPane.add(textField);
-												textField.setColumns(10);
+												inpNombre = new JTextField();
+												inpNombre.setBounds(198, 143, 169, 27);
+												contentPane.add(inpNombre);
+												inpNombre.setColumns(10);
 												
 												JLabel lblApellido = new JLabel("APELLIDO:");
 												lblApellido.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -200,10 +196,10 @@ public class MenuCajero_AgregarClient extends JFrame {
 												lblApellido.setBounds(78, 180, 110, 22);
 												contentPane.add(lblApellido);
 												
-												textField_1 = new JTextField();
-												textField_1.setColumns(10);
-												textField_1.setBounds(198, 178, 169, 27);
-												contentPane.add(textField_1);
+												inpApellido = new JTextField();
+												inpApellido.setColumns(10);
+												inpApellido.setBounds(198, 178, 169, 27);
+												contentPane.add(inpApellido);
 												
 												JLabel lblCorreo = new JLabel("CORREO:");
 												lblCorreo.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -211,10 +207,10 @@ public class MenuCajero_AgregarClient extends JFrame {
 												lblCorreo.setBounds(78, 218, 110, 22);
 												contentPane.add(lblCorreo);
 												
-												textField_2 = new JTextField();
-												textField_2.setColumns(10);
-												textField_2.setBounds(198, 216, 169, 27);
-												contentPane.add(textField_2);
+												inpCorreo = new JTextField();
+												inpCorreo.setColumns(10);
+												inpCorreo.setBounds(198, 216, 169, 27);
+												contentPane.add(inpCorreo);
 												
 												JLabel lblTel = new JLabel("TEL:");
 												lblTel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -222,10 +218,10 @@ public class MenuCajero_AgregarClient extends JFrame {
 												lblTel.setBounds(78, 253, 110, 22);
 												contentPane.add(lblTel);
 												
-												textField_3 = new JTextField();
-												textField_3.setColumns(10);
-												textField_3.setBounds(198, 251, 169, 27);
-												contentPane.add(textField_3);
+												inpTelefono = new JTextField();
+												inpTelefono.setColumns(10);
+												inpTelefono.setBounds(198, 251, 169, 27);
+												contentPane.add(inpTelefono);
 												
 												JLabel lblDireccion = new JLabel("DIRECCIÓN:");
 												lblDireccion.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -233,10 +229,10 @@ public class MenuCajero_AgregarClient extends JFrame {
 												lblDireccion.setBounds(78, 288, 110, 22);
 												contentPane.add(lblDireccion);
 												
-												textField_4 = new JTextField();
-												textField_4.setColumns(10);
-												textField_4.setBounds(198, 286, 169, 27);
-												contentPane.add(textField_4);
+												inpDireccion = new JTextField();
+												inpDireccion.setColumns(10);
+												inpDireccion.setBounds(198, 286, 169, 27);
+												contentPane.add(inpDireccion);
 												
 												JLabel lblTipo = new JLabel("TIPO:");
 												lblTipo.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -244,10 +240,10 @@ public class MenuCajero_AgregarClient extends JFrame {
 												lblTipo.setBounds(78, 326, 110, 22);
 												contentPane.add(lblTipo);
 												
-												JComboBox comboBox = new JComboBox();
-												comboBox.setModel(new DefaultComboBoxModel(new String[] {"minorista", "mayorista"}));
-												comboBox.setBounds(198, 324, 169, 27);
-												contentPane.add(comboBox);
+												selectTipo = new JComboBox<String>();
+												selectTipo.setModel(new DefaultComboBoxModel<String>(new String[] {"minorista", "mayorista"}));
+												selectTipo.setBounds(198, 324, 169, 27);
+												contentPane.add(selectTipo);
 												
 												Button button_4_1 = new Button("Guardar");
 												button_4_1.setForeground(Color.WHITE);
@@ -255,146 +251,81 @@ public class MenuCajero_AgregarClient extends JFrame {
 												button_4_1.setBackground(new Color(64, 0, 0));
 												button_4_1.setBounds(328, 367, 78, 60);
 												contentPane.add(button_4_1);
+												button_4_1.addActionListener(new ActionListener() {
+												    public void actionPerformed(ActionEvent e) {
+												        guardarCliente();
+												    }
+												});
 												
-												cargartablaventas();
+											
 									
 		
 		
 	}
 	
+	private void guardarCliente() {
+
+	    String nombre = inpNombre.getText().trim();
+	    String apellido = inpApellido.getText().trim();
+	    String correo = inpCorreo.getText().trim();
+	    String telefono = inpTelefono.getText().trim();
+	    String direccion = inpDireccion.getText().trim();
+	    String tipo = selectTipo.getSelectedItem().toString();
+
+	    if (nombre.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "Debe ingresar el nombre.");
+	        return;
+	    }
+
+	    if (apellido.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "Debe ingresar el apellido.");
+	        return;
+	    }
+
+	    if (correo.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "Debe ingresar el correo.");
+	        return;
+	    }
+
+	    if (telefono.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "Debe ingresar el teléfono.");
+	        return;
+	    }
+
+	    if (direccion.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "Debe ingresar la dirección.");
+	        return;
+	    }
+
+	    boolean clienteGuardado = controllerVenta.agregarCliente(
+	            nombre,
+	            apellido,
+	            correo,
+	            telefono,
+	            direccion,
+	            tipo
+	    );
+
+	    if (clienteGuardado) {
+	        JOptionPane.showMessageDialog(null, "Cliente agregado correctamente.");
+	        limpiarCampos();
+	    } else {
+	        JOptionPane.showMessageDialog(null, "No se pudo agregar el cliente.");
+	    }
+	}
+
+	private void limpiarCampos() {
+
+	    inpNombre.setText("");
+	    inpApellido.setText("");
+	    inpCorreo.setText("");
+	    inpTelefono.setText("");
+	    inpDireccion.setText("");
+	    selectTipo.setSelectedIndex(0);
+	}
 	
-	private void cargartablaventas() {
-	    model.setRowCount(0);
-
-	    ventas = controllerVenta.mostrarVentas();
-
-
-	    for (Venta venta : ventas) {
-	    	
-	    	String cliente = "";
-
-	        if (venta.getCliente() != null) {
-	            cliente = venta.getCliente().getNombre_cliente() + " " + venta.getCliente().getApellido_cliente();
-	        } else {
-	            cliente = "Sin cliente";
-	        }
-
-	        String metodoPago = "";
-
-	        if (venta.getMetododepago() != null) {
-	            metodoPago = venta.getMetododepago().getTipo();
-	        } else {
-	            metodoPago = "Sin método";
-	        }
-
-	        String descuento = "";
-
-	        if (venta.getDescuento() != null) {
-	            descuento = venta.getDescuento().getNombre_descuento();
-	        } else {
-	            descuento = "Sin descuento";
-	        }
-
-	        model.addRow(new Object[] {
-	            venta.getid_venta(),
-	            venta.getFecha(),
-	            venta.getTotal_neto(),
-	            venta.getTotal_bruto(),
-	            cliente,
-	            metodoPago,
-	            descuento
-	        });
-	    }
-
-	    actualizarTotales();
-	}
 	
-
-	private double calcularTotalEfectivo() {
-
-	    double totalEfectivo = 0;
-
-	    for (Venta venta : ventas) {
-
-	        if (venta.getMetododepago() != null) {
-
-	            int idMetodoPago = venta.getMetododepago().getid_metodo_de_pago();
-
-	            if (idMetodoPago == 1) {
-	                totalEfectivo += venta.getTotal_neto();
-	            }
-	        }
-	    }
-
-	    return totalEfectivo;
-	}
-
-	private double calcularTotalDebito() {
-
-	    double totalDebito = 0;
-
-	    for (Venta venta : ventas) {
-
-	        if (venta.getMetododepago() != null) {
-
-	            int idMetodoPago = venta.getMetododepago().getid_metodo_de_pago();
-
-	            if (idMetodoPago == 2) {
-	                totalDebito += venta.getTotal_neto();
-	            }
-	        }
-	    }
-
-	    return totalDebito;
-	}
-
-	private double calcularTotalTransferencia() {
-
-	    double totalTransferencia = 0;
-
-	    for (Venta venta : ventas) {
-
-	        if (venta.getMetododepago() != null) {
-
-	            int idMetodoPago = venta.getMetododepago().getid_metodo_de_pago();
-
-	            if (idMetodoPago == 3) {
-	                totalTransferencia += venta.getTotal_neto();
-	            }
-	        }
-	    }
-
-	    return totalTransferencia;
-	}
-
-	private double calcularTotalVendido() {
-
-	    double totalVendido = 0;
-
-	    for (Venta venta : ventas) {
-	        totalVendido += venta.getTotal_neto();
-	    }
-
-	    return totalVendido;
-	}
-
-	private int calcularItems() {
-
-	    int items = 0;
-
-	    for (Venta venta : ventas) {
-	        items++;
-	    }
-
-	    return items;
-	}
-
-	private void actualizarTotales() {
-
-		double totalEfectivo = calcularTotalEfectivo();
-	    double totalDebito = calcularTotalDebito();
-	    double totalTransferencia = calcularTotalTransferencia();
-	    double totalVendido = calcularTotalVendido();
-	    int items = calcularItems();
-	}
+	
+	
+	
 }

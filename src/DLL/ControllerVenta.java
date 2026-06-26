@@ -907,5 +907,64 @@ public class ControllerVenta implements VentaRepository {
         return lista;
     }
     
+    public boolean agregarCliente(String nombre, String apellido, String correo, String telefono, String direccion, String tipo) {
+
+        boolean agregado = false;
+
+        try {
+            PreparedStatement consultaCliente = con.prepareStatement(
+                "INSERT INTO clientes (nombre_cliente, apellido_cliente, correo, telefono, direccion, tipo) VALUES (?, ?, ?, ?, ?, ?)"
+            );
+
+            consultaCliente.setString(1, nombre);
+            consultaCliente.setString(2, apellido);
+            consultaCliente.setString(3, correo);
+            consultaCliente.setString(4, telefono);
+            consultaCliente.setString(5, direccion);
+            consultaCliente.setString(6, tipo);
+
+            int filas = consultaCliente.executeUpdate();
+
+            if (filas > 0) {
+                agregado = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return agregado;
+    }
+    
+    public LinkedList<Object[]> mostrarClientesParaTabla() {
+
+        LinkedList<Object[]> lista = new LinkedList<Object[]>();
+
+        try {
+            PreparedStatement consultaClientes = con.prepareStatement("SELECT * FROM clientes");
+
+            ResultSet resultadoClientes = consultaClientes.executeQuery();
+
+            while (resultadoClientes.next()) {
+
+                lista.add(new Object[] {
+                    resultadoClientes.getInt("id_cliente"),
+                    resultadoClientes.getString("nombre_cliente"),
+                    resultadoClientes.getString("apellido_cliente"),
+                    resultadoClientes.getString("correo"),
+                    resultadoClientes.getString("telefono"),
+                    resultadoClientes.getString("direccion"),
+                    resultadoClientes.getString("tipo")
+                });
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+    
+    
 
 }
