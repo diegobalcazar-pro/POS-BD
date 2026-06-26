@@ -207,7 +207,7 @@ public class MenuGestionProductos extends JFrame {
 		btnMoverProd.setFont(new Font("Ebrima", Font.BOLD, 13));
 		btnMoverProd.setBackground(new Color(128, 0, 0));
 		btnMoverProd.setForeground(new Color(255, 255, 255));
-		btnMoverProd.setBounds(29, 371, 133, 22);
+		btnMoverProd.setBounds(24, 371, 142, 22);
 		btnMoverProd.setContentAreaFilled(false);
 		btnMoverProd.setOpaque(true);
 		nav.add(btnMoverProd);
@@ -274,14 +274,28 @@ public class MenuGestionProductos extends JFrame {
 				dispose();
 			}
 		});
+		
 		btnModiCat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ModificarCategoria ventanaModiCat = new ModificarCategoria(usuarioLogueado);
+				ventanaModiCat.setVisible(true);
+				dispose();
 			}
 		});
+
 		btnCrearCat.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        CrearCategoria ventanaCat = new CrearCategoria(usuarioLogueado);
+		        ventanaCat.setVisible(true);
+		        dispose();
+		    }
+		});
+
+		// Conexión del botón Eliminar Categoría
+		btnElimCat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CrearCategoria ventanaProductos = new CrearCategoria();
-				ventanaProductos.setVisible(true);
+				EliminarCategoria ventanaElimCat = new EliminarCategoria(usuarioLogueado);
+				ventanaElimCat.setVisible(true);
 				dispose();
 			}
 		});
