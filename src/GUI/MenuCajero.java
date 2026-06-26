@@ -146,11 +146,9 @@ public class MenuCajero extends JFrame {
 								ver_ventas.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
 										
-										logueado.Menu();
-										
-										/*MenuCajero_Vercaja mcajero = new MenuCajero_Vercaja(logueado);
-										mcajero.setVisible(true);
-										dispose();*/
+										MenuCajero_Verventas m_verventas = new MenuCajero_Verventas(logueado);
+										m_verventas.setVisible(true);
+										dispose();
 							
 									}
 								});

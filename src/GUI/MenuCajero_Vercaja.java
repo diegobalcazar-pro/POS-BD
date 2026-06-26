@@ -151,7 +151,7 @@ public class MenuCajero_Vercaja extends JFrame {
 										scrollPane.setBounds(10, 131, 584, 186);
 										contentPane.add(scrollPane);
 										
-										model = new DefaultTableModel(new String[]{"ID", "Fecha", "Total Neto", "Total Bruto", "Cliente", "M. Pago", "Desuento"}, 0);
+										model = new DefaultTableModel(new String[]{"ID", "Fecha", "Total Neto", "Total Bruto", "Cliente", "M. Pago", "Descuento"}, 0);
 										table = new JTable(model);
 										table.setFont(new Font("Tahoma", Font.PLAIN, 13));
 										scrollPane.setViewportView(table);
