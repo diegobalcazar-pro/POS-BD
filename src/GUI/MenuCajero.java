@@ -161,6 +161,17 @@ public class MenuCajero extends JFrame {
 								agregar_cliente.setActionCommand("Cerrar Sesion");
 								agregar_cliente.setBounds(10, 218, 169, 44);
 								contentPane.add(agregar_cliente);
+								agregar_cliente.addActionListener(new ActionListener() {
+									public void actionPerformed(ActionEvent e) {
+										
+										
+										MenuCajero_AgregarClient m_agregarclient = new MenuCajero_AgregarClient(logueado);
+										m_agregarclient.setVisible(true);
+										dispose();
+										
+
+									}
+								});
 								
 								Button ver_caja = new Button("Ver Caja");
 								ver_caja.setForeground(Color.WHITE);
@@ -177,9 +188,7 @@ public class MenuCajero extends JFrame {
 										mcajero.setVisible(true);
 										dispose();
 										
-										
-										
-										
+
 									}
 								});
 								
