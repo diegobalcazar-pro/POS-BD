@@ -183,10 +183,6 @@ public class MenuGestionProductos extends JFrame {
 		btnModiProd.setFont(new Font("Ebrima", Font.BOLD, 13));
 		btnModiProd.setBackground(new Color(128, 0, 0));
 		btnModiProd.setForeground(new Color(255, 255, 255));
-		btnModiProd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnModiProd.setContentAreaFilled(false);
 		btnModiProd.setOpaque(true);
 		btnModiProd.setBounds(49, 222, 96, 22);
@@ -232,6 +228,7 @@ public class MenuGestionProductos extends JFrame {
 		btnCrearVarProd.setContentAreaFilled(false);
 		btnCrearVarProd.setOpaque(true);
 		nav.add(btnCrearVarProd);
+
 		btnCrearVarProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CrearVariante ventanaProductos = new CrearVariante();
@@ -239,7 +236,7 @@ public class MenuGestionProductos extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(200, 127, 516, 375);
 		contentPane.add(scrollPane);
@@ -259,7 +256,7 @@ public class MenuGestionProductos extends JFrame {
 		tablaProd.setModel(modeloTabla);
 
 		cargarVariantesEnTabla();
-		
+
 		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MenuRepositor menu = new MenuRepositor(usuarioLogueado);
@@ -267,14 +264,31 @@ public class MenuGestionProductos extends JFrame {
 				dispose();
 			}
 		});
+
 		btnCrearProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CrearProducto ventanaProductos = new CrearProducto();
+				CrearProducto ventanaProductos = new CrearProducto(usuarioLogueado);
 				ventanaProductos.setVisible(true);
 				dispose();
 			}
 		});
-		
+
+		btnModiProd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ModificarProducto ventanaModiProd = new ModificarProducto(usuarioLogueado);
+				ventanaModiProd.setVisible(true);
+				dispose();
+			}
+		});
+
+		btnElimProd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EliminarProducto ventanaElimProd = new EliminarProducto(usuarioLogueado);
+				ventanaElimProd.setVisible(true);
+				dispose();
+			}
+		});
+
 		btnModiCat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ModificarCategoria ventanaModiCat = new ModificarCategoria(usuarioLogueado);
@@ -284,14 +298,13 @@ public class MenuGestionProductos extends JFrame {
 		});
 
 		btnCrearCat.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        CrearCategoria ventanaCat = new CrearCategoria(usuarioLogueado);
-		        ventanaCat.setVisible(true);
-		        dispose();
-		    }
+			public void actionPerformed(ActionEvent e) {
+				CrearCategoria ventanaCat = new CrearCategoria(usuarioLogueado);
+				ventanaCat.setVisible(true);
+				dispose();
+			}
 		});
 
-		// Conexión del botón Eliminar Categoría
 		btnElimCat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EliminarCategoria ventanaElimCat = new EliminarCategoria(usuarioLogueado);
@@ -301,15 +314,14 @@ public class MenuGestionProductos extends JFrame {
 		});
 
 	}
-	
+
 	private void cargarVariantesEnTabla() {
-	    modeloTabla.setRowCount(0);
+		modeloTabla.setRowCount(0);
 
-	    List<Object[]> inventario =
-	            ControllerVarianteProducto.obtenerInventarioParaTabla();
+		List<Object[]> inventario = ControllerVarianteProducto.obtenerInventarioParaTabla();
 
-	    for (Object[] fila : inventario) {
-	        modeloTabla.addRow(fila);
-	    }
+		for (Object[] fila : inventario) {
+			modeloTabla.addRow(fila);
+		}
 	}
 }
