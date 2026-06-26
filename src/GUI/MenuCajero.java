@@ -13,7 +13,9 @@ import BLL.Producto;
 import BLL.Repositor;
 import BLL.Usuario;
 import BLL.VarianteProducto;
+import BLL.Venta;
 import BLL.Cliente;
+import BLL.Descuento;
 import DLL.ControllerProducto;
 import DLL.ControllerUsuario;
 import DLL.ControllerVarianteProducto;
@@ -223,14 +225,19 @@ public class MenuCajero extends JFrame {
 								cerrar_caja.setActionCommand("Cerrar Sesion");
 								cerrar_caja.setBounds(10, 278, 169, 44);
 								contentPane.add(cerrar_caja);
+								cerrar_caja.addActionListener(new ActionListener() {
+								    public void actionPerformed(ActionEvent e) {
+								        cerrarCaja();
+								    }
+								});
 										
 								        Button seleccionarCliente = new Button("Seleccionar");
 								        seleccionarCliente.setBounds(396, 144, 70, 22);
 								        contentPane.add(seleccionarCliente);
-        
 								        seleccionarCliente.addActionListener(new ActionListener() {
 								            public void actionPerformed(ActionEvent e) {
-								                seleccionarCliente();
+								                MenuCajero_SeleccionarCliente ventanaCliente = new MenuCajero_SeleccionarCliente(MenuCajero.this);
+								                ventanaCliente.setVisible(true);
 								            }
 								        });
 										
@@ -254,7 +261,8 @@ public class MenuCajero extends JFrame {
 										contentPane.add(button_4_1);
 										button_4_1.addActionListener(new ActionListener() {
 										    public void actionPerformed(ActionEvent e) {
-										        agregarProductoAlCarrito();
+										        MenuCajero_SeleccionarProducto ventanaProducto = new MenuCajero_SeleccionarProducto(MenuCajero.this);
+										        ventanaProducto.setVisible(true);
 										    }
 										});
 										
@@ -600,30 +608,49 @@ public class MenuCajero extends JFrame {
 
 	private void agregarDescuento() {
 
-	    JOptionPane.showMessageDialog(null, "Descuentos disponibles:\n" + controllerVenta.mostrarDescuentosTexto());
+	    LinkedList<Descuento> descuentos = Descuento.mostrarDescuentos();
 
-	    String idTexto = JOptionPane.showInputDialog("Ingrese el ID del descuento. Ingrese 0 para quitar descuento");
+	    String[] opciones = new String[descuentos.size() + 1];
 
-	    if (idTexto == null || idTexto.trim().isEmpty()) {
+	    opciones[0] = "0 - Sin descuento - 0%";
+
+	    for (int i = 0; i < descuentos.size(); i++) {
+
+	        Descuento descuento = descuentos.get(i);
+
+	        opciones[i + 1] = descuento.getId_descuento()
+	                + " - "
+	                + descuento.getNombre_descuento()
+	                + " - "
+	                + descuento.getPorcentaje_descuento()
+	                + "%";
+	    }
+
+	    String seleccion = (String) JOptionPane.showInputDialog(
+	            null,
+	            "Seleccione un descuento",
+	            "Descuento",
+	            JOptionPane.QUESTION_MESSAGE,
+	            null,
+	            opciones,
+	            opciones[0]
+	    );
+
+	    if (seleccion == null) {
 	        return;
 	    }
 
-	    int idDescuento = 0;
-
-	    try {
-	        idDescuento = Integer.parseInt(idTexto);
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(null, "Debe ingresar solamente números.");
-	        return;
-	    }
-
-	    if (idDescuento == 0) {
+	    if (seleccion.startsWith("0 -")) {
 	        idDescuentoSeleccionado = 0;
 	        porcentajeDescuento = 0;
 	        actualizarTotales();
 	        JOptionPane.showMessageDialog(null, "Descuento eliminado.");
 	        return;
 	    }
+
+	    String idTexto = seleccion.substring(0, seleccion.indexOf(" - "));
+
+	    int idDescuento = Integer.parseInt(idTexto);
 
 	    double porcentaje = controllerVenta.obtenerPorcentajeDescuento(idDescuento);
 
@@ -659,22 +686,29 @@ public class MenuCajero extends JFrame {
 
 	    int idCliente = clienteSeleccionado.getid_cliente();
 
-	    JOptionPane.showMessageDialog(null, "Métodos de pago disponibles:\n" + controllerVenta.mostrarMetodosPagoTexto());
+	    String[] metodosPago = {
+	            "1 - Efectivo",
+	            "2 - Débito",
+	            "3 - Transferencia"
+	    };
 
-	    String metodoTexto = JOptionPane.showInputDialog("Ingrese el ID del método de pago");
+	    String metodoSeleccionado = (String) JOptionPane.showInputDialog(
+	            null,
+	            "Seleccione el método de pago",
+	            "Método de pago",
+	            JOptionPane.QUESTION_MESSAGE,
+	            null,
+	            metodosPago,
+	            metodosPago[0]
+	    );
 
-	    if (metodoTexto == null || metodoTexto.trim().isEmpty()) {
+	    if (metodoSeleccionado == null) {
 	        return;
 	    }
 
-	    int idMetodoPago = 0;
+	    String idMetodoTexto = metodoSeleccionado.substring(0, metodoSeleccionado.indexOf(" - "));
 
-	    try {
-	        idMetodoPago = Integer.parseInt(metodoTexto);
-	    } catch (NumberFormatException e) {
-	        JOptionPane.showMessageDialog(null, "El método de pago debe ser un número.");
-	        return;
-	    }
+	    int idMetodoPago = Integer.parseInt(idMetodoTexto);
 
 	    double subtotal = calcularSubtotal();
 	    double total = calcularTotal();
@@ -705,6 +739,16 @@ public class MenuCajero extends JFrame {
 	    );
 
 	    if (venta) {
+
+	        String ticket = generarTicketVenta(metodoSeleccionado, subtotal, total);
+
+	        JOptionPane.showMessageDialog(
+	                null,
+	                ticket,
+	                "Ticket de venta",
+	                JOptionPane.INFORMATION_MESSAGE
+	        );
+
 	        carrito.clear();
 
 	        idDescuentoSeleccionado = 0;
@@ -715,7 +759,6 @@ public class MenuCajero extends JFrame {
 	        cargarTabla();
 	        actualizarTotales();
 
-	        JOptionPane.showMessageDialog(null, "Venta cobrada correctamente.");
 	    } else {
 	        JOptionPane.showMessageDialog(null, "No se pudo procesar la venta.");
 	    }
@@ -776,4 +819,173 @@ public class MenuCajero extends JFrame {
 	    clienteSeleccionado = controllerVenta.buscarClientePorId(1);
 	    actualizarClienteSeleccionado();
 	}
+	
+	public void agregarProductoDesdeVentana(int idVariante, int cantidad) {
+
+    if (cantidad <= 0) {
+        JOptionPane.showMessageDialog(null, "La cantidad debe ser mayor a 0.");
+        return;
+    }
+
+    ItemVenta itemNuevo = controllerVenta.buscarItemVenta(idVariante, cantidad);
+
+    if (itemNuevo == null) {
+        return;
+    }
+
+    for (ItemVenta item : carrito) {
+
+        if (item.getId_variante_producto() == idVariante) {
+
+            int nuevaCantidad = item.getCantidad() + cantidad;
+
+            if (controllerVenta.hayStockSuficiente(idVariante, nuevaCantidad)) {
+                item.setCantidad(nuevaCantidad);
+                JOptionPane.showMessageDialog(null, "Cantidad actualizada en el carrito.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No hay stock suficiente para sumar esa cantidad.");
+            }
+
+            cargarTabla();
+            return;
+        }
+    }
+
+    carrito.add(itemNuevo);
+
+    cargarTabla();
+
+    JOptionPane.showMessageDialog(null, "Producto agregado al carrito.");
+}
+	
+	private String generarTicketVenta(String metodoPago, double subtotal, double total) {
+
+	    String texto = "";
+
+	    texto += "ADIDAS\n";
+	    texto += "-----------------------------\n";
+	    texto += "Fecha: " + LocalDate.now().toString() + "\n";
+	    texto += "Hora: " + LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute() + "\n";
+
+	    if (clienteSeleccionado != null) {
+	        texto += "Cliente: " + clienteSeleccionado.getNombre_cliente() + " " + clienteSeleccionado.getApellido_cliente() + "\n";
+	    }
+
+	    if (logueado != null) {
+	        texto += "Cajero: " + logueado.getNombre_usuario() + "\n";
+	    }
+
+	    texto += "Método de pago: " + metodoPago + "\n";
+	    texto += "-----------------------------\n";
+	    texto += "PRODUCTOS:\n";
+
+	    for (ItemVenta item : carrito) {
+	        texto += item.getNombre_producto() + "\n";
+	        texto += "ID Variante: " + item.getId_variante_producto() + "\n";
+	        texto += "Talle: " + item.getTalle() + "\n";
+	        texto += "Color: " + item.getColor() + "\n";
+	        texto += "Precio: $" + item.getPrecio_unitario() + "\n";
+	        texto += "Cantidad: " + item.getCantidad() + "\n";
+	        texto += "Subtotal: $" + item.getSubtotal() + "\n";
+	        texto += "-----------------------------\n";
+	    }
+
+	    texto += "Subtotal: $" + subtotal + "\n";
+	    texto += "Descuento: " + porcentajeDescuento + "%\n";
+	    texto += "Total: $" + total + "\n";
+	    texto += "Items: " + calcularItems() + "\n";
+	    texto += "-----------------------------\n";
+	    texto += "Gracias por su compra.";
+
+	    return texto;
+	}
+	
+	public void cambiarClienteDesdeVentana(Cliente cliente) {
+
+	    if (cliente == null) {
+	        JOptionPane.showMessageDialog(null, "No se pudo seleccionar el cliente.");
+	        return;
+	    }
+
+	    clienteSeleccionado = cliente;
+	    actualizarClienteSeleccionado();
+
+	    JOptionPane.showMessageDialog(null, "Cliente seleccionado correctamente.");
+	}
+	
+	private void cerrarCaja() {
+
+	    LinkedList<Venta> ventasDelSistema = controllerVenta.mostrarVentas();
+
+	    LocalDate fechaHoy = LocalDate.now();
+
+	    double totalEfectivo = 0;
+	    double totalDebito = 0;
+	    double totalTransferencia = 0;
+	    double totalVendido = 0;
+
+	    int cantidadVentas = 0;
+
+	    for (Venta venta : ventasDelSistema) {
+
+	        if (venta.getFecha() != null && venta.getFecha().equals(fechaHoy)) {
+
+	            cantidadVentas++;
+
+	            totalVendido += venta.getTotal_neto();
+
+	            if (venta.getMetododepago() != null) {
+
+	                int idMetodoPago = venta.getMetododepago().getid_metodo_de_pago();
+
+	                if (idMetodoPago == 1) {
+	                    totalEfectivo += venta.getTotal_neto();
+	                }
+
+	                if (idMetodoPago == 2) {
+	                    totalDebito += venta.getTotal_neto();
+	                }
+
+	                if (idMetodoPago == 3) {
+	                    totalTransferencia += venta.getTotal_neto();
+	                }
+	            }
+	        }
+	    }
+
+	    String texto = "";
+
+	    texto += "CIERRE DE CAJA\n";
+	    texto += "-----------------------------\n";
+	    texto += "Fecha: " + fechaHoy + "\n";
+
+	    if (logueado != null) {
+	        texto += "Cajero: " + logueado.getNombre_usuario() + "\n";
+	    }
+
+	    texto += "-----------------------------\n";
+	    texto += "Ventas realizadas: " + cantidadVentas + "\n";
+	    texto += "Efectivo: $" + totalEfectivo + "\n";
+	    texto += "Débito: $" + totalDebito + "\n";
+	    texto += "Transferencia: $" + totalTransferencia + "\n";
+	    texto += "-----------------------------\n";
+	    texto += "TOTAL VENDIDO: $" + totalVendido + "\n";
+	    texto += "-----------------------------\n";
+
+	    if (cantidadVentas == 0) {
+	        texto += "No se registraron ventas en el día.";
+	    } else {
+	        texto += "Caja cerrada correctamente.";
+	    }
+
+	    JOptionPane.showMessageDialog(
+	            null,
+	            texto,
+	            "Ticket de cierre de caja",
+	            JOptionPane.INFORMATION_MESSAGE
+	    );
+	}
+	
+	
+	
 }
